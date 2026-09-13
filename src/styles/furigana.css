@@ -1,0 +1,16 @@
+/* ==========================================================================
+   Furigana Visibility Controls
+   Áp dụng thuộc tính data-furigana trên <html> (document.documentElement)
+   được đồng bộ trực tiếp từ settingsStore (Zustand persist).
+   Hiệu ứng ẩn/hiện 0ms re-render trên toàn bộ ứng dụng.
+   ========================================================================== */
+
+[data-furigana="hidden"] .ruby-wrapper rt {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+[data-furigana="visible"] .ruby-wrapper rt {
+  opacity: 1;
+  visibility: visible;
+}

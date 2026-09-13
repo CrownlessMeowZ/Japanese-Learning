@@ -1,0 +1,17 @@
+{
+  "short_name": "Nihongo Master",
+  "name": "Nihongo Master - Học Tiếng Nhật & Dịch Thuật AI",
+  "description": "Ứng dụng học tiếng Nhật chuẩn Dekiru Nihongo tích hợp Spaced Repetition (SM-2), AI Kaiwa và Dịch thuật thông minh, hỗ trợ Offline 100%",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "192x192 512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#fff8fa",
+  "theme_color": "#e91e8c",
+  "display": "standalone",
+  "orientation": "portrait"
+}

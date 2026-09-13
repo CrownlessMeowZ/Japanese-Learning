@@ -1,0 +1,530 @@
+/* ==========================================================================
+   Sakura EdTech App Theme Styles
+   Phong cách học tập hiện đại (Gamification, Sakura Petals Animation,
+   Glassmorphism Sticky Header, Soft Shadows & Progressive Disclosure Modal)
+   ========================================================================== */
+
+/* 1. HIỆU ỨNG SAKURA FALLING PETALS (CSS thuần, siêu mượt, không lag) */
+.sakura-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.sakura-bg .petal {
+  position: absolute;
+  top: -40px;
+  background: linear-gradient(135deg, #ffc0cb 0%, #ff9ebb 50%, #ff7ea1 100%);
+  border-radius: 16px 2px 16px 2px;
+  box-shadow: 0 1px 4px rgba(255, 158, 187, 0.3);
+  transform-origin: center;
+  will-change: transform, opacity;
+  animation: sakuraFall linear infinite, sakuraSway ease-in-out infinite;
+}
+
+/* Keyframes rơi từ đỉnh màn hình xuống đáy */
+@keyframes sakuraFall {
+  0% {
+    top: -40px;
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.75;
+  }
+  90% {
+    opacity: 0.65;
+  }
+  100% {
+    top: 105vh;
+    opacity: 0;
+  }
+}
+
+/* Keyframes lắc lư, xoay tròn theo làn gió */
+@keyframes sakuraSway {
+  0% {
+    transform: translateX(0) rotate(0deg) rotateY(0deg);
+  }
+  50% {
+    transform: translateX(45px) rotate(180deg) rotateY(180deg);
+  }
+  100% {
+    transform: translateX(0) rotate(360deg) rotateY(360deg);
+  }
+}
+
+/* Phân bổ vị trí, kích thước, độ trễ và thời gian ngẫu nhiên cho từng cánh hoa */
+.sakura-bg .petal:nth-child(1)  { left: 3%;  width: 13px; height: 16px; animation-duration: 9s, 3.5s; animation-delay: 0s, 0s; }
+.sakura-bg .petal:nth-child(2)  { left: 12%; width: 10px; height: 13px; animation-duration: 12s, 4s;   animation-delay: 2s, 0.5s; }
+.sakura-bg .petal:nth-child(3)  { left: 22%; width: 15px; height: 19px; animation-duration: 8.5s, 3s; animation-delay: 4s, 1s; }
+.sakura-bg .petal:nth-child(4)  { left: 31%; width: 11px; height: 14px; animation-duration: 11s, 4.5s; animation-delay: 1s, 0s; }
+.sakura-bg .petal:nth-child(5)  { left: 42%; width: 14px; height: 18px; animation-duration: 10s, 3.8s; animation-delay: 5s, 1.5s; }
+.sakura-bg .petal:nth-child(6)  { left: 52%; width: 9px;  height: 12px; animation-duration: 13s, 5s;   animation-delay: 3s, 0.8s; }
+.sakura-bg .petal:nth-child(7)  { left: 63%; width: 13px; height: 17px; animation-duration: 9.5s, 3.2s; animation-delay: 6s, 2s; }
+.sakura-bg .petal:nth-child(8)  { left: 74%; width: 16px; height: 20px; animation-duration: 11.5s, 4s; animation-delay: 0.5s, 0.2s; }
+.sakura-bg .petal:nth-child(9)  { left: 84%; width: 11px; height: 14px; animation-duration: 10.5s, 3.6s; animation-delay: 3.5s, 1.2s; }
+.sakura-bg .petal:nth-child(10) { left: 93%; width: 14px; height: 18px; animation-duration: 8s, 2.8s;  animation-delay: 7s, 0.5s; }
+.sakura-bg .petal:nth-child(11) { left: 18%; width: 12px; height: 15px; animation-duration: 10s, 4.2s; animation-delay: 5.5s, 1s; }
+.sakura-bg .petal:nth-child(12) { left: 48%; width: 10px; height: 13px; animation-duration: 12.5s, 3.4s; animation-delay: 2.5s, 0.3s; }
+.sakura-bg .petal:nth-child(13) { left: 78%; width: 15px; height: 19px; animation-duration: 9s, 3.9s;  animation-delay: 4.8s, 1.7s; }
+
+/* 2. GLASSMORPHISM TOPBAR (Sticky Header) */
+.sakura-header-glass {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1.5px solid rgba(252, 231, 243, 0.85);
+  box-shadow: 0 4px 20px rgba(233, 30, 140, 0.05);
+  transition: all 0.3s ease;
+}
+
+/* 3. GAMIFIED STREAK PILL */
+.sakura-streak-pill {
+  background: linear-gradient(135deg, #fff0f6 0%, #ffe4ec 100%);
+  color: #e91e8c;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  border: 1.5px solid #fbcfe8;
+  box-shadow: 0 2px 8px rgba(233, 30, 140, 0.12);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  animation: streakPulse 2.6s ease-in-out infinite;
+  user-select: none;
+}
+
+@keyframes streakPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 2px 8px rgba(233, 30, 140, 0.12);
+  }
+  50% {
+    transform: scale(1.04);
+    box-shadow: 0 4px 14px rgba(233, 30, 140, 0.25);
+  }
+}
+
+/* 4. DASHBOARD BANNER & CARD STYLES */
+.sakura-dashboard-banner {
+  background: linear-gradient(135deg, #ffffff 0%, #fff6f9 100%);
+  border-radius: 24px;
+  padding: 24px 28px;
+  box-shadow: 0 10px 30px rgba(233, 30, 140, 0.07), 0 2px 6px rgba(0, 0, 0, 0.02);
+  border: 1.5px solid #fce7f3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.sakura-lesson-card {
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 22px;
+  border: 1.5px solid #fce7f3;
+  box-shadow: 0 6px 20px rgba(233, 30, 140, 0.05), 0 2px 6px rgba(0, 0, 0, 0.02);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sakura-lesson-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 32px rgba(233, 30, 140, 0.12);
+}
+
+/* 5. NÚT DUY NHẤT: VÀO BÀI HỌC (Pill-shape, Sakura Gradient, Hover Bounce) */
+.enter-lesson-btn {
+  width: 100%;
+  padding: 13px 20px;
+  background: linear-gradient(135deg, #e91e8c 0%, #ff4b8b 50%, #f43f5e 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 9999px;
+  font-family: inherit;
+  font-size: 0.98rem;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(233, 30, 140, 0.28);
+  transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+  outline: none !important;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.enter-lesson-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 22px rgba(233, 30, 140, 0.38);
+  filter: brightness(1.04);
+}
+
+.enter-lesson-btn:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0 2px 8px rgba(233, 30, 140, 0.25);
+}
+
+/* 6. PROGRESSIVE DISCLOSURE MODAL (LESSON ACTION MODAL) */
+.lesson-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 16px;
+  animation: modalFadeIn 0.22s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.lesson-modal-box {
+  background: #ffffff;
+  border-radius: 26px;
+  width: 100%;
+  max-width: 520px;
+  max-height: 92vh;
+  overflow-y: auto;
+  box-shadow: 0 25px 60px rgba(233, 30, 140, 0.22), 0 10px 28px rgba(0, 0, 0, 0.12);
+  border: 1.5px solid #fce7f3;
+  animation: modalPopIn 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes modalPopIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Nút X Đóng Modal */
+.modal-close-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #f7fafc;
+  border: 1px solid #edf2f7;
+  color: #718096;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.modal-close-btn:hover {
+  background-color: #fff0f6;
+  color: #e91e8c;
+  border-color: #fce7f3;
+  transform: rotate(90deg) scale(1.08);
+}
+
+/* 7. 4 SKILL ACTION CARDS BÊN TRONG MODAL */
+.skill-card-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  border-radius: 20px;
+  border: 1.5px solid #f0e2e7;
+  background: #ffffff;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.02);
+  text-align: left;
+  width: 100%;
+  outline: none;
+  position: relative;
+  user-select: none;
+}
+
+.skill-card-item:hover:not(:disabled) {
+  transform: translateY(-3px) scale(1.015);
+}
+
+.skill-card-item:active:not(:disabled) {
+  transform: translateY(1px) scale(0.985);
+}
+
+.skill-card-item:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Icon vòng tròn nổi bật */
+.skill-icon-circle {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  flex-shrink: 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+}
+
+/* Badge số lượng / công nghệ */
+.skill-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 8px;
+  letter-spacing: 0.3px;
+}
+
+/* Biểu tượng mũi tên trượt nhẹ */
+.skill-arrow {
+  color: #cbd5e0;
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-left: auto;
+  transition: transform 0.2s ease, color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.skill-card-item:hover:not(:disabled) .skill-arrow {
+  transform: translateX(4px);
+  color: #e91e8c;
+}
+
+/* Theme từng kỹ năng */
+/* 1. Kỹ năng Từ vựng */
+.skill-vocab:hover:not(:disabled) {
+  border-color: #ff758c;
+  box-shadow: 0 8px 24px rgba(255, 117, 140, 0.16);
+  background: linear-gradient(135deg, #ffffff 0%, #fff7f9 100%);
+}
+
+/* 2. Kỹ năng Ngữ pháp */
+.skill-grammar:hover:not(:disabled) {
+  border-color: #38bdf8;
+  box-shadow: 0 8px 24px rgba(56, 189, 248, 0.16);
+  background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
+}
+.skill-grammar:hover:not(:disabled) .skill-arrow {
+  color: #0284c7;
+}
+
+/* 3. Kỹ năng Giao tiếp */
+.skill-kaiwa:hover:not(:disabled) {
+  border-color: #10b981;
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.16);
+  background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+}
+.skill-kaiwa:hover:not(:disabled) .skill-arrow {
+  color: #059669;
+}
+
+/* 4. Kỹ năng Quiz */
+.skill-quiz:hover:not(:disabled) {
+  border-color: #f43f5e;
+  box-shadow: 0 8px 24px rgba(244, 63, 94, 0.16);
+  background: linear-gradient(135deg, #ffffff 0%, #fff1f2 100%);
+}
+.skill-quiz:hover:not(:disabled) .skill-arrow {
+  color: #be123c;
+}
+
+/* 8. LOADING SPINNER ANIMATION */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 9. SAKURA TOOLTIP ANIMATIONS */
+@keyframes sakuraFadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 10. SAKURA TAB & SCREEN TRANSITIONS */
+.sakura-tab-view {
+  animation: sakuraTabSlideIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: opacity, transform;
+}
+
+@keyframes sakuraTabSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(12px) scale(0.994);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Internal Fade-In for elements & sub-grids */
+.sakura-fade-in {
+  animation: sakuraFadeOnly 0.24s cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: opacity, transform;
+}
+
+@keyframes sakuraFadeOnly {
+  0% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Header Nav Buttons with Animated Hover & Active State */
+.sakura-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 15px;
+  border-radius: 20px;
+  border: 1.5px solid #fce7f3;
+  font-weight: 700;
+  font-size: 0.86rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+  outline: none;
+  user-select: none;
+  background-color: #ffffff;
+  color: #4a5568;
+  position: relative;
+  overflow: hidden;
+}
+
+.sakura-nav-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 14px rgba(233, 30, 140, 0.16);
+  border-color: #f8bbd0;
+  color: #e91e8c;
+}
+
+.sakura-nav-btn:active {
+  transform: translateY(0) scale(0.96);
+}
+
+.sakura-nav-btn.active {
+  background: linear-gradient(135deg, #fff0f6 0%, #ffe4ec 100%);
+  border-color: #e91e8c;
+  color: #e91e8c;
+  box-shadow: 0 3px 12px rgba(233, 30, 140, 0.18);
+}
+
+/* Active tab bottom indicator dot/pill */
+.sakura-nav-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 2.5px;
+  background-color: #e91e8c;
+  border-radius: 2px;
+  animation: sakuraIndicatorEnter 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes sakuraIndicatorEnter {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+  100% {
+    width: 14px;
+    opacity: 1;
+  }
+}
+
+/* Category Sub-tabs (Vocab Screen, Filter Tabs) */
+.sakura-subtab-btn {
+  padding: 7px 16px;
+  border-radius: 20px;
+  border: 1.5px solid #e2e8f0;
+  background-color: #ffffff;
+  color: #4a5568;
+  font-size: 0.84rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+  outline: none;
+  user-select: none;
+}
+
+.sakura-subtab-btn:hover {
+  transform: translateY(-2px);
+  border-color: #f8bbd0;
+  color: #e91e8c;
+  box-shadow: 0 4px 12px rgba(233, 30, 140, 0.12);
+}
+
+.sakura-subtab-btn:active {
+  transform: translateY(0) scale(0.96);
+}
+
+.sakura-subtab-btn.active {
+  background: linear-gradient(135deg, #e91e8c 0%, #f43f5e 100%);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 4px 14px rgba(233, 30, 140, 0.28);
+  transform: translateY(-1px);
+}
+
+/* Translator Swap Button Animation */
+.translator-swap-btn {
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+}
+
+.translator-swap-btn:hover {
+  transform: scale(1.04);
+}
+
+.translator-swap-btn.swapping {
+  transform: rotate(180deg) scale(1.1);
+}
+

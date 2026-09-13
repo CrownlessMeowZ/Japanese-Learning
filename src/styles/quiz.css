@@ -1,0 +1,45 @@
+/* ==========================================================================
+   Quiz Screen Option Button Styles
+   Đảm bảo hiệu ứng :hover mượt mà và triệt tiêu hoàn toàn outline mặc định.
+   Trạng thái chuyển câu hỏi được reset sạch sẽ thông qua React Keys.
+   ========================================================================== */
+
+.quiz-option-btn {
+  width: 100%;
+  min-height: 68px;
+  padding: 14px 16px;
+  background-color: #ffffff;
+  border: 2px solid #edf2f7;
+  border-radius: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: inherit;
+  font-size: 1rem;
+  color: #2d3748;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  position: relative;
+}
+
+/* Hover: Phóng to nhẹ và viền xanh dương đậm khi lướt qua */
+.quiz-option-btn:hover:not(:disabled) {
+  transform: scale(1.02);
+  border-color: #2b6cb0;
+  box-shadow: 0 6px 18px rgba(43, 108, 176, 0.15);
+}
+
+/* Active: Hơi lún xuống tạo cảm giác tactile phản hồi click */
+.quiz-option-btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+/* Disabled: Vô hiệu hoá hiệu ứng chuột khi đã có kết quả */
+.quiz-option-btn:disabled {
+  cursor: default;
+}

@@ -1,0 +1,9176 @@
+// Dữ liệu từ vựng trọn bộ 15 bài từ giáo trình Dekiru Nihongo Sơ cấp (Quyển hồng)
+// Đã được kiểm toán 100% đối chiếu trực tiếp file PDF gốc
+
+export const lessonMeta = {
+  "1": [
+    {
+      "id": "1.1",
+      "titleJp": "私の名前・国・仕事",
+      "titleVi": "Tên, đất nước, công việc của tôi",
+      "keywords": [
+        "私の名前・国・仕事",
+        "名前"
+      ]
+    },
+    {
+      "id": "1.2",
+      "titleJp": "私の誕生日",
+      "titleVi": "Sinh nhật của tôi",
+      "keywords": [
+        "私の誕生日",
+        "誕生日"
+      ]
+    },
+    {
+      "id": "1.3",
+      "titleJp": "私の趣味",
+      "titleVi": "Sở thích của tôi",
+      "keywords": [
+        "私の趣味",
+        "趣味"
+      ]
+    }
+  ],
+  "2": [
+    {
+      "id": "2.1",
+      "titleJp": "どこですか",
+      "titleVi": "Ở đâu vậy? / Vị trí các quầy & tầng",
+      "keywords": [
+        "どこですか"
+      ]
+    },
+    {
+      "id": "2.2",
+      "titleJp": "いくらですか",
+      "titleVi": "Bao nhiêu tiền? / Mua sắm & Giá cả",
+      "keywords": [
+        "いくらですか"
+      ]
+    },
+    {
+      "id": "2.3",
+      "titleJp": "レストラン",
+      "titleVi": "Nhà hàng / Món ăn & Gọi món",
+      "keywords": [
+        "レストラン"
+      ]
+    }
+  ],
+  "3": [
+    {
+      "id": "3.1",
+      "titleJp": "何時までですか",
+      "titleVi": "Mấy giờ kết thúc? / Giờ giấc & Thời gian biểu",
+      "keywords": [
+        "何時までですか",
+        "何時"
+      ]
+    },
+    {
+      "id": "3.2",
+      "titleJp": "私のスケジュール",
+      "titleVi": "Lịch trình & Kế hoạch của tôi",
+      "keywords": [
+        "私のスケジュール",
+        "スケジュール"
+      ]
+    },
+    {
+      "id": "3.3",
+      "titleJp": "どんな毎日？",
+      "titleVi": "Mỗi ngày như thế nào? / Sinh hoạt hàng ngày",
+      "keywords": [
+        "どんな毎日？",
+        "毎日"
+      ]
+    }
+  ],
+  "4": [
+    {
+      "id": "4.1",
+      "titleJp": "どこ？",
+      "titleVi": "Ở đâu? / Phương hướng & Phương tiện đi lại",
+      "keywords": [
+        "どこ？",
+        "どこ"
+      ]
+    },
+    {
+      "id": "4.2",
+      "titleJp": "どんなところ？",
+      "titleVi": "Nơi như thế nào? / Phong cảnh & Khí hậu",
+      "keywords": [
+        "どんなところ？",
+        "ところ"
+      ]
+    },
+    {
+      "id": "4.3",
+      "titleJp": "季節・料理",
+      "titleVi": "Mùa & Món ăn đặc trưng",
+      "keywords": [
+        "季節・料理",
+        "季節",
+        "料理"
+      ]
+    }
+  ],
+  "5": [
+    {
+      "id": "5.1",
+      "titleJp": "週末",
+      "titleVi": "Cuối tuần / Hoạt động ngày nghỉ",
+      "keywords": [
+        "週末"
+      ]
+    },
+    {
+      "id": "5.2",
+      "titleJp": "休みの後で",
+      "titleVi": "Sau kỳ nghỉ / Hỏi thăm & Kể lại chuyện đã làm",
+      "keywords": [
+        "休みの後で",
+        "休み"
+      ]
+    },
+    {
+      "id": "5.3",
+      "titleJp": "今度の休みに",
+      "titleVi": "Kỳ nghỉ tới / Kế hoạch & Rủ rê",
+      "keywords": [
+        "今度の休みに",
+        "今度"
+      ]
+    }
+  ],
+  "6": [
+    {
+      "id": "6.1",
+      "titleJp": "一緒に行きませんか",
+      "titleVi": "Cùng đi với tôi không? / Lời mời & Rủ rê",
+      "keywords": [
+        "一緒に行きませんか",
+        "行きませんか"
+      ]
+    },
+    {
+      "id": "6.2",
+      "titleJp": "どっちがいい？",
+      "titleVi": "Cái nào tốt hơn? / So sánh sự vật",
+      "keywords": [
+        "どっちがいい？",
+        "どっち"
+      ]
+    },
+    {
+      "id": "6.3",
+      "titleJp": "どこがいい？",
+      "titleVi": "Ở đâu thì tốt? / Lựa chọn địa điểm",
+      "keywords": [
+        "どこがいい？"
+      ]
+    }
+  ],
+  "7": [
+    {
+      "id": "7.1",
+      "titleJp": "道がわかりません",
+      "titleVi": "Tôi không biết đường / Hỏi đường & Vị trí",
+      "keywords": [
+        "道がわかりません",
+        "道"
+      ]
+    },
+    {
+      "id": "7.2",
+      "titleJp": "どこにありますか",
+      "titleVi": "Ở đâu vậy? / Vị trí đồ vật",
+      "keywords": [
+        "どこにありますか"
+      ]
+    },
+    {
+      "id": "7.3",
+      "titleJp": "パーティーの準備",
+      "titleVi": "Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị",
+      "keywords": [
+        "パーティーの準備",
+        "準備"
+      ]
+    }
+  ],
+  "8": [
+    {
+      "id": "8.1",
+      "titleJp": "家族・友達",
+      "titleVi": "Gia đình & Bạn bè / Giới thiệu người thân",
+      "keywords": [
+        "家族・友達",
+        "家族"
+      ]
+    },
+    {
+      "id": "8.2",
+      "titleJp": "どんな人？",
+      "titleVi": "Người như thế nào? / Ngoại hình & Tính cách",
+      "keywords": [
+        "どんな人？",
+        "どんな人"
+      ]
+    },
+    {
+      "id": "8.3",
+      "titleJp": "私の好きな人",
+      "titleVi": "Người tôi yêu quý",
+      "keywords": [
+        "私の好きな人",
+        "好きな人"
+      ]
+    }
+  ],
+  "9": [
+    {
+      "id": "9.1",
+      "titleJp": "いろいろな趣味",
+      "titleVi": "Các sở thích đa dạng / Tần suất & Mức độ",
+      "keywords": [
+        "いろいろな趣味",
+        "いろいろな 趣味"
+      ]
+    },
+    {
+      "id": "9.2",
+      "titleJp": "どんなことができますか",
+      "titleVi": "Bạn có thể làm được gì? / Khả năng & Kỹ năng",
+      "keywords": [
+        "どんなことができますか",
+        "できますか"
+      ]
+    },
+    {
+      "id": "9.3",
+      "titleJp": "趣味の教室",
+      "titleVi": "Lớp học sở thích / Đăng ký tham gia",
+      "keywords": [
+        "趣味の教室",
+        "教室"
+      ]
+    }
+  ],
+  "10": [
+    {
+      "id": "10.1",
+      "titleJp": "私の集合",
+      "titleVi": "Nơi hẹn gặp / Điểm mốc & Chỉ đường",
+      "keywords": [
+        "私の集合",
+        "集合"
+      ]
+    },
+    {
+      "id": "10.2",
+      "titleJp": "ルール",
+      "titleVi": "Quy tắc & Biển báo / Được phép & Cấm",
+      "keywords": [
+        "ルール"
+      ]
+    },
+    {
+      "id": "10.3",
+      "titleJp": "動物・ペット",
+      "titleVi": "Động vật & Thú cưng",
+      "keywords": [
+        "動物・ペット",
+        "動物",
+        "ペット"
+      ]
+    }
+  ],
+  "11": [
+    {
+      "id": "11.1",
+      "titleJp": "今の生活",
+      "titleVi": "Cuộc sống hiện tại / Thói quen sinh hoạt",
+      "keywords": [
+        "今の生活",
+        "生活"
+      ]
+    },
+    {
+      "id": "11.2",
+      "titleJp": "生活の習慣",
+      "titleVi": "Tập quán sinh hoạt / Thứ tự hành động",
+      "keywords": [
+        "生活の習慣",
+        "習慣"
+      ]
+    },
+    {
+      "id": "11.3",
+      "titleJp": "私の日記",
+      "titleVi": "Nhật ký của tôi / Kể chuỗi hoạt động",
+      "keywords": [
+        "私の日記",
+        "日記"
+      ]
+    }
+  ],
+  "12": [
+    {
+      "id": "12.1",
+      "titleJp": "体の調子",
+      "titleVi": "Tình trạng sức khỏe / Triệu chứng cơ thể",
+      "keywords": [
+        "体の調子",
+        "調子"
+      ]
+    },
+    {
+      "id": "12.2",
+      "titleJp": "病院で",
+      "titleVi": "Tại bệnh viện / Trình bày với bác sĩ",
+      "keywords": [
+        "病院で"
+      ]
+    },
+    {
+      "id": "12.3",
+      "titleJp": "健康のために",
+      "titleVi": "Vì sức khỏe / Lời khuyên & Chăm sóc",
+      "keywords": [
+        "健康のために",
+        "健康"
+      ]
+    }
+  ],
+  "13": [
+    {
+      "id": "13.1",
+      "titleJp": "私の経験から",
+      "titleVi": "Từ trải nghiệm của tôi / Đã từng làm gì",
+      "keywords": [
+        "私の経験から",
+        "経験から",
+        "私の経験"
+      ]
+    },
+    {
+      "id": "13.2",
+      "titleJp": "おすすめ",
+      "titleVi": "Gợi ý & Đề xuất trải nghiệm",
+      "keywords": [
+        "おすすめ",
+        "おすすめします"
+      ]
+    },
+    {
+      "id": "13.3",
+      "titleJp": "服・持ち物",
+      "titleVi": "Trang phục & Đồ đạc",
+      "keywords": [
+        "服・持ち物",
+        "服",
+        "持ち物"
+      ]
+    }
+  ],
+  "14": [
+    {
+      "id": "14.1",
+      "titleJp": "初めて見た！初めて聞いた！",
+      "titleVi": "Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ",
+      "keywords": [
+        "初めて見た！初めて聞いた！",
+        "初めて見た",
+        "初めて"
+      ]
+    },
+    {
+      "id": "14.2",
+      "titleJp": "使い方・ルール",
+      "titleVi": "Cách dùng & Quy tắc ứng xử",
+      "keywords": [
+        "使い方・ルール",
+        "使い方"
+      ]
+    },
+    {
+      "id": "14.3",
+      "titleJp": "日本の生活",
+      "titleVi": "Cuộc sống ở Nhật Bản / Ấn tượng văn hóa",
+      "keywords": [
+        "日本の生活"
+      ]
+    }
+  ],
+  "15": [
+    {
+      "id": "15.1",
+      "titleJp": "これ、知ってる？",
+      "titleVi": "Bạn có biết cái này không? / Tin tức & Sự kiện",
+      "keywords": [
+        "これ、知ってる？",
+        "知ってる"
+      ]
+    },
+    {
+      "id": "15.2",
+      "titleJp": "イベント・祭り",
+      "titleVi": "Sự kiện & Lễ hội / Thời gian & Địa điểm",
+      "keywords": [
+        "イベント・祭り",
+        "イベント",
+        "祭り"
+      ]
+    },
+    {
+      "id": "15.3",
+      "titleJp": "天気・自然",
+      "titleVi": "Thời tiết & Thiên nhiên / Tình hình thời tiết",
+      "keywords": [
+        "天気・自然",
+        "天気",
+        "自然"
+      ]
+    }
+  ]
+};
+
+export const vocabularyData = {
+  "1": [
+    {
+      "id": "L1_1",
+      "kanji": "私",
+      "hiragana": "わたし",
+      "meaning": "Tôi",
+      "category": "Từ vựng",
+      "section": "1.1",
+      "sectionTitle": "1.1 私の名前・国・仕事 (Tên, đất nước, công việc của tôi)"
+    },
+    {
+      "id": "L1_2",
+      "kanji": "（お）名前",
+      "hiragana": "（お）なまえ",
+      "meaning": "Tên (bạn)",
+      "category": "Từ vựng",
+      "section": "1.1",
+      "sectionTitle": "1.1 私の名前・国・仕事 (Tên, đất nước, công việc của tôi)"
+    },
+    {
+      "id": "L1_3",
+      "kanji": "（お）国",
+      "hiragana": "（お）くに",
+      "meaning": "Đất nước (bạn)",
+      "category": "Từ vựng",
+      "section": "1.1",
+      "sectionTitle": "1.1 私の名前・国・仕事 (Tên, đất nước, công việc của tôi)"
+    },
+    {
+      "id": "L1_4",
+      "kanji": "日本",
+      "hiragana": "にほん",
+      "meaning": "Nhật Bản",
+      "category": "Từ vựng",
+      "section": "1.1",
+      "sectionTitle": "1.1 私の名前・国・仕事 (Tên, đất nước, công việc của tôi)"
+    },
+    {
+      "id": "L1_5",
+      "kanji": "韓国",
+      "hiragana": "かんこく",
+      "meaning": "Hàn Quốc",
+      "category": "Từ vựng",
+      "section": "1.1",
+      "sectionTitle": "1.1 私の名前・国・仕事 (Tên, đất nước, công việc của tôi)"
+    },
+    {
+      "id": "L1_6",
+      "kanji": "中国",
+      "hiragana": "ちゅうごく",
+      "meaning": "Trung Quốc",
+      "category": "Từ vựng",
+      "section": "1.1",
+      "sectionTitle": "1.1 私の名前・国・仕事 (Tên, đất nước, công việc của tôi)"
+    },
+    {
+      "id": "L1_7",
+      "kanji": "アメリカ",
+      "hiragana": "アメリカ",
+      "meaning": "Mỹ",
+      "category": "Từ vựng",
+      "section": "1.1",
+      "sectionTitle": "1.1 私の名前・国・仕事 (Tên, đất nước, công việc của tôi)"
+    },
+    {
+      "id": "L1_8",
+      "kanji": "イタリア",
+      "hiragana": "イタリア",
+      "meaning": "Ý",
+      "category": "Từ vựng",
+      "section": "1.1",
+      "sectionTitle": "1.1 私の名前・国・仕事 (Tên, đất nước, công việc của tôi)"
+    },
+    {
+      "id": "L1_9",
+      "kanji": "オーストラリア",
+      "hiragana": "オーストラリア",
+      "meaning": "Úc",
+      "category": "Từ vựng",
+      "section": "1.1",
+      "sectionTitle": "1.1 私の名前・国・仕事 (Tên, đất nước, công việc của tôi)"
+    },
+    {
+      "id": "L1_10",
+      "kanji": "ロシア",
+      "hiragana": "ロシア",
+      "meaning": "Nga",
+      "category": "Từ vựng",
+      "section": "1.1",
+      "sectionTitle": "1.1 私の名前・国・仕事 (Tên, đất nước, công việc của tôi)"
+    },
+    {
+      "id": "L1_11",
+      "kanji": "タイ",
+      "hiragana": "タイ",
+      "meaning": "Thái Lan",
+      "category": "Từ vựng",
+      "section": "1.1",
+      "sectionTitle": "1.1 私の名前・国・仕事 (Tên, đất nước, công việc của tôi)"
+    },
+    {
+      "id": "L1_12",
+      "kanji": "高校",
+      "hiragana": "こうこう",
+      "meaning": "Trường trung học phổ thông (c ấp 3)",
+      "category": "Từ vựng",
+      "section": "1.1",
+      "sectionTitle": "1.1 私の名前・国・仕事 (Tên, đất nước, công việc của tôi)"
+    },
+    {
+      "id": "L1_13",
+      "kanji": "大学",
+      "hiragana": "だいがく",
+      "meaning": "Trường đại học",
+      "category": "Từ vựng",
+      "section": "1.1",
+      "sectionTitle": "1.1 私の名前・国・仕事 (Tên, đất nước, công việc của tôi)"
+    },
+    {
+      "id": "L1_14",
+      "kanji": "日本語学校",
+      "hiragana": "にほんごがっこう",
+      "meaning": "Trường tiếng nhật",
+      "category": "Từ vựng",
+      "section": "1.1",
+      "sectionTitle": "1.1 私の名前・国・仕事 (Tên, đất nước, công việc của tôi)"
+    },
+    {
+      "id": "L1_15",
+      "kanji": "（お）仕事",
+      "hiragana": "（お）しごと",
+      "meaning": "Công vi ệc (của bạn)",
+      "category": "Từ vựng",
+      "section": "1.1",
+      "sectionTitle": "1.1 私の名前・国・仕事 (Tên, đất nước, công việc của tôi)"
+    },
+    {
+      "id": "L1_16",
+      "kanji": "学生",
+      "hiragana": "がくせい",
+      "meaning": "Học sinh",
+      "category": "Từ vựng",
+      "section": "1.1",
+      "sectionTitle": "1.1 私の名前・国・仕事 (Tên, đất nước, công việc của tôi)"
+    },
+    {
+      "id": "L1_17",
+      "kanji": "先生",
+      "hiragana": "せんせい",
+      "meaning": "Thầy/Cô giáo",
+      "category": "Từ vựng",
+      "section": "1.1",
+      "sectionTitle": "1.1 私の名前・国・仕事 (Tên, đất nước, công việc của tôi)"
+    },
+    {
+      "id": "L1_18",
+      "kanji": "教師",
+      "hiragana": "きょうし",
+      "meaning": "Giáo viên",
+      "category": "Từ vựng",
+      "section": "1.1",
+      "sectionTitle": "1.1 私の名前・国・仕事 (Tên, đất nước, công việc của tôi)"
+    },
+    {
+      "id": "L1_19",
+      "kanji": "会社員",
+      "hiragana": "かいしゃいん",
+      "meaning": "Nhân viên văn phòng",
+      "category": "Từ vựng",
+      "section": "1.1",
+      "sectionTitle": "1.1 私の名前・国・仕事 (Tên, đất nước, công việc của tôi)"
+    },
+    {
+      "id": "L1_20",
+      "kanji": "社員",
+      "hiragana": "しゃいん",
+      "meaning": "Nhân viên (c ủa công ty n ào đó)",
+      "category": "Từ vựng",
+      "section": "1.1",
+      "sectionTitle": "1.1 私の名前・国・仕事 (Tên, đất nước, công việc của tôi)"
+    },
+    {
+      "id": "L1_21",
+      "kanji": "～さん",
+      "hiragana": "～さん",
+      "meaning": "Anh/Ch ị/Ông/Bà/bạn ～",
+      "category": "Từ vựng",
+      "section": "1.1",
+      "sectionTitle": "1.1 私の名前・国・仕事 (Tên, đất nước, công việc của tôi)"
+    },
+    {
+      "id": "L1_22",
+      "kanji": "～人",
+      "hiragana": "～じん",
+      "meaning": "Người (nước nào)",
+      "category": "Từ vựng",
+      "section": "1.1",
+      "sectionTitle": "1.1 私の名前・国・仕事 (Tên, đất nước, công việc của tôi)"
+    },
+    {
+      "id": "L1_23",
+      "kanji": "～語",
+      "hiragana": "～ご",
+      "meaning": "Tiếng (nư ớc nào)",
+      "category": "Từ vựng",
+      "section": "1.1",
+      "sectionTitle": "1.1 私の名前・国・仕事 (Tên, đất nước, công việc của tôi)"
+    },
+    {
+      "id": "L1_24",
+      "kanji": "どちら",
+      "hiragana": "どちら",
+      "meaning": "Ở đâu / Phía nào",
+      "category": "Từ vựng",
+      "section": "1.1",
+      "sectionTitle": "1.1 私の名前・国・仕事 (Tên, đất nước, công việc của tôi)"
+    },
+    {
+      "id": "L1_25",
+      "kanji": "はどちらですか。",
+      "hiragana": "はどちらですか。",
+      "meaning": "Đất nước của bạn là nư ớc nào?",
+      "category": "Từ vựng",
+      "section": "1.1",
+      "sectionTitle": "1.1 私の名前・国・仕事 (Tên, đất nước, công việc của tôi)"
+    },
+    {
+      "id": "L1_26",
+      "kanji": "はじめまして",
+      "hiragana": "はじめまして",
+      "meaning": "Xin chào (l ần đầu gặp mặt)",
+      "category": "Từ vựng",
+      "section": "1.1",
+      "sectionTitle": "1.1 私の名前・国・仕事 (Tên, đất nước, công việc của tôi)"
+    },
+    {
+      "id": "L1_27",
+      "kanji": "こちらこそ",
+      "hiragana": "こちらこそ",
+      "meaning": "Tôi cũng v ậy!",
+      "category": "Từ vựng",
+      "section": "1.1",
+      "sectionTitle": "1.1 私の名前・国・仕事 (Tên, đất nước, công việc của tôi)"
+    },
+    {
+      "id": "L1_28",
+      "kanji": "あのう",
+      "hiragana": "あのう",
+      "meaning": "Anh / ch ị ơi…",
+      "category": "Từ vựng",
+      "section": "1.1",
+      "sectionTitle": "1.1 私の名前・国・仕事 (Tên, đất nước, công việc của tôi)"
+    },
+    {
+      "id": "L1_29",
+      "kanji": "すみません",
+      "hiragana": "すみません",
+      "meaning": "Xin lỗi… cho tôi h ỏi…",
+      "category": "Từ vựng",
+      "section": "1.1",
+      "sectionTitle": "1.1 私の名前・国・仕事 (Tên, đất nước, công việc của tôi)"
+    },
+    {
+      "id": "L1_30",
+      "kanji": "あのう、すみません。",
+      "hiragana": "あのう、すみません。",
+      "meaning": "Anh / ch ị ơi, xin l ỗi cho tôi h ỏi 1 chút…",
+      "category": "Từ vựng",
+      "section": "1.1",
+      "sectionTitle": "1.1 私の名前・国・仕事 (Tên, đất nước, công việc của tôi)"
+    },
+    {
+      "id": "L1_31",
+      "kanji": "そうですか。",
+      "hiragana": "そうですか。",
+      "meaning": "Thế à!",
+      "category": "Từ vựng",
+      "section": "1.1",
+      "sectionTitle": "1.1 私の名前・国・仕事 (Tên, đất nước, công việc của tôi)"
+    },
+    {
+      "id": "L1_32",
+      "kanji": "誕生日",
+      "hiragana": "たんじょうび",
+      "meaning": "Ngày sinh / Sinh nhật",
+      "category": "Từ vựng",
+      "section": "1.2",
+      "sectionTitle": "1.2 私の誕生日 (Sinh nhật của tôi)"
+    },
+    {
+      "id": "L1_33",
+      "kanji": "ブラジル",
+      "hiragana": "ブラジル",
+      "meaning": "Brazil",
+      "category": "Từ vựng",
+      "section": "1.2",
+      "sectionTitle": "1.2 私の誕生日 (Sinh nhật của tôi)"
+    },
+    {
+      "id": "L1_34",
+      "kanji": "～月",
+      "hiragana": "～がつ",
+      "meaning": "Tháng ～",
+      "category": "Từ vựng",
+      "section": "1.2",
+      "sectionTitle": "1.2 私の誕生日 (Sinh nhật của tôi)"
+    },
+    {
+      "id": "L1_35",
+      "kanji": "～日",
+      "hiragana": "～にち／か",
+      "meaning": "Ngày (mùng) ～",
+      "category": "Từ vựng",
+      "section": "1.2",
+      "sectionTitle": "1.2 私の誕生日 (Sinh nhật của tôi)"
+    },
+    {
+      "id": "L1_36",
+      "kanji": "～歳",
+      "hiragana": "～さい",
+      "meaning": "～ tuổi",
+      "category": "Từ vựng",
+      "section": "1.2",
+      "sectionTitle": "1.2 私の誕生日 (Sinh nhật của tôi)"
+    },
+    {
+      "id": "L1_37",
+      "kanji": "いつ",
+      "hiragana": "いつ",
+      "meaning": "Lúc nào / Khi nào",
+      "category": "Từ vựng",
+      "section": "1.2",
+      "sectionTitle": "1.2 私の誕生日 (Sinh nhật của tôi)"
+    },
+    {
+      "id": "L1_38",
+      "kanji": "趣味",
+      "hiragana": "しゅみ",
+      "meaning": "Sở thích",
+      "category": "Từ vựng",
+      "section": "1.3",
+      "sectionTitle": "1.3 私の趣味 (Sở thích của tôi)"
+    },
+    {
+      "id": "L1_39",
+      "kanji": "スポーツ",
+      "hiragana": "スポーツ",
+      "meaning": "Thể thao",
+      "category": "Từ vựng",
+      "section": "1.3",
+      "sectionTitle": "1.3 私の趣味 (Sở thích của tôi)"
+    },
+    {
+      "id": "L1_40",
+      "kanji": "サッカー",
+      "hiragana": "サッカー",
+      "meaning": "Bóng đá",
+      "category": "Từ vựng",
+      "section": "1.3",
+      "sectionTitle": "1.3 私の趣味 (Sở thích của tôi)"
+    },
+    {
+      "id": "L1_41",
+      "kanji": "テニス",
+      "hiragana": "テニス",
+      "meaning": "Tennis (Qu ần vợt)",
+      "category": "Từ vựng",
+      "section": "1.3",
+      "sectionTitle": "1.3 私の趣味 (Sở thích của tôi)"
+    },
+    {
+      "id": "L1_42",
+      "kanji": "水泳",
+      "hiragana": "すいえい",
+      "meaning": "Bơi lội",
+      "category": "Từ vựng",
+      "section": "1.3",
+      "sectionTitle": "1.3 私の趣味 (Sở thích của tôi)"
+    },
+    {
+      "id": "L1_43",
+      "kanji": "音楽",
+      "hiragana": "おんがく",
+      "meaning": "Âm nh ạc",
+      "category": "Từ vựng",
+      "section": "1.3",
+      "sectionTitle": "1.3 私の趣味 (Sở thích của tôi)"
+    },
+    {
+      "id": "L1_44",
+      "kanji": "読書",
+      "hiragana": "どくしょ",
+      "meaning": "Đọc sách",
+      "category": "Từ vựng",
+      "section": "1.3",
+      "sectionTitle": "1.3 私の趣味 (Sở thích của tôi)"
+    },
+    {
+      "id": "L1_45",
+      "kanji": "旅行",
+      "hiragana": "りょこう",
+      "meaning": "Du lịch",
+      "category": "Từ vựng",
+      "section": "1.3",
+      "sectionTitle": "1.3 私の趣味 (Sở thích của tôi)"
+    },
+    {
+      "id": "L1_46",
+      "kanji": "料理",
+      "hiragana": "りょうり",
+      "meaning": "Nấu ăn / Món ăn",
+      "category": "Từ vựng",
+      "section": "1.3",
+      "sectionTitle": "1.3 私の趣味 (Sở thích của tôi)"
+    },
+    {
+      "id": "L1_47",
+      "kanji": "何",
+      "hiragana": "なん",
+      "meaning": "Cái gì",
+      "category": "Từ vựng",
+      "section": "1.3",
+      "sectionTitle": "1.3 私の趣味 (Sở thích của tôi)"
+    },
+    {
+      "id": "L1_48",
+      "kanji": "あ（っ）",
+      "hiragana": "あ（っ）",
+      "meaning": "A! / Á!",
+      "category": "Từ vựng",
+      "section": "1.3",
+      "sectionTitle": "1.3 私の趣味 (Sở thích của tôi)"
+    },
+    {
+      "lesson": "1",
+      "kanji": "（どうぞ）よろしくお願いします",
+      "hiragana": "（どうぞ）よろしくおねがいします",
+      "meaning": "Rất mong nhận được sự giúp đỡ của bạn",
+      "category": "Từ vựng",
+      "section": "1.1",
+      "sectionTitle": "1.1 私の名前・国・仕事 (Tên, đất nước, công việc của tôi)",
+      "id": "L1_49"
+    },
+    {
+      "lesson": "1",
+      "kanji": "映画",
+      "hiragana": "えいが",
+      "meaning": "Phim ảnh",
+      "category": "Từ vựng",
+      "section": "1.3",
+      "sectionTitle": "1.3 私の趣味 (Sở thích của tôi)",
+      "id": "L1_50"
+    }
+  ],
+  "2": [
+    {
+      "id": "L2_1",
+      "kanji": "ここ／こちら",
+      "hiragana": "ここ／こちら",
+      "meaning": "Đây, ch ỗ này / Phía này",
+      "category": "Từ vựng",
+      "section": "2.1",
+      "sectionTitle": "2.1 どこですか (Ở đâu vậy? / Vị trí các quầy & tầng)"
+    },
+    {
+      "id": "L2_2",
+      "kanji": "そこ／そちら",
+      "hiragana": "そこ／そちら",
+      "meaning": "Kia, chỗ kia / Phía kia",
+      "category": "Từ vựng",
+      "section": "2.1",
+      "sectionTitle": "2.1 どこですか (Ở đâu vậy? / Vị trí các quầy & tầng)"
+    },
+    {
+      "id": "L2_3",
+      "kanji": "あそこ／あちら",
+      "hiragana": "あそこ／あちら",
+      "meaning": "Đó, ch ỗ đó / Phía đó",
+      "category": "Từ vựng",
+      "section": "2.1",
+      "sectionTitle": "2.1 どこですか (Ở đâu vậy? / Vị trí các quầy & tầng)"
+    },
+    {
+      "id": "L2_4",
+      "kanji": "インフォメーション",
+      "hiragana": "インフォメーション",
+      "meaning": "Quầy thông tin",
+      "category": "Từ vựng",
+      "section": "2.1",
+      "sectionTitle": "2.1 どこですか (Ở đâu vậy? / Vị trí các quầy & tầng)"
+    },
+    {
+      "id": "L2_5",
+      "kanji": "ＡＴＭ",
+      "hiragana": "ＡＴＭ",
+      "meaning": "Máy rút ti ền tự động",
+      "category": "Từ vựng",
+      "section": "2.1",
+      "sectionTitle": "2.1 どこですか (Ở đâu vậy? / Vị trí các quầy & tầng)"
+    },
+    {
+      "id": "L2_6",
+      "kanji": "エスカレーター",
+      "hiragana": "エスカレーター",
+      "meaning": "Thang cu ốn",
+      "category": "Từ vựng",
+      "section": "2.1",
+      "sectionTitle": "2.1 どこですか (Ở đâu vậy? / Vị trí các quầy & tầng)"
+    },
+    {
+      "id": "L2_7",
+      "kanji": "エレベーター",
+      "hiragana": "エレベーター",
+      "meaning": "Thang máy",
+      "category": "Từ vựng",
+      "section": "2.1",
+      "sectionTitle": "2.1 どこですか (Ở đâu vậy? / Vị trí các quầy & tầng)"
+    },
+    {
+      "id": "L2_8",
+      "kanji": "きつえんしょ",
+      "hiragana": "きつえんしょ",
+      "meaning": "Nơi hút thu ốc",
+      "category": "Từ vựng",
+      "section": "2.1",
+      "sectionTitle": "2.1 どこですか (Ở đâu vậy? / Vị trí các quầy & tầng)"
+    },
+    {
+      "id": "L2_9",
+      "kanji": "トイレ",
+      "hiragana": "トイレ",
+      "meaning": "Nhà v ệ sinh",
+      "category": "Từ vựng",
+      "section": "2.1",
+      "sectionTitle": "2.1 どこですか (Ở đâu vậy? / Vị trí các quầy & tầng)"
+    },
+    {
+      "id": "L2_10",
+      "kanji": "レジ",
+      "hiragana": "レジ",
+      "meaning": "Quầy thu ngân",
+      "category": "Từ vựng",
+      "section": "2.1",
+      "sectionTitle": "2.1 どこですか (Ở đâu vậy? / Vị trí các quầy & tầng)"
+    },
+    {
+      "id": "L2_11",
+      "kanji": "きっさてん",
+      "hiragana": "きっさてん",
+      "meaning": "Quán gi ải khát",
+      "category": "Từ vựng",
+      "section": "2.1",
+      "sectionTitle": "2.1 どこですか (Ở đâu vậy? / Vị trí các quầy & tầng)"
+    },
+    {
+      "id": "L2_12",
+      "kanji": "ショップ",
+      "hiragana": "ショップ",
+      "meaning": "Cửa hàng 100 Yên",
+      "category": "Từ vựng",
+      "section": "2.1",
+      "sectionTitle": "2.1 どこですか (Ở đâu vậy? / Vị trí các quầy & tầng)"
+    },
+    {
+      "id": "L2_13",
+      "kanji": "地下",
+      "hiragana": "地下",
+      "meaning": "Ngầm, dư ới lòng Đất",
+      "category": "Từ vựng",
+      "section": "2.1",
+      "sectionTitle": "2.1 どこですか (Ở đâu vậy? / Vị trí các quầy & tầng)"
+    },
+    {
+      "id": "L2_14",
+      "kanji": "カメラ",
+      "hiragana": "カメラ",
+      "meaning": "Máy ảnh",
+      "category": "Từ vựng",
+      "section": "2.1",
+      "sectionTitle": "2.1 どこですか (Ở đâu vậy? / Vị trí các quầy & tầng)"
+    },
+    {
+      "id": "L2_15",
+      "kanji": "携帯電話",
+      "hiragana": "けいたんでんわ",
+      "meaning": "Điện thoại di động",
+      "category": "Từ vựng",
+      "section": "2.1",
+      "sectionTitle": "2.1 どこですか (Ở đâu vậy? / Vị trí các quầy & tầng)"
+    },
+    {
+      "id": "L2_16",
+      "kanji": "電子辞書",
+      "hiragana": "でんしじしょ",
+      "meaning": "Kim từ điển",
+      "category": "Từ vựng",
+      "section": "2.1",
+      "sectionTitle": "2.1 どこですか (Ở đâu vậy? / Vị trí các quầy & tầng)"
+    },
+    {
+      "id": "L2_17",
+      "kanji": "パソコン",
+      "hiragana": "Máy tính",
+      "meaning": "cá nhân",
+      "category": "Từ vựng",
+      "section": "2.1",
+      "sectionTitle": "2.1 どこですか (Ở đâu vậy? / Vị trí các quầy & tầng)"
+    },
+    {
+      "id": "L2_18",
+      "kanji": "くつ",
+      "hiragana": "くつ",
+      "meaning": "Giầy",
+      "category": "Từ vựng",
+      "section": "2.1",
+      "sectionTitle": "2.1 どこですか (Ở đâu vậy? / Vị trí các quầy & tầng)"
+    },
+    {
+      "id": "L2_19",
+      "kanji": "消しゴム",
+      "hiragana": "けしごむ",
+      "meaning": "Tẩy",
+      "category": "Từ vựng",
+      "section": "2.1",
+      "sectionTitle": "2.1 どこですか (Ở đâu vậy? / Vị trí các quầy & tầng)"
+    },
+    {
+      "id": "L2_20",
+      "kanji": "ペン",
+      "hiragana": "ペン",
+      "meaning": "Bút",
+      "category": "Từ vựng",
+      "section": "2.1",
+      "sectionTitle": "2.1 どこですか (Ở đâu vậy? / Vị trí các quầy & tầng)"
+    },
+    {
+      "id": "L2_21",
+      "kanji": "トイレットペーパー",
+      "hiragana": "トイレットペーパー",
+      "meaning": "Giấy vệ sinh",
+      "category": "Từ vựng",
+      "section": "2.1",
+      "sectionTitle": "2.1 どこですか (Ở đâu vậy? / Vị trí các quầy & tầng)"
+    },
+    {
+      "id": "L2_22",
+      "kanji": "本",
+      "hiragana": "ほん",
+      "meaning": "Sách",
+      "category": "Từ vựng",
+      "section": "2.1",
+      "sectionTitle": "2.1 どこですか (Ở đâu vậy? / Vị trí các quầy & tầng)"
+    },
+    {
+      "id": "L2_23",
+      "kanji": "油",
+      "hiragana": "あぶら",
+      "meaning": "Dầu",
+      "category": "Từ vựng",
+      "section": "2.1",
+      "sectionTitle": "2.1 どこですか (Ở đâu vậy? / Vị trí các quầy & tầng)"
+    },
+    {
+      "id": "L2_24",
+      "kanji": "ケーキ",
+      "hiragana": "ケーキ",
+      "meaning": "Bánh ng ọt",
+      "category": "Từ vựng",
+      "section": "2.1",
+      "sectionTitle": "2.1 どこですか (Ở đâu vậy? / Vị trí các quầy & tầng)"
+    },
+    {
+      "id": "L2_25",
+      "kanji": "米",
+      "hiragana": "こめ",
+      "meaning": "Gạo",
+      "category": "Từ vựng",
+      "section": "2.1",
+      "sectionTitle": "2.1 どこですか (Ở đâu vậy? / Vị trí các quầy & tầng)"
+    },
+    {
+      "id": "L2_26",
+      "kanji": "パン",
+      "hiragana": "パン",
+      "meaning": "Bánh m ỳ",
+      "category": "Từ vựng",
+      "section": "2.1",
+      "sectionTitle": "2.1 どこですか (Ở đâu vậy? / Vị trí các quầy & tầng)"
+    },
+    {
+      "id": "L2_27",
+      "kanji": "水",
+      "hiragana": "みず",
+      "meaning": "Nước",
+      "category": "Từ vựng",
+      "section": "2.1",
+      "sectionTitle": "2.1 どこですか (Ở đâu vậy? / Vị trí các quầy & tầng)"
+    },
+    {
+      "id": "L2_28",
+      "kanji": "店員",
+      "hiragana": "てんいん",
+      "meaning": "Nhân viên bán hàng",
+      "category": "Từ vựng",
+      "section": "2.1",
+      "sectionTitle": "2.1 どこですか (Ở đâu vậy? / Vị trí các quầy & tầng)"
+    },
+    {
+      "id": "L2_29",
+      "kanji": "～階",
+      "hiragana": "～かい",
+      "meaning": "Tầng ～",
+      "category": "Từ vựng",
+      "section": "2.1",
+      "sectionTitle": "2.1 どこですか (Ở đâu vậy? / Vị trí các quầy & tầng)"
+    },
+    {
+      "id": "L2_30",
+      "kanji": "～屋",
+      "hiragana": "～や",
+      "meaning": "Cửa hàng ～, Hiệu～",
+      "category": "Từ vựng",
+      "section": "2.1",
+      "sectionTitle": "2.1 どこですか (Ở đâu vậy? / Vị trí các quầy & tầng)"
+    },
+    {
+      "id": "L2_31",
+      "kanji": "いらっしゃいませ",
+      "hiragana": "いらっしゃいませ",
+      "meaning": "Kính chào quý khách",
+      "category": "Từ vựng",
+      "section": "2.1",
+      "sectionTitle": "2.1 どこですか (Ở đâu vậy? / Vị trí các quầy & tầng)"
+    },
+    {
+      "id": "L2_32",
+      "kanji": "これ",
+      "hiragana": "これ",
+      "meaning": "Cái này",
+      "category": "Từ vựng",
+      "section": "2.2",
+      "sectionTitle": "2.2 いくらですか (Bao nhiêu tiền? / Mua sắm & Giá cả)"
+    },
+    {
+      "id": "L2_33",
+      "kanji": "それ",
+      "hiragana": "それ",
+      "meaning": "Cái kia",
+      "category": "Từ vựng",
+      "section": "2.2",
+      "sectionTitle": "2.2 いくらですか (Bao nhiêu tiền? / Mua sắm & Giá cả)"
+    },
+    {
+      "id": "L2_34",
+      "kanji": "あれ",
+      "hiragana": "あれ",
+      "meaning": "Cái đó",
+      "category": "Từ vựng",
+      "section": "2.2",
+      "sectionTitle": "2.2 いくらですか (Bao nhiêu tiền? / Mua sắm & Giá cả)"
+    },
+    {
+      "id": "L2_35",
+      "kanji": "どれ",
+      "hiragana": "どれ",
+      "meaning": "Cái nào",
+      "category": "Từ vựng",
+      "section": "2.2",
+      "sectionTitle": "2.2 いくらですか (Bao nhiêu tiền? / Mua sắm & Giá cả)"
+    },
+    {
+      "id": "L2_36",
+      "kanji": "この～",
+      "hiragana": "この～",
+      "meaning": "Cái ～ này",
+      "category": "Từ vựng",
+      "section": "2.2",
+      "sectionTitle": "2.2 いくらですか (Bao nhiêu tiền? / Mua sắm & Giá cả)"
+    },
+    {
+      "id": "L2_37",
+      "kanji": "その～",
+      "hiragana": "その～",
+      "meaning": "Cái ～ kia",
+      "category": "Từ vựng",
+      "section": "2.2",
+      "sectionTitle": "2.2 いくらですか (Bao nhiêu tiền? / Mua sắm & Giá cả)"
+    },
+    {
+      "id": "L2_38",
+      "kanji": "あの～",
+      "hiragana": "あの～",
+      "meaning": "Cái ～ đó",
+      "category": "Từ vựng",
+      "section": "2.2",
+      "sectionTitle": "2.2 いくらですか (Bao nhiêu tiền? / Mua sắm & Giá cả)"
+    },
+    {
+      "id": "L2_39",
+      "kanji": "どの～",
+      "hiragana": "どの～",
+      "meaning": "Cái ～ nào",
+      "category": "Từ vựng",
+      "section": "2.2",
+      "sectionTitle": "2.2 いくらですか (Bao nhiêu tiền? / Mua sắm & Giá cả)"
+    },
+    {
+      "id": "L2_40",
+      "kanji": "かばん",
+      "hiragana": "かばん",
+      "meaning": "Cặp, túi xách",
+      "category": "Từ vựng",
+      "section": "2.2",
+      "sectionTitle": "2.2 いくらですか (Bao nhiêu tiền? / Mua sắm & Giá cả)"
+    },
+    {
+      "id": "L2_41",
+      "kanji": "ズボン",
+      "hiragana": "ズボン",
+      "meaning": "Quần dài",
+      "category": "Từ vựng",
+      "section": "2.2",
+      "sectionTitle": "2.2 いくらですか (Bao nhiêu tiền? / Mua sắm & Giá cả)"
+    },
+    {
+      "id": "L2_42",
+      "kanji": "Tシャツ",
+      "hiragana": "Tシャツ",
+      "meaning": "Áo phông",
+      "category": "Từ vựng",
+      "section": "2.2",
+      "sectionTitle": "2.2 いくらですか (Bao nhiêu tiền? / Mua sắm & Giá cả)"
+    },
+    {
+      "id": "L2_43",
+      "kanji": "時計",
+      "hiragana": "とけい",
+      "meaning": "Đồng hồ",
+      "category": "Từ vựng",
+      "section": "2.2",
+      "sectionTitle": "2.2 いくらですか (Bao nhiêu tiền? / Mua sắm & Giá cả)"
+    },
+    {
+      "id": "L2_44",
+      "kanji": "～円",
+      "hiragana": "～えん",
+      "meaning": "～ Yên",
+      "category": "Từ vựng",
+      "section": "2.2",
+      "sectionTitle": "2.2 いくらですか (Bao nhiêu tiền? / Mua sắm & Giá cả)"
+    },
+    {
+      "id": "L2_45",
+      "kanji": "いくら",
+      "hiragana": "いくら",
+      "meaning": "Bao nhiêu ti ền",
+      "category": "Từ vựng",
+      "section": "2.2",
+      "sectionTitle": "2.2 いくらですか (Bao nhiêu tiền? / Mua sắm & Giá cả)"
+    },
+    {
+      "id": "L2_46",
+      "kanji": "じゃ",
+      "hiragana": "じゃ",
+      "meaning": "Thế thì / Thôi thì",
+      "category": "Từ vựng",
+      "section": "2.2",
+      "sectionTitle": "2.2 いくらですか (Bao nhiêu tiền? / Mua sắm & Giá cả)"
+    },
+    {
+      "id": "L2_47",
+      "kanji": "魚",
+      "hiragana": "さかな",
+      "meaning": "Cá",
+      "category": "Từ vựng",
+      "section": "2.3",
+      "sectionTitle": "2.3 レストラン (Nhà hàng / Món ăn & Gọi món)"
+    },
+    {
+      "id": "L2_48",
+      "kanji": "肉",
+      "hiragana": "にく",
+      "meaning": "Thịt",
+      "category": "Từ vựng",
+      "section": "2.3",
+      "sectionTitle": "2.3 レストラン (Nhà hàng / Món ăn & Gọi món)"
+    },
+    {
+      "id": "L2_49",
+      "kanji": "牛肉",
+      "hiragana": "ぎゅうにく",
+      "meaning": "Thịt bò",
+      "category": "Từ vựng",
+      "section": "2.3",
+      "sectionTitle": "2.3 レストラン (Nhà hàng / Món ăn & Gọi món)"
+    },
+    {
+      "id": "L2_50",
+      "kanji": "豚肉",
+      "hiragana": "ぶたにく",
+      "meaning": "Thịt lợn",
+      "category": "Từ vựng",
+      "section": "2.3",
+      "sectionTitle": "2.3 レストラン (Nhà hàng / Món ăn & Gọi món)"
+    },
+    {
+      "id": "L2_51",
+      "kanji": "野菜",
+      "hiragana": "やさい",
+      "meaning": "Rau",
+      "category": "Từ vựng",
+      "section": "2.3",
+      "sectionTitle": "2.3 レストラン (Nhà hàng / Món ăn & Gọi món)"
+    },
+    {
+      "id": "L2_52",
+      "kanji": "いちご",
+      "hiragana": "いちご",
+      "meaning": "Quả dâu",
+      "category": "Từ vựng",
+      "section": "2.3",
+      "sectionTitle": "2.3 レストラン (Nhà hàng / Món ăn & Gọi món)"
+    },
+    {
+      "id": "L2_53",
+      "kanji": "りんご",
+      "hiragana": "りんご",
+      "meaning": "Quả táo",
+      "category": "Từ vựng",
+      "section": "2.3",
+      "sectionTitle": "2.3 レストラン (Nhà hàng / Món ăn & Gọi món)"
+    },
+    {
+      "id": "L2_54",
+      "kanji": "料理",
+      "hiragana": "りょうり",
+      "meaning": "Món ăn / N ấu ăn",
+      "category": "Từ vựng",
+      "section": "2.3",
+      "sectionTitle": "2.3 レストラン (Nhà hàng / Món ăn & Gọi món)"
+    },
+    {
+      "id": "L2_55",
+      "kanji": "です",
+      "hiragana": "です",
+      "meaning": "Đây là món ăn cá.",
+      "category": "Từ vựng",
+      "section": "2.3",
+      "sectionTitle": "2.3 レストラン (Nhà hàng / Món ăn & Gọi món)"
+    },
+    {
+      "id": "L2_56",
+      "kanji": "カレー",
+      "hiragana": "カレー",
+      "meaning": "Món cà -ri",
+      "category": "Từ vựng",
+      "section": "2.3",
+      "sectionTitle": "2.3 レストラン (Nhà hàng / Món ăn & Gọi món)"
+    },
+    {
+      "id": "L2_57",
+      "kanji": "スープ",
+      "hiragana": "スープ",
+      "meaning": "Canh, súp",
+      "category": "Từ vựng",
+      "section": "2.3",
+      "sectionTitle": "2.3 レストラン (Nhà hàng / Món ăn & Gọi món)"
+    },
+    {
+      "id": "L2_58",
+      "kanji": "とんかつ",
+      "hiragana": "とんかつ",
+      "meaning": "Món th ịt lợn chiên xù",
+      "category": "Từ vựng",
+      "section": "2.3",
+      "sectionTitle": "2.3 レストラン (Nhà hàng / Món ăn & Gọi món)"
+    },
+    {
+      "id": "L2_59",
+      "kanji": "ハンバーグ",
+      "hiragana": "ハンバーグ",
+      "meaning": "Món th ịt băm viên",
+      "category": "Từ vựng",
+      "section": "2.3",
+      "sectionTitle": "2.3 レストラン (Nhà hàng / Món ăn & Gọi món)"
+    },
+    {
+      "id": "L2_60",
+      "kanji": "ご飯",
+      "hiragana": "ごはん",
+      "meaning": "Cơm",
+      "category": "Từ vựng",
+      "section": "2.3",
+      "sectionTitle": "2.3 レストラン (Nhà hàng / Món ăn & Gọi món)"
+    },
+    {
+      "id": "L2_61",
+      "kanji": "を2つください。",
+      "hiragana": "を2つください。",
+      "meaning": "Cho tôi 2 bát/xu ất cơm.",
+      "category": "Từ vựng",
+      "section": "2.3",
+      "sectionTitle": "2.3 レストラン (Nhà hàng / Món ăn & Gọi món)"
+    },
+    {
+      "id": "L2_62",
+      "kanji": "ライス",
+      "hiragana": "ライス",
+      "meaning": "Cơm, g ạo",
+      "category": "Từ vựng",
+      "section": "2.3",
+      "sectionTitle": "2.3 レストラン (Nhà hàng / Món ăn & Gọi món)"
+    },
+    {
+      "id": "L2_63",
+      "kanji": "ジュース",
+      "hiragana": "ジュース",
+      "meaning": "Nước ngọt, nước trái cây",
+      "category": "Từ vựng",
+      "section": "2.3",
+      "sectionTitle": "2.3 レストラン (Nhà hàng / Món ăn & Gọi món)"
+    },
+    {
+      "id": "L2_64",
+      "kanji": "コーヒー",
+      "hiragana": "コーヒー",
+      "meaning": "Cà phê",
+      "category": "Từ vựng",
+      "section": "2.3",
+      "sectionTitle": "2.3 レストラン (Nhà hàng / Món ăn & Gọi món)"
+    },
+    {
+      "id": "L2_65",
+      "kanji": "紅茶",
+      "hiragana": "こうちゃ",
+      "meaning": "Trà đen",
+      "category": "Từ vựng",
+      "section": "2.3",
+      "sectionTitle": "2.3 レストラン (Nhà hàng / Món ăn & Gọi món)"
+    },
+    {
+      "id": "L2_66",
+      "kanji": "（お）茶",
+      "hiragana": "（お）ちゃ",
+      "meaning": "Trà, nư ớc chè",
+      "category": "Từ vựng",
+      "section": "2.3",
+      "sectionTitle": "2.3 レストラン (Nhà hàng / Món ăn & Gọi món)"
+    },
+    {
+      "id": "L2_67",
+      "kanji": "ビール",
+      "hiragana": "ビール",
+      "meaning": "Bia",
+      "category": "Từ vựng",
+      "section": "2.3",
+      "sectionTitle": "2.3 レストラン (Nhà hàng / Món ăn & Gọi món)"
+    },
+    {
+      "id": "L2_68",
+      "kanji": "ワイン",
+      "hiragana": "ワイン",
+      "meaning": "Rượu vang",
+      "category": "Từ vựng",
+      "section": "2.3",
+      "sectionTitle": "2.3 レストラン (Nhà hàng / Món ăn & Gọi món)"
+    },
+    {
+      "id": "L2_69",
+      "kanji": "インド",
+      "hiragana": "インド",
+      "meaning": "Ấn Độ",
+      "category": "Từ vựng",
+      "section": "2.3",
+      "sectionTitle": "2.3 レストラン (Nhà hàng / Món ăn & Gọi món)"
+    },
+    {
+      "id": "L2_70",
+      "kanji": "ドイツ",
+      "hiragana": "ドイツ",
+      "meaning": "Đức",
+      "category": "Từ vựng",
+      "section": "2.3",
+      "sectionTitle": "2.3 レストラン (Nhà hàng / Món ăn & Gọi món)"
+    },
+    {
+      "id": "L2_71",
+      "kanji": "フランス",
+      "hiragana": "フランス",
+      "meaning": "Pháp",
+      "category": "Từ vựng",
+      "section": "2.3",
+      "sectionTitle": "2.3 レストラン (Nhà hàng / Món ăn & Gọi món)"
+    },
+    {
+      "id": "L2_72",
+      "kanji": "財布",
+      "hiragana": "さいふ",
+      "meaning": "Ví tiền",
+      "category": "Từ vựng",
+      "section": "2.3",
+      "sectionTitle": "2.3 レストラン (Nhà hàng / Món ăn & Gọi món)"
+    },
+    {
+      "id": "L2_73",
+      "kanji": "英語",
+      "hiragana": "えいご",
+      "meaning": "Tiếng Anh",
+      "category": "Từ vựng",
+      "section": "2.3",
+      "sectionTitle": "2.3 レストラン (Nhà hàng / Món ăn & Gọi món)"
+    },
+    {
+      "id": "L2_74",
+      "kanji": "～つ",
+      "hiragana": "～つ",
+      "meaning": "～ cái / ～ chiếc",
+      "category": "Từ vựng",
+      "section": "2.3",
+      "sectionTitle": "2.3 レストラン (Nhà hàng / Món ăn & Gọi món)"
+    },
+    {
+      "id": "L2_75",
+      "kanji": "だれ",
+      "hiragana": "だれ",
+      "meaning": "Ai",
+      "category": "Từ vựng",
+      "section": "2.3",
+      "sectionTitle": "2.3 レストラン (Nhà hàng / Món ăn & Gọi món)"
+    },
+    {
+      "id": "L2_76",
+      "kanji": "いします",
+      "hiragana": "いします",
+      "meaning": "Cho tôi g ọi đồ.",
+      "category": "Từ vựng",
+      "section": "2.3",
+      "sectionTitle": "2.3 レストラン (Nhà hàng / Món ăn & Gọi món)"
+    },
+    {
+      "id": "L2_77",
+      "kanji": "どうぞ",
+      "hiragana": "どうぞ",
+      "meaning": "Xin m ời",
+      "category": "Từ vựng",
+      "section": "2.3",
+      "sectionTitle": "2.3 レストラン (Nhà hàng / Món ăn & Gọi món)"
+    },
+    {
+      "lesson": "2",
+      "kanji": "レストラン",
+      "hiragana": "レストラン",
+      "meaning": "Nhà hàng, quán ăn",
+      "category": "Từ vựng",
+      "section": "2.1",
+      "sectionTitle": "2.1 どこですか (Ở đâu vậy? / Vị trí các quầy & tầng)",
+      "id": "L2_78"
+    },
+    {
+      "lesson": "2",
+      "kanji": "卵",
+      "hiragana": "たまご",
+      "meaning": "Trứng",
+      "category": "Từ vựng",
+      "section": "2.3",
+      "sectionTitle": "2.3 レストラン (Nhà hàng / Món ăn & Gọi món)",
+      "id": "L2_79"
+    }
+  ],
+  "3": [
+    {
+      "id": "L3_1",
+      "kanji": "今",
+      "hiragana": "いま",
+      "meaning": "Bây gi ờ",
+      "category": "Từ vựng",
+      "section": "3.1",
+      "sectionTitle": "3.1 何時までですか (Mấy giờ kết thúc? / Giờ giấc & Thời gian biểu)"
+    },
+    {
+      "id": "L3_2",
+      "kanji": "午前",
+      "hiragana": "ごぜん",
+      "meaning": "Buổi sáng / AM",
+      "category": "Từ vựng",
+      "section": "3.1",
+      "sectionTitle": "3.1 何時までですか (Mấy giờ kết thúc? / Giờ giấc & Thời gian biểu)"
+    },
+    {
+      "id": "L3_3",
+      "kanji": "午後",
+      "hiragana": "ごご",
+      "meaning": "Buổi chiều / PM",
+      "category": "Từ vựng",
+      "section": "3.1",
+      "sectionTitle": "3.1 何時までですか (Mấy giờ kết thúc? / Giờ giấc & Thời gian biểu)"
+    },
+    {
+      "id": "L3_4",
+      "kanji": "昼",
+      "hiragana": "ひる",
+      "meaning": "Buổi trưa",
+      "category": "Từ vựng",
+      "section": "3.1",
+      "sectionTitle": "3.1 何時までですか (Mấy giờ kết thúc? / Giờ giấc & Thời gian biểu)"
+    },
+    {
+      "id": "L3_5",
+      "kanji": "銀行",
+      "hiragana": "ぎんこう",
+      "meaning": "Ngân hàng",
+      "category": "Từ vựng",
+      "section": "3.1",
+      "sectionTitle": "3.1 何時までですか (Mấy giờ kết thúc? / Giờ giấc & Thời gian biểu)"
+    },
+    {
+      "id": "L3_6",
+      "kanji": "体育館",
+      "hiragana": "たいいくかん",
+      "meaning": "Nhà thi đ ấu, Nhà t ập thể dục",
+      "category": "Từ vựng",
+      "section": "3.1",
+      "sectionTitle": "3.1 何時までですか (Mấy giờ kết thúc? / Giờ giấc & Thời gian biểu)"
+    },
+    {
+      "id": "L3_7",
+      "kanji": "図書館",
+      "hiragana": "としょかん",
+      "meaning": "Thư vi ện",
+      "category": "Từ vựng",
+      "section": "3.1",
+      "sectionTitle": "3.1 何時までですか (Mấy giờ kết thúc? / Giờ giấc & Thời gian biểu)"
+    },
+    {
+      "id": "L3_8",
+      "kanji": "病院",
+      "hiragana": "びょういん",
+      "meaning": "Bệnh viện",
+      "category": "Từ vựng",
+      "section": "3.1",
+      "sectionTitle": "3.1 何時までですか (Mấy giờ kết thúc? / Giờ giấc & Thời gian biểu)"
+    },
+    {
+      "id": "L3_9",
+      "kanji": "郵便局",
+      "hiragana": "ゆうびんきょく",
+      "meaning": "Bưu đi ện",
+      "category": "Từ vựng",
+      "section": "3.1",
+      "sectionTitle": "3.1 何時までですか (Mấy giờ kết thúc? / Giờ giấc & Thời gian biểu)"
+    },
+    {
+      "id": "L3_10",
+      "kanji": "授業",
+      "hiragana": "じゅぎょう",
+      "meaning": "Giờ học",
+      "category": "Từ vựng",
+      "section": "3.1",
+      "sectionTitle": "3.1 何時までですか (Mấy giờ kết thúc? / Giờ giấc & Thời gian biểu)"
+    },
+    {
+      "id": "L3_11",
+      "kanji": "テスト",
+      "hiragana": "テスト",
+      "meaning": "Bài ki ểm tra",
+      "category": "Từ vựng",
+      "section": "3.1",
+      "sectionTitle": "3.1 何時までですか (Mấy giờ kết thúc? / Giờ giấc & Thời gian biểu)"
+    },
+    {
+      "id": "L3_12",
+      "kanji": "休み",
+      "hiragana": "やすみ",
+      "meaning": "Nghỉ / Ngày nghỉ",
+      "category": "Từ vựng",
+      "section": "3.1",
+      "sectionTitle": "3.1 何時までですか (Mấy giờ kết thúc? / Giờ giấc & Thời gian biểu)"
+    },
+    {
+      "id": "L3_13",
+      "kanji": "時間",
+      "hiragana": "じかん",
+      "meaning": "Thời gian / Gi ờ giấc",
+      "category": "Từ vựng",
+      "section": "3.1",
+      "sectionTitle": "3.1 何時までですか (Mấy giờ kết thúc? / Giờ giấc & Thời gian biểu)"
+    },
+    {
+      "id": "L3_14",
+      "kanji": "～時",
+      "hiragana": "～じ",
+      "meaning": "～ giờ",
+      "category": "Từ vựng",
+      "section": "3.1",
+      "sectionTitle": "3.1 何時までですか (Mấy giờ kết thúc? / Giờ giấc & Thời gian biểu)"
+    },
+    {
+      "id": "L3_15",
+      "kanji": "～分",
+      "hiragana": "～ふん",
+      "meaning": "～ phút",
+      "category": "Từ vựng",
+      "section": "3.1",
+      "sectionTitle": "3.1 何時までですか (Mấy giờ kết thúc? / Giờ giấc & Thời gian biểu)"
+    },
+    {
+      "id": "L3_16",
+      "kanji": "です。",
+      "hiragana": "です。",
+      "meaning": "Bây gi ờ là 9 gi ờ 20 phút.",
+      "category": "Từ vựng",
+      "section": "3.1",
+      "sectionTitle": "3.1 何時までですか (Mấy giờ kết thúc? / Giờ giấc & Thời gian biểu)"
+    },
+    {
+      "id": "L3_17",
+      "kanji": "～時半",
+      "hiragana": "～じはん",
+      "meaning": "～ giờ rưỡi",
+      "category": "Từ vựng",
+      "section": "3.1",
+      "sectionTitle": "3.1 何時までですか (Mấy giờ kết thúc? / Giờ giấc & Thời gian biểu)"
+    },
+    {
+      "id": "L3_18",
+      "kanji": "～曜日",
+      "hiragana": "～ようび",
+      "meaning": "Thứ ～",
+      "category": "Từ vựng",
+      "section": "3.1",
+      "sectionTitle": "3.1 何時までですか (Mấy giờ kết thúc? / Giờ giấc & Thời gian biểu)"
+    },
+    {
+      "id": "L3_19",
+      "kanji": "スケジュール",
+      "hiragana": "スケジュール",
+      "meaning": "Kế hoạch, lịch",
+      "category": "Từ vựng",
+      "section": "3.2",
+      "sectionTitle": "3.2 私のスケジュール (Lịch trình & Kế hoạch của tôi)"
+    },
+    {
+      "id": "L3_20",
+      "kanji": "アルバイト",
+      "hiragana": "アルバイト",
+      "meaning": "Việc làm thêm",
+      "category": "Từ vựng",
+      "section": "3.2",
+      "sectionTitle": "3.2 私のスケジュール (Lịch trình & Kế hoạch của tôi)"
+    },
+    {
+      "id": "L3_21",
+      "kanji": "スキー",
+      "hiragana": "スキー",
+      "meaning": "Trượt tuyết",
+      "category": "Từ vựng",
+      "section": "3.2",
+      "sectionTitle": "3.2 私のスケジュール (Lịch trình & Kế hoạch của tôi)"
+    },
+    {
+      "id": "L3_22",
+      "kanji": "パーティー",
+      "hiragana": "パーティー",
+      "meaning": "Bữa tiệc",
+      "category": "Từ vựng",
+      "section": "3.2",
+      "sectionTitle": "3.2 私のスケジュール (Lịch trình & Kế hoạch của tôi)"
+    },
+    {
+      "id": "L3_23",
+      "kanji": "バーベキュー",
+      "hiragana": "バーベキュー",
+      "meaning": "Tiệc nướng ngoài tr ời",
+      "category": "Từ vựng",
+      "section": "3.2",
+      "sectionTitle": "3.2 私のスケジュール (Lịch trình & Kế hoạch của tôi)"
+    },
+    {
+      "id": "L3_24",
+      "kanji": "花火",
+      "hiragana": "はなび",
+      "meaning": "Pháo hoa",
+      "category": "Từ vựng",
+      "section": "3.2",
+      "sectionTitle": "3.2 私のスケジュール (Lịch trình & Kế hoạch của tôi)"
+    },
+    {
+      "id": "L3_25",
+      "kanji": "ホームステイ",
+      "hiragana": "ホームステイ",
+      "meaning": "Ở cùng gia đình b ản địa",
+      "category": "Từ vựng",
+      "section": "3.2",
+      "sectionTitle": "3.2 私のスケジュール (Lịch trình & Kế hoạch của tôi)"
+    },
+    {
+      "id": "L3_26",
+      "kanji": "（お）祭り",
+      "hiragana": "（お）まつり",
+      "meaning": "Lễ hội",
+      "category": "Từ vựng",
+      "section": "3.2",
+      "sectionTitle": "3.2 私のスケジュール (Lịch trình & Kế hoạch của tôi)"
+    },
+    {
+      "id": "L3_27",
+      "kanji": "海",
+      "hiragana": "うみ",
+      "meaning": "Biển",
+      "category": "Từ vựng",
+      "section": "3.2",
+      "sectionTitle": "3.2 私のスケジュール (Lịch trình & Kế hoạch của tôi)"
+    },
+    {
+      "id": "L3_28",
+      "kanji": "公園",
+      "hiragana": "こうえん",
+      "meaning": "Công viên",
+      "category": "Từ vựng",
+      "section": "3.2",
+      "sectionTitle": "3.2 私のスケジュール (Lịch trình & Kế hoạch của tôi)"
+    },
+    {
+      "id": "L3_29",
+      "kanji": "桜",
+      "hiragana": "さくら",
+      "meaning": "Hoa anh đào",
+      "category": "Từ vựng",
+      "section": "3.2",
+      "sectionTitle": "3.2 私のスケジュール (Lịch trình & Kế hoạch của tôi)"
+    },
+    {
+      "id": "L3_30",
+      "kanji": "（お）酒",
+      "hiragana": "（お）さけ",
+      "meaning": "Rượu (nhật)",
+      "category": "Từ vựng",
+      "section": "3.2",
+      "sectionTitle": "3.2 私のスケジュール (Lịch trình & Kế hoạch của tôi)"
+    },
+    {
+      "id": "L3_31",
+      "kanji": "（お）すし",
+      "hiragana": "（お）すし",
+      "meaning": "Món sushi",
+      "category": "Từ vựng",
+      "section": "3.2",
+      "sectionTitle": "3.2 私のスケジュール (Lịch trình & Kế hoạch của tôi)"
+    },
+    {
+      "id": "L3_32",
+      "kanji": "バス",
+      "hiragana": "バス",
+      "meaning": "Xe buýt",
+      "category": "Từ vựng",
+      "section": "3.2",
+      "sectionTitle": "3.2 私のスケジュール (Lịch trình & Kế hoạch của tôi)"
+    },
+    {
+      "id": "L3_33",
+      "kanji": "（お）弁当",
+      "hiragana": "（お）べんとう",
+      "meaning": "Cơm h ộp",
+      "category": "Từ vựng",
+      "section": "3.2",
+      "sectionTitle": "3.2 私のスケジュール (Lịch trình & Kế hoạch của tôi)"
+    },
+    {
+      "id": "L3_34",
+      "kanji": "1年",
+      "hiragana": "いちねん",
+      "meaning": "1 năm",
+      "category": "Từ vựng",
+      "section": "3.2",
+      "sectionTitle": "3.2 私のスケジュール (Lịch trình & Kế hoạch của tôi)"
+    },
+    {
+      "id": "L3_35",
+      "kanji": "春",
+      "hiragana": "はる",
+      "meaning": "Mùa xuân",
+      "category": "Từ vựng",
+      "section": "3.2",
+      "sectionTitle": "3.2 私のスケジュール (Lịch trình & Kế hoạch của tôi)"
+    },
+    {
+      "id": "L3_36",
+      "kanji": "夏",
+      "hiragana": "なつ",
+      "meaning": "Mùa hè",
+      "category": "Từ vựng",
+      "section": "3.2",
+      "sectionTitle": "3.2 私のスケジュール (Lịch trình & Kế hoạch của tôi)"
+    },
+    {
+      "id": "L3_37",
+      "kanji": "秋",
+      "hiragana": "あき",
+      "meaning": "Mùa thu",
+      "category": "Từ vựng",
+      "section": "3.2",
+      "sectionTitle": "3.2 私のスケジュール (Lịch trình & Kế hoạch của tôi)"
+    },
+    {
+      "id": "L3_38",
+      "kanji": "冬",
+      "hiragana": "ふゆ",
+      "meaning": "Mùa đông",
+      "category": "Từ vựng",
+      "section": "3.2",
+      "sectionTitle": "3.2 私のスケジュール (Lịch trình & Kế hoạch của tôi)"
+    },
+    {
+      "id": "L3_39",
+      "kanji": "ゴールデンウイーク",
+      "hiragana": "ゴールデンウイーク",
+      "meaning": "Tuần lễ vàng",
+      "category": "Từ vựng",
+      "section": "3.2",
+      "sectionTitle": "3.2 私のスケジュール (Lịch trình & Kế hoạch của tôi)"
+    },
+    {
+      "id": "L3_40",
+      "kanji": "何",
+      "hiragana": "なに",
+      "meaning": "Cái gì",
+      "category": "Từ vựng",
+      "section": "3.2",
+      "sectionTitle": "3.2 私のスケジュール (Lịch trình & Kế hoạch của tôi)"
+    },
+    {
+      "id": "L3_41",
+      "kanji": "行きます  いきます",
+      "hiragana": "行きます  いきます",
+      "meaning": "Đi",
+      "category": "Từ vựng",
+      "section": "3.2",
+      "sectionTitle": "3.2 私のスケジュール (Lịch trình & Kế hoạch của tôi)"
+    },
+    {
+      "id": "L3_42",
+      "kanji": "帰ります  かえります",
+      "hiragana": "帰ります  かえります",
+      "meaning": "Về, trở về",
+      "category": "Từ vựng",
+      "section": "3.2",
+      "sectionTitle": "3.2 私のスケジュール (Lịch trình & Kế hoạch của tôi)"
+    },
+    {
+      "id": "L3_43",
+      "kanji": "飲みます  のみます",
+      "hiragana": "飲みます  のみます",
+      "meaning": "Uống",
+      "category": "Từ vựng",
+      "section": "3.2",
+      "sectionTitle": "3.2 私のスケジュール (Lịch trình & Kế hoạch của tôi)"
+    },
+    {
+      "id": "L3_44",
+      "kanji": "食べます  たべます",
+      "hiragana": "食べます  たべます",
+      "meaning": "Ăn",
+      "category": "Từ vựng",
+      "section": "3.2",
+      "sectionTitle": "3.2 私のスケジュール (Lịch trình & Kế hoạch của tôi)"
+    },
+    {
+      "id": "L3_45",
+      "kanji": "見ます",
+      "hiragana": "みます",
+      "meaning": "Xem, nhìn",
+      "category": "Từ vựng",
+      "section": "3.2",
+      "sectionTitle": "3.2 私のスケジュール (Lịch trình & Kế hoạch của tôi)"
+    },
+    {
+      "id": "L3_46",
+      "kanji": "します",
+      "hiragana": "します",
+      "meaning": "Làm, chơi",
+      "category": "Từ vựng",
+      "section": "3.2",
+      "sectionTitle": "3.2 私のスケジュール (Lịch trình & Kế hoạch của tôi)"
+    },
+    {
+      "id": "L3_47",
+      "kanji": "スキーをします。",
+      "hiragana": "スキーをします。",
+      "meaning": "Chơi trư ợt tuyết.",
+      "category": "Từ vựng",
+      "section": "3.2",
+      "sectionTitle": "3.2 私のスケジュール (Lịch trình & Kế hoạch của tôi)"
+    },
+    {
+      "id": "L3_48",
+      "kanji": "いいですね",
+      "hiragana": "いいですね",
+      "meaning": "Hay quá nh ỉ!",
+      "category": "Từ vựng",
+      "section": "3.2",
+      "sectionTitle": "3.2 私のスケジュール (Lịch trình & Kế hoạch của tôi)"
+    },
+    {
+      "id": "L3_49",
+      "kanji": "えっ",
+      "hiragana": "えっ",
+      "meaning": "Ơ! / H ả",
+      "category": "Từ vựng",
+      "section": "3.2",
+      "sectionTitle": "3.2 私のスケジュール (Lịch trình & Kế hoạch của tôi)"
+    },
+    {
+      "id": "L3_50",
+      "kanji": "へえ",
+      "hiragana": "へえ",
+      "meaning": "Chà / Wow",
+      "category": "Từ vựng",
+      "section": "3.2",
+      "sectionTitle": "3.2 私のスケジュール (Lịch trình & Kế hoạch của tôi)"
+    },
+    {
+      "id": "L3_51",
+      "kanji": "朝",
+      "hiragana": "あさ",
+      "meaning": "Buổi sáng",
+      "category": "Từ vựng",
+      "section": "3.3",
+      "sectionTitle": "3.3 どんな毎日？ (Mỗi ngày như thế nào? / Sinh hoạt hàng ngày)"
+    },
+    {
+      "id": "L3_52",
+      "kanji": "夜",
+      "hiragana": "よる",
+      "meaning": "Buổi tối, đêm",
+      "category": "Từ vựng",
+      "section": "3.3",
+      "sectionTitle": "3.3 どんな毎日？ (Mỗi ngày như thế nào? / Sinh hoạt hàng ngày)"
+    },
+    {
+      "id": "L3_53",
+      "kanji": "毎日",
+      "hiragana": "まいにち",
+      "meaning": "Hàng ngày",
+      "category": "Từ vựng",
+      "section": "3.3",
+      "sectionTitle": "3.3 どんな毎日？ (Mỗi ngày như thế nào? / Sinh hoạt hàng ngày)"
+    },
+    {
+      "id": "L3_54",
+      "kanji": "毎朝",
+      "hiragana": "まいあさ",
+      "meaning": "Hàng sáng",
+      "category": "Từ vựng",
+      "section": "3.3",
+      "sectionTitle": "3.3 どんな毎日？ (Mỗi ngày như thế nào? / Sinh hoạt hàng ngày)"
+    },
+    {
+      "id": "L3_55",
+      "kanji": "毎晩",
+      "hiragana": "まいばん",
+      "meaning": "Mỗi tối",
+      "category": "Từ vựng",
+      "section": "3.3",
+      "sectionTitle": "3.3 どんな毎日？ (Mỗi ngày như thế nào? / Sinh hoạt hàng ngày)"
+    },
+    {
+      "id": "L3_56",
+      "kanji": "朝ご飯",
+      "hiragana": "あさごはん",
+      "meaning": "Bữa sáng",
+      "category": "Từ vựng",
+      "section": "3.3",
+      "sectionTitle": "3.3 どんな毎日？ (Mỗi ngày như thế nào? / Sinh hoạt hàng ngày)"
+    },
+    {
+      "id": "L3_57",
+      "kanji": "昼ごはん",
+      "hiragana": "ひるごはん",
+      "meaning": "Bữa trưa",
+      "category": "Từ vựng",
+      "section": "3.3",
+      "sectionTitle": "3.3 どんな毎日？ (Mỗi ngày như thế nào? / Sinh hoạt hàng ngày)"
+    },
+    {
+      "id": "L3_58",
+      "kanji": "家",
+      "hiragana": "うち",
+      "meaning": "Nhà, ngôi nhà",
+      "category": "Từ vựng",
+      "section": "3.3",
+      "sectionTitle": "3.3 どんな毎日？ (Mỗi ngày như thế nào? / Sinh hoạt hàng ngày)"
+    },
+    {
+      "id": "L3_59",
+      "kanji": "会社",
+      "hiragana": "かいしゃ",
+      "meaning": "Công ty",
+      "category": "Từ vựng",
+      "section": "3.3",
+      "sectionTitle": "3.3 どんな毎日？ (Mỗi ngày như thế nào? / Sinh hoạt hàng ngày)"
+    },
+    {
+      "id": "L3_60",
+      "kanji": "学校",
+      "hiragana": "がっこう",
+      "meaning": "Trường học",
+      "category": "Từ vựng",
+      "section": "3.3",
+      "sectionTitle": "3.3 どんな毎日？ (Mỗi ngày như thế nào? / Sinh hoạt hàng ngày)"
+    },
+    {
+      "id": "L3_61",
+      "kanji": "コンビニ",
+      "hiragana": "コンビニ",
+      "meaning": "Cửa hàng ti ện lợi",
+      "category": "Từ vựng",
+      "section": "3.3",
+      "sectionTitle": "3.3 どんな毎日？ (Mỗi ngày như thế nào? / Sinh hoạt hàng ngày)"
+    },
+    {
+      "id": "L3_62",
+      "kanji": "牛乳",
+      "hiragana": "ぎゅうにゅう",
+      "meaning": "Sữa bò",
+      "category": "Từ vựng",
+      "section": "3.3",
+      "sectionTitle": "3.3 どんな毎日？ (Mỗi ngày như thế nào? / Sinh hoạt hàng ngày)"
+    },
+    {
+      "id": "L3_63",
+      "kanji": "果物",
+      "hiragana": "くだもの",
+      "meaning": "Hoa qu ả, trái cây",
+      "category": "Từ vựng",
+      "section": "3.3",
+      "sectionTitle": "3.3 どんな毎日？ (Mỗi ngày như thế nào? / Sinh hoạt hàng ngày)"
+    },
+    {
+      "id": "L3_64",
+      "kanji": "サラダ",
+      "hiragana": "サラダ",
+      "meaning": "Món salad",
+      "category": "Từ vựng",
+      "section": "3.3",
+      "sectionTitle": "3.3 どんな毎日？ (Mỗi ngày như thế nào? / Sinh hoạt hàng ngày)"
+    },
+    {
+      "id": "L3_65",
+      "kanji": "チーズ",
+      "hiragana": "チーズ",
+      "meaning": "Pho-mát",
+      "category": "Từ vựng",
+      "section": "3.3",
+      "sectionTitle": "3.3 どんな毎日？ (Mỗi ngày như thế nào? / Sinh hoạt hàng ngày)"
+    },
+    {
+      "id": "L3_66",
+      "kanji": "インターネット",
+      "hiragana": "インターネット",
+      "meaning": "Mạng internet",
+      "category": "Từ vựng",
+      "section": "3.3",
+      "sectionTitle": "3.3 どんな毎日？ (Mỗi ngày như thế nào? / Sinh hoạt hàng ngày)"
+    },
+    {
+      "id": "L3_67",
+      "kanji": "新聞",
+      "hiragana": "しんぶん",
+      "meaning": "Báo, t ờ báo",
+      "category": "Từ vựng",
+      "section": "3.3",
+      "sectionTitle": "3.3 どんな毎日？ (Mỗi ngày như thế nào? / Sinh hoạt hàng ngày)"
+    },
+    {
+      "id": "L3_68",
+      "kanji": "テレビ",
+      "hiragana": "テレビ",
+      "meaning": "Ti vi",
+      "category": "Từ vựng",
+      "section": "3.3",
+      "sectionTitle": "3.3 どんな毎日？ (Mỗi ngày như thế nào? / Sinh hoạt hàng ngày)"
+    },
+    {
+      "id": "L3_69",
+      "kanji": "CD",
+      "hiragana": "（シーディー）",
+      "meaning": "CD",
+      "category": "Từ vựng",
+      "section": "3.3",
+      "sectionTitle": "3.3 どんな毎日？ (Mỗi ngày như thế nào? / Sinh hoạt hàng ngày)"
+    },
+    {
+      "id": "L3_70",
+      "kanji": "DVD",
+      "hiragana": "（ディー ブイディー）",
+      "meaning": "DVD",
+      "category": "Từ vựng",
+      "section": "3.3",
+      "sectionTitle": "3.3 どんな毎日？ (Mỗi ngày như thế nào? / Sinh hoạt hàng ngày)"
+    },
+    {
+      "id": "L3_71",
+      "kanji": "何も",
+      "hiragana": "なにも",
+      "meaning": "Cái gì cũng…",
+      "category": "Từ vựng",
+      "section": "3.3",
+      "sectionTitle": "3.3 どんな毎日？ (Mỗi ngày như thế nào? / Sinh hoạt hàng ngày)"
+    },
+    {
+      "id": "L3_72",
+      "kanji": "どこ（へ）も",
+      "hiragana": "どこ（へ）も",
+      "meaning": "Đâu cũng…",
+      "category": "Từ vựng",
+      "section": "3.3",
+      "sectionTitle": "3.3 どんな毎日？ (Mỗi ngày như thế nào? / Sinh hoạt hàng ngày)"
+    },
+    {
+      "id": "L3_73",
+      "kanji": "買います  かいます",
+      "hiragana": "買います  かいます",
+      "meaning": "Mua",
+      "category": "Từ vựng",
+      "section": "3.3",
+      "sectionTitle": "3.3 どんな毎日？ (Mỗi ngày như thế nào? / Sinh hoạt hàng ngày)"
+    },
+    {
+      "id": "L3_74",
+      "kanji": "聞きます  ききます",
+      "hiragana": "聞きます  ききます",
+      "meaning": "Nghe",
+      "category": "Từ vựng",
+      "section": "3.3",
+      "sectionTitle": "3.3 どんな毎日？ (Mỗi ngày như thế nào? / Sinh hoạt hàng ngày)"
+    },
+    {
+      "id": "L3_75",
+      "kanji": "働きます  はたらきます",
+      "hiragana": "働きます  はたらきます",
+      "meaning": "Làm vi ệc, lao đ ộng",
+      "category": "Từ vựng",
+      "section": "3.3",
+      "sectionTitle": "3.3 どんな毎日？ (Mỗi ngày như thế nào? / Sinh hoạt hàng ngày)"
+    },
+    {
+      "id": "L3_76",
+      "kanji": "読みます  よみます",
+      "hiragana": "読みます  よみます",
+      "meaning": "Đọc",
+      "category": "Từ vựng",
+      "section": "3.3",
+      "sectionTitle": "3.3 どんな毎日？ (Mỗi ngày như thế nào? / Sinh hoạt hàng ngày)"
+    },
+    {
+      "id": "L3_77",
+      "kanji": "寝ます",
+      "hiragana": "ねます",
+      "meaning": "Ngủ",
+      "category": "Từ vựng",
+      "section": "3.3",
+      "sectionTitle": "3.3 どんな毎日？ (Mỗi ngày như thế nào? / Sinh hoạt hàng ngày)"
+    },
+    {
+      "id": "L3_78",
+      "kanji": "勉強します べんきょうします",
+      "hiragana": "勉強します べんきょうします",
+      "meaning": "Học, học bài, học tập",
+      "category": "Từ vựng",
+      "section": "3.3",
+      "sectionTitle": "3.3 どんな毎日？ (Mỗi ngày như thế nào? / Sinh hoạt hàng ngày)"
+    },
+    {
+      "id": "L3_79",
+      "kanji": "来ます",
+      "hiragana": "来ます",
+      "meaning": "きます［くる］ Tới, đến",
+      "category": "Từ vựng",
+      "section": "3.3",
+      "sectionTitle": "3.3 どんな毎日？ (Mỗi ngày như thế nào? / Sinh hoạt hàng ngày)"
+    },
+    {
+      "lesson": "3",
+      "kanji": "働きます",
+      "hiragana": "はたらきます",
+      "meaning": "Làm việc, lao động",
+      "category": "Từ vựng",
+      "section": "3.2",
+      "sectionTitle": "3.2 私のスケジュール (Lịch trình & Kế hoạch của tôi)",
+      "id": "L3_80"
+    }
+  ],
+  "4": [
+    {
+      "id": "L4_1",
+      "kanji": "北",
+      "hiragana": "きた",
+      "meaning": "Phía b ắc",
+      "category": "Từ vựng",
+      "section": "4.1",
+      "sectionTitle": "4.1 どこ？ (Ở đâu? / Phương hướng & Phương tiện đi lại)"
+    },
+    {
+      "id": "L4_2",
+      "kanji": "南",
+      "hiragana": "みなみ",
+      "meaning": "Phía nam",
+      "category": "Từ vựng",
+      "section": "4.1",
+      "sectionTitle": "4.1 どこ？ (Ở đâu? / Phương hướng & Phương tiện đi lại)"
+    },
+    {
+      "id": "L4_3",
+      "kanji": "東",
+      "hiragana": "ひがし",
+      "meaning": "Phía đông",
+      "category": "Từ vựng",
+      "section": "4.1",
+      "sectionTitle": "4.1 どこ？ (Ở đâu? / Phương hướng & Phương tiện đi lại)"
+    },
+    {
+      "id": "L4_4",
+      "kanji": "西",
+      "hiragana": "にし",
+      "meaning": "Phía tây",
+      "category": "Từ vựng",
+      "section": "4.1",
+      "sectionTitle": "4.1 どこ？ (Ở đâu? / Phương hướng & Phương tiện đi lại)"
+    },
+    {
+      "id": "L4_5",
+      "kanji": "真ん中",
+      "hiragana": "まんなか",
+      "meaning": "Chính gi ữa",
+      "category": "Từ vựng",
+      "section": "4.1",
+      "sectionTitle": "4.1 どこ？ (Ở đâu? / Phương hướng & Phương tiện đi lại)"
+    },
+    {
+      "id": "L4_6",
+      "kanji": "車",
+      "hiragana": "くるま",
+      "meaning": "Ô tô",
+      "category": "Từ vựng",
+      "section": "4.1",
+      "sectionTitle": "4.1 どこ？ (Ở đâu? / Phương hướng & Phương tiện đi lại)"
+    },
+    {
+      "id": "L4_7",
+      "kanji": "新幹線",
+      "hiragana": "しんかんせん",
+      "meaning": "Tàu cao tốc Shinkansen",
+      "category": "Từ vựng",
+      "section": "4.1",
+      "sectionTitle": "4.1 どこ？ (Ở đâu? / Phương hướng & Phương tiện đi lại)"
+    },
+    {
+      "id": "L4_8",
+      "kanji": "電車",
+      "hiragana": "でんしゃ",
+      "meaning": "Tàu đi ện",
+      "category": "Từ vựng",
+      "section": "4.1",
+      "sectionTitle": "4.1 どこ？ (Ở đâu? / Phương hướng & Phương tiện đi lại)"
+    },
+    {
+      "id": "L4_9",
+      "kanji": "飛行機",
+      "hiragana": "ひこうき",
+      "meaning": "Máy bay",
+      "category": "Từ vựng",
+      "section": "4.1",
+      "sectionTitle": "4.1 どこ？ (Ở đâu? / Phương hướng & Phương tiện đi lại)"
+    },
+    {
+      "id": "L4_10",
+      "kanji": "駅",
+      "hiragana": "えき",
+      "meaning": "Nhà ga",
+      "category": "Từ vựng",
+      "section": "4.1",
+      "sectionTitle": "4.1 どこ？ (Ở đâu? / Phương hướng & Phương tiện đi lại)"
+    },
+    {
+      "id": "L4_11",
+      "kanji": "町",
+      "hiragana": "まち",
+      "meaning": "Thành o hố, thị trấn",
+      "category": "Từ vựng",
+      "section": "4.1",
+      "sectionTitle": "4.1 どこ？ (Ở đâu? / Phương hướng & Phương tiện đi lại)"
+    },
+    {
+      "id": "L4_12",
+      "kanji": "～時間",
+      "hiragana": "～じかん",
+      "meaning": "～Tiếng",
+      "category": "Từ vựng",
+      "section": "4.1",
+      "sectionTitle": "4.1 どこ？ (Ở đâu? / Phương hướng & Phương tiện đi lại)"
+    },
+    {
+      "id": "L4_13",
+      "kanji": "～時間半",
+      "hiragana": "～じかんはん",
+      "meaning": "～ Tiếng rư ỡi",
+      "category": "Từ vựng",
+      "section": "4.1",
+      "sectionTitle": "4.1 どこ？ (Ở đâu? / Phương hướng & Phương tiện đi lại)"
+    },
+    {
+      "id": "L4_14",
+      "kanji": "～分",
+      "hiragana": "～ふん",
+      "meaning": "～ Phút",
+      "category": "Từ vựng",
+      "section": "4.1",
+      "sectionTitle": "4.1 どこ？ (Ở đâu? / Phương hướng & Phương tiện đi lại)"
+    },
+    {
+      "id": "L4_15",
+      "kanji": "です。",
+      "hiragana": "です。",
+      "meaning": "Từ nhà đ ến trường mất 20 phút",
+      "category": "Từ vựng",
+      "section": "4.1",
+      "sectionTitle": "4.1 どこ？ (Ở đâu? / Phương hướng & Phương tiện đi lại)"
+    },
+    {
+      "id": "L4_16",
+      "kanji": "歩いて",
+      "hiragana": "あるいて",
+      "meaning": "Đi bộ",
+      "category": "Từ vựng",
+      "section": "4.1",
+      "sectionTitle": "4.1 どこ？ (Ở đâu? / Phương hướng & Phương tiện đi lại)"
+    },
+    {
+      "id": "L4_17",
+      "kanji": "～くらい",
+      "hiragana": "～くらい",
+      "meaning": "Khoảng",
+      "category": "Từ vựng",
+      "section": "4.1",
+      "sectionTitle": "4.1 どこ？ (Ở đâu? / Phương hướng & Phương tiện đi lại)"
+    },
+    {
+      "id": "L4_18",
+      "kanji": "どのくらい",
+      "hiragana": "どのくらい",
+      "meaning": "Bao lâu",
+      "category": "Từ vựng",
+      "section": "4.1",
+      "sectionTitle": "4.1 どこ？ (Ở đâu? / Phương hướng & Phương tiện đi lại)"
+    },
+    {
+      "id": "L4_19",
+      "kanji": "温泉",
+      "hiragana": "おんせん",
+      "meaning": "Suối nước nóng",
+      "category": "Từ vựng",
+      "section": "4.2",
+      "sectionTitle": "4.2 どんなところ？ (Nơi như thế nào? / Phong cảnh & Khí hậu)"
+    },
+    {
+      "id": "L4_20",
+      "kanji": "川",
+      "hiragana": "かわ",
+      "meaning": "Sông",
+      "category": "Từ vựng",
+      "section": "4.2",
+      "sectionTitle": "4.2 どんなところ？ (Nơi như thế nào? / Phong cảnh & Khí hậu)"
+    },
+    {
+      "id": "L4_21",
+      "kanji": "山",
+      "hiragana": "やま",
+      "meaning": "Núi",
+      "category": "Từ vựng",
+      "section": "4.2",
+      "sectionTitle": "4.2 どんなところ？ (Nơi như thế nào? / Phong cảnh & Khí hậu)"
+    },
+    {
+      "id": "L4_22",
+      "kanji": "教会",
+      "hiragana": "きょうかい",
+      "meaning": "Nhà th ờ",
+      "category": "Từ vựng",
+      "section": "4.2",
+      "sectionTitle": "4.2 どんなところ？ (Nơi như thế nào? / Phong cảnh & Khí hậu)"
+    },
+    {
+      "id": "L4_23",
+      "kanji": "（お）城",
+      "hiragana": "おしろ",
+      "meaning": "Lâu đài",
+      "category": "Từ vựng",
+      "section": "4.2",
+      "sectionTitle": "4.2 どんなところ？ (Nơi như thế nào? / Phong cảnh & Khí hậu)"
+    },
+    {
+      "id": "L4_24",
+      "kanji": "（お）寺",
+      "hiragana": "おてら",
+      "meaning": "Chùa",
+      "category": "Từ vựng",
+      "section": "4.2",
+      "sectionTitle": "4.2 どんなところ？ (Nơi như thế nào? / Phong cảnh & Khí hậu)"
+    },
+    {
+      "id": "L4_25",
+      "kanji": "ビル",
+      "hiragana": "ビル",
+      "meaning": "Tòa nhà",
+      "category": "Từ vựng",
+      "section": "4.2",
+      "sectionTitle": "4.2 どんなところ？ (Nơi như thế nào? / Phong cảnh & Khí hậu)"
+    },
+    {
+      "id": "L4_26",
+      "kanji": "ところ",
+      "hiragana": "ところ",
+      "meaning": "Nơi, ch ỗ",
+      "category": "Từ vựng",
+      "section": "4.2",
+      "sectionTitle": "4.2 どんなところ？ (Nơi như thế nào? / Phong cảnh & Khí hậu)"
+    },
+    {
+      "id": "L4_27",
+      "kanji": "人",
+      "hiragana": "ひと",
+      "meaning": "Người",
+      "category": "Từ vựng",
+      "section": "4.2",
+      "sectionTitle": "4.2 どんなところ？ (Nơi như thế nào? / Phong cảnh & Khí hậu)"
+    },
+    {
+      "id": "L4_28",
+      "kanji": "緑",
+      "hiragana": "みどり",
+      "meaning": "Màu xanh ; Cây xanh",
+      "category": "Từ vựng",
+      "section": "4.2",
+      "sectionTitle": "4.2 どんなところ？ (Nơi như thế nào? / Phong cảnh & Khí hậu)"
+    },
+    {
+      "id": "L4_29",
+      "kanji": "あります",
+      "hiragana": "あります",
+      "meaning": "Có",
+      "category": "Từ vựng",
+      "section": "4.2",
+      "sectionTitle": "4.2 どんなところ？ (Nơi như thế nào? / Phong cảnh & Khí hậu)"
+    },
+    {
+      "id": "L4_30",
+      "kanji": "があります 。",
+      "hiragana": "があります 。",
+      "meaning": "Ở Hakone có su ối nước nóng",
+      "category": "Từ vựng",
+      "section": "4.2",
+      "sectionTitle": "4.2 どんなところ？ (Nơi như thế nào? / Phong cảnh & Khí hậu)"
+    },
+    {
+      "id": "L4_31",
+      "kanji": "新しい",
+      "hiragana": "あたらしい",
+      "meaning": "Mới",
+      "category": "Từ vựng",
+      "section": "4.2",
+      "sectionTitle": "4.2 どんなところ？ (Nơi như thế nào? / Phong cảnh & Khí hậu)"
+    },
+    {
+      "id": "L4_32",
+      "kanji": "古い",
+      "hiragana": "ふるい",
+      "meaning": "Cũ",
+      "category": "Từ vựng",
+      "section": "4.2",
+      "sectionTitle": "4.2 どんなところ？ (Nơi như thế nào? / Phong cảnh & Khí hậu)"
+    },
+    {
+      "id": "L4_33",
+      "kanji": "いい",
+      "hiragana": "いい",
+      "meaning": "Tốt",
+      "category": "Từ vựng",
+      "section": "4.2",
+      "sectionTitle": "4.2 どんなところ？ (Nơi như thế nào? / Phong cảnh & Khí hậu)"
+    },
+    {
+      "id": "L4_34",
+      "kanji": "（～が）多い",
+      "hiragana": "（～が）おおい",
+      "meaning": "Nhiều ～",
+      "category": "Từ vựng",
+      "section": "4.2",
+      "sectionTitle": "4.2 どんなところ？ (Nơi như thế nào? / Phong cảnh & Khí hậu)"
+    },
+    {
+      "id": "L4_35",
+      "kanji": "（～が）少ない",
+      "hiragana": "（～が）すくない",
+      "meaning": "Ít ～",
+      "category": "Từ vựng",
+      "section": "4.2",
+      "sectionTitle": "4.2 どんなところ？ (Nơi như thế nào? / Phong cảnh & Khí hậu)"
+    },
+    {
+      "id": "L4_36",
+      "kanji": "大きい",
+      "hiragana": "おおきい",
+      "meaning": "To, lớn",
+      "category": "Từ vựng",
+      "section": "4.2",
+      "sectionTitle": "4.2 どんなところ？ (Nơi như thế nào? / Phong cảnh & Khí hậu)"
+    },
+    {
+      "id": "L4_37",
+      "kanji": "小さい",
+      "hiragana": "ちいさい",
+      "meaning": "Nhỏ, bé",
+      "category": "Từ vựng",
+      "section": "4.2",
+      "sectionTitle": "4.2 どんなところ？ (Nơi như thế nào? / Phong cảnh & Khí hậu)"
+    },
+    {
+      "id": "L4_38",
+      "kanji": "高い",
+      "hiragana": "たかい",
+      "meaning": "Cao, đ ắt",
+      "category": "Từ vựng",
+      "section": "4.2",
+      "sectionTitle": "4.2 どんなところ？ (Nơi như thế nào? / Phong cảnh & Khí hậu)"
+    },
+    {
+      "id": "L4_39",
+      "kanji": "いです。",
+      "hiragana": "いです。",
+      "meaning": "Núi Phú S ỹ cao",
+      "category": "Từ vựng",
+      "section": "4.2",
+      "sectionTitle": "4.2 どんなところ？ (Nơi như thế nào? / Phong cảnh & Khí hậu)"
+    },
+    {
+      "id": "L4_40",
+      "kanji": "低い",
+      "hiragana": "ひくい",
+      "meaning": "Thấp",
+      "category": "Từ vựng",
+      "section": "4.2",
+      "sectionTitle": "4.2 どんなところ？ (Nơi như thế nào? / Phong cảnh & Khí hậu)"
+    },
+    {
+      "id": "L4_41",
+      "kanji": "きれい（な）",
+      "hiragana": "きれい（な）",
+      "meaning": "Đẹp, sạch sẽ",
+      "category": "Từ vựng",
+      "section": "4.2",
+      "sectionTitle": "4.2 どんなところ？ (Nơi như thế nào? / Phong cảnh & Khí hậu)"
+    },
+    {
+      "id": "L4_42",
+      "kanji": "静か（な）",
+      "hiragana": "しずか",
+      "meaning": "Yên tĩnh",
+      "category": "Từ vựng",
+      "section": "4.2",
+      "sectionTitle": "4.2 どんなところ？ (Nơi như thế nào? / Phong cảnh & Khí hậu)"
+    },
+    {
+      "id": "L4_43",
+      "kanji": "にぎやか（な）",
+      "hiragana": "にぎやか（な）",
+      "meaning": "Náo nhi ệt, nhộn nhịp",
+      "category": "Từ vựng",
+      "section": "4.2",
+      "sectionTitle": "4.2 どんなところ？ (Nơi như thế nào? / Phong cảnh & Khí hậu)"
+    },
+    {
+      "id": "L4_44",
+      "kanji": "有名（な）",
+      "hiragana": "ゆうめい",
+      "meaning": "Nổi tiếng",
+      "category": "Từ vựng",
+      "section": "4.2",
+      "sectionTitle": "4.2 どんなところ？ (Nơi như thế nào? / Phong cảnh & Khí hậu)"
+    },
+    {
+      "id": "L4_45",
+      "kanji": "どんな",
+      "hiragana": "どんな",
+      "meaning": "Như th ế nào",
+      "category": "Từ vựng",
+      "section": "4.2",
+      "sectionTitle": "4.2 どんなところ？ (Nơi như thế nào? / Phong cảnh & Khí hậu)"
+    },
+    {
+      "id": "L4_46",
+      "kanji": "そして",
+      "hiragana": "そして",
+      "meaning": "Và",
+      "category": "Từ vựng",
+      "section": "4.2",
+      "sectionTitle": "4.2 どんなところ？ (Nơi như thế nào? / Phong cảnh & Khí hậu)"
+    },
+    {
+      "id": "L4_47",
+      "kanji": "雨",
+      "hiragana": "あめ",
+      "meaning": "Mưa",
+      "category": "Từ vựng",
+      "section": "4.3",
+      "sectionTitle": "4.3 季節・料理 (Mùa & Món ăn đặc trưng)"
+    },
+    {
+      "id": "L4_48",
+      "kanji": "雪",
+      "hiragana": "ゆき",
+      "meaning": "Tuyết",
+      "category": "Từ vựng",
+      "section": "4.3",
+      "sectionTitle": "4.3 季節・料理 (Mùa & Món ăn đặc trưng)"
+    },
+    {
+      "id": "L4_49",
+      "kanji": "日",
+      "hiragana": "ひ",
+      "meaning": "Ngày / Mặt trời",
+      "category": "Từ vựng",
+      "section": "4.3",
+      "sectionTitle": "4.3 季節・料理 (Mùa & Món ăn đặc trưng)"
+    },
+    {
+      "id": "L4_50",
+      "kanji": "メロン",
+      "hiragana": "メロン",
+      "meaning": "Dưa gang (dưa lư ới)",
+      "category": "Từ vựng",
+      "section": "4.3",
+      "sectionTitle": "4.3 季節・料理 (Mùa & Món ăn đặc trưng)"
+    },
+    {
+      "id": "L4_51",
+      "kanji": "暖かい",
+      "hiragana": "あたたかい",
+      "meaning": "Ấm áp (thời tiết)",
+      "category": "Từ vựng",
+      "section": "4.3",
+      "sectionTitle": "4.3 季節・料理 (Mùa & Món ăn đặc trưng)"
+    },
+    {
+      "id": "L4_52",
+      "kanji": "涼しい",
+      "hiragana": "すずしい",
+      "meaning": "Mát m ẻ",
+      "category": "Từ vựng",
+      "section": "4.3",
+      "sectionTitle": "4.3 季節・料理 (Mùa & Món ăn đặc trưng)"
+    },
+    {
+      "id": "L4_53",
+      "kanji": "暑い",
+      "hiragana": "あつい",
+      "meaning": "Nóng bức (thời tiết)",
+      "category": "Từ vựng",
+      "section": "4.3",
+      "sectionTitle": "4.3 季節・料理 (Mùa & Món ăn đặc trưng)"
+    },
+    {
+      "id": "L4_54",
+      "kanji": "寒い",
+      "hiragana": "さむい",
+      "meaning": "Lạnh, rét (thời tiết)",
+      "category": "Từ vựng",
+      "section": "4.3",
+      "sectionTitle": "4.3 季節・料理 (Mùa & Món ăn đặc trưng)"
+    },
+    {
+      "id": "L4_55",
+      "kanji": "天気がいい",
+      "hiragana": "てんきがいい",
+      "meaning": "Thời tiết đẹp",
+      "category": "Từ vựng",
+      "section": "4.3",
+      "sectionTitle": "4.3 季節・料理 (Mùa & Món ăn đặc trưng)"
+    },
+    {
+      "id": "L4_56",
+      "kanji": "天気がわるい",
+      "hiragana": "てんきがわるい",
+      "meaning": "Thời tiết xấu",
+      "category": "Từ vựng",
+      "section": "4.3",
+      "sectionTitle": "4.3 季節・料理 (Mùa & Món ăn đặc trưng)"
+    },
+    {
+      "id": "L4_57",
+      "kanji": "温かい",
+      "hiragana": "あたたかい",
+      "meaning": "Ấm (nhi ệt độ, cảm giác)",
+      "category": "Từ vựng",
+      "section": "4.3",
+      "sectionTitle": "4.3 季節・料理 (Mùa & Món ăn đặc trưng)"
+    },
+    {
+      "id": "L4_58",
+      "kanji": "熱い",
+      "hiragana": "あつい",
+      "meaning": "Nóng (nhi ệt độ)",
+      "category": "Từ vựng",
+      "section": "4.3",
+      "sectionTitle": "4.3 季節・料理 (Mùa & Món ăn đặc trưng)"
+    },
+    {
+      "id": "L4_59",
+      "kanji": "冷たい",
+      "hiragana": "つめたい",
+      "meaning": "Lạnh / Mát (nhiệt độ, cảm giác)",
+      "category": "Từ vựng",
+      "section": "4.3",
+      "sectionTitle": "4.3 季節・料理 (Mùa & Món ăn đặc trưng)"
+    },
+    {
+      "id": "L4_60",
+      "kanji": "おいしい",
+      "hiragana": "おいしい",
+      "meaning": "Ngon",
+      "category": "Từ vựng",
+      "section": "4.3",
+      "sectionTitle": "4.3 季節・料理 (Mùa & Món ăn đặc trưng)"
+    },
+    {
+      "id": "L4_61",
+      "kanji": "甘い",
+      "hiragana": "あまい",
+      "meaning": "Ngọt",
+      "category": "Từ vựng",
+      "section": "4.3",
+      "sectionTitle": "4.3 季節・料理 (Mùa & Món ăn đặc trưng)"
+    },
+    {
+      "id": "L4_62",
+      "kanji": "辛い",
+      "hiragana": "からい",
+      "meaning": "Cay",
+      "category": "Từ vựng",
+      "section": "4.3",
+      "sectionTitle": "4.3 季節・料理 (Mùa & Món ăn đặc trưng)"
+    },
+    {
+      "id": "L4_63",
+      "kanji": "苦い",
+      "hiragana": "にがい",
+      "meaning": "Đắng",
+      "category": "Từ vựng",
+      "section": "4.3",
+      "sectionTitle": "4.3 季節・料理 (Mùa & Món ăn đặc trưng)"
+    },
+    {
+      "id": "L4_64",
+      "kanji": "すっぱい",
+      "hiragana": "すっぱい",
+      "meaning": "Chua",
+      "category": "Từ vựng",
+      "section": "4.3",
+      "sectionTitle": "4.3 季節・料理 (Mùa & Món ăn đặc trưng)"
+    },
+    {
+      "id": "L4_65",
+      "kanji": "一年中",
+      "hiragana": "いちねんじゅう",
+      "meaning": "Suốt 1 năm",
+      "category": "Từ vựng",
+      "section": "4.3",
+      "sectionTitle": "4.3 季節・料理 (Mùa & Món ăn đặc trưng)"
+    },
+    {
+      "id": "L4_66",
+      "kanji": "あまり",
+      "hiragana": "あまり",
+      "meaning": "Không ～ lắm",
+      "category": "Từ vựng",
+      "section": "4.3",
+      "sectionTitle": "4.3 季節・料理 (Mùa & Món ăn đặc trưng)"
+    },
+    {
+      "id": "L4_67",
+      "kanji": "くないです。",
+      "hiragana": "くないです。",
+      "meaning": "Đất nước tôi vào mùa hè không l ạnh lắm",
+      "category": "Từ vựng",
+      "section": "4.3",
+      "sectionTitle": "4.3 季節・料理 (Mùa & Món ăn đặc trưng)"
+    },
+    {
+      "id": "L4_68",
+      "kanji": "少し",
+      "hiragana": "すこし",
+      "meaning": "Một chút, ít",
+      "category": "Từ vựng",
+      "section": "4.3",
+      "sectionTitle": "4.3 季節・料理 (Mùa & Món ăn đặc trưng)"
+    },
+    {
+      "id": "L4_69",
+      "kanji": "とても",
+      "hiragana": "とても",
+      "meaning": "Rất",
+      "category": "Từ vựng",
+      "section": "4.3",
+      "sectionTitle": "4.3 季節・料理 (Mùa & Món ăn đặc trưng)"
+    },
+    {
+      "id": "L4_70",
+      "kanji": "どう",
+      "hiragana": "どう",
+      "meaning": "Thế nào",
+      "category": "Từ vựng",
+      "section": "4.3",
+      "sectionTitle": "4.3 季節・料理 (Mùa & Món ăn đặc trưng)"
+    },
+    {
+      "id": "L4_71",
+      "kanji": "そうですね。",
+      "hiragana": "そうですね。",
+      "meaning": "Câu nói th ể hiện sự đồng tình",
+      "category": "Từ vựng",
+      "section": "4.3",
+      "sectionTitle": "4.3 季節・料理 (Mùa & Món ăn đặc trưng)"
+    },
+    {
+      "lesson": "4",
+      "kanji": "神社",
+      "hiragana": "じんじゃ",
+      "meaning": "Đền thần đạo",
+      "category": "Từ vựng",
+      "section": "4.1",
+      "sectionTitle": "4.1 どこ？ (Ở đâu? / Vị trí địa lý)",
+      "id": "L4_72"
+    }
+  ],
+  "5": [
+    {
+      "id": "L5_1",
+      "kanji": "今日",
+      "hiragana": "きょう",
+      "meaning": "Hôm nay",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_2",
+      "kanji": "明日",
+      "hiragana": "あした",
+      "meaning": "Ngày mai",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_3",
+      "kanji": "あさって",
+      "hiragana": "あさって",
+      "meaning": "Ngày kia",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_4",
+      "kanji": "昨日",
+      "hiragana": "きのう",
+      "meaning": "Hôm qua",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_5",
+      "kanji": "おととい",
+      "hiragana": "おととい",
+      "meaning": "Hôm kia",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_6",
+      "kanji": "先週",
+      "hiragana": "せんしゅ う",
+      "meaning": "Tuần trước",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_7",
+      "kanji": "家",
+      "hiragana": "いえ",
+      "meaning": "Nhà",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_8",
+      "kanji": "部屋",
+      "hiragana": "へや",
+      "meaning": "Căn phòng",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_9",
+      "kanji": "デパート",
+      "hiragana": "デパート",
+      "meaning": "Trung tâm thương m ại",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_10",
+      "kanji": "美術館",
+      "hiragana": "びじゅつかん",
+      "meaning": "Bảo tàng m ỹ thuật",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_11",
+      "kanji": "ゲーム",
+      "hiragana": "ゲーム",
+      "meaning": "Trò chơi",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_12",
+      "kanji": "家族",
+      "hiragana": "かぞく",
+      "meaning": "Gia đình",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_13",
+      "kanji": "恋人",
+      "hiragana": "こいびと",
+      "meaning": "Người yêu",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_14",
+      "kanji": "友達",
+      "hiragana": "ともだち",
+      "meaning": "Bạn bè",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_15",
+      "kanji": "ルームメイト",
+      "hiragana": "ルームメイト",
+      "meaning": "Bạn cùng phòng",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_16",
+      "kanji": "どこか（へ）",
+      "hiragana": "どこか（へ）",
+      "meaning": "Nơi nào đó",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_17",
+      "kanji": "会います 1",
+      "hiragana": "あいます",
+      "meaning": "Gặp gỡ",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_18",
+      "kanji": "作ります 1",
+      "hiragana": "つくります",
+      "meaning": "Làm, ch ế tạo",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_19",
+      "kanji": "買い物します 3 かいものします",
+      "hiragana": "買い物します 3 かいものします",
+      "meaning": "Mua s ắm",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_20",
+      "kanji": "食事します 3 しょくじします",
+      "hiragana": "食事します 3 しょくじします",
+      "meaning": "Dùng bữa, ăn u ống",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_21",
+      "kanji": "洗濯します3 せんたくします",
+      "hiragana": "洗濯します3 せんたくします",
+      "meaning": "Giặt giũ",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_22",
+      "kanji": "掃除します3 そうじします",
+      "hiragana": "掃除します3 そうじします",
+      "meaning": "Hút b ụi, lau d ọn nhà c ửa",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_23",
+      "kanji": "それから",
+      "hiragana": "それから",
+      "meaning": "Sau đó",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_24",
+      "kanji": "一人で",
+      "hiragana": "ひとりで",
+      "meaning": "Một mình",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_25",
+      "kanji": "今朝",
+      "hiragana": "けさ",
+      "meaning": "Sáng nay",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_26",
+      "kanji": "先月",
+      "hiragana": "せんげつ",
+      "meaning": "Tháng trư ớc",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_27",
+      "kanji": "去年",
+      "hiragana": "きょねん",
+      "meaning": "Năm ngoái",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_28",
+      "kanji": "風邪",
+      "hiragana": "かぜ",
+      "meaning": "Cảm cúm",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_29",
+      "kanji": "天気",
+      "hiragana": "てんき",
+      "meaning": "Thời tiết",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_30",
+      "kanji": "晩ご飯",
+      "hiragana": "ばんごはん",
+      "meaning": "Cơm t ối",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_31",
+      "kanji": "服",
+      "hiragana": "ふく",
+      "meaning": "Quần áo",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_32",
+      "kanji": "登ります 1",
+      "hiragana": "のぼります",
+      "meaning": "Leo, trèo",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_33",
+      "kanji": "入ります 1",
+      "hiragana": "はいります",
+      "meaning": "Vào / Bước vào",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_34",
+      "kanji": "ります。",
+      "hiragana": "ります。",
+      "meaning": "Tắm suối nước nóng",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_35",
+      "kanji": "忙しい",
+      "hiragana": "いそがしい",
+      "meaning": "Bận",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_36",
+      "kanji": "おもしろい",
+      "hiragana": "おもしろい",
+      "meaning": "Thú v ị, hay, hấp dẫn",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_37",
+      "kanji": "気持ちがいい",
+      "hiragana": "きもちがいい",
+      "meaning": "Cảm thấy sảng khoái",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_38",
+      "kanji": "高い",
+      "hiragana": "たかい",
+      "meaning": "Cao, đ ắt",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_39",
+      "kanji": "かったです。",
+      "hiragana": "かったです。",
+      "meaning": "Máy tính đ ắt",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_40",
+      "kanji": "安い",
+      "hiragana": "やすい",
+      "meaning": "Rẻ",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_41",
+      "kanji": "楽しい",
+      "hiragana": "たのしい",
+      "meaning": "Vui vẻ",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_42",
+      "kanji": "難しい",
+      "hiragana": "むずかしい",
+      "meaning": "Khó",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_43",
+      "kanji": "簡単（な）",
+      "hiragana": "かんたん",
+      "meaning": "Dễ, đơn gi ản",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_44",
+      "kanji": "大変（な）",
+      "hiragana": "たいへん",
+      "meaning": "Vất vả",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_45",
+      "kanji": "暇（な）",
+      "hiragana": "ひま",
+      "meaning": "Rảnh rỗi",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_46",
+      "kanji": "どうして",
+      "hiragana": "どうして",
+      "meaning": "Tại sao",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
+    },
+    {
+      "id": "L5_47",
+      "kanji": "今度",
+      "hiragana": "こんど",
+      "meaning": "Lần tới",
+      "category": "Từ vựng",
+      "section": "5.3",
+      "sectionTitle": "5.3 今度の休みに (Kỳ nghỉ tới / Kế hoạch & Rủ rê)"
+    },
+    {
+      "id": "L5_48",
+      "kanji": "今晩",
+      "hiragana": "こんばん",
+      "meaning": "Tối nay",
+      "category": "Từ vựng",
+      "section": "5.3",
+      "sectionTitle": "5.3 今度の休みに (Kỳ nghỉ tới / Kế hoạch & Rủ rê)"
+    },
+    {
+      "id": "L5_49",
+      "kanji": "今年",
+      "hiragana": "ことし",
+      "meaning": "Năm nay",
+      "category": "Từ vựng",
+      "section": "5.3",
+      "sectionTitle": "5.3 今度の休みに (Kỳ nghỉ tới / Kế hoạch & Rủ rê)"
+    },
+    {
+      "id": "L5_50",
+      "kanji": "来年",
+      "hiragana": "らいねん",
+      "meaning": "Sang năm",
+      "category": "Từ vựng",
+      "section": "5.3",
+      "sectionTitle": "5.3 今度の休みに (Kỳ nghỉ tới / Kế hoạch & Rủ rê)"
+    },
+    {
+      "id": "L5_51",
+      "kanji": "アニメ",
+      "hiragana": "アニメ",
+      "meaning": "Hoạt hình",
+      "category": "Từ vựng",
+      "section": "5.3",
+      "sectionTitle": "5.3 今度の休みに (Kỳ nghỉ tới / Kế hoạch & Rủ rê)"
+    },
+    {
+      "id": "L5_52",
+      "kanji": "絵",
+      "hiragana": "え",
+      "meaning": "Tranh",
+      "category": "Từ vựng",
+      "section": "5.3",
+      "sectionTitle": "5.3 今度の休みに (Kỳ nghỉ tới / Kế hoạch & Rủ rê)"
+    },
+    {
+      "id": "L5_53",
+      "kanji": "景色",
+      "hiragana": "けしき",
+      "meaning": "Phong c ảnh",
+      "category": "Từ vựng",
+      "section": "5.3",
+      "sectionTitle": "5.3 今度の休みに (Kỳ nghỉ tới / Kế hoạch & Rủ rê)"
+    },
+    {
+      "id": "L5_54",
+      "kanji": "自転車",
+      "hiragana": "じてんしゃ",
+      "meaning": "Xe đạp",
+      "category": "Từ vựng",
+      "section": "5.3",
+      "sectionTitle": "5.3 今度の休みに (Kỳ nghỉ tới / Kế hoạch & Rủ rê)"
+    },
+    {
+      "id": "L5_55",
+      "kanji": "写真",
+      "hiragana": "しゃしん",
+      "meaning": "Ảnh",
+      "category": "Từ vựng",
+      "section": "5.3",
+      "sectionTitle": "5.3 今度の休みに (Kỳ nghỉ tới / Kế hoạch & Rủ rê)"
+    },
+    {
+      "id": "L5_56",
+      "kanji": "撮ります1",
+      "hiragana": "とります",
+      "meaning": "Chụp",
+      "category": "Từ vựng",
+      "section": "5.3",
+      "sectionTitle": "5.3 今度の休みに (Kỳ nghỉ tới / Kế hoạch & Rủ rê)"
+    },
+    {
+      "id": "L5_57",
+      "kanji": "借ります 2",
+      "hiragana": "かります",
+      "meaning": "Vay, mư ợn",
+      "category": "Từ vựng",
+      "section": "5.3",
+      "sectionTitle": "5.3 今度の休みに (Kỳ nghỉ tới / Kế hoạch & Rủ rê)"
+    },
+    {
+      "id": "L5_58",
+      "kanji": "ほしい",
+      "hiragana": "ほしい",
+      "meaning": "Muốn có",
+      "category": "Từ vựng",
+      "section": "5.3",
+      "sectionTitle": "5.3 今度の休みに (Kỳ nghỉ tới / Kế hoạch & Rủ rê)"
+    },
+    {
+      "id": "L5_59",
+      "kanji": "好き（な）",
+      "hiragana": "すき",
+      "meaning": "Thích",
+      "category": "Từ vựng",
+      "section": "5.3",
+      "sectionTitle": "5.3 今度の休みに (Kỳ nghỉ tới / Kế hoạch & Rủ rê)"
+    },
+    {
+      "id": "L5_60",
+      "kanji": "嫌い（な）",
+      "hiragana": "きらい",
+      "meaning": "Ghét",
+      "category": "Từ vựng",
+      "section": "5.3",
+      "sectionTitle": "5.3 今度の休みに (Kỳ nghỉ tới / Kế hoạch & Rủ rê)"
+    },
+    {
+      "lesson": "5",
+      "kanji": "週末",
+      "hiragana": "しゅうまつ",
+      "meaning": "Cuối tuần",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)",
+      "id": "L5_61"
+    },
+    {
+      "lesson": "5",
+      "kanji": "買い物します",
+      "hiragana": "かいものします",
+      "meaning": "Mua sắm",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)",
+      "id": "L5_62"
+    },
+    {
+      "lesson": "5",
+      "kanji": "食事します",
+      "hiragana": "しょくじします",
+      "meaning": "Dùng bữa, ăn uống",
+      "category": "Từ vựng",
+      "section": "5.1",
+      "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)",
+      "id": "L5_63"
+    }
+  ],
+  "6": [
+    {
+      "id": "L6_1",
+      "kanji": "今週",
+      "hiragana": "こんしゅう",
+      "meaning": "Tuần này",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_2",
+      "kanji": "来週",
+      "hiragana": "らいしゅう",
+      "meaning": "Tuần sau",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_3",
+      "kanji": "今月",
+      "hiragana": "こんげつ",
+      "meaning": "Tháng này",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_4",
+      "kanji": "来月",
+      "hiragana": "らいげつ",
+      "meaning": "Tháng sau",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_5",
+      "kanji": "カラオケ",
+      "hiragana": "カラオケ",
+      "meaning": "Hát karaoke",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_6",
+      "kanji": "コンサート",
+      "hiragana": "コンサート",
+      "meaning": "Hòa nh ạc",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_7",
+      "kanji": "試合",
+      "hiragana": "しあい",
+      "meaning": "Trận đấu",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_8",
+      "kanji": "セール",
+      "hiragana": "セール",
+      "meaning": "Giảm giá",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_9",
+      "kanji": "チケット",
+      "hiragana": "チケット",
+      "meaning": "Vé",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_10",
+      "kanji": "地図",
+      "hiragana": "ちず",
+      "meaning": "Bản đồ",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_11",
+      "kanji": "ドライブ",
+      "hiragana": "ドライブ",
+      "meaning": "Lái xe",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_12",
+      "kanji": "水着",
+      "hiragana": "みずぎ",
+      "meaning": "Đồ bơi",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_13",
+      "kanji": "野球",
+      "hiragana": "やきゅう",
+      "meaning": "Bóng chày",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_14",
+      "kanji": "約束",
+      "hiragana": "やくそく",
+      "meaning": "Hứa, hẹn",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_15",
+      "kanji": "用事",
+      "hiragana": "ようじ",
+      "meaning": "Việc bận",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_16",
+      "kanji": "～枚",
+      "hiragana": "～まい",
+      "meaning": "Cách đ ếm vật mỏng, ph ẳng",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_17",
+      "kanji": "あります 1",
+      "hiragana": "あります 1",
+      "meaning": "Có",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_18",
+      "kanji": "があります",
+      "hiragana": "があります",
+      "meaning": "Tối nay có vi ệc bận",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_19",
+      "kanji": "があります",
+      "hiragana": "があります",
+      "meaning": "Có trận đấu bóng chày ở Yokohama",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_20",
+      "kanji": "あります",
+      "hiragana": "あります",
+      "meaning": "Tôi có 2 vé",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_21",
+      "kanji": "残念（な）",
+      "hiragana": "ざんねん",
+      "meaning": "Tiếc",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_22",
+      "kanji": "一緒に",
+      "hiragana": "いっしょに",
+      "meaning": "Cùng v ới",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_23",
+      "kanji": "いいですね",
+      "hiragana": "いいですね",
+      "meaning": "Hay đ ấy, được đấy",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_24",
+      "kanji": "きませんか。",
+      "hiragana": "きませんか。",
+      "meaning": "Đi xem phim v ới tôi đi?",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_25",
+      "kanji": "ああ",
+      "hiragana": "ああ",
+      "meaning": "A",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_26",
+      "kanji": "はちょっと …",
+      "hiragana": "はちょっと …",
+      "meaning": "A, thứ 7 thì không đư ợc",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_27",
+      "kanji": "すみません",
+      "hiragana": "すみません",
+      "meaning": "Xin lỗi",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_28",
+      "kanji": "べませんか。",
+      "hiragana": "べませんか。",
+      "meaning": "Tối nay đ i ăn v ới tôi đi?",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_29",
+      "kanji": "はちょっと …",
+      "hiragana": "はちょっと …",
+      "meaning": "Xin lỗi, tối nay thì không đư ợc rồi",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_30",
+      "kanji": "また今度",
+      "hiragana": "またこんど",
+      "meaning": "Hẹn anh l ần sau",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_31",
+      "kanji": "わあ",
+      "hiragana": "わあ",
+      "meaning": "Oa (Thể hiện sự ngạc nhiên)",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_32",
+      "kanji": "食べ物",
+      "hiragana": "たべもの",
+      "meaning": "Đồ ăn",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_33",
+      "kanji": "飲み物",
+      "hiragana": "のみもの",
+      "meaning": "Đồ uống",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_34",
+      "kanji": "焼き肉",
+      "hiragana": "やきにく",
+      "meaning": "Thịt nướng",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_35",
+      "kanji": "ラーメン",
+      "hiragana": "ラーメン",
+      "meaning": "Mỳ Nhật",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_36",
+      "kanji": "食べ放題",
+      "hiragana": "たべほうだい",
+      "meaning": "Ăn buffe",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_37",
+      "kanji": "コース",
+      "hiragana": "コース",
+      "meaning": "Suất ăn / Khóa học",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_38",
+      "kanji": "居酒屋",
+      "hiragana": "いざかや",
+      "meaning": "Quán rư ợu",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_39",
+      "kanji": "映画館",
+      "hiragana": "えいがかん",
+      "meaning": "Rạp chiếu phim",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_40",
+      "kanji": "地下鉄",
+      "hiragana": "ちかてつ",
+      "meaning": "Tàu đi ện ngầm",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_41",
+      "kanji": "歌手",
+      "hiragana": "かしゅ",
+      "meaning": "Ca sỹ",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_42",
+      "kanji": "季節",
+      "hiragana": "きせつ",
+      "meaning": "Mùa",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_43",
+      "kanji": "コメディー",
+      "hiragana": "コメディー",
+      "meaning": "Hài kịch",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_44",
+      "kanji": "ジャズ",
+      "hiragana": "ジャズ",
+      "meaning": "Nhạc jazz",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_45",
+      "kanji": "ツアー",
+      "hiragana": "ツアー",
+      "meaning": "Tour du l ịch",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_46",
+      "kanji": "どちら",
+      "hiragana": "どちら",
+      "meaning": "Bên nào, phương nào",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_47",
+      "kanji": "どちらも",
+      "hiragana": "どちらも",
+      "meaning": "Bên nào cũng",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_48",
+      "kanji": "近い",
+      "hiragana": "ちかい",
+      "meaning": "Gần",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_49",
+      "kanji": "遠い",
+      "hiragana": "とおい",
+      "meaning": "Xa",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_50",
+      "kanji": "早い",
+      "hiragana": "はやい",
+      "meaning": "Sớm",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_51",
+      "kanji": "広い",
+      "hiragana": "ひろい",
+      "meaning": "Rộng",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_52",
+      "kanji": "いちばん",
+      "hiragana": "いちばん",
+      "meaning": "Nhất",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_53",
+      "kanji": "全部",
+      "hiragana": "ぜんぶ",
+      "meaning": "Toàn b ộ",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_54",
+      "kanji": "そうですねえ",
+      "hiragana": "そうですねえ",
+      "meaning": "Câu nói ng ập ngừng khi suy",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_55",
+      "kanji": "お好み焼き",
+      "hiragana": "おこのみやき",
+      "meaning": "Món bánh xèo nhật",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_56",
+      "kanji": "すき焼き",
+      "hiragana": "すきやき",
+      "meaning": "Món nhúng có th ịt bò và rau",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_57",
+      "kanji": "遊びます 1 あそびます",
+      "hiragana": "遊びます 1 あそびます",
+      "meaning": "Chơi",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_58",
+      "kanji": "ぜひ",
+      "hiragana": "ぜひ",
+      "meaning": "Nhất định",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_59",
+      "kanji": "まだ",
+      "hiragana": "まだ",
+      "meaning": "Vẫn, chưa",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_60",
+      "kanji": "もう",
+      "hiragana": "もう",
+      "meaning": "Đã, rồi",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_61",
+      "kanji": "そうしまし ょう",
+      "hiragana": "そうしまし ょう",
+      "meaning": "Làm như th ế đi",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    },
+    {
+      "id": "L6_62",
+      "kanji": "わかりました",
+      "hiragana": "わかりました",
+      "meaning": "Tôi hi ểu rồi",
+      "category": "Từ vựng",
+      "section": "6.1",
+      "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
+    }
+  ],
+  "7": [
+    {
+      "id": "L7_1",
+      "kanji": "改札",
+      "hiragana": "かいさつ",
+      "meaning": "Soát vé",
+      "category": "Từ vựng",
+      "section": "7.1",
+      "sectionTitle": "7.1 道がわかりません (Tôi không biết đường / Hỏi đường & Vị trí)"
+    },
+    {
+      "id": "L7_2",
+      "kanji": "木",
+      "hiragana": "き",
+      "meaning": "Cây / Gỗ",
+      "category": "Từ vựng",
+      "section": "7.1",
+      "sectionTitle": "7.1 道がわかりません (Tôi không biết đường / Hỏi đường & Vị trí)"
+    },
+    {
+      "id": "L7_3",
+      "kanji": "交番",
+      "hiragana": "こうばん",
+      "meaning": "Đồn cảnh sát",
+      "category": "Từ vựng",
+      "section": "7.1",
+      "sectionTitle": "7.1 道がわかりません (Tôi không biết đường / Hỏi đường & Vị trí)"
+    },
+    {
+      "id": "L7_4",
+      "kanji": "自動販売機",
+      "hiragana": "じどうはんばいき",
+      "meaning": "Máy bán hàng t ự động",
+      "category": "Từ vựng",
+      "section": "7.1",
+      "sectionTitle": "7.1 道がわかりません (Tôi không biết đường / Hỏi đường & Vị trí)"
+    },
+    {
+      "id": "L7_5",
+      "kanji": "ポスト",
+      "hiragana": "ポスト",
+      "meaning": "Thùng thư",
+      "category": "Từ vựng",
+      "section": "7.1",
+      "sectionTitle": "7.1 道がわかりません (Tôi không biết đường / Hỏi đường & Vị trí)"
+    },
+    {
+      "id": "L7_6",
+      "kanji": "花",
+      "hiragana": "はな",
+      "meaning": "Hoa",
+      "category": "Từ vựng",
+      "section": "7.1",
+      "sectionTitle": "7.1 道がわかりません (Tôi không biết đường / Hỏi đường & Vị trí)"
+    },
+    {
+      "id": "L7_7",
+      "kanji": "犬",
+      "hiragana": "いぬ",
+      "meaning": "Con chó",
+      "category": "Từ vựng",
+      "section": "7.1",
+      "sectionTitle": "7.1 道がわかりません (Tôi không biết đường / Hỏi đường & Vị trí)"
+    },
+    {
+      "id": "L7_8",
+      "kanji": "間",
+      "hiragana": "あいだ",
+      "meaning": "Giữa, ở giữa",
+      "category": "Từ vựng",
+      "section": "7.1",
+      "sectionTitle": "7.1 道がわかりません (Tôi không biết đường / Hỏi đường & Vị trí)"
+    },
+    {
+      "id": "L7_9",
+      "kanji": "上",
+      "hiragana": "うえ",
+      "meaning": "Trên, bên trên",
+      "category": "Từ vựng",
+      "section": "7.1",
+      "sectionTitle": "7.1 道がわかりません (Tôi không biết đường / Hỏi đường & Vị trí)"
+    },
+    {
+      "id": "L7_10",
+      "kanji": "下",
+      "hiragana": "した",
+      "meaning": "Dưới, phía dư ới",
+      "category": "Từ vựng",
+      "section": "7.1",
+      "sectionTitle": "7.1 道がわかりません (Tôi không biết đường / Hỏi đường & Vị trí)"
+    },
+    {
+      "id": "L7_11",
+      "kanji": "近く",
+      "hiragana": "ちかく",
+      "meaning": "Gần (ở vị trí gần)",
+      "category": "Từ vựng",
+      "section": "7.1",
+      "sectionTitle": "7.1 道がわかりません (Tôi không biết đường / Hỏi đường & Vị trí)"
+    },
+    {
+      "id": "L7_12",
+      "kanji": "隣",
+      "hiragana": "となり",
+      "meaning": "Bên c ạnh (cạnh sát)",
+      "category": "Từ vựng",
+      "section": "7.1",
+      "sectionTitle": "7.1 道がわかりません (Tôi không biết đường / Hỏi đường & Vị trí)"
+    },
+    {
+      "id": "L7_13",
+      "kanji": "中",
+      "hiragana": "なか",
+      "meaning": "Trong, bên trong",
+      "category": "Từ vựng",
+      "section": "7.1",
+      "sectionTitle": "7.1 道がわかりません (Tôi không biết đường / Hỏi đường & Vị trí)"
+    },
+    {
+      "id": "L7_14",
+      "kanji": "外",
+      "hiragana": "そと",
+      "meaning": "Ngoài, bên ngoài",
+      "category": "Từ vựng",
+      "section": "7.1",
+      "sectionTitle": "7.1 道がわかりません (Tôi không biết đường / Hỏi đường & Vị trí)"
+    },
+    {
+      "id": "L7_15",
+      "kanji": "前",
+      "hiragana": "まえ",
+      "meaning": "Trước, phía trư ớc",
+      "category": "Từ vựng",
+      "section": "7.1",
+      "sectionTitle": "7.1 道がわかりません (Tôi không biết đường / Hỏi đường & Vị trí)"
+    },
+    {
+      "id": "L7_16",
+      "kanji": "後ろ",
+      "hiragana": "うしろ",
+      "meaning": "Sau, phía sau, đ ằng sau",
+      "category": "Từ vựng",
+      "section": "7.1",
+      "sectionTitle": "7.1 道がわかりません (Tôi không biết đường / Hỏi đường & Vị trí)"
+    },
+    {
+      "id": "L7_17",
+      "kanji": "横",
+      "hiragana": "よこ",
+      "meaning": "Bên c ạnh, chi ều ngang",
+      "category": "Từ vựng",
+      "section": "7.1",
+      "sectionTitle": "7.1 道がわかりません (Tôi không biết đường / Hỏi đường & Vị trí)"
+    },
+    {
+      "id": "L7_18",
+      "kanji": "迎えに行きます 1 むかえにいきます",
+      "hiragana": "迎えに行きます 1 むかえにいきます",
+      "meaning": "Đi đón",
+      "category": "Từ vựng",
+      "section": "7.1",
+      "sectionTitle": "7.1 道がわかりません (Tôi không biết đường / Hỏi đường & Vị trí)"
+    },
+    {
+      "id": "L7_19",
+      "kanji": "います 2",
+      "hiragana": "います 2",
+      "meaning": "Có mặt ở (sự tồn tại của ngư ời, động vật)",
+      "category": "Từ vựng",
+      "section": "7.1",
+      "sectionTitle": "7.1 道がわかりません (Tôi không biết đường / Hỏi đường & Vị trí)"
+    },
+    {
+      "id": "L7_20",
+      "kanji": "にいます。",
+      "hiragana": "にいます。",
+      "meaning": "Tôi ở hiệu sách.",
+      "category": "Từ vựng",
+      "section": "7.1",
+      "sectionTitle": "7.1 道がわかりません (Tôi không biết đường / Hỏi đường & Vị trí)"
+    },
+    {
+      "id": "L7_21",
+      "kanji": "もしもし",
+      "hiragana": "もしもし",
+      "meaning": "A lô a lô (khi g ọi điện thoại)",
+      "category": "Từ vựng",
+      "section": "7.1",
+      "sectionTitle": "7.1 道がわかりません (Tôi không biết đường / Hỏi đường & Vị trí)"
+    },
+    {
+      "id": "L7_22",
+      "kanji": "いす",
+      "hiragana": "いす",
+      "meaning": "Ghế, cái gh ế",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_23",
+      "kanji": "テーブル",
+      "hiragana": "テーブル",
+      "meaning": "Bàn, cái bàn",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_24",
+      "kanji": "電子レンジ",
+      "hiragana": "でんしれんじ",
+      "meaning": "Lò vi sóng",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_25",
+      "kanji": "冷蔵庫",
+      "hiragana": "れいぞうこ",
+      "meaning": "Tủ lạnh",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_26",
+      "kanji": "砂糖",
+      "hiragana": "さとう",
+      "meaning": "Đường (ăn)",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_27",
+      "kanji": "塩",
+      "hiragana": "しお",
+      "meaning": "Muối",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_28",
+      "kanji": "しょうゆ",
+      "hiragana": "しょうゆ",
+      "meaning": "Muối",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_29",
+      "kanji": "コップ",
+      "hiragana": "コップ",
+      "meaning": "Cốc, cái c ốc",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_30",
+      "kanji": "（お）皿",
+      "hiragana": "（お）さら",
+      "meaning": "Đĩa, cái đĩa",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_31",
+      "kanji": "スプーン",
+      "hiragana": "スプーン",
+      "meaning": "Cái thìa, cái mu ỗng",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_32",
+      "kanji": "ナイフ",
+      "hiragana": "ナイフ",
+      "meaning": "Dao, con dao",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_33",
+      "kanji": "フォーク",
+      "hiragana": "フォーク",
+      "meaning": "Cái dĩa",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_34",
+      "kanji": "はし",
+      "hiragana": "はし",
+      "meaning": "Đũa",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_35",
+      "kanji": "漢字",
+      "hiragana": "かんじ",
+      "meaning": "Chữ hán",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_36",
+      "kanji": "どれ",
+      "hiragana": "どれ",
+      "meaning": "Cái nào",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_37",
+      "kanji": "どの～",
+      "hiragana": "どの～",
+      "meaning": "～ nào",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_38",
+      "kanji": "洗います 1 あらいます",
+      "hiragana": "洗います 1 あらいます",
+      "meaning": "Giặt, rửa, tắm",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_39",
+      "kanji": "置きます 1 おきます",
+      "hiragana": "置きます 1 おきます",
+      "meaning": "Đặt, để",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_40",
+      "kanji": "書きます 1 かきます",
+      "hiragana": "書きます 1 かきます",
+      "meaning": "Viết",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_41",
+      "kanji": "貸します 1 かします",
+      "hiragana": "貸します 1 かします",
+      "meaning": "Cho mư ợn",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_42",
+      "kanji": "聞きます 1 ききます",
+      "hiragana": "聞きます 1 ききます",
+      "meaning": "Nghe, h ỏi",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_43",
+      "kanji": "きます。",
+      "hiragana": "きます。",
+      "meaning": "Tôi hỏi anh Pak s ố điện thoại.",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_44",
+      "kanji": "切ります 1 きります",
+      "hiragana": "切ります 1 きります",
+      "meaning": "Cắt, gọt",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_45",
+      "kanji": "使います 1 つかいます",
+      "hiragana": "使います 1 つかいます",
+      "meaning": "Dùng, s ử dụng",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_46",
+      "kanji": "手伝います 1 てつだいます",
+      "hiragana": "手伝います 1 てつだいます",
+      "meaning": "Giúp, giúp đ ỡ",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_47",
+      "kanji": "取ります 1 とります",
+      "hiragana": "取ります 1 とります",
+      "meaning": "Cầm, lấy",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_48",
+      "kanji": "持って行きます 1 もっていきます",
+      "hiragana": "持って行きます 1 もっていきます",
+      "meaning": "Mang đi",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_49",
+      "kanji": "わかります 1",
+      "hiragana": "わかります 1",
+      "meaning": "Hiểu, biết",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_50",
+      "kanji": "出します 1",
+      "hiragana": "だします",
+      "meaning": "Nộp, lấy ra",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_51",
+      "kanji": "します。",
+      "hiragana": "します。",
+      "meaning": "Tôi lấy nước trái cây t ừ tủ lạnh",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_52",
+      "kanji": "入れます 2",
+      "hiragana": "いれます",
+      "meaning": "Cho vào, b ỏ vào",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_53",
+      "kanji": "教えます 2",
+      "hiragana": "おしえます",
+      "meaning": "Dạy, chỉ bảo",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_54",
+      "kanji": "たくさん",
+      "hiragana": "たくさん",
+      "meaning": "Nhiều",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_55",
+      "kanji": "すみませんが",
+      "hiragana": "すみませんが",
+      "meaning": "Xin lỗi",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_56",
+      "kanji": "ああ",
+      "hiragana": "ああ",
+      "meaning": "A, à",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_57",
+      "kanji": "ああ、これですね。",
+      "hiragana": "ああ、これですね。",
+      "meaning": "A, là cái này n hỉ!",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_58",
+      "kanji": "いいですよ。",
+      "hiragana": "いいですよ。",
+      "meaning": "Được đấy!",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_59",
+      "kanji": "歌",
+      "hiragana": "うた",
+      "meaning": "Bài hát",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_60",
+      "kanji": "ギター",
+      "hiragana": "ギター",
+      "meaning": "Đàn ghi ta",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_61",
+      "kanji": "台所",
+      "hiragana": "だいどころ",
+      "meaning": "Nhà b ếp",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_62",
+      "kanji": "たばこ",
+      "hiragana": "たばこ",
+      "meaning": "Thuốc lá",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_63",
+      "kanji": "電話",
+      "hiragana": "でんわ",
+      "meaning": "Điện thoại",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_64",
+      "kanji": "ピザ",
+      "hiragana": "ピザ",
+      "meaning": "Bánh p izza",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_65",
+      "kanji": "窓",
+      "hiragana": "まど",
+      "meaning": "Cửa sổ",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_66",
+      "kanji": "歌います 1 うたいます",
+      "hiragana": "歌います 1 うたいます",
+      "meaning": "Hát",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_67",
+      "kanji": "吸います 1 すいます",
+      "hiragana": "吸います 1 すいます",
+      "meaning": "Hút",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_68",
+      "kanji": "話します 1 はなします",
+      "hiragana": "話します 1 はなします",
+      "meaning": "Nói chuy ện",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_69",
+      "kanji": "く］1 ひきます",
+      "hiragana": "く］1 ひきます",
+      "meaning": "Chơi (nh ạc cụ)",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_70",
+      "kanji": "持ちます 1",
+      "hiragana": "もちます",
+      "meaning": "Cầm, mang",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_71",
+      "kanji": "開けます 2 あけます",
+      "hiragana": "開けます 2 あけます",
+      "meaning": "Mở",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_72",
+      "kanji": "閉めます 2 しめます",
+      "hiragana": "閉めます 2 しめます",
+      "meaning": "Đóng",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_73",
+      "kanji": "かけます 2",
+      "hiragana": "かけます 2",
+      "meaning": "Gọi",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_74",
+      "kanji": "をかけます。",
+      "hiragana": "をかけます。",
+      "meaning": "Tôi gọi điện cho bạn tôi",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "id": "L7_75",
+      "kanji": "持って来ます 3 もってきます",
+      "hiragana": "持って来ます 3 もってきます",
+      "meaning": "Mang đ ến",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
+    },
+    {
+      "lesson": "7",
+      "kanji": "貸します",
+      "hiragana": "かします",
+      "meaning": "Cho mượn",
+      "category": "Từ vựng",
+      "section": "7.3",
+      "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)",
+      "id": "L7_76"
+    }
+  ],
+  "8": [
+    {
+      "id": "L8_1",
+      "kanji": "両親",
+      "hiragana": "りょうしん",
+      "meaning": "Bố mẹ (của mình)",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_2",
+      "kanji": "父",
+      "hiragana": "ちち",
+      "meaning": "Bố (của mình)",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_3",
+      "kanji": "母",
+      "hiragana": "はは",
+      "meaning": "Mẹ (của mình)",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_4",
+      "kanji": "兄弟",
+      "hiragana": "きょうだい",
+      "meaning": "Anh c hị",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_5",
+      "kanji": "兄",
+      "hiragana": "あに",
+      "meaning": "Anh trai (c ủa mình)",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_6",
+      "kanji": "姉",
+      "hiragana": "あね",
+      "meaning": "Chị gái (c ủa mình)",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_7",
+      "kanji": "弟",
+      "hiragana": "おとうと",
+      "meaning": "Em trai (c ủa mình)",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_8",
+      "kanji": "妹",
+      "hiragana": "いもうと",
+      "meaning": "Em gái (c ủa mình)",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_9",
+      "kanji": "夫",
+      "hiragana": "おっと",
+      "meaning": "Chồng (của mình)",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_10",
+      "kanji": "妻",
+      "hiragana": "つま",
+      "meaning": "Vợ (của mình)",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_11",
+      "kanji": "子ども",
+      "hiragana": "こども",
+      "meaning": "Con (c ủa mình)",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_12",
+      "kanji": "息子",
+      "hiragana": "むすこ",
+      "meaning": "Con trai (c ủa mình)",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_13",
+      "kanji": "むすめ",
+      "hiragana": "むすめ",
+      "meaning": "Con gái (c ủa mình)",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_14",
+      "kanji": "お父さん",
+      "hiragana": "おとうさん",
+      "meaning": "Bố (của ngư ời khác)",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_15",
+      "kanji": "お母さん",
+      "hiragana": "おかあさん",
+      "meaning": "Mẹ (của ngư ời khác)",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_16",
+      "kanji": "お兄さん",
+      "hiragana": "おにいさん",
+      "meaning": "Anh trai (c ủa ngư ời khác)",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_17",
+      "kanji": "お姉さん",
+      "hiragana": "おねえさん",
+      "meaning": "Chị gái (c ủa ngư ời khác)",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_18",
+      "kanji": "弟さん",
+      "hiragana": "おとうとさん",
+      "meaning": "Em trai (c ủa ngư ời khác)",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_19",
+      "kanji": "妹さん",
+      "hiragana": "いもうとさん",
+      "meaning": "Em gái (c ủa ngư ời khác)",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_20",
+      "kanji": "お子さん",
+      "hiragana": "おこさん",
+      "meaning": "Con (c ủa ngư ời khác)",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_21",
+      "kanji": "ペット",
+      "hiragana": "ペット",
+      "meaning": "Thú nuôi",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_22",
+      "kanji": "猫",
+      "hiragana": "ねこ",
+      "meaning": "Con mèo",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_23",
+      "kanji": "ピアノ",
+      "hiragana": "ピアノ",
+      "meaning": "Đàn piano",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_24",
+      "kanji": "医者",
+      "hiragana": "いしゃ",
+      "meaning": "Bác sỹ",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_25",
+      "kanji": "高校生",
+      "hiragana": "こうこうせい",
+      "meaning": "Học sinh c ấp ba",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_26",
+      "kanji": "大学生",
+      "hiragana": "だいがくせい",
+      "meaning": "Sinh viên đại học",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_27",
+      "kanji": "～匹",
+      "hiragana": "～ひき",
+      "meaning": "～ con",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_28",
+      "kanji": "住みます 1 すみます",
+      "hiragana": "住みます 1 すみます",
+      "meaning": "Sống, sinh sống",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_29",
+      "kanji": "います 2",
+      "hiragana": "います 2",
+      "meaning": "Có (ngư ời, động vật)",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_30",
+      "kanji": "がいます。",
+      "hiragana": "がいます。",
+      "meaning": "Tôi có em trai.",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_31",
+      "kanji": "ご主人",
+      "hiragana": "ごしゅじん",
+      "meaning": "Chồng (của ngư ời khác)",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_32",
+      "kanji": "奥さん",
+      "hiragana": "おくさん",
+      "meaning": "Vợ (của ngư ời khác)",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_33",
+      "kanji": "先輩",
+      "hiragana": "せんぱい",
+      "meaning": "Tiền bối, ngư ời đi trư ớc, đàn anh đàn ch ị",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_34",
+      "kanji": "後輩",
+      "hiragana": "こうはい",
+      "meaning": "Hậu bối, ngư ời vào sau , đàn em",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_35",
+      "kanji": "うさぎ",
+      "hiragana": "うさぎ",
+      "meaning": "Con thỏ",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_36",
+      "kanji": "体",
+      "hiragana": "からだ",
+      "meaning": "Thân th ể, cơ th ể, sức khỏe",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_37",
+      "kanji": "足",
+      "hiragana": "あし",
+      "meaning": "Chân",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_38",
+      "kanji": "顔",
+      "hiragana": "かお",
+      "meaning": "Mặt, khuôn m ặt",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_39",
+      "kanji": "髪",
+      "hiragana": "かみ",
+      "meaning": "Tóc",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_40",
+      "kanji": "口",
+      "hiragana": "くち",
+      "meaning": "Miệng",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_41",
+      "kanji": "鼻",
+      "hiragana": "はな",
+      "meaning": "Mũi",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_42",
+      "kanji": "目",
+      "hiragana": "め",
+      "meaning": "Mắt",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_43",
+      "kanji": "耳",
+      "hiragana": "みみ",
+      "meaning": "Tai",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_44",
+      "kanji": "頭がいい",
+      "hiragana": "あたまがいい",
+      "meaning": "Thông minh",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_45",
+      "kanji": "かっこいい",
+      "hiragana": "かっこいい",
+      "meaning": "Bảnh bao , đẹp trai",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_46",
+      "kanji": "かわいい",
+      "hiragana": "かわいい",
+      "meaning": "Đáng yêu, d ễ thương",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_47",
+      "kanji": "背が高い",
+      "hiragana": "せがたかい",
+      "meaning": "Cao (dáng ngư ời)",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_48",
+      "kanji": "長い",
+      "hiragana": "ながい",
+      "meaning": "Dài",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_49",
+      "kanji": "短い",
+      "hiragana": "みじかい",
+      "meaning": "Ngắn",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_50",
+      "kanji": "優しい",
+      "hiragana": "やさしい",
+      "meaning": "Hiền lành",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_51",
+      "kanji": "黒い",
+      "hiragana": "くろい",
+      "meaning": "Đen, màu đen",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_52",
+      "kanji": "白い",
+      "hiragana": "しろい",
+      "meaning": "Trắng, màu tr ắng",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_53",
+      "kanji": "茶色い",
+      "hiragana": "ちゃいろい",
+      "meaning": "Màu nâu",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_54",
+      "kanji": "元気（な）",
+      "hiragana": "げんき（な）",
+      "meaning": "Khỏe mạnh",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_55",
+      "kanji": "親切（な）",
+      "hiragana": "しんせつ（な）",
+      "meaning": "Tốt bụng",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_56",
+      "kanji": "まじめ（な）",
+      "hiragana": "まじめ（な）",
+      "meaning": "Chăm ch ỉ, cần mẫn",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_57",
+      "kanji": "上手（な）",
+      "hiragana": "じょうず（な）",
+      "meaning": "Giỏi",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_58",
+      "kanji": "下手（な）",
+      "hiragana": "へた（な）",
+      "meaning": "Kém",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_59",
+      "kanji": "カード",
+      "hiragana": "カード",
+      "meaning": "Thẻ / Thiệp",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_60",
+      "kanji": "ります。",
+      "hiragana": "ります。",
+      "meaning": "Tôi gửi thiệp mừng cho bạn tôi",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_61",
+      "kanji": "傘",
+      "hiragana": "かさ",
+      "meaning": "Ô, cái ô",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_62",
+      "kanji": "（お）金",
+      "hiragana": "（お）かね",
+      "meaning": "Tiền",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_63",
+      "kanji": "靴下",
+      "hiragana": "くつした",
+      "meaning": "Đôi tất",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_64",
+      "kanji": "辞書",
+      "hiragana": "じしょ",
+      "meaning": "Từ điển",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_65",
+      "kanji": "チョコレート",
+      "hiragana": "チョコレート",
+      "meaning": "Sô cô la",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_66",
+      "kanji": "手紙",
+      "hiragana": "てがみ",
+      "meaning": "Thư",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_67",
+      "kanji": "ネックレス",
+      "hiragana": "ネックレス",
+      "meaning": "Vòng c ổ",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_68",
+      "kanji": "ノート",
+      "hiragana": "ノート",
+      "meaning": "Vở, quyển vở",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_69",
+      "kanji": "プレゼント",
+      "hiragana": "プレゼント",
+      "meaning": "Quà, món quà",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_70",
+      "kanji": "メール",
+      "hiragana": "メール",
+      "meaning": "Thư, thư đi ện tử",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_71",
+      "kanji": "祖母",
+      "hiragana": "そぼ",
+      "meaning": "Bà (của mình)",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_72",
+      "kanji": "クリスマス",
+      "hiragana": "クリスマス",
+      "meaning": "Giáng sinh",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_73",
+      "kanji": "結婚式",
+      "hiragana": "けっこんしき",
+      "meaning": "Lễ kết hôn",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_74",
+      "kanji": "バレンタインデー",
+      "hiragana": "バレンタインデー",
+      "meaning": "Ngày l ễ tình nhân",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_75",
+      "kanji": "何か",
+      "hiragana": "なにか",
+      "meaning": "Cái gì đó",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_76",
+      "kanji": "送ります 1 おくります",
+      "hiragana": "送ります 1 おくります",
+      "meaning": "Gửi / Tiễn",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_77",
+      "kanji": "もらいます 1",
+      "hiragana": "もらいます 1",
+      "meaning": "Nhận",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_78",
+      "kanji": "あげます 2",
+      "hiragana": "あげます 2",
+      "meaning": "Tặng, bi ếu",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_79",
+      "kanji": "くれます 2",
+      "hiragana": "くれます 2",
+      "meaning": "Cho (mình)",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_80",
+      "kanji": "電話します 3 でんわします",
+      "hiragana": "電話します 3 でんわします",
+      "meaning": "Gọi điện thoại",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_81",
+      "kanji": "もうすぐ",
+      "hiragana": "もうすぐ",
+      "meaning": "Sắp, sắp sửa",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "id": "L8_82",
+      "kanji": "よかったですね",
+      "hiragana": "よかったですね",
+      "meaning": "Tốt quá nh ỉ!",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
+    },
+    {
+      "lesson": "8",
+      "kanji": "～人",
+      "hiragana": "～にん",
+      "meaning": "～ người (đơn vị đếm người)",
+      "category": "Từ vựng",
+      "section": "8.1",
+      "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè)",
+      "id": "L8_83"
+    }
+  ],
+  "9": [
+    {
+      "id": "L9_1",
+      "kanji": "アクション",
+      "hiragana": "アクション",
+      "meaning": "Hành đ ộng",
+      "category": "Từ vựng",
+      "section": "9.1",
+      "sectionTitle": "9.1 いろいろな趣味 (Các sở thích đa dạng / Tần suất & Mức độ)"
+    },
+    {
+      "id": "L9_2",
+      "kanji": "（お）菓子",
+      "hiragana": "（お）かし",
+      "meaning": "Bánh k ẹo",
+      "category": "Từ vựng",
+      "section": "9.1",
+      "sectionTitle": "9.1 いろいろな趣味 (Các sở thích đa dạng / Tần suất & Mức độ)"
+    },
+    {
+      "id": "L9_3",
+      "kanji": "切手",
+      "hiragana": "きって",
+      "meaning": "Tem",
+      "category": "Từ vựng",
+      "section": "9.1",
+      "sectionTitle": "9.1 いろいろな趣味 (Các sở thích đa dạng / Tần suất & Mức độ)"
+    },
+    {
+      "id": "L9_4",
+      "kanji": "クラシック",
+      "hiragana": "クラシック",
+      "meaning": "Nhạc cổ điển",
+      "category": "Từ vựng",
+      "section": "9.1",
+      "sectionTitle": "9.1 いろいろな趣味 (Các sở thích đa dạng / Tần suất & Mức độ)"
+    },
+    {
+      "id": "L9_5",
+      "kanji": "ポップス",
+      "hiragana": "ポップス",
+      "meaning": "Nhạc Pop",
+      "category": "Từ vựng",
+      "section": "9.1",
+      "sectionTitle": "9.1 いろいろな趣味 (Các sở thích đa dạng / Tần suất & Mức độ)"
+    },
+    {
+      "id": "L9_6",
+      "kanji": "小説",
+      "hiragana": "しょうせつ",
+      "meaning": "Tiểu thuy ết",
+      "category": "Từ vựng",
+      "section": "9.1",
+      "sectionTitle": "9.1 いろいろな趣味 (Các sở thích đa dạng / Tần suất & Mức độ)"
+    },
+    {
+      "id": "L9_7",
+      "kanji": "漫画",
+      "hiragana": "まんが",
+      "meaning": "Truyện tranh",
+      "category": "Từ vựng",
+      "section": "9.1",
+      "sectionTitle": "9.1 いろいろな趣味 (Các sở thích đa dạng / Tần suất & Mức độ)"
+    },
+    {
+      "id": "L9_8",
+      "kanji": "釣り",
+      "hiragana": "つり",
+      "meaning": "Câu cá",
+      "category": "Từ vựng",
+      "section": "9.1",
+      "sectionTitle": "9.1 いろいろな趣味 (Các sở thích đa dạng / Tần suất & Mức độ)"
+    },
+    {
+      "id": "L9_9",
+      "kanji": "ドラマ",
+      "hiragana": "ドラマ",
+      "meaning": "Phim truy ền hình",
+      "category": "Từ vựng",
+      "section": "9.1",
+      "sectionTitle": "9.1 いろいろな趣味 (Các sở thích đa dạng / Tần suất & Mức độ)"
+    },
+    {
+      "id": "L9_10",
+      "kanji": "プール",
+      "hiragana": "プール",
+      "meaning": "Bể bơi",
+      "category": "Từ vựng",
+      "section": "9.1",
+      "sectionTitle": "9.1 いろいろな趣味 (Các sở thích đa dạng / Tần suất & Mức độ)"
+    },
+    {
+      "id": "L9_11",
+      "kanji": "最近",
+      "hiragana": "さいきん",
+      "meaning": "Gần đây",
+      "category": "Từ vựng",
+      "section": "9.1",
+      "sectionTitle": "9.1 いろいろな趣味 (Các sở thích đa dạng / Tần suất & Mức độ)"
+    },
+    {
+      "id": "L9_12",
+      "kanji": "～日",
+      "hiragana": "～にち",
+      "meaning": "～ ngày",
+      "category": "Từ vựng",
+      "section": "9.1",
+      "sectionTitle": "9.1 いろいろな趣味 (Các sở thích đa dạng / Tần suất & Mức độ)"
+    },
+    {
+      "id": "L9_13",
+      "kanji": "～週間",
+      "hiragana": "～しゅうかん",
+      "meaning": "～ tuần",
+      "category": "Từ vựng",
+      "section": "9.1",
+      "sectionTitle": "9.1 いろいろな趣味 (Các sở thích đa dạng / Tần suất & Mức độ)"
+    },
+    {
+      "id": "L9_14",
+      "kanji": "～か月",
+      "hiragana": "～かげつ",
+      "meaning": "～ tháng",
+      "category": "Từ vựng",
+      "section": "9.1",
+      "sectionTitle": "9.1 いろいろな趣味 (Các sở thích đa dạng / Tần suất & Mức độ)"
+    },
+    {
+      "id": "L9_15",
+      "kanji": "～年",
+      "hiragana": "～ねん",
+      "meaning": "～ năm",
+      "category": "Từ vựng",
+      "section": "9.1",
+      "sectionTitle": "9.1 いろいろな趣味 (Các sở thích đa dạng / Tần suất & Mức độ)"
+    },
+    {
+      "id": "L9_16",
+      "kanji": "～回",
+      "hiragana": "～かい",
+      "meaning": "～ lần",
+      "category": "Từ vựng",
+      "section": "9.1",
+      "sectionTitle": "9.1 いろいろな趣味 (Các sở thích đa dạng / Tần suất & Mức độ)"
+    },
+    {
+      "id": "L9_17",
+      "kanji": "～冊",
+      "hiragana": "～さつ",
+      "meaning": "～ quyển",
+      "category": "Từ vựng",
+      "section": "9.1",
+      "sectionTitle": "9.1 いろいろな趣味 (Các sở thích đa dạng / Tần suất & Mức độ)"
+    },
+    {
+      "id": "L9_18",
+      "kanji": "～杯",
+      "hiragana": "～はい",
+      "meaning": "～ ly, cốc (đơn v ị đếm ly, bát…)",
+      "category": "Từ vựng",
+      "section": "9.1",
+      "sectionTitle": "9.1 いろいろな趣味 (Các sở thích đa dạng / Tần suất & Mức độ)"
+    },
+    {
+      "id": "L9_19",
+      "kanji": "～本",
+      "hiragana": "～ほん",
+      "meaning": "～ cái, chi ếc, cây (đơn v ị đếm vật có chi ều dài)",
+      "category": "Từ vựng",
+      "section": "9.1",
+      "sectionTitle": "9.1 いろいろな趣味 (Các sở thích đa dạng / Tần suất & Mức độ)"
+    },
+    {
+      "id": "L9_20",
+      "kanji": "～料理（例：イタリア料理） ～りょうり",
+      "hiragana": "～料理（例：イタリア料理） ～りょうり",
+      "meaning": "Món ～ (Vd: món Ý)",
+      "category": "Từ vựng",
+      "section": "9.1",
+      "sectionTitle": "9.1 いろいろな趣味 (Các sở thích đa dạng / Tần suất & Mức độ)"
+    },
+    {
+      "id": "L9_21",
+      "kanji": "泳ぎます 1",
+      "hiragana": "およぎます",
+      "meaning": "Bơi",
+      "category": "Từ vựng",
+      "section": "9.1",
+      "sectionTitle": "9.1 いろいろな趣味 (Các sở thích đa dạng / Tần suất & Mức độ)"
+    },
+    {
+      "id": "L9_22",
+      "kanji": "描きます1",
+      "hiragana": "かきます",
+      "meaning": "Vẽ, tả",
+      "category": "Từ vựng",
+      "section": "9.1",
+      "sectionTitle": "9.1 いろいろな趣味 (Các sở thích đa dạng / Tần suất & Mức độ)"
+    },
+    {
+      "id": "L9_23",
+      "kanji": "集めます 2",
+      "hiragana": "あつめます",
+      "meaning": "Thu th ập, tập hợp",
+      "category": "Từ vựng",
+      "section": "9.1",
+      "sectionTitle": "9.1 いろいろな趣味 (Các sở thích đa dạng / Tần suất & Mức độ)"
+    },
+    {
+      "id": "L9_24",
+      "kanji": "運転します 3 うんてんします",
+      "hiragana": "運転します 3 うんてんします",
+      "meaning": "Lái (xe)",
+      "category": "Từ vựng",
+      "section": "9.1",
+      "sectionTitle": "9.1 いろいろな趣味 (Các sở thích đa dạng / Tần suất & Mức độ)"
+    },
+    {
+      "id": "L9_25",
+      "kanji": "特に",
+      "hiragana": "とくに",
+      "meaning": "Đặc biệt",
+      "category": "Từ vựng",
+      "section": "9.1",
+      "sectionTitle": "9.1 いろいろな趣味 (Các sở thích đa dạng / Tần suất & Mức độ)"
+    },
+    {
+      "id": "L9_26",
+      "kanji": "よく",
+      "hiragana": "よく",
+      "meaning": "Thường, hay, r ất",
+      "category": "Từ vựng",
+      "section": "9.1",
+      "sectionTitle": "9.1 いろいろな趣味 (Các sở thích đa dạng / Tần suất & Mức độ)"
+    },
+    {
+      "id": "L9_27",
+      "kanji": "ます。",
+      "hiragana": "ます。",
+      "meaning": "Tôi thư ờng xem phim.",
+      "category": "Từ vựng",
+      "section": "9.1",
+      "sectionTitle": "9.1 いろいろな趣味 (Các sở thích đa dạng / Tần suất & Mức độ)"
+    },
+    {
+      "id": "L9_28",
+      "kanji": "ときどき",
+      "hiragana": "ときどき",
+      "meaning": "Thỉnh tho ảng, đôi khi",
+      "category": "Từ vựng",
+      "section": "9.1",
+      "sectionTitle": "9.1 いろいろな趣味 (Các sở thích đa dạng / Tần suất & Mức độ)"
+    },
+    {
+      "id": "L9_29",
+      "kanji": "あまり",
+      "hiragana": "あまり",
+      "meaning": "Không ～ lắm",
+      "category": "Từ vựng",
+      "section": "9.1",
+      "sectionTitle": "9.1 いろいろな趣味 (Các sở thích đa dạng / Tần suất & Mức độ)"
+    },
+    {
+      "id": "L9_30",
+      "kanji": "ません。",
+      "hiragana": "ません。",
+      "meaning": "Tôi không xem ti vi nhi ều lắm.",
+      "category": "Từ vựng",
+      "section": "9.1",
+      "sectionTitle": "9.1 いろいろな趣味 (Các sở thích đa dạng / Tần suất & Mức độ)"
+    },
+    {
+      "id": "L9_31",
+      "kanji": "全然",
+      "hiragana": "ぜんぜん",
+      "meaning": "Hoàn toàn không ～",
+      "category": "Từ vựng",
+      "section": "9.1",
+      "sectionTitle": "9.1 いろいろな趣味 (Các sở thích đa dạng / Tần suất & Mức độ)"
+    },
+    {
+      "id": "L9_32",
+      "kanji": "でも",
+      "hiragana": "でも",
+      "meaning": "Nhưng , tuy nhiên",
+      "category": "Từ vựng",
+      "section": "9.1",
+      "sectionTitle": "9.1 いろいろな趣味 (Các sở thích đa dạng / Tần suất & Mức độ)"
+    },
+    {
+      "id": "L9_33",
+      "kanji": "だけ",
+      "hiragana": "だけ",
+      "meaning": "Chỉ",
+      "category": "Từ vựng",
+      "section": "9.1",
+      "sectionTitle": "9.1 いろいろな趣味 (Các sở thích đa dạng / Tần suất & Mức độ)"
+    },
+    {
+      "id": "L9_34",
+      "kanji": "イベント",
+      "hiragana": "イベント",
+      "meaning": "Sự kiện",
+      "category": "Từ vựng",
+      "section": "9.1",
+      "sectionTitle": "9.1 いろいろな趣味 (Các sở thích đa dạng / Tần suất & Mức độ)"
+    },
+    {
+      "id": "L9_35",
+      "kanji": "コンテスト",
+      "hiragana": "コンテスト",
+      "meaning": "Cuộc thi",
+      "category": "Từ vựng",
+      "section": "9.1",
+      "sectionTitle": "9.1 いろいろな趣味 (Các sở thích đa dạng / Tần suất & Mức độ)"
+    },
+    {
+      "id": "L9_36",
+      "kanji": "食堂",
+      "hiragana": "しょくどう",
+      "meaning": "Nhà ăn",
+      "category": "Từ vựng",
+      "section": "9.1",
+      "sectionTitle": "9.1 いろいろな趣味 (Các sở thích đa dạng / Tần suất & Mức độ)"
+    },
+    {
+      "id": "L9_37",
+      "kanji": "ダイビング",
+      "hiragana": "ダイビング",
+      "meaning": "Sự lặn xuống, lao xu ống",
+      "category": "Từ vựng",
+      "section": "9.1",
+      "sectionTitle": "9.1 いろいろな趣味 (Các sở thích đa dạng / Tần suất & Mức độ)"
+    },
+    {
+      "id": "L9_38",
+      "kanji": "ダンス",
+      "hiragana": "ダンス",
+      "meaning": "Khiêu vũ",
+      "category": "Từ vựng",
+      "section": "9.1",
+      "sectionTitle": "9.1 いろいろな趣味 (Các sở thích đa dạng / Tần suất & Mức độ)"
+    },
+    {
+      "id": "L9_39",
+      "kanji": "～クラブ（例：ダンスクラブ）",
+      "hiragana": "～クラブ（例：ダンスクラブ）",
+      "meaning": "Câu lạc bộ ～ (Vd: câu lạc bộ khiêu vũ)",
+      "category": "Từ vựng",
+      "section": "9.1",
+      "sectionTitle": "9.1 いろいろな趣味 (Các sở thích đa dạng / Tần suất & Mức độ)"
+    },
+    {
+      "id": "L9_40",
+      "kanji": "）きょうしつ",
+      "hiragana": "）きょうしつ",
+      "meaning": "Lớp học ～ (Vd: lớp học thư pháp )",
+      "category": "Từ vựng",
+      "section": "9.3",
+      "sectionTitle": "9.3 趣味の教室 (Lớp học sở thích / Đăng ký tham gia)"
+    },
+    {
+      "id": "L9_41",
+      "kanji": "習います 1",
+      "hiragana": "ならいます",
+      "meaning": "Học",
+      "category": "Từ vựng",
+      "section": "9.3",
+      "sectionTitle": "9.3 趣味の教室 (Lớp học sở thích / Đăng ký tham gia)"
+    },
+    {
+      "id": "L9_42",
+      "kanji": "乗ります 1",
+      "hiragana": "のります",
+      "meaning": "Lên",
+      "category": "Từ vựng",
+      "section": "9.3",
+      "sectionTitle": "9.3 趣味の教室 (Lớp học sở thích / Đăng ký tham gia)"
+    },
+    {
+      "id": "L9_43",
+      "kanji": "入ります 1",
+      "hiragana": "はいります",
+      "meaning": "Vào, đi vào ; Gia nh ập, tham gia",
+      "category": "Từ vựng",
+      "section": "9.3",
+      "sectionTitle": "9.3 趣味の教室 (Lớp học sở thích / Đăng ký tham gia)"
+    },
+    {
+      "id": "L9_44",
+      "kanji": "ります。",
+      "hiragana": "Tham gia",
+      "meaning": "câu lạc bộ khiêu vũ",
+      "category": "Từ vựng",
+      "section": "9.3",
+      "sectionTitle": "9.3 趣味の教室 (Lớp học sở thích / Đăng ký tham gia)"
+    },
+    {
+      "id": "L9_45",
+      "kanji": "申し込みます1 もうしこみます",
+      "hiragana": "申し込みます1 もうしこみます",
+      "meaning": "Xin, th ỉnh cầu,đăng ký",
+      "category": "Từ vựng",
+      "section": "9.3",
+      "sectionTitle": "9.3 趣味の教室 (Lớp học sở thích / Đăng ký tham gia)"
+    },
+    {
+      "id": "L9_46",
+      "kanji": "できます 2",
+      "hiragana": "できます 2",
+      "meaning": "Có thể",
+      "category": "Từ vựng",
+      "section": "9.3",
+      "sectionTitle": "9.3 趣味の教室 (Lớp học sở thích / Đăng ký tham gia)"
+    },
+    {
+      "id": "L9_47",
+      "kanji": "スキーができます。",
+      "hiragana": "スキーができます。",
+      "meaning": "Tôi có th ể trượt tuyết",
+      "category": "Từ vựng",
+      "section": "9.3",
+      "sectionTitle": "9.3 趣味の教室 (Lớp học sở thích / Đăng ký tham gia)"
+    },
+    {
+      "id": "L9_48",
+      "kanji": "参加します 3 さんかします",
+      "hiragana": "参加します 3 さんかします",
+      "meaning": "Tham gia",
+      "category": "Từ vựng",
+      "section": "9.3",
+      "sectionTitle": "9.3 趣味の教室 (Lớp học sở thích / Đăng ký tham gia)"
+    },
+    {
+      "id": "L9_49",
+      "kanji": "すごい",
+      "hiragana": "すごい",
+      "meaning": "Kinh kh ủng / T uyệt vời",
+      "category": "Từ vựng",
+      "section": "9.3",
+      "sectionTitle": "9.3 趣味の教室 (Lớp học sở thích / Đăng ký tham gia)"
+    },
+    {
+      "id": "L9_50",
+      "kanji": "いろいろな",
+      "hiragana": "いろいろな",
+      "meaning": "Nhiều, đa d ạng",
+      "category": "Từ vựng",
+      "section": "9.3",
+      "sectionTitle": "9.3 趣味の教室 (Lớp học sở thích / Đăng ký tham gia)"
+    },
+    {
+      "id": "L9_51",
+      "kanji": "上手に",
+      "hiragana": "じょうずに",
+      "meaning": "Thành th ạo",
+      "category": "Từ vựng",
+      "section": "9.3",
+      "sectionTitle": "9.3 趣味の教室 (Lớp học sở thích / Đăng ký tham gia)"
+    },
+    {
+      "id": "L9_52",
+      "kanji": "受付",
+      "hiragana": "うけつけ",
+      "meaning": "Quầy lễ tân, thường trực",
+      "category": "Từ vựng",
+      "section": "9.3",
+      "sectionTitle": "9.3 趣味の教室 (Lớp học sở thích / Đăng ký tham gia)"
+    },
+    {
+      "id": "L9_53",
+      "kanji": "カード",
+      "hiragana": "カード",
+      "meaning": "Thẻ",
+      "category": "Từ vựng",
+      "section": "9.3",
+      "sectionTitle": "9.3 趣味の教室 (Lớp học sở thích / Đăng ký tham gia)"
+    },
+    {
+      "id": "L9_54",
+      "kanji": "ります。",
+      "hiragana": "ります。",
+      "meaning": "Tôi sẽ làm th ẻ thư vi ện.",
+      "category": "Từ vựng",
+      "section": "9.3",
+      "sectionTitle": "9.3 趣味の教室 (Lớp học sở thích / Đăng ký tham gia)"
+    },
+    {
+      "id": "L9_55",
+      "kanji": "外国人登録証",
+      "hiragana": "外国人登録証",
+      "meaning": "がいこくじんとうろくしょ う Chứng nh ận đăng ký ngư ời nước ngoài",
+      "category": "Từ vựng",
+      "section": "9.3",
+      "sectionTitle": "9.3 趣味の教室 (Lớp học sở thích / Đăng ký tham gia)"
+    },
+    {
+      "id": "L9_56",
+      "kanji": "住所",
+      "hiragana": "じゅうしょ",
+      "meaning": "Địa chỉ",
+      "category": "Từ vựng",
+      "section": "9.3",
+      "sectionTitle": "9.3 趣味の教室 (Lớp học sở thích / Đăng ký tham gia)"
+    },
+    {
+      "id": "L9_57",
+      "kanji": "宿題",
+      "hiragana": "しゅくだい",
+      "meaning": "Bài tập về nhà",
+      "category": "Từ vựng",
+      "section": "9.3",
+      "sectionTitle": "9.3 趣味の教室 (Lớp học sở thích / Đăng ký tham gia)"
+    },
+    {
+      "id": "L9_58",
+      "kanji": "電話番号",
+      "hiragana": "でんわばんごう",
+      "meaning": "Số điện thoại",
+      "category": "Từ vựng",
+      "section": "9.3",
+      "sectionTitle": "9.3 趣味の教室 (Lớp học sở thích / Đăng ký tham gia)"
+    },
+    {
+      "id": "L9_59",
+      "kanji": "～番",
+      "hiragana": "～ばん",
+      "meaning": "Số~",
+      "category": "Từ vựng",
+      "section": "9.3",
+      "sectionTitle": "9.3 趣味の教室 (Lớp học sở thích / Đăng ký tham gia)"
+    },
+    {
+      "id": "L9_60",
+      "kanji": "言います 1 いいます",
+      "hiragana": "言います 1 いいます",
+      "meaning": "Nói",
+      "category": "Từ vựng",
+      "section": "9.3",
+      "sectionTitle": "9.3 趣味の教室 (Lớp học sở thích / Đăng ký tham gia)"
+    },
+    {
+      "id": "L9_61",
+      "kanji": "払います1 はらいます",
+      "hiragana": "払います1 はらいます",
+      "meaning": "Trả, chi tr ả",
+      "category": "Từ vựng",
+      "section": "9.3",
+      "sectionTitle": "9.3 趣味の教室 (Lớp học sở thích / Đăng ký tham gia)"
+    },
+    {
+      "id": "L9_62",
+      "kanji": "降ります 2 おります",
+      "hiragana": "降ります 2 おります",
+      "meaning": "Xuống (tàu, xe)",
+      "category": "Từ vựng",
+      "section": "9.3",
+      "sectionTitle": "9.3 趣味の教室 (Lớp học sở thích / Đăng ký tham gia)"
+    },
+    {
+      "id": "L9_63",
+      "kanji": "見せます 2 みせます",
+      "hiragana": "見せます 2 みせます",
+      "meaning": "Cho xem",
+      "category": "Từ vựng",
+      "section": "9.3",
+      "sectionTitle": "9.3 趣味の教室 (Lớp học sở thích / Đăng ký tham gia)"
+    },
+    {
+      "id": "L9_64",
+      "kanji": "予約します 3 よやくします",
+      "hiragana": "予約します 3 よやくします",
+      "meaning": "Đặt trước",
+      "category": "Từ vựng",
+      "section": "9.3",
+      "sectionTitle": "9.3 趣味の教室 (Lớp học sở thích / Đăng ký tham gia)"
+    },
+    {
+      "id": "L9_65",
+      "kanji": "どうやって",
+      "hiragana": "どうやって",
+      "meaning": "Làm th ế nào",
+      "category": "Từ vựng",
+      "section": "9.3",
+      "sectionTitle": "9.3 趣味の教室 (Lớp học sở thích / Đăng ký tham gia)"
+    },
+    {
+      "lesson": "9",
+      "kanji": "いつも",
+      "hiragana": "いつも",
+      "meaning": "Luôn, thường xuyên, luôn luôn",
+      "category": "Từ vựng",
+      "section": "9.1",
+      "sectionTitle": "9.1 いろいろな趣味 (Nhiều sở thích khác nhau)",
+      "id": "L9_66"
+    },
+    {
+      "lesson": "9",
+      "kanji": "申し込みます",
+      "hiragana": "もうしこみます",
+      "meaning": "Xin, thỉnh cầu, đăng ký",
+      "category": "Từ vựng",
+      "section": "9.2",
+      "sectionTitle": "9.2 申し込み (Đăng ký & Thủ tục)",
+      "id": "L9_67"
+    },
+    {
+      "lesson": "9",
+      "kanji": "払います",
+      "hiragana": "はらいます",
+      "meaning": "Trả tiền, thanh toán",
+      "category": "Từ vựng",
+      "section": "9.3",
+      "sectionTitle": "9.3 支払い (Thanh toán & Hướng dẫn)",
+      "id": "L9_68"
+    }
+  ],
+  "10": [
+    {
+      "id": "L10_1",
+      "kanji": "音",
+      "hiragana": "おと",
+      "meaning": "Âm thanh , tiếng động",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
+    },
+    {
+      "id": "L10_2",
+      "kanji": "声",
+      "hiragana": "こえ",
+      "meaning": "Giọng nói",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
+    },
+    {
+      "id": "L10_3",
+      "kanji": "薬",
+      "hiragana": "くすり",
+      "meaning": "Thuốc (uống, bôi…)",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
+    },
+    {
+      "id": "L10_4",
+      "kanji": "右",
+      "hiragana": "みぎ",
+      "meaning": "Bên ph ải",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
+    },
+    {
+      "id": "L10_5",
+      "kanji": "左",
+      "hiragana": "ひだり",
+      "meaning": "Bên trái",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
+    },
+    {
+      "id": "L10_6",
+      "kanji": "角",
+      "hiragana": "かど",
+      "meaning": "Góc đường",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
+    },
+    {
+      "id": "L10_7",
+      "kanji": "交差点",
+      "hiragana": "こうさてん",
+      "meaning": "Ngã tư",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
+    },
+    {
+      "id": "L10_8",
+      "kanji": "信号",
+      "hiragana": "しんごう",
+      "meaning": "Tín hi ệu / Đèn giao thông",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
+    },
+    {
+      "id": "L10_9",
+      "kanji": "橋",
+      "hiragana": "はし",
+      "meaning": "Cầu",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
+    },
+    {
+      "id": "L10_10",
+      "kanji": "道",
+      "hiragana": "みち",
+      "meaning": "Đường",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
+    },
+    {
+      "id": "L10_11",
+      "kanji": "～つ目",
+      "hiragana": "～つめ",
+      "meaning": "Thứ ~ (đếm thứ tự)",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
+    },
+    {
+      "id": "L10_12",
+      "kanji": "探します 1",
+      "hiragana": "さがします",
+      "meaning": "Tìm ki ếm/Tìm",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
+    },
+    {
+      "id": "L10_13",
+      "kanji": "飲みます 1",
+      "hiragana": "のみます",
+      "meaning": "Uống",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
+    },
+    {
+      "id": "L10_14",
+      "kanji": "みます",
+      "hiragana": "みます",
+      "meaning": "Uống thu ốc",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
+    },
+    {
+      "id": "L10_15",
+      "kanji": "曲がります 1 まがります",
+      "hiragana": "曲がります 1 まがります",
+      "meaning": "Rẽ/ Quẹo",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
+    },
+    {
+      "id": "L10_16",
+      "kanji": "渡ります1",
+      "hiragana": "わたります",
+      "meaning": "Qua, băng qua",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
+    },
+    {
+      "id": "L10_17",
+      "kanji": "聞こえます 2 きこえます",
+      "hiragana": "聞こえます 2 きこえます",
+      "meaning": "Nghe th ấy / Nghe đư ợc",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
+    },
+    {
+      "id": "L10_18",
+      "kanji": "見えます  2 みえます",
+      "hiragana": "見えます  2 みえます",
+      "meaning": "Nhìn th ấy / Nhìn đư ợc",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
+    },
+    {
+      "id": "L10_19",
+      "kanji": "まっすぐ",
+      "hiragana": "まっすぐ",
+      "meaning": "Thẳng",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
+    },
+    {
+      "id": "L10_20",
+      "kanji": "よく",
+      "hiragana": "よく",
+      "meaning": "Rõ",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
+    },
+    {
+      "id": "L10_21",
+      "kanji": "よくわかりません。",
+      "hiragana": "よくわかりません。",
+      "meaning": "(Tôi) k hông hi ểu rõ.",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
+    },
+    {
+      "id": "L10_22",
+      "kanji": "ちょっと",
+      "hiragana": "ちょっと",
+      "meaning": "Một chút",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
+    },
+    {
+      "id": "L10_23",
+      "kanji": "ええと",
+      "hiragana": "ええと",
+      "meaning": "À, ờ",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
+    },
+    {
+      "id": "L10_24",
+      "kanji": "カーテン",
+      "hiragana": "カーテン",
+      "meaning": "Rèm",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
+    },
+    {
+      "id": "L10_25",
+      "kanji": "（お）客（さん）",
+      "hiragana": "（お）きゃく（さん）",
+      "meaning": "Khách",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
+    },
+    {
+      "id": "L10_26",
+      "kanji": "ごみ",
+      "hiragana": "ごみ",
+      "meaning": "Rác",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
+    },
+    {
+      "id": "L10_27",
+      "kanji": "手",
+      "hiragana": "て",
+      "meaning": "Tay",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
+    },
+    {
+      "id": "L10_28",
+      "kanji": "荷物",
+      "hiragana": "にもつ",
+      "meaning": "Hành lý / Bưu ph ẩm",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
+    },
+    {
+      "id": "L10_29",
+      "kanji": "パンフレット",
+      "hiragana": "パンフレット",
+      "meaning": "Tờ rơi / Tờ quảng cáo",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
+    },
+    {
+      "id": "L10_30",
+      "kanji": "他",
+      "hiragana": "ほか",
+      "meaning": "Khác",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
+    },
+    {
+      "id": "L10_31",
+      "kanji": "皆さん",
+      "hiragana": "みなさん",
+      "meaning": "Mọi người",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
+    },
+    {
+      "id": "L10_32",
+      "kanji": "（お）土産",
+      "hiragana": "おみやげ",
+      "meaning": "Quà (lưu ni ệm)",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
+    },
+    {
+      "id": "L10_33",
+      "kanji": "押します1",
+      "hiragana": "おします",
+      "meaning": "Ấn/ Đẩy",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
+    },
+    {
+      "id": "L10_34",
+      "kanji": "座ります 1",
+      "hiragana": "すわります",
+      "meaning": "Ngồi",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
+    },
+    {
+      "id": "L10_35",
+      "kanji": "立ちます 1",
+      "hiragana": "たちます",
+      "meaning": "Đứng",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
+    },
+    {
+      "id": "L10_36",
+      "kanji": "入ります 1",
+      "hiragana": "はいります",
+      "meaning": "Vào",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
+    },
+    {
+      "id": "L10_37",
+      "kanji": "ります",
+      "hiragana": "ります",
+      "meaning": "Vào phòng học",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
+    },
+    {
+      "id": "L10_38",
+      "kanji": "持って帰ります 1もってかえります",
+      "hiragana": "持って帰ります 1もってかえります",
+      "meaning": "Mang v ề",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
+    },
+    {
+      "id": "L10_39",
+      "kanji": "遅れます 2 おくれます",
+      "hiragana": "遅れます 2 おくれます",
+      "meaning": "Muộn, chậm trễ",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
+    },
+    {
+      "id": "L10_40",
+      "kanji": "捨てます",
+      "hiragana": "すてます",
+      "meaning": "Vứt, vứt bỏ",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
+    },
+    {
+      "id": "L10_41",
+      "kanji": "集合します",
+      "hiragana": "しゅうごうします",
+      "meaning": "Tập trung / Tập hợp",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
+    },
+    {
+      "id": "L10_42",
+      "kanji": "危ない",
+      "hiragana": "あぶない",
+      "meaning": "Nguy hi ểm",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
+    },
+    {
+      "id": "L10_43",
+      "kanji": "大切（な）",
+      "hiragana": "たいせつ（な）",
+      "meaning": "Quan tr ọng / Quý giá",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
+    },
+    {
+      "id": "L10_44",
+      "kanji": "迷惑（な）",
+      "hiragana": "めいわくな（な）",
+      "meaning": "Phiền phức",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
+    },
+    {
+      "id": "L10_45",
+      "kanji": "動物園",
+      "hiragana": "どうぶつえん",
+      "meaning": "Vườn bách thú",
+      "category": "Từ vựng",
+      "section": "10.3",
+      "sectionTitle": "10.3 動物・ペット (Động vật & Thú cưng)"
+    },
+    {
+      "id": "L10_46",
+      "kanji": "クマ",
+      "hiragana": "クマ",
+      "meaning": "Gấu",
+      "category": "Từ vựng",
+      "section": "10.3",
+      "sectionTitle": "10.3 動物・ペット (Động vật & Thú cưng)"
+    },
+    {
+      "id": "L10_47",
+      "kanji": "コアラ",
+      "hiragana": "コアラ",
+      "meaning": "Gấu Kao -la",
+      "category": "Từ vựng",
+      "section": "10.3",
+      "sectionTitle": "10.3 動物・ペット (Động vật & Thú cưng)"
+    },
+    {
+      "id": "L10_48",
+      "kanji": "サル",
+      "hiragana": "サル",
+      "meaning": "Khỉ",
+      "category": "Từ vựng",
+      "section": "10.3",
+      "sectionTitle": "10.3 動物・ペット (Động vật & Thú cưng)"
+    },
+    {
+      "id": "L10_49",
+      "kanji": "ゾウ",
+      "hiragana": "ゾウ",
+      "meaning": "Voi",
+      "category": "Từ vựng",
+      "section": "10.3",
+      "sectionTitle": "10.3 動物・ペット (Động vật & Thú cưng)"
+    },
+    {
+      "id": "L10_50",
+      "kanji": "鳥",
+      "hiragana": "とり",
+      "meaning": "Chim",
+      "category": "Từ vựng",
+      "section": "10.3",
+      "sectionTitle": "10.3 動物・ペット (Động vật & Thú cưng)"
+    },
+    {
+      "id": "L10_51",
+      "kanji": "パンダ",
+      "hiragana": "パンダ",
+      "meaning": "Gấu trúc",
+      "category": "Từ vựng",
+      "section": "10.3",
+      "sectionTitle": "10.3 動物・ペット (Động vật & Thú cưng)"
+    },
+    {
+      "id": "L10_52",
+      "kanji": "ペンギン",
+      "hiragana": "ペンギン",
+      "meaning": "Chim cánh c ụt",
+      "category": "Từ vựng",
+      "section": "10.3",
+      "sectionTitle": "10.3 動物・ペット (Động vật & Thú cưng)"
+    },
+    {
+      "id": "L10_53",
+      "kanji": "入り口",
+      "hiragana": "いりぐち",
+      "meaning": "Cửa vào/ L ối vào",
+      "category": "Từ vựng",
+      "section": "10.3",
+      "sectionTitle": "10.3 動物・ペット (Động vật & Thú cưng)"
+    },
+    {
+      "id": "L10_54",
+      "kanji": "出口",
+      "hiragana": "でぐち",
+      "meaning": "Cửa ra/ L ối ra",
+      "category": "Từ vựng",
+      "section": "10.3",
+      "sectionTitle": "10.3 動物・ペット (Động vật & Thú cưng)"
+    },
+    {
+      "id": "L10_55",
+      "kanji": "えさ",
+      "hiragana": "えさ",
+      "meaning": "Mồi / Thức ăn cho đ ộng vật",
+      "category": "Từ vựng",
+      "section": "10.3",
+      "sectionTitle": "10.3 動物・ペット (Động vật & Thú cưng)"
+    },
+    {
+      "id": "L10_56",
+      "kanji": "おなか",
+      "hiragana": "おなか",
+      "meaning": "Bụng",
+      "category": "Từ vựng",
+      "section": "10.3",
+      "sectionTitle": "10.3 動物・ペット (Động vật & Thú cưng)"
+    },
+    {
+      "id": "L10_57",
+      "kanji": "観覧車",
+      "hiragana": "かんらんしゃ",
+      "meaning": "Xe tham quan",
+      "category": "Từ vựng",
+      "section": "10.3",
+      "sectionTitle": "10.3 動物・ペット (Động vật & Thú cưng)"
+    },
+    {
+      "id": "L10_58",
+      "kanji": "バナナ",
+      "hiragana": "バナナ",
+      "meaning": "Chuối",
+      "category": "Từ vựng",
+      "section": "10.3",
+      "sectionTitle": "10.3 動物・ペット (Động vật & Thú cưng)"
+    },
+    {
+      "id": "L10_59",
+      "kanji": "ボール",
+      "hiragana": "ボール",
+      "meaning": "Bóng",
+      "category": "Từ vựng",
+      "section": "10.3",
+      "sectionTitle": "10.3 動物・ペット (Động vật & Thú cưng)"
+    },
+    {
+      "id": "L10_60",
+      "kanji": "～たち",
+      "hiragana": "～たち",
+      "meaning": "Các ～ / Bọn ～ (số nhiều)",
+      "category": "Từ vựng",
+      "section": "10.3",
+      "sectionTitle": "10.3 動物・ペット (Động vật & Thú cưng)"
+    },
+    {
+      "id": "L10_61",
+      "kanji": "歩きます 1",
+      "hiragana": "あるきます",
+      "meaning": "Đi bộ",
+      "category": "Từ vựng",
+      "section": "10.3",
+      "sectionTitle": "10.3 動物・ペット (Động vật & Thú cưng)"
+    },
+    {
+      "id": "L10_62",
+      "kanji": "飛びます 1",
+      "hiragana": "とびます",
+      "meaning": "Bay",
+      "category": "Từ vựng",
+      "section": "10.3",
+      "sectionTitle": "10.3 動物・ペット (Động vật & Thú cưng)"
+    },
+    {
+      "id": "L10_63",
+      "kanji": "なります「なる」 1",
+      "hiragana": "なります「なる」 1",
+      "meaning": "Trở nên/ Tr ở thành",
+      "category": "Từ vựng",
+      "section": "10.3",
+      "sectionTitle": "10.3 動物・ペット (Động vật & Thú cưng)"
+    },
+    {
+      "id": "L10_64",
+      "kanji": "休みます 1",
+      "hiragana": "やすみます",
+      "meaning": "Nghỉ",
+      "category": "Từ vựng",
+      "section": "10.3",
+      "sectionTitle": "10.3 動物・ペット (Động vật & Thú cưng)"
+    },
+    {
+      "id": "L10_65",
+      "kanji": "あそこのベンチで休みましょう",
+      "hiragana": "あそこのベンチで休みましょう",
+      "meaning": "Cùng nghỉ ở ghế băng kia nào!",
+      "category": "Từ vựng",
+      "section": "10.3",
+      "sectionTitle": "10.3 動物・ペット (Động vật & Thú cưng)"
+    },
+    {
+      "id": "L10_66",
+      "kanji": "やります 1",
+      "hiragana": "やります 1",
+      "meaning": "Cho",
+      "category": "Từ vựng",
+      "section": "10.3",
+      "sectionTitle": "10.3 動物・ペット (Động vật & Thú cưng)"
+    },
+    {
+      "id": "L10_67",
+      "kanji": "おなかがすきます 1",
+      "hiragana": "おなかがすきます 1",
+      "meaning": "Đói",
+      "category": "Từ vựng",
+      "section": "10.3",
+      "sectionTitle": "10.3 動物・ペット (Động vật & Thú cưng)"
+    },
+    {
+      "id": "L10_68",
+      "kanji": "のどがかわきます 1",
+      "hiragana": "のどがかわきます 1",
+      "meaning": "Khát",
+      "category": "Từ vựng",
+      "section": "10.3",
+      "sectionTitle": "10.3 動物・ペット (Động vật & Thú cưng)"
+    },
+    {
+      "id": "L10_69",
+      "kanji": "疲れます「 疲れる」 2 つかれます",
+      "hiragana": "疲れます「 疲れる」 2 つかれます",
+      "meaning": "Mệt",
+      "category": "Từ vựng",
+      "section": "10.3",
+      "sectionTitle": "10.3 動物・ペット (Động vật & Thú cưng)"
+    },
+    {
+      "id": "L10_70",
+      "kanji": "痛い",
+      "hiragana": "いたい",
+      "meaning": "Đau",
+      "category": "Từ vựng",
+      "section": "10.3",
+      "sectionTitle": "10.3 動物・ペット (Động vật & Thú cưng)"
+    },
+    {
+      "id": "L10_71",
+      "kanji": "暗い",
+      "hiragana": "くらい",
+      "meaning": "Tối",
+      "category": "Từ vựng",
+      "section": "10.3",
+      "sectionTitle": "10.3 動物・ペット (Động vật & Thú cưng)"
+    },
+    {
+      "id": "L10_72",
+      "kanji": "そろそろ",
+      "hiragana": "そろそろ",
+      "meaning": "Đến lúc ph ải~",
+      "category": "Từ vựng",
+      "section": "10.3",
+      "sectionTitle": "10.3 動物・ペット (Động vật & Thú cưng)"
+    },
+    {
+      "id": "L10_73",
+      "kanji": "本当だ",
+      "hiragana": "ほんとうだ",
+      "meaning": "Thật",
+      "category": "Từ vựng",
+      "section": "10.3",
+      "sectionTitle": "10.3 動物・ペット (Động vật & Thú cưng)"
+    },
+    {
+      "lesson": "10",
+      "kanji": "見えます",
+      "hiragana": "みえます",
+      "meaning": "Nhìn thấy, trông thấy",
+      "category": "Từ vựng",
+      "section": "10.1",
+      "sectionTitle": "10.1 私の部屋 (Phòng của tôi / Tầm nhìn & Âm thanh)",
+      "id": "L10_74"
+    }
+  ],
+  "11": [
+    {
+      "id": "L11_1",
+      "kanji": "頭",
+      "hiragana": "あたま",
+      "meaning": "Đầu",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_2",
+      "kanji": "会話",
+      "hiragana": "かいわ",
+      "meaning": "Hội thoại",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_3",
+      "kanji": "作文",
+      "hiragana": "さくぶん",
+      "meaning": "Tập làm văn , viết văn",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_4",
+      "kanji": "クラスメイト",
+      "hiragana": "クラスメイト",
+      "meaning": "Bạn cùng l ớp",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_5",
+      "kanji": "雑誌",
+      "hiragana": "ざっし",
+      "meaning": "Tạp chí",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_6",
+      "kanji": "ジョギング",
+      "hiragana": "ジョギング",
+      "meaning": "Chạy bộ (tập thể dục)",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_7",
+      "kanji": "生活",
+      "hiragana": "せいかつ",
+      "meaning": "Cuộc sống, sinh ho ạt",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_8",
+      "kanji": "店長",
+      "hiragana": "てんちょう",
+      "meaning": "Chủ cửa hàng",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_9",
+      "kanji": "日記",
+      "hiragana": "にっき",
+      "meaning": "Nhật kí",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_10",
+      "kanji": "初め",
+      "hiragana": "はじめ",
+      "meaning": "Đầu, ban đ ầu",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_11",
+      "kanji": "一人暮らし",
+      "hiragana": "ひとりくらし",
+      "meaning": "Sống một mình",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_12",
+      "kanji": "ひらがな",
+      "hiragana": "ひらがな",
+      "meaning": "Chữ Hiragana",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_13",
+      "kanji": "平日",
+      "hiragana": "へいじつ",
+      "meaning": "Ngày thư ờng",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_14",
+      "kanji": "毎週",
+      "hiragana": "まいしゅう",
+      "meaning": "Hàng tu ần",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_15",
+      "kanji": "終わります 1 おわります",
+      "hiragana": "終わります 1 おわります",
+      "meaning": "Kết thúc",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_16",
+      "kanji": "通います 1",
+      "hiragana": "かよいます",
+      "meaning": "Đi (học, làm)",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_17",
+      "kanji": "ひきます 1",
+      "hiragana": "ひきます 1",
+      "meaning": "Chơi (d ụng cụ âm nh ạc)",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_18",
+      "kanji": "休みます 1",
+      "hiragana": "やすみます",
+      "meaning": "Nghỉ",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_19",
+      "kanji": "みます。",
+      "hiragana": "みます。",
+      "meaning": "Nghỉ học",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_20",
+      "kanji": "慣れます 2",
+      "hiragana": "なれます",
+      "meaning": "Quen",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_21",
+      "kanji": "忘れます 2",
+      "hiragana": "わすれます",
+      "meaning": "Quên",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_22",
+      "kanji": "散歩します 3 さんぽします",
+      "hiragana": "散歩します 3 さんぽします",
+      "meaning": "Đi dạo",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_23",
+      "kanji": "厳しい",
+      "hiragana": "きびしい",
+      "meaning": "Ngiêm kh ắc",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_24",
+      "kanji": "眠い",
+      "hiragana": "ねむい",
+      "meaning": "Buồn ngủ",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_25",
+      "kanji": "たいてい",
+      "hiragana": "たいてい",
+      "meaning": "Đại để/ Đại khái",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_26",
+      "kanji": "なかなか",
+      "hiragana": "なかなか",
+      "meaning": "Mãi mà",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_27",
+      "kanji": "オリンピック",
+      "hiragana": "オリンピック",
+      "meaning": "Đại hội thể thao Olympic",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_28",
+      "kanji": "外国",
+      "hiragana": "がいこく",
+      "meaning": "Nước ngoài",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_29",
+      "kanji": "小学生",
+      "hiragana": "しょうがくせい",
+      "meaning": "Học sinh ti ểu học, cấp 1",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_30",
+      "kanji": "中学生",
+      "hiragana": "ちゅうがくせい",
+      "meaning": "Học sinh trung học, cấp 2",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_31",
+      "kanji": "選手",
+      "hiragana": "せんしゅ",
+      "meaning": "Tuyển thủ / Cầu thủ",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_32",
+      "kanji": "祖父",
+      "hiragana": "そふ",
+      "meaning": "Ông",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_33",
+      "kanji": "始めます  2",
+      "hiragana": "はじめます",
+      "meaning": "Bắt đầu",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_34",
+      "kanji": "別れます 2",
+      "hiragana": "わかれます",
+      "meaning": "Chia tay",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_35",
+      "kanji": "卒業します 3 そつきょう・します",
+      "hiragana": "卒業します 3 そつきょう・します",
+      "meaning": "Tốt nghi ệp",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_36",
+      "kanji": "入学します 3 にゅうがく・します",
+      "hiragana": "入学します 3 にゅうがく・します",
+      "meaning": "Nhập học",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_37",
+      "kanji": "だんだん",
+      "hiragana": "だんだん",
+      "meaning": "Dần dần",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_38",
+      "kanji": "初めて",
+      "hiragana": "はじめて",
+      "meaning": "Lần đầu tiên",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_39",
+      "kanji": "それで",
+      "hiragana": "それで",
+      "meaning": "Vì thế / Vì vậy",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_40",
+      "kanji": "エアコン",
+      "hiragana": "エアコン",
+      "meaning": "Điều hòa",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_41",
+      "kanji": "ニュース",
+      "hiragana": "ニュース",
+      "meaning": "Tin tức",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_42",
+      "kanji": "消します 1",
+      "hiragana": "けします",
+      "meaning": "Tắt",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_43",
+      "kanji": "つけます 2",
+      "hiragana": "つけます 2",
+      "meaning": "Bật",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_44",
+      "kanji": "引越しします 3 ひっこしします",
+      "hiragana": "引越しします 3 ひっこしします",
+      "meaning": "Chuyển nhà",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_45",
+      "kanji": "うん",
+      "hiragana": "うん",
+      "meaning": "Vâng ( thân m ật)",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_46",
+      "kanji": "ううん",
+      "hiragana": "ううん",
+      "meaning": "Không (th ân mật)",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_47",
+      "kanji": "ごめん",
+      "hiragana": "ごめん",
+      "meaning": "Xin lỗi",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_48",
+      "kanji": "そっか",
+      "hiragana": "そっか",
+      "meaning": "Thế à!",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "id": "L11_49",
+      "kanji": "また",
+      "hiragana": "また",
+      "meaning": "Lại",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
+    },
+    {
+      "lesson": "11",
+      "kanji": "ええ",
+      "hiragana": "ええ",
+      "meaning": "Ừ, vâng (đồng ý thân mật)",
+      "category": "Từ vựng",
+      "section": "11.1",
+      "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại)",
+      "id": "L11_50"
+    },
+    {
+      "lesson": "11",
+      "kanji": "卒業します",
+      "hiragana": "そつぎょうします",
+      "meaning": "Tốt nghiệp",
+      "category": "Từ vựng",
+      "section": "11.3",
+      "sectionTitle": "11.3 私の日記 (Nhật ký của tôi)",
+      "id": "L11_51"
+    }
+  ],
+  "12": [
+    {
+      "id": "L12_1",
+      "kanji": "けが",
+      "hiragana": "けが",
+      "meaning": "Vết thương",
+      "category": "Từ vựng",
+      "section": "12.1",
+      "sectionTitle": "12.1 体の調子 (Tình trạng sức khỏe / Triệu chứng cơ thể)"
+    },
+    {
+      "id": "L12_2",
+      "kanji": "食欲",
+      "hiragana": "しょくよく",
+      "meaning": "Sự thèm ăn / Sự ngon mi ệng",
+      "category": "Từ vựng",
+      "section": "12.1",
+      "sectionTitle": "12.1 体の調子 (Tình trạng sức khỏe / Triệu chứng cơ thể)"
+    },
+    {
+      "id": "L12_3",
+      "kanji": "調子",
+      "hiragana": "ちょうし",
+      "meaning": "Tình tr ạng (sức khỏe, máy móc)",
+      "category": "Từ vựng",
+      "section": "12.1",
+      "sectionTitle": "12.1 体の調子 (Tình trạng sức khỏe / Triệu chứng cơ thể)"
+    },
+    {
+      "id": "L12_4",
+      "kanji": "熱",
+      "hiragana": "ねつ",
+      "meaning": "Nhiệt độ / Sốt",
+      "category": "Từ vựng",
+      "section": "12.1",
+      "sectionTitle": "12.1 体の調子 (Tình trạng sức khỏe / Triệu chứng cơ thể)"
+    },
+    {
+      "id": "L12_5",
+      "kanji": "病気",
+      "hiragana": "びょうき",
+      "meaning": "Bệnh / Ốm",
+      "category": "Từ vựng",
+      "section": "12.1",
+      "sectionTitle": "12.1 体の調子 (Tình trạng sức khỏe / Triệu chứng cơ thể)"
+    },
+    {
+      "id": "L12_6",
+      "kanji": "のど",
+      "hiragana": "のど",
+      "meaning": "Họng",
+      "category": "Từ vựng",
+      "section": "12.1",
+      "sectionTitle": "12.1 体の調子 (Tình trạng sức khỏe / Triệu chứng cơ thể)"
+    },
+    {
+      "id": "L12_7",
+      "kanji": "歯",
+      "hiragana": "は",
+      "meaning": "Răng",
+      "category": "Từ vựng",
+      "section": "12.1",
+      "sectionTitle": "12.1 体の調子 (Tình trạng sức khỏe / Triệu chứng cơ thể)"
+    },
+    {
+      "id": "L12_8",
+      "kanji": "飲み会",
+      "hiragana": "のみかい",
+      "meaning": "Bữa nhậu",
+      "category": "Từ vựng",
+      "section": "12.1",
+      "sectionTitle": "12.1 体の調子 (Tình trạng sức khỏe / Triệu chứng cơ thể)"
+    },
+    {
+      "id": "L12_9",
+      "kanji": "～度",
+      "hiragana": "～ど",
+      "meaning": "～ độ",
+      "category": "Từ vựng",
+      "section": "12.1",
+      "sectionTitle": "12.1 体の調子 (Tình trạng sức khỏe / Triệu chứng cơ thể)"
+    },
+    {
+      "id": "L12_10",
+      "kanji": "治ります 1 なおります",
+      "hiragana": "治ります 1 なおります",
+      "meaning": "Khỏi",
+      "category": "Từ vựng",
+      "section": "12.1",
+      "sectionTitle": "12.1 体の調子 (Tình trạng sức khỏe / Triệu chứng cơ thể)"
+    },
+    {
+      "id": "L12_11",
+      "kanji": "悪い",
+      "hiragana": "わるい",
+      "meaning": "Xấu, tồi",
+      "category": "Từ vựng",
+      "section": "12.1",
+      "sectionTitle": "12.1 体の調子 (Tình trạng sức khỏe / Triệu chứng cơ thể)"
+    },
+    {
+      "id": "L12_12",
+      "kanji": "気持ちが悪い",
+      "hiragana": "きもちがわるい",
+      "meaning": "Khó ch ịu (tâm tr ạng xấu)",
+      "category": "Từ vựng",
+      "section": "12.1",
+      "sectionTitle": "12.1 体の調子 (Tình trạng sức khỏe / Triệu chứng cơ thể)"
+    },
+    {
+      "id": "L12_13",
+      "kanji": "大丈夫（な）",
+      "hiragana": "だいじょうぶ（な）",
+      "meaning": "Ổn, không sao",
+      "category": "Từ vựng",
+      "section": "12.1",
+      "sectionTitle": "12.1 体の調子 (Tình trạng sức khỏe / Triệu chứng cơ thể)"
+    },
+    {
+      "id": "L12_14",
+      "kanji": "早く",
+      "hiragana": "はやく",
+      "meaning": "Sớm",
+      "category": "Từ vựng",
+      "section": "12.1",
+      "sectionTitle": "12.1 体の調子 (Tình trạng sức khỏe / Triệu chứng cơ thể)"
+    },
+    {
+      "id": "L12_15",
+      "kanji": "おかげさまで",
+      "hiragana": "おかげさまで",
+      "meaning": "Ơn trời / Nhờ trời",
+      "category": "Từ vựng",
+      "section": "12.1",
+      "sectionTitle": "12.1 体の調子 (Tình trạng sức khỏe / Triệu chứng cơ thể)"
+    },
+    {
+      "id": "L12_16",
+      "kanji": "お大事に",
+      "hiragana": "おだいじに",
+      "meaning": "Chúc chóng kh ỏe nhé! (nói v ới người ốm)",
+      "category": "Từ vựng",
+      "section": "12.1",
+      "sectionTitle": "12.1 体の調子 (Tình trạng sức khỏe / Triệu chứng cơ thể)"
+    },
+    {
+      "id": "L12_17",
+      "kanji": "それはいけませんね",
+      "hiragana": "それはいけませんね",
+      "meaning": "Thế thì gay go, v ất vả quá nh ỉ! (chia s ẻ)",
+      "category": "Từ vựng",
+      "section": "12.1",
+      "sectionTitle": "12.1 体の調子 (Tình trạng sức khỏe / Triệu chứng cơ thể)"
+    },
+    {
+      "id": "L12_18",
+      "kanji": "シャワー",
+      "hiragana": "シャワー",
+      "meaning": "Vòi hoa sen",
+      "category": "Từ vựng",
+      "section": "12.1",
+      "sectionTitle": "12.1 体の調子 (Tình trạng sức khỏe / Triệu chứng cơ thể)"
+    },
+    {
+      "id": "L12_19",
+      "kanji": "睡眠",
+      "hiragana": "すいみん",
+      "meaning": "Giấc ngủ/ Việc ngủ",
+      "category": "Từ vựng",
+      "section": "12.1",
+      "sectionTitle": "12.1 体の調子 (Tình trạng sức khỏe / Triệu chứng cơ thể)"
+    },
+    {
+      "id": "L12_20",
+      "kanji": "歯医者",
+      "hiragana": "はいしゃ",
+      "meaning": "Nha sĩ",
+      "category": "Từ vựng",
+      "section": "12.1",
+      "sectionTitle": "12.1 体の調子 (Tình trạng sức khỏe / Triệu chứng cơ thể)"
+    },
+    {
+      "id": "L12_21",
+      "kanji": "やけど",
+      "hiragana": "やけど",
+      "meaning": "Bỏng / Vết bỏng",
+      "category": "Từ vựng",
+      "section": "12.1",
+      "sectionTitle": "12.1 体の調子 (Tình trạng sức khỏe / Triệu chứng cơ thể)"
+    },
+    {
+      "id": "L12_22",
+      "kanji": "こと",
+      "hiragana": "こと",
+      "meaning": "Việc",
+      "category": "Từ vựng",
+      "section": "12.1",
+      "sectionTitle": "12.1 体の調子 (Tình trạng sức khỏe / Triệu chứng cơ thể)"
+    },
+    {
+      "id": "L12_23",
+      "kanji": "もの",
+      "hiragana": "もの",
+      "meaning": "Vật / Đồ vật",
+      "category": "Từ vựng",
+      "section": "12.1",
+      "sectionTitle": "12.1 体の調子 (Tình trạng sức khỏe / Triệu chứng cơ thể)"
+    },
+    {
+      "id": "L12_24",
+      "kanji": "以上",
+      "hiragana": "いじょう",
+      "meaning": "Trên / Hơn",
+      "category": "Từ vựng",
+      "section": "12.1",
+      "sectionTitle": "12.1 体の調子 (Tình trạng sức khỏe / Triệu chứng cơ thể)"
+    },
+    {
+      "id": "L12_25",
+      "kanji": "出します 1",
+      "hiragana": "だします",
+      "meaning": "Lấy ra/ Đưa ra",
+      "category": "Từ vựng",
+      "section": "12.1",
+      "sectionTitle": "12.1 体の調子 (Tình trạng sức khỏe / Triệu chứng cơ thể)"
+    },
+    {
+      "id": "L12_26",
+      "kanji": "します",
+      "hiragana": "します",
+      "meaning": "Nói",
+      "category": "Từ vựng",
+      "section": "12.1",
+      "sectionTitle": "12.1 体の調子 (Tình trạng sức khỏe / Triệu chứng cơ thể)"
+    },
+    {
+      "id": "L12_27",
+      "kanji": "塗ります1",
+      "hiragana": "ぬります",
+      "meaning": "Sơn",
+      "category": "Từ vựng",
+      "section": "12.1",
+      "sectionTitle": "12.1 体の調子 (Tình trạng sức khỏe / Triệu chứng cơ thể)"
+    },
+    {
+      "id": "L12_28",
+      "kanji": "浴びます 2",
+      "hiragana": "あびます",
+      "meaning": "Tắm",
+      "category": "Từ vựng",
+      "section": "12.1",
+      "sectionTitle": "12.1 体の調子 (Tình trạng sức khỏe / Triệu chứng cơ thể)"
+    },
+    {
+      "id": "L12_29",
+      "kanji": "出かけます 2 でかけます",
+      "hiragana": "出かけます 2 でかけます",
+      "meaning": "Đi ra ngoài",
+      "category": "Từ vựng",
+      "section": "12.1",
+      "sectionTitle": "12.1 体の調子 (Tình trạng sức khỏe / Triệu chứng cơ thể)"
+    },
+    {
+      "id": "L12_30",
+      "kanji": "運動します 3 うんどう します",
+      "hiragana": "運動します 3 うんどう します",
+      "meaning": "Tập thể dục",
+      "category": "Từ vựng",
+      "section": "12.1",
+      "sectionTitle": "12.1 体の調子 (Tình trạng sức khỏe / Triệu chứng cơ thể)"
+    },
+    {
+      "id": "L12_31",
+      "kanji": "固い",
+      "hiragana": "かたい",
+      "meaning": "Cứng",
+      "category": "Từ vựng",
+      "section": "12.1",
+      "sectionTitle": "12.1 体の調子 (Tình trạng sức khỏe / Triệu chứng cơ thể)"
+    },
+    {
+      "id": "L12_32",
+      "kanji": "柔らかい",
+      "hiragana": "やわらかい",
+      "meaning": "Mềm",
+      "category": "Từ vựng",
+      "section": "12.1",
+      "sectionTitle": "12.1 体の調子 (Tình trạng sức khỏe / Triệu chứng cơ thể)"
+    },
+    {
+      "id": "L12_33",
+      "kanji": "体にいい",
+      "hiragana": "からだにいい",
+      "meaning": "Tốt cho s ức khỏe",
+      "category": "Từ vựng",
+      "section": "12.1",
+      "sectionTitle": "12.1 体の調子 (Tình trạng sức khỏe / Triệu chứng cơ thể)"
+    },
+    {
+      "id": "L12_34",
+      "kanji": "自分で",
+      "hiragana": "じぶんで",
+      "meaning": "Tự mình",
+      "category": "Từ vựng",
+      "section": "12.1",
+      "sectionTitle": "12.1 体の調子 (Tình trạng sức khỏe / Triệu chứng cơ thể)"
+    },
+    {
+      "id": "L12_35",
+      "kanji": "できるだけ",
+      "hiragana": "できるだけ",
+      "meaning": "Cố gắng hết sức",
+      "category": "Từ vựng",
+      "section": "12.1",
+      "sectionTitle": "12.1 体の調子 (Tình trạng sức khỏe / Triệu chứng cơ thể)"
+    },
+    {
+      "id": "L12_36",
+      "kanji": "ゆっくり",
+      "hiragana": "ゆっくり",
+      "meaning": "Thong th ả / Từ từ",
+      "category": "Từ vựng",
+      "section": "12.1",
+      "sectionTitle": "12.1 体の調子 (Tình trạng sức khỏe / Triệu chứng cơ thể)"
+    },
+    {
+      "id": "L12_37",
+      "kanji": "んでください 。",
+      "hiragana": "んでください 。",
+      "meaning": "Hãy nghỉ ngơi thong th ả",
+      "category": "Từ vựng",
+      "section": "12.1",
+      "sectionTitle": "12.1 体の調子 (Tình trạng sức khỏe / Triệu chứng cơ thể)"
+    },
+    {
+      "id": "L12_38",
+      "kanji": "薬剤師",
+      "hiragana": "やくざいし",
+      "meaning": "Dược sĩ",
+      "category": "Từ vựng",
+      "section": "12.2",
+      "sectionTitle": "12.2 病院で (Tại bệnh viện / Trình bày với bác sĩ)"
+    },
+    {
+      "id": "L12_39",
+      "kanji": "上着",
+      "hiragana": "うわぎ",
+      "meaning": "Áo khoác",
+      "category": "Từ vựng",
+      "section": "12.2",
+      "sectionTitle": "12.2 病院で (Tại bệnh viện / Trình bày với bác sĩ)"
+    },
+    {
+      "id": "L12_40",
+      "kanji": "コンタクトレンズ",
+      "hiragana": "コンタクトレンズ",
+      "meaning": "Kính áp tròng",
+      "category": "Từ vựng",
+      "section": "12.2",
+      "sectionTitle": "12.2 病院で (Tại bệnh viện / Trình bày với bác sĩ)"
+    },
+    {
+      "id": "L12_41",
+      "kanji": "説明書",
+      "hiragana": "せつめいしょ",
+      "meaning": "Sách hướng dẫn",
+      "category": "Từ vựng",
+      "section": "12.2",
+      "sectionTitle": "12.2 病院で (Tại bệnh viện / Trình bày với bác sĩ)"
+    },
+    {
+      "id": "L12_42",
+      "kanji": "（お）風 呂 （お）ふろ",
+      "hiragana": "（お）風 呂 （お）ふろ",
+      "meaning": "Bồn tắm",
+      "category": "Từ vựng",
+      "section": "12.2",
+      "sectionTitle": "12.2 病院で (Tại bệnh viện / Trình bày với bác sĩ)"
+    },
+    {
+      "id": "L12_43",
+      "kanji": "保険証",
+      "hiragana": "ほけんしょう",
+      "meaning": "Thẻ bảo hiểm",
+      "category": "Từ vựng",
+      "section": "12.2",
+      "sectionTitle": "12.2 病院で (Tại bệnh viện / Trình bày với bác sĩ)"
+    },
+    {
+      "id": "L12_44",
+      "kanji": "待合室",
+      "hiragana": "まちあいしつ",
+      "meaning": "Phòng ch ờ",
+      "category": "Từ vựng",
+      "section": "12.2",
+      "sectionTitle": "12.2 病院で (Tại bệnh viện / Trình bày với bác sĩ)"
+    },
+    {
+      "id": "L12_45",
+      "kanji": "薬局",
+      "hiragana": "やっきょく",
+      "meaning": "Hiệu thuốc",
+      "category": "Từ vựng",
+      "section": "12.2",
+      "sectionTitle": "12.2 病院で (Tại bệnh viện / Trình bày với bác sĩ)"
+    },
+    {
+      "id": "L12_46",
+      "kanji": "出します 1 だします",
+      "hiragana": "出します 1 だします",
+      "meaning": "Xuất trình / N ộp",
+      "category": "Từ vựng",
+      "section": "12.2",
+      "sectionTitle": "12.2 病院で (Tại bệnh viện / Trình bày với bác sĩ)"
+    },
+    {
+      "id": "L12_47",
+      "kanji": "してください。",
+      "hiragana": "Hãy xuất trình",
+      "meaning": "thẻ bảo hiểm",
+      "category": "Từ vựng",
+      "section": "12.2",
+      "sectionTitle": "12.2 病院で (Tại bệnh viện / Trình bày với bác sĩ)"
+    },
+    {
+      "id": "L12_48",
+      "kanji": "脱ぎます1ぬぎます",
+      "hiragana": "脱ぎます1ぬぎます",
+      "meaning": "Cởi",
+      "category": "Từ vựng",
+      "section": "12.2",
+      "sectionTitle": "12.2 病院で (Tại bệnh viện / Trình bày với bác sĩ)"
+    },
+    {
+      "id": "L12_49",
+      "kanji": "走ります 1 はしります",
+      "hiragana": "走ります 1 はしります",
+      "meaning": "Chạy",
+      "category": "Từ vựng",
+      "section": "12.2",
+      "sectionTitle": "12.2 病院で (Tại bệnh viện / Trình bày với bác sĩ)"
+    },
+    {
+      "id": "L12_50",
+      "kanji": "待ちます 1 まちます",
+      "hiragana": "待ちます 1 まちます",
+      "meaning": "Đợi/ Chờ",
+      "category": "Từ vựng",
+      "section": "12.2",
+      "sectionTitle": "12.2 病院で (Tại bệnh viện / Trình bày với bác sĩ)"
+    },
+    {
+      "id": "L12_51",
+      "kanji": "磨きます1 みがきます",
+      "hiragana": "磨きます1 みがきます",
+      "meaning": "Đánh (răng)",
+      "category": "Từ vựng",
+      "section": "12.2",
+      "sectionTitle": "12.2 病院で (Tại bệnh viện / Trình bày với bác sĩ)"
+    },
+    {
+      "id": "L12_52",
+      "kanji": "横になります 1よこになります",
+      "hiragana": "横になります 1よこになります",
+      "meaning": "Nằm",
+      "category": "Từ vựng",
+      "section": "12.2",
+      "sectionTitle": "12.2 病院で (Tại bệnh viện / Trình bày với bác sĩ)"
+    },
+    {
+      "id": "L12_53",
+      "kanji": "準備します 1じゅんびします",
+      "hiragana": "準備します 1じゅんびします",
+      "meaning": "Chuẩn bị",
+      "category": "Từ vựng",
+      "section": "12.2",
+      "sectionTitle": "12.2 病院で (Tại bệnh viện / Trình bày với bác sĩ)"
+    },
+    {
+      "id": "L12_54",
+      "kanji": "かゆい",
+      "hiragana": "かゆい",
+      "meaning": "Ngứa",
+      "category": "Từ vựng",
+      "section": "12.2",
+      "sectionTitle": "12.2 病院で (Tại bệnh viện / Trình bày với bác sĩ)"
+    }
+  ],
+  "13": [
+    {
+      "id": "L13_1",
+      "kanji": "紅葉",
+      "hiragana": "こうよう",
+      "meaning": "Lá đỏ",
+      "category": "Từ vựng",
+      "section": "13.1",
+      "sectionTitle": "13.1 私の経験から (Từ trải nghiệm của tôi / Đã từng làm gì)"
+    },
+    {
+      "id": "L13_2",
+      "kanji": "サービス",
+      "hiragana": "サービス",
+      "meaning": "Dịch vụ",
+      "category": "Từ vựng",
+      "section": "13.1",
+      "sectionTitle": "13.1 私の経験から (Từ trải nghiệm của tôi / Đã từng làm gì)"
+    },
+    {
+      "id": "L13_3",
+      "kanji": "相撲",
+      "hiragana": "すもう",
+      "meaning": "Vật Sumo",
+      "category": "Từ vựng",
+      "section": "13.1",
+      "sectionTitle": "13.1 私の経験から (Từ trải nghiệm của tôi / Đã từng làm gì)"
+    },
+    {
+      "id": "L13_4",
+      "kanji": "ホテル",
+      "hiragana": "ホテル",
+      "meaning": "Khách s ạn",
+      "category": "Từ vựng",
+      "section": "13.1",
+      "sectionTitle": "13.1 私の経験から (Từ trải nghiệm của tôi / Đã từng làm gì)"
+    },
+    {
+      "id": "L13_5",
+      "kanji": "知ります",
+      "hiragana": "しります",
+      "meaning": "Biết",
+      "category": "Từ vựng",
+      "section": "13.1",
+      "sectionTitle": "13.1 私の経験から (Từ trải nghiệm của tôi / Đã từng làm gì)"
+    },
+    {
+      "id": "L13_6",
+      "kanji": "デート・します",
+      "hiragana": "デート・します",
+      "meaning": "Hẹn hò",
+      "category": "Từ vựng",
+      "section": "13.1",
+      "sectionTitle": "13.1 私の経験から (Từ trải nghiệm của tôi / Đã từng làm gì)"
+    },
+    {
+      "id": "L13_7",
+      "kanji": "1回も",
+      "hiragana": "いっかいも",
+      "meaning": "1 lần cũng (không)",
+      "category": "Từ vựng",
+      "section": "13.1",
+      "sectionTitle": "13.1 私の経験から (Từ trải nghiệm của tôi / Đã từng làm gì)"
+    },
+    {
+      "id": "L13_8",
+      "kanji": "何回も",
+      "hiragana": "なんかいも",
+      "meaning": "Rất nhiều lần",
+      "category": "Từ vựng",
+      "section": "13.1",
+      "sectionTitle": "13.1 私の経験から (Từ trải nghiệm của tôi / Đã từng làm gì)"
+    },
+    {
+      "id": "L13_9",
+      "kanji": "男の人",
+      "hiragana": "おとこのひと",
+      "meaning": "Đàn ông",
+      "category": "Từ vựng",
+      "section": "13.2",
+      "sectionTitle": "13.2 おすすめ (Gợi ý & Đề xuất trải nghiệm)"
+    },
+    {
+      "id": "L13_10",
+      "kanji": "女の人",
+      "hiragana": "おんなのひと",
+      "meaning": "Phụ nữ",
+      "category": "Từ vựng",
+      "section": "13.2",
+      "sectionTitle": "13.2 おすすめ (Gợi ý & Đề xuất trải nghiệm)"
+    },
+    {
+      "id": "L13_11",
+      "kanji": "（お）店",
+      "hiragana": "（お）みせ",
+      "meaning": "Cửa hàng",
+      "category": "Từ vựng",
+      "section": "13.2",
+      "sectionTitle": "13.2 おすすめ (Gợi ý & Đề xuất trải nghiệm)"
+    },
+    {
+      "id": "L13_12",
+      "kanji": "遊園地",
+      "hiragana": "ゆうえんち",
+      "meaning": "Khu vui chơi",
+      "category": "Từ vựng",
+      "section": "13.2",
+      "sectionTitle": "13.2 おすすめ (Gợi ý & Đề xuất trải nghiệm)"
+    },
+    {
+      "id": "L13_13",
+      "kanji": "ジェットコースター",
+      "hiragana": "ジェットコースター",
+      "meaning": "Tàu lượn",
+      "category": "Từ vựng",
+      "section": "13.2",
+      "sectionTitle": "13.2 おすすめ (Gợi ý & Đề xuất trải nghiệm)"
+    },
+    {
+      "id": "L13_14",
+      "kanji": "電気製品",
+      "hiragana": "でんきせいひん",
+      "meaning": "Đồ điện",
+      "category": "Từ vựng",
+      "section": "13.2",
+      "sectionTitle": "13.2 おすすめ (Gợi ý & Đề xuất trải nghiệm)"
+    },
+    {
+      "id": "L13_15",
+      "kanji": "サングラス",
+      "hiragana": "サングラス",
+      "meaning": "Kính mát",
+      "category": "Từ vựng",
+      "section": "13.2",
+      "sectionTitle": "13.2 おすすめ (Gợi ý & Đề xuất trải nghiệm)"
+    },
+    {
+      "id": "L13_16",
+      "kanji": "眼鏡",
+      "hiragana": "めがね",
+      "meaning": "Kính",
+      "category": "Từ vựng",
+      "section": "13.2",
+      "sectionTitle": "13.2 おすすめ (Gợi ý & Đề xuất trải nghiệm)"
+    },
+    {
+      "id": "L13_17",
+      "kanji": "シャツ",
+      "hiragana": "シャツ",
+      "meaning": "Áo sơ mi",
+      "category": "Từ vựng",
+      "section": "13.2",
+      "sectionTitle": "13.2 おすすめ (Gợi ý & Đề xuất trải nghiệm)"
+    },
+    {
+      "id": "L13_18",
+      "kanji": "スカート",
+      "hiragana": "スカート",
+      "meaning": "Váy (ng ắn), juýp",
+      "category": "Từ vựng",
+      "section": "13.2",
+      "sectionTitle": "13.2 おすすめ (Gợi ý & Đề xuất trải nghiệm)"
+    },
+    {
+      "id": "L13_19",
+      "kanji": "ネクタイ",
+      "hiragana": "ネクタイ",
+      "meaning": "Cà vạt",
+      "category": "Từ vựng",
+      "section": "13.2",
+      "sectionTitle": "13.2 おすすめ (Gợi ý & Đề xuất trải nghiệm)"
+    },
+    {
+      "id": "L13_20",
+      "kanji": "帽子",
+      "hiragana": "ぼうし",
+      "meaning": "Mũ",
+      "category": "Từ vựng",
+      "section": "13.2",
+      "sectionTitle": "13.2 おすすめ (Gợi ý & Đề xuất trải nghiệm)"
+    },
+    {
+      "id": "L13_21",
+      "kanji": "人気",
+      "hiragana": "にんき",
+      "meaning": "Sự được yêu thích,đư ợc mến mộ",
+      "category": "Từ vựng",
+      "section": "13.2",
+      "sectionTitle": "13.2 おすすめ (Gợi ý & Đề xuất trải nghiệm)"
+    },
+    {
+      "id": "L13_22",
+      "kanji": "売ります 1",
+      "hiragana": "うります",
+      "meaning": "Bán",
+      "category": "Từ vựng",
+      "section": "13.2",
+      "sectionTitle": "13.2 おすすめ (Gợi ý & Đề xuất trải nghiệm)"
+    },
+    {
+      "id": "L13_23",
+      "kanji": "泊まります 1 とまります",
+      "hiragana": "泊まります 1 とまります",
+      "meaning": "Trọ lại,nghỉ lại",
+      "category": "Từ vựng",
+      "section": "13.2",
+      "sectionTitle": "13.2 おすすめ (Gợi ý & Đề xuất trải nghiệm)"
+    },
+    {
+      "id": "L13_24",
+      "kanji": "をかけます",
+      "hiragana": "をかけます",
+      "meaning": "Đeo kính.",
+      "category": "Từ vựng",
+      "section": "13.2",
+      "sectionTitle": "13.2 おすすめ (Gợi ý & Đề xuất trải nghiệm)"
+    },
+    {
+      "id": "L13_25",
+      "kanji": "着ます 2",
+      "hiragana": "きます",
+      "meaning": "Mặc",
+      "category": "Từ vựng",
+      "section": "13.2",
+      "sectionTitle": "13.2 おすすめ (Gợi ý & Đề xuất trải nghiệm)"
+    },
+    {
+      "id": "L13_26",
+      "kanji": "ネクタイをします",
+      "hiragana": "ネクタイをします",
+      "meaning": "Thắt cà-vạt",
+      "category": "Từ vựng",
+      "section": "13.2",
+      "sectionTitle": "13.2 おすすめ (Gợi ý & Đề xuất trải nghiệm)"
+    },
+    {
+      "id": "L13_27",
+      "kanji": "青い",
+      "hiragana": "あおい",
+      "meaning": "Xanh",
+      "category": "Từ vựng",
+      "section": "13.2",
+      "sectionTitle": "13.2 おすすめ (Gợi ý & Đề xuất trải nghiệm)"
+    },
+    {
+      "id": "L13_28",
+      "kanji": "赤い",
+      "hiragana": "あかい",
+      "meaning": "Đỏ",
+      "category": "Từ vựng",
+      "section": "13.2",
+      "sectionTitle": "13.2 おすすめ (Gợi ý & Đề xuất trải nghiệm)"
+    },
+    {
+      "id": "L13_29",
+      "kanji": "黄色い",
+      "hiragana": "きいろい",
+      "meaning": "Vàng",
+      "category": "Từ vựng",
+      "section": "13.2",
+      "sectionTitle": "13.2 おすすめ (Gợi ý & Đề xuất trải nghiệm)"
+    },
+    {
+      "id": "L13_30",
+      "kanji": "若い",
+      "hiragana": "わかい",
+      "meaning": "Trẻ",
+      "category": "Từ vựng",
+      "section": "13.2",
+      "sectionTitle": "13.2 おすすめ (Gợi ý & Đề xuất trải nghiệm)"
+    },
+    {
+      "id": "L13_31",
+      "kanji": "新鮮(な)",
+      "hiragana": "しんせん",
+      "meaning": "Tươi, m ới",
+      "category": "Từ vựng",
+      "section": "13.2",
+      "sectionTitle": "13.2 おすすめ (Gợi ý & Đề xuất trải nghiệm)"
+    },
+    {
+      "id": "L13_32",
+      "kanji": "材料",
+      "hiragana": "ざいりょう",
+      "meaning": "Tài liệu, vật liệu",
+      "category": "Từ vựng",
+      "section": "13.2",
+      "sectionTitle": "13.2 おすすめ (Gợi ý & Đề xuất trải nghiệm)"
+    },
+    {
+      "id": "L13_33",
+      "kanji": "場所",
+      "hiragana": "ばしょ",
+      "meaning": "Địa điểm",
+      "category": "Từ vựng",
+      "section": "13.2",
+      "sectionTitle": "13.2 おすすめ (Gợi ý & Đề xuất trải nghiệm)"
+    },
+    {
+      "id": "L13_34",
+      "kanji": "バスケットボール",
+      "hiragana": "バスケットボール",
+      "meaning": "Bóng r ổ",
+      "category": "Từ vựng",
+      "section": "13.2",
+      "sectionTitle": "13.2 おすすめ (Gợi ý & Đề xuất trải nghiệm)"
+    },
+    {
+      "id": "L13_35",
+      "kanji": "浴衣",
+      "hiragana": "ゆかた",
+      "meaning": "Trang ph ục Yukata (Kimono m ặc mùa hè)",
+      "category": "Từ vựng",
+      "section": "13.2",
+      "sectionTitle": "13.2 おすすめ (Gợi ý & Đề xuất trải nghiệm)"
+    },
+    {
+      "id": "L13_36",
+      "kanji": "どこか",
+      "hiragana": "どこか",
+      "meaning": "Chỗ nào đó",
+      "category": "Từ vựng",
+      "section": "13.2",
+      "sectionTitle": "13.2 おすすめ (Gợi ý & Đề xuất trải nghiệm)"
+    },
+    {
+      "id": "L13_37",
+      "kanji": "練習します 3 れんしゅうします",
+      "hiragana": "練習します 3 れんしゅうします",
+      "meaning": "Luyện tập",
+      "category": "Từ vựng",
+      "section": "13.2",
+      "sectionTitle": "13.2 おすすめ (Gợi ý & Đề xuất trải nghiệm)"
+    },
+    {
+      "id": "L13_38",
+      "kanji": "みんなで",
+      "hiragana": "みんなで",
+      "meaning": "Tất cả mọi người",
+      "category": "Từ vựng",
+      "section": "13.2",
+      "sectionTitle": "13.2 おすすめ (Gợi ý & Đề xuất trải nghiệm)"
+    },
+    {
+      "lesson": "13",
+      "kanji": "かけます",
+      "hiragana": "かけます",
+      "meaning": "Đeo (kính), treo",
+      "category": "Từ vựng",
+      "section": "13.2",
+      "sectionTitle": "13.2 おすすめ (Giới thiệu & Gợi ý)",
+      "id": "L13_39"
+    }
+  ],
+  "14": [
+    {
+      "id": "L14_1",
+      "kanji": "うどん",
+      "hiragana": "うどん",
+      "meaning": "Món mì udon",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_2",
+      "kanji": "そば",
+      "hiragana": "そば",
+      "meaning": "Món mì soba",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_3",
+      "kanji": "カイロ",
+      "hiragana": "カイロ",
+      "meaning": "Kairo (v ật bỏ túi để làm ấm cơ th ể)",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_4",
+      "kanji": "こたつ",
+      "hiragana": "こたつ",
+      "meaning": "Bàn có lò sư ởi, lò than đư ợc đặt dưới sàn",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_5",
+      "kanji": "字",
+      "hiragana": "じ",
+      "meaning": "Chữ, ký tự",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_6",
+      "kanji": "食券",
+      "hiragana": "しょっけん",
+      "meaning": "Phiếu ăn",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_7",
+      "kanji": "（お）釣り",
+      "hiragana": "（お）つり",
+      "meaning": "Tiền thừa, tiền trả lại",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_8",
+      "kanji": "電気",
+      "hiragana": "でんき",
+      "meaning": "Điện, đèn",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_9",
+      "kanji": "ドア",
+      "hiragana": "ドア",
+      "meaning": "Cửa ra vào",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_10",
+      "kanji": "唐辛子",
+      "hiragana": "とうがらし",
+      "meaning": "Ớt",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_11",
+      "kanji": "風鈴",
+      "hiragana": "ふうりん",
+      "meaning": "Chuông gió",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_12",
+      "kanji": "布団",
+      "hiragana": "ふとん",
+      "meaning": "Chăn",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_13",
+      "kanji": "ポケット",
+      "hiragana": "ポケット",
+      "meaning": "Túi qu ần, túi áo",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_14",
+      "kanji": "ボタン",
+      "hiragana": "ボタン",
+      "meaning": "Nút b ấm, khuy áo",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_15",
+      "kanji": "（お）湯",
+      "hiragana": "（お）ゆ",
+      "meaning": "Nước nóng",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_16",
+      "kanji": "湯たんぽ",
+      "hiragana": "ゆたんぽ",
+      "meaning": "Túi chư ờm",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_17",
+      "kanji": "レバー",
+      "hiragana": "レバー",
+      "meaning": "Cần gạt,đòn b ẩy",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_18",
+      "kanji": "開きます 1",
+      "hiragana": "あきます",
+      "meaning": "(cửa)Mở",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_19",
+      "kanji": "座ります 1",
+      "hiragana": "すわります",
+      "meaning": "Ngồi",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_20",
+      "kanji": "つきます 1",
+      "hiragana": "つきます 1",
+      "meaning": "(đèn, thiết bị) Bật / Sáng",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_21",
+      "kanji": "回します 1",
+      "hiragana": "まわします",
+      "meaning": "Xoay,quay",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_22",
+      "kanji": "出ます",
+      "hiragana": "2",
+      "meaning": "でます (nước, tiền) Chảy ra / Chạy ra",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_23",
+      "kanji": "あれ？",
+      "hiragana": "あれ？",
+      "meaning": "Ơ? Gì vậy nhỉ?",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_24",
+      "kanji": "いただきます。",
+      "hiragana": "いただきます。",
+      "meaning": "Xin m ời (câu nói trư ớc khi ăn uống)",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_25",
+      "kanji": "おなかがいっぱいです",
+      "hiragana": "。",
+      "meaning": "No",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_26",
+      "kanji": "ごちそうさまでした。",
+      "hiragana": "ごちそうさまでした。",
+      "meaning": "Xin m ời (câu nói sau khi ăn u ống)",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_27",
+      "kanji": "以下",
+      "hiragana": "いか",
+      "meaning": "Dưới đây,sau đây",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_28",
+      "kanji": "玄関",
+      "hiragana": "げんかん",
+      "meaning": "Hiên nhà,s ảnh trong nhà",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_29",
+      "kanji": "シートベルト",
+      "hiragana": "シートベルト",
+      "meaning": "Seat belt,dây an toàn",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_30",
+      "kanji": "ヘルメット",
+      "hiragana": "ヘルメット",
+      "meaning": "Mũ bảo hiểm",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_31",
+      "kanji": "パスポート",
+      "hiragana": "パスポート",
+      "meaning": "Hộ chiếu",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_32",
+      "kanji": "身分証",
+      "hiragana": "みぶんしょう",
+      "meaning": "Chứng minh thư,th ẻ căn cư ớc",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_33",
+      "kanji": "料金",
+      "hiragana": "りょうきん",
+      "meaning": "Phí,cư ớc",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_34",
+      "kanji": "入場料",
+      "hiragana": "にゅうじょうりょう",
+      "meaning": "Phí vào c ửa",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_35",
+      "kanji": "並びます",
+      "hiragana": "ならびます",
+      "meaning": "Xếp hàng,đư ợc xếp",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_36",
+      "kanji": "止めます",
+      "hiragana": "とめます",
+      "meaning": "Dừng",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_37",
+      "kanji": "分けます",
+      "hiragana": "わけます",
+      "meaning": "Chia",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_38",
+      "kanji": "きちんと",
+      "hiragana": "きちんと",
+      "meaning": "Chỉn chu,c ẩn thận",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_39",
+      "kanji": "そうなんですか。",
+      "hiragana": "そうなんですか。",
+      "meaning": "Vậy à?",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_40",
+      "kanji": "ほら",
+      "hiragana": "Này này!",
+      "meaning": "Nhìn này!",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_41",
+      "kanji": "田舎",
+      "hiragana": "いなか",
+      "meaning": "Quê, nông thôn",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_42",
+      "kanji": "都会",
+      "hiragana": "とかい",
+      "meaning": "Thành th ị",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_43",
+      "kanji": "空気",
+      "hiragana": "くうき",
+      "meaning": "Không khí",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_44",
+      "kanji": "交通",
+      "hiragana": "こうつう",
+      "meaning": "Giao thông",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_45",
+      "kanji": "時給",
+      "hiragana": "じきゅう",
+      "meaning": "Lương theo gi ờ",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_46",
+      "kanji": "自由",
+      "hiragana": "じゆう",
+      "meaning": "Tự do",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_47",
+      "kanji": "デザイン",
+      "hiragana": "デザイン",
+      "meaning": "Thiết kế",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_48",
+      "kanji": "番組",
+      "hiragana": "ばんぐみ",
+      "meaning": "Chương trình",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_49",
+      "kanji": "ファストフード",
+      "hiragana": "ファストフード",
+      "meaning": "Đồ ăn nhanh",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_50",
+      "kanji": "ファッション",
+      "hiragana": "ファッション",
+      "meaning": "Thời trang",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_51",
+      "kanji": "フリープラン",
+      "hiragana": "フリープラン",
+      "meaning": "Tour du l ịch mà các công ty du l ịch ch ỉ",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_52",
+      "kanji": "思います 1",
+      "hiragana": "おもいます",
+      "meaning": "Nghĩ rằng / Cho r ằng",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_53",
+      "kanji": "化粧します 3",
+      "hiragana": "けしょう します",
+      "meaning": "Trang đi ểm",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_54",
+      "kanji": "経験します 3",
+      "hiragana": "けいけん します",
+      "meaning": "Trải nghi ệm",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_55",
+      "kanji": "うるさい",
+      "hiragana": "うるさい",
+      "meaning": "Ầm ĩ,ồn ào",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_56",
+      "kanji": "おしゃれ （な）",
+      "hiragana": "おしゃれ （な）",
+      "meaning": "Ăn diện,hợp thời trang",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_57",
+      "kanji": "複雑（な）",
+      "hiragana": "複雑（な）",
+      "meaning": "ふくざつ （な） Phức tạp",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_58",
+      "kanji": "便利（な）",
+      "hiragana": "便利（な）",
+      "meaning": "べんり（な） Tiện lợi",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_59",
+      "kanji": "不便（な）",
+      "hiragana": "不便（な）",
+      "meaning": "ふべん（な） Bất tiện",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_60",
+      "kanji": "いつでも",
+      "hiragana": "いつでも",
+      "meaning": "Bất cứ khi nào",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_61",
+      "kanji": "うーん",
+      "hiragana": "うーん",
+      "meaning": "Từ đệm giống ええと , khi phân vân chưa",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_62",
+      "kanji": "～について",
+      "hiragana": "～について",
+      "meaning": "Về ~",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    },
+    {
+      "id": "L14_63",
+      "kanji": "います",
+      "hiragana": "います",
+      "meaning": "Tôi cũng nghĩ như v ậy.",
+      "category": "Từ vựng",
+      "section": "14.1",
+      "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
+    }
+  ],
+  "15": [
+    {
+      "id": "L15_1",
+      "kanji": "ガラス",
+      "hiragana": "ガラス",
+      "meaning": "Kính / Cốc thủy tinh",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_2",
+      "kanji": "曇り",
+      "hiragana": "くもり",
+      "meaning": "Trời nhiều mây",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_3",
+      "kanji": "台風",
+      "hiragana": "たいふう",
+      "meaning": "Bão",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_4",
+      "kanji": "地震",
+      "hiragana": "じしん",
+      "meaning": "Động đất",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_5",
+      "kanji": "事故",
+      "hiragana": "じこ",
+      "meaning": "Sự cố, tai nạn",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_6",
+      "kanji": "～大会",
+      "hiragana": "～たいかい",
+      "meaning": "Đại hội, lễ hội",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_7",
+      "kanji": "チーム",
+      "hiragana": "チーム",
+      "meaning": "Đội",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_8",
+      "kanji": "中止",
+      "hiragana": "ちゅうし",
+      "meaning": "Hoãn, dừng lại",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_9",
+      "kanji": "フリーマーケット",
+      "hiragana": "フリーマーケット",
+      "meaning": "Chợ trời",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_10",
+      "kanji": "本当",
+      "hiragana": "ほんとう",
+      "meaning": "Sự thật",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_11",
+      "kanji": "昔",
+      "hiragana": "むかし",
+      "meaning": "Ngày xưa",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_12",
+      "kanji": "無料",
+      "hiragana": "むりょう",
+      "meaning": "Miễn phí",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_13",
+      "kanji": "夕方",
+      "hiragana": "ゆうがた",
+      "meaning": "Chiều tối,hoàng hôn",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_14",
+      "kanji": "死にます 1",
+      "hiragana": "しにます",
+      "meaning": "Chết",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_15",
+      "kanji": "亡くなります 1 なくなります",
+      "hiragana": "亡くなります 1 なくなります",
+      "meaning": "Mất, hết",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_16",
+      "kanji": "止まります 1",
+      "hiragana": "とまります",
+      "meaning": "(máy) Dừng",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_17",
+      "kanji": "始まります 1",
+      "hiragana": "はじまります",
+      "meaning": "(giờ học) Bắt đầu",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_18",
+      "kanji": "降ります 1",
+      "hiragana": "ふります",
+      "meaning": "Rơi",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_19",
+      "kanji": "勝ちます 1",
+      "hiragana": "かちます",
+      "meaning": "Thắng, chiến thắng",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_20",
+      "kanji": "負けます 2",
+      "hiragana": "まけます",
+      "meaning": "Thua, th ất bại",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_21",
+      "kanji": "倒れます 2",
+      "hiragana": "たおれます",
+      "meaning": "Đổ",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_22",
+      "kanji": "できます 2",
+      "hiragana": "できます 2",
+      "meaning": "Được hoàn thành , xong",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_23",
+      "kanji": "ができます。",
+      "hiragana": "ができます。",
+      "meaning": "Cửa hàng m ới được hoàn thành",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_24",
+      "kanji": "割れます 2",
+      "hiragana": "われます",
+      "meaning": "Vỡ",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_25",
+      "kanji": "結婚します 3",
+      "hiragana": "けっこん します",
+      "meaning": "Cưới, kết hôn",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_26",
+      "kanji": "怖い",
+      "hiragana": "こわい",
+      "meaning": "Sợ / Đáng s ợ",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_27",
+      "kanji": "心配（な）",
+      "hiragana": "しんぱい （な）",
+      "meaning": "Lo lắng",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_28",
+      "kanji": "風",
+      "hiragana": "かぜ",
+      "meaning": "Gió",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_29",
+      "kanji": "ストラップ",
+      "hiragana": "ストラップ",
+      "meaning": "Dây đeo vào đi ện thoại, máy ảnh",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_30",
+      "kanji": "席",
+      "hiragana": "せき",
+      "meaning": "Chỗ ngồi",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_31",
+      "kanji": "急ぎます 1",
+      "hiragana": "いそぎます",
+      "meaning": "Vội vàng",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_32",
+      "kanji": "混みます 1",
+      "hiragana": "こみます",
+      "meaning": "Đông",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_33",
+      "kanji": "間に合います 1 まにあいます",
+      "hiragana": "間に合います 1 まにあいます",
+      "meaning": "Kịp",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_34",
+      "kanji": "やみます 1",
+      "hiragana": "やみます",
+      "meaning": "Tạnh (mưa)",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_35",
+      "kanji": "晴れます 2",
+      "hiragana": "はれます",
+      "meaning": "Trời đẹp",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_36",
+      "kanji": "～パーセント",
+      "hiragana": "～パーセント",
+      "meaning": "Phần trăm",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_37",
+      "kanji": "～引き",
+      "hiragana": "～びき",
+      "meaning": "Giảm giá",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_38",
+      "kanji": "き）",
+      "hiragana": "き）",
+      "meaning": "Giảm giá 10%",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_39",
+      "kanji": "強い",
+      "hiragana": "つよい",
+      "meaning": "Mạnh",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_40",
+      "kanji": "きっと",
+      "hiragana": "きっと",
+      "meaning": "Chắc chắn",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_41",
+      "kanji": "たぶん",
+      "hiragana": "たぶん",
+      "meaning": "Có lẽ",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_42",
+      "kanji": "もし",
+      "hiragana": "もし",
+      "meaning": "Nếu",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_43",
+      "kanji": "集まります 1",
+      "hiragana": "あつまります",
+      "meaning": "Tập trung, tụ họp lại",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_44",
+      "kanji": "閉まります 1",
+      "hiragana": "しまります",
+      "meaning": "(cửa) Đóng",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_45",
+      "kanji": "すきます 1",
+      "hiragana": "すきます 1",
+      "meaning": "Vắng / Rỗng",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_46",
+      "kanji": "落ちます 2",
+      "hiragana": "おちます",
+      "meaning": "Rơi",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_47",
+      "kanji": "消えます 2",
+      "hiragana": "きえます",
+      "meaning": "(đèn) Tắt / Biến mất",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_48",
+      "kanji": "壊れます 2",
+      "hiragana": "こわれます",
+      "meaning": "Hỏng",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "id": "L15_49",
+      "kanji": "汚れます 2",
+      "hiragana": "よごれます",
+      "meaning": "Bẩn, vấy bẩn",
+      "category": "Từ vựng",
+      "section": "15.1",
+      "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
+    },
+    {
+      "lesson": "15",
+      "kanji": "花火大会",
+      "hiragana": "はなびたいかい",
+      "meaning": "Lễ hội pháo hoa",
+      "category": "Từ vựng",
+      "section": "15.2",
+      "sectionTitle": "15.2 イベント・祭り (Sự kiện & Lễ hội)",
+      "id": "L15_50"
+    },
+    {
+      "lesson": "15",
+      "kanji": "入院します",
+      "hiragana": "にゅういんします",
+      "meaning": "Nhập viện",
+      "category": "Từ vựng",
+      "section": "15.3",
+      "sectionTitle": "15.3 病院・健康 (Bệnh viện & Sức khỏe)",
+      "id": "L15_51"
+    }
+  ]
+};
