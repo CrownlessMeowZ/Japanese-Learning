@@ -2371,7 +2371,7 @@ export const vocabularyData = {
       "id": "L4_5",
       "kanji": "真ん中",
       "hiragana": "まんなか",
-      "meaning": "Chính gi ữa",
+      "meaning": "Chính giữa, ở giữa",
       "category": "Từ vựng",
       "section": "4.1",
       "sectionTitle": "4.1 どこ？ (Ở đâu? / Phương hướng & Phương tiện đi lại)"

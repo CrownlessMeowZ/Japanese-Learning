@@ -11,7 +11,7 @@ import '../styles/sakura.css';
  * - Mỗi thẻ bài học chỉ hiển thị thông tin trọng tâm + 1 nút duy nhất: [ 🚀 Vào Bài Học ]
  * - Khi click sẽ kích hoạt LessonModal với 4 lựa chọn kỹ năng chuyên sâu (Từ Vựng, Ngữ Pháp, Giao Tiếp, Quiz)
  */
-export const Dashboard = ({ onSelectQuiz, onSelectVocab, onSelectGrammar, onSelectKaiwa, onOpenTranslator }) => {
+export const Dashboard = ({ onSelectQuiz, onSelectVocab, onSelectGrammar, onSelectKaiwa, onOpenTranslator, onOpenKana }) => {
   const { dailyStreak, getCompletionRate } = useProgress();
   const [selectedLessonForModal, setSelectedLessonForModal] = useState(null);
 
@@ -39,6 +39,16 @@ export const Dashboard = ({ onSelectQuiz, onSelectVocab, onSelectGrammar, onSele
         <div style={styles.streakStats}>
           <span style={styles.badge}>🏆 Kỷ lục: {dailyStreak.bestStreak} ngày</span>
           <span style={styles.badge}>🌸 Giáo trình: Dekiru Nihongo (15 bài)</span>
+          {onOpenKana && (
+            <button
+              type="button"
+              style={styles.kanaBannerBtn}
+              onClick={onOpenKana}
+              title="Học bảng chữ cái Hiragana & Katakana, Luyện phản xạ"
+            >
+              🔤 Bảng Chữ Cái
+            </button>
+          )}
           {onOpenTranslator && (
             <button
               type="button"
@@ -220,6 +230,21 @@ const styles = {
     fontWeight: '800',
     border: '1.5px solid #f8bbd0',
     boxShadow: '0 2px 8px rgba(233, 30, 140, 0.12)',
+    cursor: 'pointer',
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '6px',
+    transition: 'all 0.2s ease',
+  },
+  kanaBannerBtn: {
+    backgroundColor: '#eff6ff',
+    color: '#2563eb',
+    padding: '7px 16px',
+    borderRadius: '20px',
+    fontSize: '0.85rem',
+    fontWeight: '800',
+    border: '1.5px solid #bfdbfe',
+    boxShadow: '0 2px 8px rgba(37, 99, 235, 0.12)',
     cursor: 'pointer',
     display: 'inline-flex',
     alignItems: 'center',

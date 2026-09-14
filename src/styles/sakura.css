@@ -528,3 +528,304 @@
   transform: rotate(180deg) scale(1.1);
 }
 
+/* 11. SPELLCHECK & "DID YOU MEAN?" SUGGESTION BANNER */
+.sakura-spellcheck-banner {
+  background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+  border: 1.5px solid #fed7aa;
+  border-radius: 12px;
+  padding: 10px 16px;
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  color: #9a3412;
+  box-shadow: 0 2px 8px rgba(251, 146, 60, 0.1);
+  animation: sakuraFadeOnly 0.25s ease both;
+  flex-wrap: wrap;
+}
+
+.sakura-spellcheck-suggestion {
+  background-color: #ffffff;
+  border: 1.5px solid #fb923c;
+  color: #c2410c;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.sakura-spellcheck-suggestion:hover {
+  background-color: #ffedd5;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(251, 146, 60, 0.25);
+}
+
+.sakura-spellcheck-suggestion:active {
+  transform: translateY(0) scale(0.96);
+}
+
+/* ==========================================================================
+   12. SAKURA SPLASH SCREEN (INTRO MỞ ĐẦU)
+   ========================================================================== */
+.sakura-splash-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99999;
+  background: radial-gradient(circle at 50% 35%, #ffffff 0%, #fff1f6 55%, #fce7f3 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.sakura-splash-backdrop.fade-out {
+  opacity: 0;
+  transform: scale(1.03);
+  pointer-events: none;
+}
+
+.sakura-splash-skip-btn {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1.5px solid #fbcfe8;
+  color: #db2777;
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 6px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(233, 30, 140, 0.1);
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.sakura-splash-skip-btn:hover {
+  background: #ffffff;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(233, 30, 140, 0.2);
+}
+
+.sakura-splash-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 480px;
+  width: 90%;
+  padding: 20px;
+}
+
+.sakura-splash-logo-wrap {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.sakura-splash-halo {
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(244, 114, 182, 0.4) 0%, rgba(244, 114, 182, 0) 70%);
+  animation: splashHalo 2s ease-in-out infinite;
+}
+
+.sakura-splash-emoji {
+  font-size: 3.4rem;
+  filter: drop-shadow(0 4px 12px rgba(233, 30, 140, 0.3));
+  animation: splashEmoji 2.2s ease-in-out infinite;
+  display: inline-block;
+}
+
+@keyframes splashHalo {
+  0%, 100% {
+    transform: scale(0.9);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.9;
+  }
+}
+
+@keyframes splashEmoji {
+  0%, 100% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(10deg) scale(1.08);
+  }
+}
+
+.sakura-splash-app-title {
+  font-size: 2.1rem;
+  font-weight: 900;
+  color: #be185d;
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+.sakura-splash-app-subtitle {
+  font-size: 0.92rem;
+  color: #9d174d;
+  margin: 4px 0 20px;
+  font-weight: 600;
+  opacity: 0.85;
+}
+
+.sakura-splash-quote-card {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1.5px solid #fce7f3;
+  border-radius: 20px;
+  padding: 16px 20px;
+  box-shadow: 0 10px 30px rgba(233, 30, 140, 0.08);
+  width: 100%;
+  margin-bottom: 22px;
+  animation: splashFadeUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes splashFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(16px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.sakura-splash-quote-badge {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #db2777;
+  background: #fdf2f8;
+  border: 1px solid #fce7f3;
+  padding: 2px 10px;
+  border-radius: 12px;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+.sakura-splash-quote-kanji {
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: #1e293b;
+  margin-bottom: 4px;
+  letter-spacing: 0.5px;
+}
+
+.sakura-splash-quote-reading {
+  font-size: 0.88rem;
+  color: #db2777;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.sakura-splash-quote-meaning {
+  font-size: 0.9rem;
+  color: #475569;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.sakura-splash-progress-track {
+  width: 100%;
+  height: 6px;
+  background: #fce7f3;
+  border-radius: 9999px;
+  overflow: hidden;
+  margin-bottom: 8px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.sakura-splash-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ec4899 0%, #f43f5e 50%, #fb7185 100%);
+  border-radius: 9999px;
+  transition: width 0.04s linear;
+}
+
+.sakura-splash-loading-text {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 0.8rem;
+  color: #9d174d;
+  font-weight: 600;
+}
+
+.sakura-splash-percent {
+  font-weight: 800;
+  color: #e11d48;
+}
+
+.sakura-splash-enter-btn {
+  margin-top: 16px;
+  background: linear-gradient(135deg, #e91e8c 0%, #ff4b8b 50%, #f43f5e 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 9999px;
+  padding: 10px 28px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(233, 30, 140, 0.35);
+  transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sakura-splash-enter-btn:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 6px 20px rgba(233, 30, 140, 0.45);
+}
+
+.sakura-splash-enter-btn:active {
+  transform: translateY(0) scale(0.97);
+}
+
+/* ==========================================================================
+   13. KANA ACTIVE RECALL & SHAKE ANIMATION
+   ========================================================================== */
+.shake-animation {
+  animation: kanaShake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes kanaShake {
+  10%, 90% {
+    transform: translateX(-3px);
+  }
+  20%, 80% {
+    transform: translateX(4px);
+  }
+  30%, 50%, 70% {
+    transform: translateX(-6px);
+  }
+  40%, 60% {
+    transform: translateX(6px);
+  }
+}
+
+

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { SplashScreen } from './components/Splash/SplashScreen';
 import { WelcomeScreen } from './components/Welcome/WelcomeScreen';
 import { Dashboard } from './components/Dashboard';
 import { QuizScreen } from './components/Quiz/QuizScreen';
@@ -6,6 +7,7 @@ import { GrammarScreen } from './components/Grammar/GrammarScreen';
 import { KaiwaScreen } from './components/Kaiwa/KaiwaScreen';
 import { VocabScreen } from './components/Vocab/VocabScreen';
 import { Translator } from './components/Dictionary/Translator';
+import { KanaScreen } from './components/Kana/KanaScreen';
 import { FuriganaSwitch } from './components/FuriganaSwitch';
 import { useProgress } from './hooks/useProgress';
 import { vocabularyData } from './data/vocabulary';
@@ -20,8 +22,21 @@ import './App.css';
  * Trạng thái mạng Online/Offline (PWA) và State-based Routing
  */
 export default function App() {
-  // Mặc định mở Giao diện Mở Đầu (WelcomeScreen) tạo ấn tượng chuyên nghiệp
-  const [currentRoute, setCurrentRoute] = useState('welcome'); // 'welcome' | 'dashboard' | 'quiz' | 'vocab' | 'grammar' | 'kaiwa' | 'translator'
+  // Trạng thái Intro Mở Đầu (SplashScreen): chỉ xuất hiện 1 lần đầu khi mở app (sessionStorage)
+  // Khi reload (F5) hoặc ấn lại link sẽ không hiện lại; người dùng có thể bấm nút "✨ Intro" trên Header để xem lại bất cứ lúc nào
+  const [showSplash, setShowSplash] = useState(() => {
+    try {
+      const hasSeen = sessionStorage.getItem('nihongo_intro_shown');
+      if (!hasSeen) {
+        sessionStorage.setItem('nihongo_intro_shown', 'true');
+        return true;
+      }
+      return false;
+    } catch {
+      return false;
+    }
+  });
+  const [currentRoute, setCurrentRoute] = useState('dashboard'); // 'dashboard' | 'welcome' | 'kana' | 'quiz' | 'vocab' | 'grammar' | 'kaiwa' | 'translator'
   const [activeLessonId, setActiveLessonId] = useState(1);
   const [isOnline, setIsOnline] = useState(typeof navigator !== 'undefined' ? navigator.onLine : true);
   const { dailyStreak } = useProgress();
@@ -72,6 +87,10 @@ export default function App() {
     setCurrentRoute('translator');
   };
 
+  const handleOpenKana = () => {
+    setCurrentRoute('kana');
+  };
+
   const handleBackToDashboard = () => {
     setCurrentRoute('dashboard');
   };
@@ -82,6 +101,9 @@ export default function App() {
 
   return (
     <div className="app-container" style={{ minHeight: '100vh', backgroundColor: '#fff8fa', position: 'relative' }}>
+      {/* 🌸 Intro Splash Screen (Mở đầu tự động chuyển vào màn hình chính sau ~2.2s) */}
+      {showSplash && <SplashScreen onFinish={() => setShowSplash(false)} />}
+
       {/* 🌸 Falling Sakura Petals Animation (Pure CSS, GPU-Accelerated) */}
       <div className="sakura-bg" aria-hidden="true">
         {Array.from({ length: 13 }).map((_, i) => (
@@ -107,7 +129,7 @@ export default function App() {
             </div>
           </div>
 
-          {/* Header Action Controls - Thứ tự: Khóa Học -> Từ Điển -> Phiên Âm -> Số Lửa */}
+          {/* Header Action Controls - Thứ tự: Khóa Học -> Bảng Chữ Cái -> Từ Điển -> Phiên Âm -> Số Lửa -> Intro */}
           <div style={styles.headerActions}>
             {/* Network Status Badge (Online / Offline PWA indicator) */}
             {!isOnline ? (
@@ -126,7 +148,17 @@ export default function App() {
               📚 Khóa Học
             </button>
 
-            {/* 2. Nút Mở Từ Điển & Dịch Thuật */}
+            {/* 2. Nút Bảng Chữ Cái (Kana Chart & Quiz Tofugu Style) */}
+            <button
+              type="button"
+              onClick={handleOpenKana}
+              className={`sakura-nav-btn ${currentRoute === 'kana' ? 'active' : ''}`}
+              title="Học Bảng Chữ Cái Hiragana & Katakana, Luyện phản xạ"
+            >
+              🔤 Bảng Chữ Cái
+            </button>
+
+            {/* 3. Nút Mở Từ Điển & Dịch Thuật */}
             <button
               type="button"
               onClick={handleOpenTranslator}
@@ -136,13 +168,23 @@ export default function App() {
               🔍 Từ Điển
             </button>
 
-            {/* 3. Global Furigana Switch (Phiên Âm) */}
+            {/* 4. Global Furigana Switch (Phiên Âm) */}
             <FuriganaSwitch />
 
-            {/* 4. Gamified Streak Badge (Số lửa học mỗi ngày) */}
+            {/* 5. Gamified Streak Badge (Số lửa học mỗi ngày) */}
             <div className="sakura-streak-pill" title={`Chuỗi học tập liên tiếp: ${dailyStreak.count} ngày!`}>
               🔥 {dailyStreak.count} ngày
             </div>
+
+            {/* 6. Nút Xem Intro Mở Đầu */}
+            <button
+              type="button"
+              onClick={() => setShowSplash(true)}
+              className="sakura-nav-btn"
+              title="Bấm để xem lại màn hình Intro chào mừng & danh ngôn"
+            >
+              ✨ Intro
+            </button>
           </div>
         </div>
       </header>
@@ -168,7 +210,12 @@ export default function App() {
               onSelectGrammar={handleOpenGrammar}
               onSelectKaiwa={handleOpenKaiwa}
               onOpenTranslator={handleOpenTranslator}
+              onOpenKana={handleOpenKana}
             />
+          )}
+
+          {currentRoute === 'kana' && (
+            <KanaScreen onBack={handleBackToDashboard} />
           )}
 
           {currentRoute === 'translator' && (

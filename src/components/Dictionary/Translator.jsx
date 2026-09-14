@@ -1,13 +1,18 @@
 import React, { useState, useMemo } from 'react';
-import { romajiToHiragana, isProbablyRomaji } from '../../utils/romajiConverter';
-import { searchLocalDictionary } from '../../utils/localDictionary';
+import {
+  romajiToHiragana,
+  romajiToJapanese,
+  isProbablyRomaji
+} from '../../utils/romajiConverter';
+import { searchLocalDictionary, getExactWordByRomaji, getFuzzySuggestions } from '../../utils/localDictionary';
 import '../../styles/sakura.css';
 
 /**
  * Translator Component - Module Từ Điển & Dịch Thuật Đa Năng
- * - Tích hợp Google Translate Unofficial API (dt=t&dt=rm)
- * - Tự động nhận diện và chuyển đổi Romaji (vd: "watashi" -> "わたし" -> "Tôi")
- * - Tích hợp bộ Từ điển Nội bộ 965 từ vựng hoạt động 100% OFFLINE
+ * - Tích hợp Google Translate Unofficial API (dt=t&dt=rm&dt=qc&dt=qca) với multi-client fallback
+ * - Tự động nhận diện và sửa lỗi chính tả ("Có phải bạn muốn tìm...") từ Google AI + Thuật toán Levenshtein cục bộ
+ * - Tự động nhận diện và chuyển đổi Romaji chuẩn xác qua Dynamic Romaji Index từ kho > 1.150 từ vựng
+ * - Tích hợp bộ Từ điển Nội bộ hoạt động 100% OFFLINE
  * - Hiển thị Cách đọc (Romaji/Phonetic) & Phát âm chuẩn Web Speech TTS
  */
 export const Translator = ({ onBack }) => {
@@ -22,11 +27,14 @@ export const Translator = ({ onBack }) => {
   const [isOfflineResult, setIsOfflineResult] = useState(false);
   const [copySuccess, setCopySuccess] = useState(false);
   const [isSwapping, setIsSwapping] = useState(false);
+  const [spellSuggestion, setSpellSuggestion] = useState(null); // Gợi ý chính tả "Có phải bạn muốn tìm..."
 
   // Mẫu câu gợi ý nhanh cho người học
   const samplePhrases = [
+    { text: 'mannaka', from: 'ja', to: 'vi', label: 'mannaka (Ở giữa / Chính giữa)' },
+    { text: 'biiru', from: 'ja', to: 'vi', label: 'biiru (Bia - Katakana)' },
+    { text: 'biru', from: 'ja', to: 'vi', label: 'biru (Tòa nhà - Katakana)' },
     { text: 'watashi', from: 'ja', to: 'vi', label: 'watashi (Tôi - Romaji)' },
-    { text: 'o namae wa', from: 'ja', to: 'vi', label: 'o namae wa (Tên bạn là gì?)' },
     { text: 'arigatou gozaimasu', from: 'ja', to: 'vi', label: 'arigatou gozaimasu (Cảm ơn)' },
     { text: 'Xin chào, bạn khỏe không?', from: 'vi', to: 'ja', label: 'Xin chào (VI ➔ JA)' },
   ];
@@ -47,59 +55,94 @@ export const Translator = ({ onBack }) => {
 
   /**
    * Gọi Dịch Thuật (Kết hợp Google AI + Offline Fallback)
+   * @param {string|null} [overrideText=null] - Từ khóa ghi đè (vd khi bấm vào gợi ý sửa lỗi chính tả)
    */
-  const handleTranslate = async () => {
-    const trimmed = sourceText.trim();
+  const handleTranslate = async (overrideText = null) => {
+    const textToProcess = typeof overrideText === 'string' ? overrideText : sourceText;
+    const trimmed = textToProcess.trim();
     if (!trimmed) {
       setTranslatedText('');
       setSourcePhonetic('');
       setTargetPhonetic('');
+      setSpellSuggestion(null);
       setErrorMessage(null);
       setIsOfflineResult(false);
       return;
     }
 
+    if (typeof overrideText === 'string') {
+      setSourceText(overrideText);
+    }
+
     setIsLoading(true);
     setErrorMessage(null);
     setIsOfflineResult(false);
+    setSpellSuggestion(null);
 
-    // Xử lý thông minh cho Romaji:
-    // Nếu người dùng nhập tiếng Nhật dạng Romaji (vd: "watashi"), tự động chuyển thành Hiragana ("わたし")
+    // Xử lý thông minh cho Romaji dựa trên Dynamic Romaji Index từ kho từ vựng
     let queryToSend = trimmed;
     let actualSourceLang = sourceLang;
     let actualTargetLang = targetLang;
+    const isRomaji = isProbablyRomaji(trimmed);
 
-    if (sourceLang === 'ja' && isProbablyRomaji(trimmed)) {
-      queryToSend = romajiToHiragana(trimmed);
-      setSourcePhonetic(trimmed);
-    } else if (sourceLang === 'vi' && isProbablyRomaji(trimmed)) {
-      // Nếu đang chọn VI nhưng người dùng gõ Romaji "watashi":
-      // Tự động hiểu là người dùng muốn tra từ tiếng Nhật sang tiếng Việt
-      queryToSend = romajiToHiragana(trimmed);
+    // Kiểm tra xem từ Romaji có khớp với từ nào trong kho từ vựng nội bộ không
+    const exactLocalWord = isRomaji ? getExactWordByRomaji(trimmed) : null;
+
+    if (sourceLang === 'ja' && isRomaji) {
+      if (exactLocalWord) {
+        // Tự động phân giải chính xác chữ Katakana/Hiragana tương ứng từ cơ sở dữ liệu
+        queryToSend = exactLocalWord.hiragana || exactLocalWord.kanji;
+      } else {
+        queryToSend = romajiToJapanese(trimmed);
+      }
+      setSourcePhonetic(`${trimmed} (${queryToSend})`);
+    } else if (sourceLang === 'vi' && isRomaji) {
+      // Nếu đang chọn VI nhưng người dùng gõ Romaji tiếng Nhật:
+      if (exactLocalWord) {
+        queryToSend = exactLocalWord.hiragana || exactLocalWord.kanji;
+      } else {
+        queryToSend = romajiToJapanese(trimmed);
+      }
       actualSourceLang = 'ja';
       actualTargetLang = 'vi';
+      setSourcePhonetic(`${trimmed} (${queryToSend})`);
     }
 
-    // 1. Nếu thiết bị đang Offline: Tra cứu trực tiếp từ điển nội bộ 965 từ vựng
+    // 1. Nếu thiết bị đang Offline: Tra cứu trực tiếp từ điển nội bộ
     if (!navigator.onLine) {
       handleOfflineLookup(trimmed);
       setIsLoading(false);
       return;
     }
 
-    // 2. Nếu Online: Gọi Google Translate Unofficial API (dt=t&dt=rm)
-    const endpoint = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${actualSourceLang}&tl=${actualTargetLang}&dt=t&dt=rm&q=${encodeURIComponent(
-      queryToSend
-    )}`;
+    // 2. Nếu Online: Gọi Google Translate với cơ chế Multi-client Fallback & Spellcheck
+    const googleClients = ['dict-chrome-ex', 'at', 'gtx'];
+    let data = null;
+    let lastError = null;
+
+    for (const client of googleClients) {
+      try {
+        const endpoint = `https://translate.googleapis.com/translate_a/single?client=${client}&sl=${actualSourceLang}&tl=${actualTargetLang}&dt=t&dt=rm&dt=qc&dt=qca&q=${encodeURIComponent(
+          queryToSend
+        )}`;
+        const response = await fetch(endpoint);
+        if (response.ok) {
+          data = await response.json();
+          break;
+        }
+      } catch (err) {
+        lastError = err;
+      }
+    }
+
+    if (!data) {
+      console.warn('[Translator] All Google endpoints failed, falling back to local dictionary:', lastError);
+      handleOfflineLookup(trimmed);
+      setIsLoading(false);
+      return;
+    }
 
     try {
-      const response = await fetch(endpoint);
-      if (!response.ok) {
-        throw new Error(`Google Translate phản hồi lỗi (${response.status})`);
-      }
-
-      const data = await response.json();
-
       let fullTranslatedText = '';
       let srcTranslit = '';
       let tgtTranslit = '';
@@ -126,17 +169,56 @@ export const Translator = ({ onBack }) => {
       }
 
       setTranslatedText(fullTranslatedText);
-      // Nếu người dùng gõ Romaji, giữ nguyên hoặc dùng transliteration từ Google
-      if (isProbablyRomaji(trimmed) && !srcTranslit) {
-        setSourcePhonetic(trimmed);
+      // Hiển thị cách đọc phiên âm chuẩn
+      if (isRomaji) {
+        setSourcePhonetic(`${trimmed} (${queryToSend})`);
       } else {
         setSourcePhonetic(srcTranslit);
       }
       setTargetPhonetic(tgtTranslit);
       setIsOfflineResult(false);
+
+      // --- 3. Bóc tách Gợi Ý Sửa Lỗi Chính Tả ("Did you mean...?") ---
+      let detectedSuggestion = null;
+
+      // A. Kiểm tra phản hồi Spellcheck từ Google Translate (data[7])
+      if (Array.isArray(data) && Array.isArray(data[7]) && data[7].length >= 2) {
+        const gText = typeof data[7][1] === 'string' ? data[7][1].trim() : '';
+        if (
+          gText &&
+          gText.toLowerCase() !== trimmed.toLowerCase() &&
+          gText.toLowerCase() !== queryToSend.toLowerCase()
+        ) {
+          detectedSuggestion = {
+            text: gText,
+            display: gText,
+            source: 'google'
+          };
+        }
+      }
+
+      // B. Nếu Google chưa có gợi ý hoặc từ là Romaji/tiếng Nhật bị sai chính tả:
+      // Kiểm tra bộ Levenshtein Fuzzy Matcher từ kho từ vựng nội bộ (> 1.150 từ)
+      if (!detectedSuggestion && (isRomaji || actualSourceLang === 'ja')) {
+        const fuzzy = getFuzzySuggestions(trimmed, 1);
+        if (fuzzy.length > 0 && fuzzy[0].dist <= 2) {
+          const best = fuzzy[0];
+          const suggestionText = best.text;
+          if (suggestionText.toLowerCase() !== trimmed.toLowerCase()) {
+            detectedSuggestion = {
+              text: suggestionText,
+              display: best.romaji && best.romaji !== best.hiragana
+                ? `${best.romaji} (${best.kanji || best.hiragana}: ${best.meaning})`
+                : `${best.kanji || best.hiragana} (${best.meaning})`,
+              source: 'local'
+            };
+          }
+        }
+      }
+
+      setSpellSuggestion(detectedSuggestion);
     } catch (err) {
-      console.warn('[Translator] Online API error, falling back to local dictionary:', err);
-      // Fallback sang từ điển cục bộ khi API lỗi hoặc mất kết nối
+      console.warn('[Translator] Parse error, falling back to local dictionary:', err);
       handleOfflineLookup(trimmed);
     } finally {
       setIsLoading(false);
@@ -161,16 +243,38 @@ export const Translator = ({ onBack }) => {
       }
       setIsOfflineResult(true);
       setErrorMessage(null);
+      setSpellSuggestion(null);
     } else {
       setIsOfflineResult(false);
+      // Khi offline và không tìm thấy kết quả chính xác, thử tìm từ viết gần đúng nhất
+      const fuzzy = getFuzzySuggestions(query, 1);
+      if (fuzzy.length > 0 && fuzzy[0].dist <= 2) {
+        const best = fuzzy[0];
+        setSpellSuggestion({
+          text: best.text,
+          display: best.romaji && best.romaji !== best.hiragana
+            ? `${best.romaji} (${best.kanji || best.hiragana}: ${best.meaning})`
+            : `${best.kanji || best.hiragana} (${best.meaning})`,
+          source: 'local'
+        });
+      }
       if (!navigator.onLine) {
         setErrorMessage(
-          '📴 Bạn đang ngoại tuyến. Từ này chưa có trong bộ 965 từ vựng có sẵn. Vui lòng kết nối internet để dịch bằng Google AI.'
+          '📴 Bạn đang ngoại tuyến. Từ này chưa có trong bộ từ vựng có sẵn. Vui lòng kết nối internet để dịch bằng Google AI.'
         );
       } else {
         setErrorMessage('⚠️ Không thể kết nối đến máy chủ Google Dịch. Vui lòng thử lại sau.');
       }
     }
+  };
+
+  /**
+   * Bấm áp dụng từ gợi ý sửa lỗi chính tả
+   */
+  const handleApplySuggestion = (suggestedText) => {
+    setSourceText(suggestedText);
+    setSpellSuggestion(null);
+    handleTranslate(suggestedText);
   };
 
   /**
@@ -195,6 +299,7 @@ export const Translator = ({ onBack }) => {
     setTranslatedText(prevSourceText);
     setSourcePhonetic(prevTargetPhonetic);
     setTargetPhonetic(prevSourcePhonetic);
+    setSpellSuggestion(null);
     setErrorMessage(null);
     setIsOfflineResult(false);
   };
@@ -317,6 +422,7 @@ export const Translator = ({ onBack }) => {
                     setTranslatedText('');
                     setSourcePhonetic('');
                     setTargetPhonetic('');
+                    setSpellSuggestion(null);
                     setErrorMessage(null);
                     setIsOfflineResult(false);
                   }}
@@ -331,11 +437,14 @@ export const Translator = ({ onBack }) => {
               style={styles.textarea}
               placeholder={
                 sourceLang === 'ja'
-                  ? 'Nhập tiếng Nhật: Kanji, Hiragana hoặc Romaji (vd: "watashi", "o namae wa")...'
+                  ? 'Nhập tiếng Nhật: Kanji, Hiragana hoặc Romaji (vd: "watashi", "mannaka", "o namae wa")...'
                   : 'Nhập tiếng Việt hoặc từ khóa cần dịch...'
               }
               value={sourceText}
-              onChange={(e) => setSourceText(e.target.value)}
+              onChange={(e) => {
+                setSourceText(e.target.value);
+                if (spellSuggestion) setSpellSuggestion(null);
+              }}
               onKeyDown={(e) => {
                 if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
                   e.preventDefault();
@@ -350,6 +459,21 @@ export const Translator = ({ onBack }) => {
               <div className="phonetic-text" style={styles.phoneticText}>
                 <span style={styles.phoneticLabel}>Cách đọc: </span>
                 {sourcePhonetic}
+              </div>
+            )}
+
+            {/* Gợi ý sửa lỗi chính tả phong cách Google Dịch ("Did you mean...?") */}
+            {spellSuggestion && (
+              <div className="sakura-spellcheck-banner" style={{ margin: '10px 0' }}>
+                <span style={{ fontWeight: '600' }}>💡 Có phải bạn muốn tìm:</span>
+                <button
+                  type="button"
+                  className="sakura-spellcheck-suggestion"
+                  onClick={() => handleApplySuggestion(spellSuggestion.text)}
+                  title="Bấm để tự động sửa và dịch từ này"
+                >
+                  👉 {spellSuggestion.display}
+                </button>
               </div>
             )}
 
@@ -503,7 +627,9 @@ export const Translator = ({ onBack }) => {
                   setSourceLang(phrase.from);
                   setTargetLang(phrase.to);
                   setSourceText(phrase.text);
+                  setSpellSuggestion(null);
                   setErrorMessage(null);
+                  handleTranslate(phrase.text);
                 }}
                 title={`Dịch thử: ${phrase.text}`}
               >
