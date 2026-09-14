@@ -45,7 +45,7 @@ export const Flashcard = ({
     stopAudio();
 
     if (item?.id) {
-      reviewItem(item.id, 'vocab', quality);
+      reviewItem(item.id, 'vocab', quality, item);
     }
 
     // Lật lại mặt trước rồi chuyển thẻ

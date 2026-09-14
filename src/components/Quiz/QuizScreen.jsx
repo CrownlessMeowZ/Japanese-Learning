@@ -71,7 +71,7 @@ export const QuizScreen = ({ lessonId = 1, rawQuestions = [], onBack }) => {
     const targetId = target?.id || target?.kanji || target?.hiragana || currentQuestion?.id;
 
     if (targetId) {
-      reviewItem(targetId, 'vocab', quality);
+      reviewItem(targetId, 'vocab', quality, target);
     }
 
     // 3. Tự động phát âm thanh của đáp án CHÍNH XÁC để user ghi nhớ

@@ -1,5 +1,5 @@
-import { useCallback } from 'react';
-import { useProgressStore } from '../store/progressStore';
+import { useCallback, useMemo } from 'react';
+import { useProgressStore, healMistakeVault } from '../store/progressStore';
 import { getTodayDateString } from '../utils/srsAlgo';
 
 export const useProgress = () => {
@@ -82,15 +82,31 @@ export const useProgress = () => {
     [learnedItems]
   );
 
+  const bonsaiState = useProgressStore((state) => state.bonsai_state);
+  const rawMistakeVault = useProgressStore((state) => state.mistake_vault);
+  const mistakeVault = useMemo(() => healMistakeVault(rawMistakeVault), [rawMistakeVault]);
+  const waterBonsai = useProgressStore((state) => state.waterBonsai);
+  const recordMistake = useProgressStore((state) => state.recordMistake);
+  const recordRescueSuccess = useProgressStore((state) => state.recordRescueSuccess);
+  const clearMistake = useProgressStore((state) => state.clearMistake);
+  const clearAllMistakes = useProgressStore((state) => state.clearAllMistakes);
+
   return {
     currentLesson,
     dailyStreak,
     learnedItems,
+    bonsaiState,
+    mistakeVault,
     setCurrentLesson,
     markAsLearned,
     checkIsLearned,
     reviewItem,
     getDueItems,
     getCompletionRate,
+    waterBonsai,
+    recordMistake,
+    recordRescueSuccess,
+    clearMistake,
+    clearAllMistakes,
   };
 };

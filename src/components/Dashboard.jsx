@@ -3,7 +3,13 @@ import { useProgress } from '../hooks/useProgress';
 import { vocabularyData } from '../data/vocabulary';
 import { grammarData } from '../data/grammar';
 import { LessonModal } from './LessonModal';
+import { SakuraGarden } from './Garden/SakuraGarden';
 import '../styles/sakura.css';
+
+// Tối ưu hóa Code Splitting: Lazy load MistakeVaultModal chỉ tải khi người dùng click mở
+const MistakeVaultModal = React.lazy(() =>
+  import('./Rescue/MistakeVaultModal').then((mod) => ({ default: mod.MistakeVaultModal }))
+);
 
 // Danh sách 15 bài học chuẩn Dekiru Nihongo Sơ cấp
 const LESSONS = Array.from({ length: 15 }, (_, i) => i + 1);
@@ -15,8 +21,21 @@ const LESSONS = Array.from({ length: 15 }, (_, i) => i + 1);
  * - Khi click sẽ kích hoạt LessonModal với 4 lựa chọn kỹ năng chuyên sâu (Từ Vựng, Ngữ Pháp, Giao Tiếp, Quiz)
  */
 export const Dashboard = ({ onSelectQuiz, onSelectVocab, onSelectGrammar, onSelectKaiwa, onOpenTranslator, onOpenKana }) => {
-  const { dailyStreak, getCompletionRate } = useProgress();
+  const {
+    dailyStreak,
+    getCompletionRate,
+    bonsaiState,
+    mistakeVault,
+    waterBonsai,
+    recordMistake,
+    recordRescueSuccess,
+    clearMistake,
+    clearAllMistakes,
+  } = useProgress();
   const [selectedLessonForModal, setSelectedLessonForModal] = useState(null);
+  const [isMistakeModalOpen, setIsMistakeModalOpen] = useState(false);
+
+  const mistakeCount = Object.keys(mistakeVault || {}).length;
 
   // Tối ưu hóa: tính toán tiến độ hoàn thành cho 15 bài bằng useMemo, tránh lặp lại 965 từ mỗi render
   const lessonCards = useMemo(() => {
@@ -76,8 +95,23 @@ export const Dashboard = ({ onSelectQuiz, onSelectVocab, onSelectGrammar, onSele
               🔍 Tra Cứu Từ Điển
             </button>
           )}
+          <button
+            type="button"
+            style={styles.mistakeBannerBtn}
+            onClick={() => setIsMistakeModalOpen(true)}
+            title="Xem danh sách các từ hay làm sai và luyện tập cứu hộ"
+          >
+            ⚠️ Hộp Cứu Hộ {mistakeCount > 0 ? `(${mistakeCount})` : ''}
+          </button>
         </div>
       </div>
+
+      {/* Vườn Bonsai Sakura Tăng Trưởng */}
+      <SakuraGarden
+        streakCount={dailyStreak.count}
+        bonsaiState={bonsaiState}
+        onWater={waterBonsai}
+      />
 
       <div style={styles.sectionHeader}>
         <div>
@@ -151,6 +185,21 @@ export const Dashboard = ({ onSelectQuiz, onSelectVocab, onSelectGrammar, onSele
           onSelectKaiwa={onSelectKaiwa}
           onSelectQuiz={onSelectQuiz}
         />
+      )}
+
+      {/* Mistake Vault Rescue Modal (Lazy Loaded) */}
+      {isMistakeModalOpen && (
+        <React.Suspense fallback={null}>
+          <MistakeVaultModal
+            isOpen={isMistakeModalOpen}
+            onClose={() => setIsMistakeModalOpen(false)}
+            mistakeVault={mistakeVault}
+            onRescueSuccess={recordRescueSuccess}
+            onRescueFail={recordMistake}
+            onClearMistake={clearMistake}
+            onClearAll={clearAllMistakes}
+          />
+        </React.Suspense>
       )}
     </div>
   );
@@ -258,6 +307,21 @@ const styles = {
     fontWeight: '800',
     border: '1.5px solid #bfdbfe',
     boxShadow: '0 2px 8px rgba(37, 99, 235, 0.12)',
+    cursor: 'pointer',
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '6px',
+    transition: 'all 0.2s ease',
+  },
+  mistakeBannerBtn: {
+    backgroundColor: '#fff1f2',
+    color: '#e11d48',
+    padding: '7px 16px',
+    borderRadius: '20px',
+    fontSize: '0.85rem',
+    fontWeight: '800',
+    border: '1.5px solid #fecdd3',
+    boxShadow: '0 2px 8px rgba(225, 29, 72, 0.12)',
     cursor: 'pointer',
     display: 'inline-flex',
     alignItems: 'center',

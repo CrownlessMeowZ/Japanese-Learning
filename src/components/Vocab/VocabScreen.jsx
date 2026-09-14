@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { Flashcard } from './Flashcard';
 import { FuriganaText } from '../FuriganaText';
 import { useAudioPlayer } from '../../hooks/useAudioPlayer';
+import { useProgress } from '../../hooks/useProgress';
 import { vocabularyData } from '../../data/vocabulary';
 import { romajiToHiragana } from '../../utils/romajiConverter';
 
@@ -20,6 +21,7 @@ export const VocabScreen = ({
   const [selectedSection, setSelectedSection] = useState('all');
 
   const { playAudio } = useAudioPlayer();
+  const { checkIsLearned } = useProgress();
 
   // Dữ liệu từ vựng của bài học (ưu tiên prop, fallback về dataset)
   const allWords = useMemo(() => {
