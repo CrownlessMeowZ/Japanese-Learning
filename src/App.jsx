@@ -17,6 +17,8 @@ const KaiwaScreen = lazy(() => import('./components/Kaiwa/KaiwaScreen').then((m)
 const VocabScreen = lazy(() => import('./components/Vocab/VocabScreen').then((m) => ({ default: m.VocabScreen })));
 const Translator = lazy(() => import('./components/Dictionary/Translator').then((m) => ({ default: m.Translator })));
 const KanaScreen = lazy(() => import('./components/Kana/KanaScreen').then((m) => ({ default: m.KanaScreen })));
+const KanjiScreen = lazy(() => import('./components/Kanji/KanjiScreen').then((m) => ({ default: m.KanjiScreen })));
+const BackupRestoreModal = lazy(() => import('./components/Backup/BackupRestoreModal').then((m) => ({ default: m.BackupRestoreModal })));
 
 /**
  * App Root Component - Sakura EdTech App
@@ -38,8 +40,9 @@ export default function App() {
       return false;
     }
   });
-  const [currentRoute, setCurrentRoute] = useState('dashboard'); // 'dashboard' | 'welcome' | 'kana' | 'quiz' | 'vocab' | 'grammar' | 'kaiwa' | 'translator'
+  const [currentRoute, setCurrentRoute] = useState('dashboard'); // 'dashboard' | 'welcome' | 'kana' | 'kanji' | 'quiz' | 'vocab' | 'grammar' | 'kaiwa' | 'translator'
   const [activeLessonId, setActiveLessonId] = useState(1);
+  const [isBackupModalOpen, setIsBackupModalOpen] = useState(false);
   const [isOnline, setIsOnline] = useState(typeof navigator !== 'undefined' ? navigator.onLine : true);
   const { dailyStreak } = useProgress();
 
@@ -91,6 +94,10 @@ export default function App() {
 
   const handleOpenKana = () => {
     setCurrentRoute('kana');
+  };
+
+  const handleOpenKanji = () => {
+    setCurrentRoute('kanji');
   };
 
   const handleBackToDashboard = () => {
@@ -160,7 +167,17 @@ export default function App() {
               🔤 Bảng Chữ Cái
             </button>
 
-            {/* 3. Nút Mở Từ Điển & Dịch Thuật */}
+            {/* 3. Nút Hán Tự (Kanji N5 Canvas) */}
+            <button
+              type="button"
+              onClick={handleOpenKanji}
+              className={`sakura-nav-btn ${currentRoute === 'kanji' ? 'active' : ''}`}
+              title="Học chữ Hán N5, Âm Hán Việt & Luyện viết trên Canvas"
+            >
+              🈸 Hán Tự
+            </button>
+
+            {/* 4. Nút Mở Từ Điển & Dịch Thuật */}
             <button
               type="button"
               onClick={handleOpenTranslator}
@@ -170,15 +187,15 @@ export default function App() {
               🔍 Từ Điển
             </button>
 
-            {/* 4. Global Furigana Switch (Phiên Âm) */}
+            {/* 5. Global Furigana Switch (Phiên Âm) */}
             <FuriganaSwitch />
 
-            {/* 5. Gamified Streak Badge (Số lửa học mỗi ngày) */}
+            {/* 6. Gamified Streak Badge (Số lửa học mỗi ngày) */}
             <div className="sakura-streak-pill" title={`Chuỗi học tập liên tiếp: ${dailyStreak.count} ngày!`}>
               🔥 {dailyStreak.count} ngày
             </div>
 
-            {/* 6. Nút Xem Intro Mở Đầu */}
+            {/* 7. Nút Xem Intro Mở Đầu */}
             <button
               type="button"
               onClick={() => setShowSplash(true)}
@@ -186,6 +203,16 @@ export default function App() {
               title="Bấm để xem lại màn hình Intro chào mừng & danh ngôn"
             >
               ✨ Intro
+            </button>
+
+            {/* 8. Nút Sao Lưu & Khôi Phục JSON */}
+            <button
+              type="button"
+              onClick={() => setIsBackupModalOpen(true)}
+              className="sakura-nav-btn"
+              title="Sao lưu & Khôi phục dữ liệu học tập (JSON)"
+            >
+              💾 Sao Lưu
             </button>
           </div>
         </div>
@@ -219,11 +246,16 @@ export default function App() {
                 onSelectKaiwa={handleOpenKaiwa}
                 onOpenTranslator={handleOpenTranslator}
                 onOpenKana={handleOpenKana}
+                onOpenKanji={handleOpenKanji}
               />
             )}
 
             {currentRoute === 'kana' && (
               <KanaScreen onBack={handleBackToDashboard} />
+            )}
+
+            {currentRoute === 'kanji' && (
+              <KanjiScreen onBack={handleBackToDashboard} />
             )}
 
             {currentRoute === 'translator' && (
@@ -263,6 +295,16 @@ export default function App() {
           </div>
         </Suspense>
       </main>
+
+      {/* 💾 Modal Sao Lưu & Khôi Phục Dữ Liệu */}
+      {isBackupModalOpen && (
+        <Suspense fallback={null}>
+          <BackupRestoreModal
+            isOpen={isBackupModalOpen}
+            onClose={() => setIsBackupModalOpen(false)}
+          />
+        </Suspense>
+      )}
     </div>
   );
 }

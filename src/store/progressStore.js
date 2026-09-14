@@ -145,6 +145,9 @@ export const useProgressStore = create(
       // Sổ tay điểm yếu / Hộp cứu hộ (Mistake Vault)
       mistake_vault: {},
 
+      // Danh sách chữ Hán (Kanji) đã ghi nhớ
+      kanji_learned: {},
+
       setCurrentLesson: (lessonId) => {
         const numericId = parseInt(lessonId, 10);
         if (numericId >= 1 && numericId <= 15) {
@@ -337,6 +340,94 @@ export const useProgressStore = create(
       },
 
       /**
+       * Đánh dấu đã nhớ / chưa nhớ một chữ Hán (Kanji)
+       * @param {string} kanjiId ID chữ Hán (vd: 'k_1' hoặc chữ Kanji)
+       */
+      toggleKanjiLearned: (kanjiId) => {
+        if (!kanjiId) return;
+        const current = { ...(get().kanji_learned || {}) };
+        const exists = Boolean(current[kanjiId]);
+
+        if (exists) {
+          delete current[kanjiId];
+        } else {
+          current[kanjiId] = {
+            learnedAt: new Date().toISOString(),
+          };
+        }
+
+        set({ kanji_learned: current });
+        if (!exists) {
+          get().updateActivityStreak();
+        }
+      },
+
+      /**
+       * Nhập toàn bộ dữ liệu sao lưu từ file JSON (Data Restore)
+       * @param {Object} importedData Dữ liệu backup JSON
+       * @returns {boolean} true nếu import thành công
+       */
+      importAllData: (importedData) => {
+        if (!importedData || typeof importedData !== 'object') {
+          return false;
+        }
+
+        const validLearned = importedData.learned_items && typeof importedData.learned_items === 'object'
+          ? importedData.learned_items
+          : get().learned_items;
+
+        const validKanji = importedData.kanji_learned && typeof importedData.kanji_learned === 'object'
+          ? importedData.kanji_learned
+          : (get().kanji_learned || {});
+
+        const validMistakes = importedData.mistake_vault && typeof importedData.mistake_vault === 'object'
+          ? healMistakeVault(importedData.mistake_vault)
+          : get().mistake_vault;
+
+        const validBonsai = importedData.bonsai_state && typeof importedData.bonsai_state === 'object'
+          ? importedData.bonsai_state
+          : get().bonsai_state;
+
+        const validStreak = importedData.daily_streak && typeof importedData.daily_streak === 'object'
+          ? importedData.daily_streak
+          : get().daily_streak;
+
+        const validLesson = parseInt(importedData.current_lesson, 10) || get().current_lesson || 1;
+
+        set({
+          learned_items: validLearned,
+          kanji_learned: validKanji,
+          mistake_vault: validMistakes,
+          bonsai_state: validBonsai,
+          daily_streak: validStreak,
+          current_lesson: validLesson,
+        });
+
+        return true;
+      },
+
+      /**
+       * Đặt lại toàn bộ tiến độ học tập (Reset về mặc định)
+       */
+      resetAllProgress: () => {
+        set({
+          learned_items: {},
+          kanji_learned: {},
+          current_lesson: 1,
+          daily_streak: {
+            count: 1,
+            lastActiveDate: getTodayDateString(),
+            bestStreak: 1,
+          },
+          bonsai_state: {
+            lastWateredDate: null,
+            waterCount: 0,
+          },
+          mistake_vault: {},
+        });
+      },
+
+      /**
        * Cập nhật tiến độ Spaced Repetition (SM-2) sau một phiên ôn tập
        * Tự động liên kết với Hộp Cứu Hộ khi trả lời sai (quality < 3) hoặc sửa đúng (quality >= 4)
        * @param {string|number} id ID của item (từ vựng / ngữ pháp)
@@ -394,8 +485,13 @@ export const useProgressStore = create(
       storage: createJSONStorage(() => localStorage),
       version: 1,
       onRehydrateStorage: () => (state) => {
-        if (state && state.mistake_vault) {
-          state.mistake_vault = healMistakeVault(state.mistake_vault);
+        if (state) {
+          if (state.mistake_vault) {
+            state.mistake_vault = healMistakeVault(state.mistake_vault);
+          }
+          if (!state.kanji_learned) {
+            state.kanji_learned = {};
+          }
         }
       },
     }

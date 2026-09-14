@@ -20,7 +20,7 @@ const LESSONS = Array.from({ length: 15 }, (_, i) => i + 1);
  * - Mỗi thẻ bài học chỉ hiển thị thông tin trọng tâm + 1 nút duy nhất: [ 🚀 Vào Bài Học ]
  * - Khi click sẽ kích hoạt LessonModal với 4 lựa chọn kỹ năng chuyên sâu (Từ Vựng, Ngữ Pháp, Giao Tiếp, Quiz)
  */
-export const Dashboard = ({ onSelectQuiz, onSelectVocab, onSelectGrammar, onSelectKaiwa, onOpenTranslator, onOpenKana }) => {
+export const Dashboard = ({ onSelectQuiz, onSelectVocab, onSelectGrammar, onSelectKaiwa, onOpenTranslator, onOpenKana, onOpenKanji }) => {
   const {
     dailyStreak,
     getCompletionRate,
@@ -83,6 +83,16 @@ export const Dashboard = ({ onSelectQuiz, onSelectVocab, onSelectGrammar, onSele
               title="Học bảng chữ cái Hiragana & Katakana, Luyện phản xạ"
             >
               🔤 Bảng Chữ Cái
+            </button>
+          )}
+          {onOpenKanji && (
+            <button
+              type="button"
+              style={styles.kanjiBannerBtn}
+              onClick={onOpenKanji}
+              title="Học chữ Hán N5, Âm Hán Việt & Luyện viết trên Canvas"
+            >
+              🈸 Luyện Viết Hán Tự
             </button>
           )}
           {onOpenTranslator && (
@@ -307,6 +317,21 @@ const styles = {
     fontWeight: '800',
     border: '1.5px solid #bfdbfe',
     boxShadow: '0 2px 8px rgba(37, 99, 235, 0.12)',
+    cursor: 'pointer',
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '6px',
+    transition: 'all 0.2s ease',
+  },
+  kanjiBannerBtn: {
+    backgroundColor: '#fff1f2',
+    color: '#e11d48',
+    padding: '7px 16px',
+    borderRadius: '20px',
+    fontSize: '0.85rem',
+    fontWeight: '800',
+    border: '1.5px solid #fecdd3',
+    boxShadow: '0 2px 8px rgba(225, 29, 72, 0.12)',
     cursor: 'pointer',
     display: 'inline-flex',
     alignItems: 'center',

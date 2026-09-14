@@ -85,11 +85,20 @@ export const useProgress = () => {
   const bonsaiState = useProgressStore((state) => state.bonsai_state);
   const rawMistakeVault = useProgressStore((state) => state.mistake_vault);
   const mistakeVault = useMemo(() => healMistakeVault(rawMistakeVault), [rawMistakeVault]);
+  const kanjiLearned = useProgressStore((state) => state.kanji_learned || {});
   const waterBonsai = useProgressStore((state) => state.waterBonsai);
   const recordMistake = useProgressStore((state) => state.recordMistake);
   const recordRescueSuccess = useProgressStore((state) => state.recordRescueSuccess);
   const clearMistake = useProgressStore((state) => state.clearMistake);
   const clearAllMistakes = useProgressStore((state) => state.clearAllMistakes);
+  const toggleKanjiLearned = useProgressStore((state) => state.toggleKanjiLearned);
+  const importAllData = useProgressStore((state) => state.importAllData);
+  const resetAllProgress = useProgressStore((state) => state.resetAllProgress);
+
+  const checkIsKanjiLearned = useCallback(
+    (id) => Boolean(kanjiLearned[id]),
+    [kanjiLearned]
+  );
 
   return {
     currentLesson,
@@ -97,9 +106,12 @@ export const useProgress = () => {
     learnedItems,
     bonsaiState,
     mistakeVault,
+    kanjiLearned,
     setCurrentLesson,
     markAsLearned,
     checkIsLearned,
+    checkIsKanjiLearned,
+    toggleKanjiLearned,
     reviewItem,
     getDueItems,
     getCompletionRate,
@@ -108,5 +120,7 @@ export const useProgress = () => {
     recordRescueSuccess,
     clearMistake,
     clearAllMistakes,
+    importAllData,
+    resetAllProgress,
   };
 };
