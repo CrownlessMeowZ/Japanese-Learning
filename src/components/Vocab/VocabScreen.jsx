@@ -2,9 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { Flashcard } from './Flashcard';
 import { FuriganaText } from '../FuriganaText';
 import { useAudioPlayer } from '../../hooks/useAudioPlayer';
-import { useProgress } from '../../hooks/useProgress';
 import { vocabularyData } from '../../data/vocabulary';
-import { fisherYatesShuffle } from '../../hooks/useQuizEngine';
 import { romajiToHiragana } from '../../utils/romajiConverter';
 
 /**
@@ -21,8 +19,7 @@ export const VocabScreen = ({
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedSection, setSelectedSection] = useState('all');
 
-  const { playAudio, isPlaying } = useAudioPlayer();
-  const { checkIsLearned, toggleLearnedItem } = useProgress();
+  const { playAudio } = useAudioPlayer();
 
   // Dữ liệu từ vựng của bài học (ưu tiên prop, fallback về dataset)
   const allWords = useMemo(() => {

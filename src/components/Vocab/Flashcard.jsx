@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useAudioPlayer } from '../../hooks/useAudioPlayer';
 import { useProgress } from '../../hooks/useProgress';
 import { FuriganaText } from '../FuriganaText';
@@ -11,20 +11,22 @@ import { FuriganaText } from '../FuriganaText';
 export const Flashcard = ({
   item,
   onNext,
-  onPrev,
+  _onPrev,
   currentIndex = 0,
   totalCount = 0,
 }) => {
   const [isFlipped, setIsFlipped] = useState(false);
+  const [prevId, setPrevId] = useState(item?.id);
   const { reviewItem } = useProgress();
 
   const soundTarget = item?.hiragana || item?.kanji || item?.audio_url || '';
   const { isPlaying, playAudio, stopAudio } = useAudioPlayer(soundTarget);
 
-  // Tự động lật về mặt trước khi đổi sang từ vựng mới
-  useEffect(() => {
+  // Tự động lật về mặt trước khi đổi sang từ vựng mới (không dùng effect gây cascading render)
+  if (item?.id !== prevId) {
+    setPrevId(item?.id);
     setIsFlipped(false);
-  }, [item?.id]);
+  }
 
   if (!item) return null;
 

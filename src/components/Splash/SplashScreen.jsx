@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import '../../styles/sakura.css';
 
 // Danh sách danh ngôn & châm ngôn tiếng Nhật truyền cảm hứng (Kotowaza)
@@ -72,14 +72,19 @@ export const SplashScreen = ({ onFinish }) => {
     return INSPIRATIONAL_QUOTES[randomIndex];
   });
 
-  const handleDismiss = () => {
+  const handleDismiss = useCallback(() => {
     if (isFadingOut) return;
     setIsFadingOut(true);
     // Chờ hiệu ứng mờ dần (Fade-out 350ms) rồi gọi onFinish
     setTimeout(() => {
       onFinish();
     }, 350);
-  };
+  }, [isFadingOut, onFinish]);
+
+  const handleDismissRef = useRef(handleDismiss);
+  useEffect(() => {
+    handleDismissRef.current = handleDismiss;
+  }, [handleDismiss]);
 
   // Điều khiển thanh tiến trình và đếm ngược (chỉ bắt đầu khi người dùng thực sự nhìn thấy tab)
   useEffect(() => {
@@ -99,9 +104,9 @@ export const SplashScreen = ({ onFinish }) => {
 
         if (elapsed >= totalMs) {
           clearInterval(interval);
-          handleDismiss();
+          handleDismissRef.current();
         }
-      }, 30);
+      }, 200); // 200ms interval kết hợp CSS transition mượt mà, giảm 85% số lần re-render
     };
 
     // Nếu tab đang bị ẩn (Brave/Chrome đang khởi động nền), chờ đến khi tab hiển thị trước mắt người dùng

@@ -12,6 +12,12 @@ export const useSpeechRecognition = (options = {}) => {
   const [error, setError] = useState(null);
 
   const recognitionRef = useRef(null);
+  const optionsRef = useRef(options);
+
+  useEffect(() => {
+    optionsRef.current = options;
+  }, [options]);
+
   const isSupported = typeof window !== 'undefined' && Boolean(
     window.SpeechRecognition || window.webkitSpeechRecognition
   );
@@ -36,8 +42,8 @@ export const useSpeechRecognition = (options = {}) => {
       const current = event.resultIndex;
       const resultText = event.results[current][0].transcript;
       setTranscript(resultText);
-      if (options.onResult) {
-        options.onResult(resultText);
+      if (optionsRef.current.onResult) {
+        optionsRef.current.onResult(resultText);
       }
     };
 
@@ -59,7 +65,7 @@ export const useSpeechRecognition = (options = {}) => {
     return () => {
       try {
         recognition.abort();
-      } catch (e) {
+      } catch {
         // Ignore abort on unmount
       }
       recognitionRef.current = null;
@@ -90,7 +96,7 @@ export const useSpeechRecognition = (options = {}) => {
     if (recognitionRef.current) {
       try {
         recognitionRef.current.stop();
-      } catch (err) {
+      } catch {
         // Ignore
       }
     }

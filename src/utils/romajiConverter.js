@@ -86,7 +86,7 @@ export function romajiToHiragana(text) {
   str = str.replace(/nn([aiueoy])/g, (match, p1) => 'んn' + p1);
 
   // 2. Xử lý n' hoặc n- (ví dụ: shin'ai -> しんあい)
-  str = str.replace(/n['’\-]/g, 'ん');
+  str = str.replace(/n['’-]/g, 'ん');
 
   // 3. Xử lý 'n' đứng trước phụ âm (trừ y) hoặc cuối từ -> 'ん' (kondo -> こんど, shinbun -> しんぶん)
   str = str.replace(/n(?=[^aiueoy\s]|$)/g, 'ん');
@@ -227,5 +227,5 @@ export function isProbablyRomaji(text) {
     return false;
   }
   // Nếu chỉ gồm chữ cái Latin và có chứa nguyên âm a, e, i, o, u
-  return /^[a-zA-Z\s'’\-]+$/.test(trimmed) && /[aeiou]/.test(trimmed);
+  return /^[a-zA-Z\s'’-]+$/.test(trimmed) && /[aeiou]/.test(trimmed);
 }

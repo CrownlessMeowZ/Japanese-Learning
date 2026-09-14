@@ -9,7 +9,6 @@ const STATIC_ASSETS = [
   '/index.html',
   '/manifest.json',
   '/favicon.svg',
-  '/icons.svg',
 ];
 
 // 1. Cài đặt Service Worker và lưu trước các file tĩnh cốt lõi

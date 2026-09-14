@@ -1,5 +1,5 @@
 // src/hooks/useAudioPlayer.js
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 /**
  * Global Audio Manager (Singleton instance ngoài React lifecycle)
@@ -168,8 +168,8 @@ const audioManager = new AudioManager();
  * Cung cấp state `isPlaying` (boolean hoặc kiểm tra theo target) và action `playAudio`
  */
 export const useAudioPlayer = (specificTarget = null) => {
-  const [currentlyPlayingTarget, setCurrentlyPlayingTarget] = useState(audioManager.currentTextOrUrl);
-  const [isPlayingGlobally, setIsPlayingGlobally] = useState(Boolean(audioManager.currentTextOrUrl));
+  const [currentlyPlayingTarget, setCurrentlyPlayingTarget] = useState(audioManager.currentPlayingTarget);
+  const [isPlayingGlobally, setIsPlayingGlobally] = useState(Boolean(audioManager.currentPlayingTarget));
 
   useEffect(() => {
     // Đăng ký nhận notify từ Audio Manager Singleton

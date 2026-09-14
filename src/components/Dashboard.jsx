@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useProgress } from '../hooks/useProgress';
 import { vocabularyData } from '../data/vocabulary';
 import { grammarData } from '../data/grammar';
 import { LessonModal } from './LessonModal';
 import '../styles/sakura.css';
+
+// Danh sách 15 bài học chuẩn Dekiru Nihongo Sơ cấp
+const LESSONS = Array.from({ length: 15 }, (_, i) => i + 1);
 
 /**
  * Dashboard Component - Progressive Disclosure (Modal Pattern)
@@ -15,8 +18,22 @@ export const Dashboard = ({ onSelectQuiz, onSelectVocab, onSelectGrammar, onSele
   const { dailyStreak, getCompletionRate } = useProgress();
   const [selectedLessonForModal, setSelectedLessonForModal] = useState(null);
 
-  // Danh sách 15 bài học chuẩn Dekiru Nihongo Sơ cấp
-  const lessons = Array.from({ length: 15 }, (_, i) => i + 1);
+  // Tối ưu hóa: tính toán tiến độ hoàn thành cho 15 bài bằng useMemo, tránh lặp lại 965 từ mỗi render
+  const lessonCards = useMemo(() => {
+    return LESSONS.map((lessonId) => {
+      const words = vocabularyData[String(lessonId)] || [];
+      const grammars = grammarData[lessonId] || grammarData[String(lessonId)] || [];
+      const { percentage, learnedCount, totalCount } = getCompletionRate(lessonId, words);
+      return {
+        lessonId,
+        words,
+        grammars,
+        percentage,
+        learnedCount,
+        totalCount,
+      };
+    });
+  }, [getCompletionRate]);
 
   return (
     <div style={styles.container}>
@@ -75,11 +92,7 @@ export const Dashboard = ({ onSelectQuiz, onSelectVocab, onSelectGrammar, onSele
 
       {/* Grid 15 Lessons */}
       <div style={styles.grid}>
-        {lessons.map((lessonId) => {
-          const words = vocabularyData[String(lessonId)] || [];
-          const grammars = grammarData[lessonId] || grammarData[String(lessonId)] || [];
-          const { percentage, learnedCount, totalCount } = getCompletionRate(lessonId, words);
-
+        {lessonCards.map(({ lessonId, words, grammars, percentage, learnedCount, totalCount }) => {
           return (
             <div key={lessonId} className="sakura-lesson-card">
               <div>

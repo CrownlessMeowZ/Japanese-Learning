@@ -33,7 +33,6 @@ export const KanaScreen = ({ onBack }) => {
   const [isInputShaking, setIsInputShaking] = useState(false);
   const [showAnswerFeedback, setShowAnswerFeedback] = useState(null); // { correct: bool, text: string } | null
   const [stats, setStats] = useState({ correct: 0, wrong: 0, troubleItems: [] });
-  const [choiceOptions, setChoiceOptions] = useState([]);
   const inputRef = useRef(null);
 
   // Phát âm chữ cái tiếng Nhật (Web Speech API)
@@ -77,8 +76,17 @@ export const KanaScreen = ({ onBack }) => {
       return;
     }
 
-    // Xáo trộn ngẫu nhiên (Fisher-Yates shuffle)
-    const shuffled = [...pool].sort(() => Math.random() - 0.5);
+    // Xáo trộn ngẫu nhiên và chuẩn bị sẵn 4 lựa chọn trắc nghiệm cho từng câu
+    const allRomaji = Array.from(new Set(pool.map((q) => q.romaji)));
+    const shuffled = [...pool].sort(() => Math.random() - 0.5).map((current) => {
+      const wrongPool = allRomaji.filter((r) => r !== current.romaji);
+      const wrongShuffled = wrongPool.sort(() => Math.random() - 0.5).slice(0, 3);
+      const options = [current.romaji, ...wrongShuffled].sort(() => Math.random() - 0.5);
+      return {
+        ...current,
+        choiceOptions: options,
+      };
+    });
 
     setQuizQuestions(shuffled);
     setCurrentIndex(0);
@@ -89,17 +97,9 @@ export const KanaScreen = ({ onBack }) => {
     setActiveTab('quiz');
   };
 
-  // Tạo các lựa chọn trắc nghiệm cho câu hiện tại
-  useEffect(() => {
-    if (activeTab === 'quiz' && quizMode === 'choice' && quizQuestions[currentIndex]) {
-      const current = quizQuestions[currentIndex];
-      const allRomaji = Array.from(new Set(quizQuestions.map((q) => q.romaji)));
-      const wrongPool = allRomaji.filter((r) => r !== current.romaji);
-      const wrongShuffled = wrongPool.sort(() => Math.random() - 0.5).slice(0, 3);
-      const options = [current.romaji, ...wrongShuffled].sort(() => Math.random() - 0.5);
-      setChoiceOptions(options);
-    }
-  }, [activeTab, quizMode, currentIndex, quizQuestions]);
+  // Lựa chọn trắc nghiệm cho câu hiện tại (trích xuất trực tiếp từ câu hỏi đã chuẩn bị)
+  const currentQuestion = quizQuestions[currentIndex];
+  const choiceOptions = currentQuestion?.choiceOptions || [];
 
   // Focus ô input khi ở chế độ gõ phím
   useEffect(() => {

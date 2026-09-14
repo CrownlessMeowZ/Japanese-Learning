@@ -11,7 +11,7 @@ export const FuriganaText = React.memo(({ kanji, kana, text, className = '' }) =
   const rawText = text || (typeof kanji === 'string' && kanji.includes('[') ? kanji : null);
   if (rawText) {
     const tokens = [];
-    const pattern = /([一-龠々〆ヶ]+)\[([ぁ-んァ-ヶ]+)\]|([^\[\]]+)/g;
+    const pattern = /([一-龠々〆ヶ]+)\[([ぁ-んァ-ヶ]+)\]|([^[\\]]+)/g;
     let match;
 
     while ((match = pattern.exec(rawText)) !== null) {
