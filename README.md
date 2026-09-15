@@ -20,14 +20,16 @@
 
 ## 📖 Giới Thiệu (Overview)
 
-**Nihongo Master (日本語マスター)** là một ứng dụng Web học tiếng Nhật thế hệ mới theo mô hình **Client-side Native / Offline-First Progressive Web App (PWA)**, được thiết kế chuyên sâu dành cho giáo trình **Dekiru Nihongo Sơ cấp (15 Bài học)** cùng toàn bộ hệ thống bảng chữ cái **Hiragana & Katakana**.
+**Nihongo Master (日本語マスター)** là một ứng dụng Web học tiếng Nhật thế hệ mới theo mô hình **Client-side Native / Offline-First Progressive Web App (PWA)**, được thiết kế chuyên sâu dành cho giáo trình **Dekiru Nihongo Sơ cấp (15 Bài học)**, toàn bộ hệ thống bảng chữ cái **Hiragana & Katakana mở rộng** và kho tàng **80 Hán tự N5 cơ bản**.
 
 Vượt lên trên những ứng dụng hiển thị thông thường, **Nihongo Master** được thai nghén từ sự kết hợp hài hòa giữa **Khoa học Máy tính (Computer Science)**, **Khoa học Nhận thức (Cognitive Science)** và **Nghệ thuật Thẩm mỹ Nhật Bản**:
 
-* 🧠 **Khoa học Trí nhớ Dài hạn:** Áp dụng thuật toán Spaced Repetition (**SuperMemo-2 / SM-2**) nhằm bẻ gãy đường cong lãng quên (Ebbinghaus Forgetting Curve), đưa từ vựng vào sâu trong trí nhớ dài hạn.
+* 🧠 **Khoa học Trí nhớ Dài hạn:** Áp dụng thuật toán Spaced Repetition (**SuperMemo-2 / SM-2**) nhằm bẻ gãy đường cong lãng quên (Ebbinghaus Forgetting Curve), đưa 965+ từ vựng chuẩn sách hồng vào sâu trong trí nhớ dài hạn.
 * 🎙️ **Trí tuệ Nhân tạo Âm thanh:** Luyện phản xạ hội thoại và chấm điểm phát âm tiếng Nhật thời gian thực (`ja-JP`) bằng thuật toán **Quy hoạch động (Dynamic Programming - Levenshtein Distance)** kết hợp Web Speech API gốc trên trình duyệt.
-* ⚡ **Phản Xạ Gõ Phím Thần Tốc (Speed Typing):** Rèn luyện khả năng chuyển dịch tâm trí từ Romaji sang Kana với phản hồi xúc giác và thị giác tức thời.
-* 📖 **Từ Điển Lai (Hybrid Dual-Engine):** Tích hợp từ điển nội bộ tra cứu tức thì $0\text{ms}$ không cần Internet, song hành cùng bộ dịch thuật Google Translate API với cơ chế tự động sửa lỗi gõ (Did you mean) và phiên âm Romaji.
+* 🈸 **Nghệ Thuật Thư Pháp Hán Tự (Shodō Canvas):** Luyện nét chữ Hán trực tiếp trên bảng vẽ Canvas tương tác với lưới chữ điền chuẩn truyền thống, tra cứu âm Hán - Việt, Onyomi, Kunyomi và ví dụ ngữ cảnh.
+* ⚡ **Phản Xạ Gõ Phím & Katakana Đột Phá:** Bảng chữ cái Hiragana & Katakana toàn diện, bổ sung âm Katakana Dakuten `ヴ (vu)` và **8 hàng Katakana mở rộng** chuẩn Tofugu; hỗ trợ chế độ trắc nghiệm độc lập và **Speed Typing** thần tốc.
+* 📖 **Bộ Dịch & Từ Điển Đa Tầng (Multi-Tier Real-Time):** Tra cứu tức thì $0\text{ms}$ kho từ điển nội bộ 965+ từ khi offline; tự động dịch thời gian thực (Debounced 400ms) với cơ chế fallback 3 tầng linh hoạt: **Google Translate API ➔ MyMemory API ➔ Offline Lexicon**.
+* 💾 **Ký Ức An Toàn (JSON Backup & Restore):** Cơ chế sao lưu và khôi phục toàn bộ tiến trình học tập, chuỗi Streak và lịch sử SM-2 sang định dạng file JSON chỉ với một cú click.
 * 🎨 **Thẩm Mỹ Đậm Phong Vị Nhật Bản:** Trải nghiệm thị giác nhẹ nhàng, thanh thoát với hiệu ứng cánh hoa anh đào rơi bồng bềnh (**GPU Sakura Compositor**), không gây xao nhãng và tôn trọng trạng thái tập trung sâu (*Zen Flow State*).
 
 ---
@@ -55,7 +57,7 @@ giảm kích thước bundle      tuyệt đối vào việc học      hiệu �
    Giao diện người dùng được thiết kế dựa trên bảng màu truyền thống Nhật Bản: sắc hồng dịu của hoa anh đào (*Sakura-iro* 🌸), sắc xanh trầm ấm (*Aoi* 🍵), cùng nền tối dịu mắt (*Sumi* 🌑). Không quảng cáo, không banner gây rối, mang lại không gian tĩnh lặng cho tâm trí.
 3. **Takumi (匠 - Tay nghề nghệ nhân tỉ mỉ):**  
    * **GPU Sakura Animation:** Cánh hoa anh đào rơi tự nhiên trong không gian đa chiều, được tính toán và xử lý hoàn toàn bằng GPU Compositing Layer (`translate3d`, `will-change: transform`), tiêu tốn xấp xỉ 0% CPU và bảo toàn 60fps mượt mà.
-   * **Zero-Collision Audio Engine:** Thiết kế theo Singleton Pattern, ngăn chặn hoàn toàn hiện tượng âm thanh bị phát đè lên nhau khi học viên bấm nghe nhiều từ vựng liên tiếp.
+   * **Zero-Collision Audio Engine:** Thiết kế theo Singleton Pattern, ngăn chặn hoàn toàn hiện tượng âm thanh bị phát đè lên nhau khi học viên thao tác liên tục trên các thẻ từ vựng.
    * **Instant Furigana Switch:** Kỹ thuật CSS Data-attribute Selector `[data-furigana="hidden"]` cho phép bật/tắt toàn bộ phiên âm Kana trên chữ Hán mà **không gây re-render bất kỳ component React nào**.
 
 ---
@@ -65,26 +67,27 @@ giảm kích thước bundle      tuyệt đối vào việc học      hiệu �
 Ứng dụng tuân thủ nghiêm ngặt mô hình kiến trúc **Client-Side High Performance & Modular Layering**:
 
 ```
-┌────────────────────────────────────────────────────────────────────────┐
-│                        PRESENTATION LAYER (REACT 19)                   │
-│   Dashboard (15 Lessons)   │ KanaScreen (Speed Typing / Quiz Matrix)  │
-│   VocabScreen (3D Cards)   │ KaiwaScreen (Voice AI Recognition)       │
-│   GrammarScreen (Formulas) │ QuizScreen (Fisher-Yates Challenges)     │
-│   Translator (Hybrid Dict) │ FuriganaSwitch (CSS Data-Attribute)      │
-└───────────────────▲───────────────────────────────▲────────────────────┘
-                    │                               │
-┌───────────────────┴───────────────────────────────┴────────────────────┐
-│                         APPLICATION LOGIC & HOOKS                      │
-│   useQuizEngine (State Machine)      │ useAudioPlayer (Singleton Audio)│
-│   useSpeechRecognition (ja-JP Native)│ useProgress (Facade SRS SM-2)   │
-└───────────────────▲───────────────────────────────▲────────────────────┘
-                    │                               │
-┌───────────────────┴───────────────────────────────┴────────────────────┐
-│                      DATA & STATE PERSISTENCE LAYER                    │
-│   Zustand Store (Persist LocalStorage) │ srsAlgo.js (SM-2 Core Engine) │
-│   stringUtils.js (DP Levenshtein)      │ GPU Sakura Particle Canvas    │
-│   vocabulary.js (Offline Lexicon)      │ grammar.js (15 Dekiru Lessons)│
-└────────────────────────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                             PRESENTATION LAYER (REACT 19)                              │
+│   WelcomeScreen (Hero Hub)     │ Dashboard (15 Lessons)   │ KanjiScreen (Canvas Pad)   │
+│   VocabScreen (3D Cards)       │ KaiwaScreen (Voice AI)   │ KanaScreen (Tofugu Matrix) │
+│   GrammarScreen (Formulas)     │ QuizScreen (State Engine)│ Translator (Multi-Tier API)│
+│   BackupRestoreModal (JSON IO) │ FuriganaSwitch (CSS Data)│ SplashScreen (Zen Splash)  │
+└────────────────────────▲──────────────────────────────────────▲────────────────────────┘
+                         │                                      │
+┌────────────────────────┴──────────────────────────────────────┴────────────────────────┐
+│                                APPLICATION LOGIC & HOOKS                               │
+│   useQuizEngine (State Machine)             │ useAudioPlayer (Singleton Audio Engine)  │
+│   useSpeechRecognition (ja-JP Web Speech)   │ useProgress (Facade SRS SM-2 Engine)     │
+└────────────────────────▲──────────────────────────────────────▲────────────────────────┘
+                         │                                      │
+┌────────────────────────┴──────────────────────────────────────┴────────────────────────┐
+│                             DATA & STATE PERSISTENCE LAYER                             │
+│   Zustand Store (Persist LocalStorage)      │ srsAlgo.js (SM-2 Core Engine)            │
+│   stringUtils.js (DP Levenshtein)           │ GPU Sakura Particle CSS Layer            │
+│   vocabulary.js / .json (965+ Pink Book)    │ grammar.js (15 Dekiru Lessons)           │
+│   kanjiData.js (80 N5 Kanji & Radicals)     │ offlineDictionary.js (0ms Fast Search)   │
+└────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ### Bảng Phân Bổ Công Nghệ
@@ -93,7 +96,7 @@ giảm kích thước bundle      tuyệt đối vào việc học      hiệu �
 | :--- | :--- | :--- |
 | **Core Framework** | **React 19.2 + Vite 8.3** | Render UI siêu tốc, kiến trúc component hiện đại, HMR tức thì |
 | **State Management** | **Zustand 5.0 + Persist** | Quản lý trạng thái tập trung, lưu trữ tiến trình & streak vào `LocalStorage` với chi phí bộ nhớ tối thiểu |
-| **Code Splitting** | **`React.lazy()` + `<Suspense>`** | Tách nhỏ 6 màn hình chức năng thành các chunk độc lập, giảm dung lượng tải trang ban đầu xuống ~480 kB |
+| **Code Splitting** | **`React.lazy()` + `<Suspense>`** | Tách nhỏ các màn hình chức năng thành các chunk độc lập, giảm dung lượng tải trang ban đầu xuống ~480 kB |
 | **Code Quality** | **Oxlint 1.81 (Rust-based)** | Công cụ kiểm tra mã nguồn siêu nhanh bằng Rust, đạt chuẩn 0 lỗi và 0 cảnh báo kỹ thuật |
 | **Voice Processing** | **Web Speech API (`ja-JP`)** | Nhận dạng giọng nói tự nhiên từ trình duyệt, bảo mật thông tin và hoàn toàn miễn phí |
 | **Audio Engine** | **HTML5 Audio + Web Speech TTS** | Quản lý phát âm thanh chuẩn bản ngữ qua cơ chế Singleton chống xung đột đa luồng |
@@ -174,14 +177,17 @@ Dữ liệu ngữ pháp được trích xuất tự động từ file bảng tí
 
 | Biểu tượng | Tính năng | Mô tả chi tiết |
 | :---: | :--- | :--- |
+| 🌸 | **Đại Sảnh Đón Tiếp (Welcome Hub)** | Màn hình Hero ấn tượng chuẩn EdTech quốc tế, tôn vinh 4 chỉ số vàng (15 bài học, 965+ từ vựng, SM-2, 100% PWA Offline), phím tắt học cấp tốc và nút Trang Chủ điều hướng linh hoạt. |
 | 🎴 | **Thẻ Ghi Nhớ Flashcard 3D** | Lật thẻ không gian 3D mượt mà, tích hợp phát âm bản ngữ, phiên âm Furigana và chấm điểm chu kỳ Spaced Repetition (SM-2). |
-| ⛩️ | **Bảng Chữ Cái Kana Master** | Hiển thị toàn diện Hiragana & Katakana (Seion, Dakuon, Yoon); chế độ **Speed Typing** gõ phím phản xạ Romaji thần tốc và trắc nghiệm 4 lựa chọn. |
+| 🈸 | **Hán Tự N5 & Bảng Vẽ Canvas** | 80 Hán tự căn bản N5 kèm âm Hán-Việt, Onyomi, Kunyomi và số nét; tích hợp bảng vẽ Canvas luyện viết chữ Hán với lưới chữ điền $2 \times 2$ truyền thống. |
+| ⛩️ | **Bảng Chữ Cái Kana Master (Tofugu)** | Bảng Hiragana & Katakana toàn diện, bổ sung Katakana Dakuten `ヴ` và **8 hàng Katakana mở rộng**; chế độ **Speed Typing** gõ phím phản xạ Romaji và trắc nghiệm độc lập. |
 | 🎙️ | **Hội Thoại Kaiwa AI** | Luyện phát âm trực tiếp qua Micro, chấm điểm theo thời gian thực bằng thuật toán Levenshtein với thang màu trực quan. |
-| 📖 | **Từ Điển & Dịch Thuật AI** | Tra cứu từ điển nội bộ Dekiru 15 bài không cần mạng; dịch thuật Google Translate API tự động với gợi ý sửa lỗi gõ và Romaji. |
+| 📖 | **Từ Điển & Dịch Thuật Đa Tầng** | Tra cứu tức thì từ điển 965+ từ vựng nội bộ không cần mạng; dịch tự động thời gian thực (Debounced 400ms) với cơ chế dự phòng 3 tầng (Google API ➔ MyMemory ➔ Offline). |
 | 📝 | **Đấu Trường Trắc Nghiệm (Quiz)** | Thử thách phản xạ kiến thức theo từng bài học, cơ chế tính điểm theo chuỗi đúng liên tiếp (Streak) và vinh danh kết quả. |
 | 📊 | **Bảng Điều Khiển (Dashboard)** | Theo dõi tiến trình học tập của 15 bài Dekiru Nihongo, thống kê số lượng thẻ cần ôn tập và quản lý chuỗi ngày học tập liên tục. |
 | 🌿 | **Vườn Bonsai Tăng Trưởng (Sakura Garden)** | Cây Bonsai hoa anh đào tương tác đồ họa SVG tiến hóa qua 5 cấp độ theo chuỗi Streak, kèm tính năng tưới cây và danh ngôn Zen Nhật Bản. |
 | ⚠️ | **Sổ Tay Điểm Yếu & Hộp Cứu Hộ (Mistake Vault)** | Tự động âm thầm gom các từ hay làm sai trong Quiz & Flashcard, cung cấp chế độ cứu hộ cấp tốc với cơ chế tốt nghiệp sau 2 lần sửa đúng. |
+| 💾 | **Sao Lưu & Khôi Phục Ký Ức (JSON Backup)** | Xuất và nhập toàn bộ tiến trình học tập, chuỗi Streak và dữ liệu SM-2 sang file JSON an toàn, không lo mất dữ liệu khi dùng PWA Offline. |
 | 🌸 | **GPU Sakura Falling Effect** | Hiệu ứng cánh hoa anh đào rơi bồng bềnh mô phỏng vật lý 3D, chạy 100% trên GPU compositor layer, êm dịu và tiết kiệm pin. |
 
 ---
@@ -200,24 +206,30 @@ Japanese Learning/
 ├── src/
 │   ├── assets/                 # Hình ảnh minh họa & icon ứng dụng
 │   ├── components/             # Các khối giao diện React (UI Components)
-│   │   ├── Dictionary/         # Translator.jsx & Dumb Components (Dịch thuật & Từ điển)
+│   │   ├── Backup/             # BackupRestoreModal.jsx (Sao lưu & Khôi phục JSON)
+│   │   ├── Dictionary/         # Translator.jsx & Dumb Components (Dịch thuật AI đa tầng & Từ điển)
 │   │   ├── Garden/             # SakuraGarden.jsx (Vườn Bonsai tương tác 5 cấp độ)
-│   │   ├── Grammar/            # GrammarCard.jsx, GrammarScreen.jsx
-│   │   ├── Kaiwa/              # KaiwaCard.jsx, KaiwaScreen.jsx (Voice AI)
-│   │   ├── Kana/               # KanaScreen.jsx & Dumb Components (Speed Typing & Matrix)
-│   │   ├── Quiz/               # QuizScreen.jsx (State-machine Quiz Engine)
-│   │   ├── Rescue/             # MistakeVaultModal.jsx (Hộp Cứu Hộ Điểm Yếu & Ôn Tập)
+│   │   ├── Grammar/            # GrammarCard.jsx, GrammarScreen.jsx (Ngữ pháp 15 bài)
+│   │   ├── Kaiwa/              # KaiwaCard.jsx, KaiwaScreen.jsx (Voice AI & Levenshtein)
+│   │   ├── Kana/               # KanaScreen.jsx, KanaMatrixView, KanaQuiz... (Tofugu Extended Kana)
+│   │   ├── Kanji/              # KanjiScreen.jsx, KanjiCanvasPad.jsx... (80 Hán tự & Luyện viết)
+│   │   ├── Quiz/               # QuizScreen.jsx (State-machine Quiz Engine & Fisher-Yates)
+│   │   ├── Rescue/             # MistakeVaultModal.jsx (Hộp Cứu Hộ Điểm Yếu & Ôn Tập SM-2)
+│   │   ├── Splash/             # SplashScreen.jsx (Màn hình mở đầu danh ngôn Zen)
 │   │   ├── Vocab/              # Flashcard.jsx (3D flip), VocabScreen.jsx
-│   │   ├── Welcome/            # WelcomeScreen.jsx (Onboarding Carousel)
-│   │   ├── Dashboard.jsx       # Bảng tiến độ 15 bài học dạng lưới 2x2
+│   │   ├── Welcome/            # WelcomeScreen.jsx (Hero Onboarding Landing Hub)
+│   │   ├── Dashboard.jsx       # Bảng tiến độ 15 bài học & Lộ trình Dekiru
 │   │   ├── FuriganaSwitch.jsx  # Công tắc bật/tắt Furigana toàn app
 │   │   └── FuriganaText.jsx    # Component hiển thị thẻ <ruby> tối ưu
 │   ├── data/                   # Cơ sở tri thức ứng dụng
 │   │   ├── grammar.js          # Dữ liệu ngữ pháp 15 bài Dekiru
-│   │   ├── kanaData.js         # Dữ liệu bảng chữ cái Hiragana & Katakana
-│   │   └── vocabulary.js       # Dữ liệu từ vựng đồ sộ theo từng bài học
+│   │   ├── kanaData.js         # Bảng chữ cái Hiragana & Katakana mở rộng 8 hàng
+│   │   ├── kanjiData.js        # 80 chữ Hán N5 căn bản kèm âm Hán Việt
+│   │   ├── offlineDictionary.js# Từ điển offline tra cứu tức thì 0ms
+│   │   ├── vocabulary.js       # 965+ từ vựng đối chiếu chuẩn sách hồng Dekiru
+│   │   └── vocabulary.json     # Dữ liệu JSON từ vựng đầy đủ
 │   ├── hooks/                  # Custom Hooks tách bạch logic nghiệp vụ
-│   │   ├── useAudioPlayer.js   # Singleton Audio Manager
+│   │   ├── useAudioPlayer.js   # Singleton Audio Manager (Zero-Collision)
 │   │   ├── useProgress.js      # Facade hook quản lý tiến độ & SM-2
 │   │   ├── useQuizEngine.js    # Logic bài tập & Fisher-Yates shuffle
 │   │   └── useSpeechRecognition.js # Web Speech API recognition wrapper
@@ -253,8 +265,8 @@ Japanese Learning/
 ### 2. Cài Đặt Ứng Dụng
 ```bash
 # 1. Clone mã nguồn về máy tính
-git clone https://github.com/your-username/japanese-learning.git
-cd japanese-learning
+git clone https://github.com/CrownlessMeowZ/Japanese-Learning.git
+cd Japanese-Learning
 
 # 2. Cài đặt các gói phụ thuộc (dependencies)
 npm install
@@ -305,7 +317,7 @@ python scripts/export_grammar.py
 
 Mọi ý tưởng cải tiến, báo cáo lỗi (Issue) hoặc yêu cầu kéo (Pull Request) nhằm nâng tầm dự án đều được chào đón nồng nhiệt theo tinh thần cộng đồng mã nguồn mở:
 
-1. **Fork** repository này về tài khoản GitHub của bạn.
+1. **Fork** repository này về tài khoản GitHub của bạn (`https://github.com/CrownlessMeowZ/Japanese-Learning`).
 2. Tạo một nhánh tính năng mới (`git checkout -b feature/Shin-Kinou`).
 3. Cam kết các thay đổi (`git commit -m 'feat: them tinh nang luyen viet Kanji'`).
 4. Đẩy nhánh lên GitHub (`git push origin feature/Shin-Kinou`).
