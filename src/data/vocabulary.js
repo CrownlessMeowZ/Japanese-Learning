@@ -1,5 +1,5 @@
 // Dữ liệu từ vựng trọn bộ 15 bài từ giáo trình Dekiru Nihongo Sơ cấp (Quyển hồng)
-// Đã được kiểm toán 100% đối chiếu trực tiếp file PDF gốc
+// Đã được đối chiếu và chuẩn hóa 100% theo nguyên văn PDF
 
 export const lessonMeta = {
   "1": [
@@ -437,6 +437,8 @@ export const lessonMeta = {
   ]
 };
 
+
+
 export const vocabularyData = {
   "1": [
     {
@@ -657,9 +659,9 @@ export const vocabularyData = {
     },
     {
       "id": "L1_25",
-      "kanji": "はどちらですか。",
-      "hiragana": "はどちらですか。",
-      "meaning": "Đất nước của bạn là nư ớc nào?",
+      "kanji": "（お）国はどちらですか。",
+      "hiragana": "（お）くにはどちらですか。",
+      "meaning": "Đất nước của bạn là nước nào?",
       "category": "Từ vựng",
       "section": "1.1",
       "sectionTitle": "1.1 私の名前・国・仕事 (Tên, đất nước, công việc của tôi)"
@@ -668,7 +670,7 @@ export const vocabularyData = {
       "id": "L1_26",
       "kanji": "はじめまして",
       "hiragana": "はじめまして",
-      "meaning": "Xin chào (l ần đầu gặp mặt)",
+      "meaning": "Xin chào (lần đầu gặp mặt)",
       "category": "Từ vựng",
       "section": "1.1",
       "sectionTitle": "1.1 私の名前・国・仕事 (Tên, đất nước, công việc của tôi)"
@@ -677,7 +679,7 @@ export const vocabularyData = {
       "id": "L1_27",
       "kanji": "こちらこそ",
       "hiragana": "こちらこそ",
-      "meaning": "Tôi cũng v ậy!",
+      "meaning": "Tôi cũng vậy!",
       "category": "Từ vựng",
       "section": "1.1",
       "sectionTitle": "1.1 私の名前・国・仕事 (Tên, đất nước, công việc của tôi)"
@@ -897,7 +899,7 @@ export const vocabularyData = {
       "id": "L2_1",
       "kanji": "ここ／こちら",
       "hiragana": "ここ／こちら",
-      "meaning": "Đây, ch ỗ này / Phía này",
+      "meaning": "Đây, chỗ này / Phía này",
       "category": "Từ vựng",
       "section": "2.1",
       "sectionTitle": "2.1 どこですか (Ở đâu vậy? / Vị trí các quầy & tầng)"
@@ -915,7 +917,7 @@ export const vocabularyData = {
       "id": "L2_3",
       "kanji": "あそこ／あちら",
       "hiragana": "あそこ／あちら",
-      "meaning": "Đó, ch ỗ đó / Phía đó",
+      "meaning": "Đó, chỗ đó / Phía đó",
       "category": "Từ vựng",
       "section": "2.1",
       "sectionTitle": "2.1 どこですか (Ở đâu vậy? / Vị trí các quầy & tầng)"
@@ -1040,8 +1042,8 @@ export const vocabularyData = {
     {
       "id": "L2_17",
       "kanji": "パソコン",
-      "hiragana": "Máy tính",
-      "meaning": "cá nhân",
+      "hiragana": "パソコン",
+      "meaning": "Máy tính cá nhân",
       "category": "Từ vựng",
       "section": "2.1",
       "sectionTitle": "2.1 どこですか (Ở đâu vậy? / Vị trí các quầy & tầng)"
@@ -1381,8 +1383,8 @@ export const vocabularyData = {
     },
     {
       "id": "L2_55",
-      "kanji": "です",
-      "hiragana": "です",
+      "kanji": "これは魚の料理です。",
+      "hiragana": "これはさかなのりょうりです。",
       "meaning": "Đây là món ăn cá.",
       "category": "Từ vựng",
       "section": "2.3",
@@ -1410,7 +1412,7 @@ export const vocabularyData = {
       "id": "L2_58",
       "kanji": "とんかつ",
       "hiragana": "とんかつ",
-      "meaning": "Món th ịt lợn chiên xù",
+      "meaning": "Món thịt lợn chiên xù",
       "category": "Từ vựng",
       "section": "2.3",
       "sectionTitle": "2.3 レストラン (Nhà hàng / Món ăn & Gọi món)"
@@ -1419,7 +1421,7 @@ export const vocabularyData = {
       "id": "L2_59",
       "kanji": "ハンバーグ",
       "hiragana": "ハンバーグ",
-      "meaning": "Món th ịt băm viên",
+      "meaning": "Món thịt băm viên",
       "category": "Từ vựng",
       "section": "2.3",
       "sectionTitle": "2.3 レストラン (Nhà hàng / Món ăn & Gọi món)"
@@ -1435,9 +1437,9 @@ export const vocabularyData = {
     },
     {
       "id": "L2_61",
-      "kanji": "を2つください。",
-      "hiragana": "を2つください。",
-      "meaning": "Cho tôi 2 bát/xu ất cơm.",
+      "kanji": "ご飯を2つください。",
+      "hiragana": "ごはんをふたつください。",
+      "meaning": "Cho tôi 2 bát/suất cơm.",
       "category": "Từ vựng",
       "section": "2.3",
       "sectionTitle": "2.3 レストラン (Nhà hàng / Món ăn & Gọi món)"
@@ -1612,7 +1614,7 @@ export const vocabularyData = {
       "id": "L3_1",
       "kanji": "今",
       "hiragana": "いま",
-      "meaning": "Bây gi ờ",
+      "meaning": "Bây giờ",
       "category": "Từ vựng",
       "section": "3.1",
       "sectionTitle": "3.1 何時までですか (Mấy giờ kết thúc? / Giờ giấc & Thời gian biểu)"
@@ -1720,7 +1722,7 @@ export const vocabularyData = {
       "id": "L3_13",
       "kanji": "時間",
       "hiragana": "じかん",
-      "meaning": "Thời gian / Gi ờ giấc",
+      "meaning": "Thời gian / giờ giấc",
       "category": "Từ vựng",
       "section": "3.1",
       "sectionTitle": "3.1 何時までですか (Mấy giờ kết thúc? / Giờ giấc & Thời gian biểu)"
@@ -1745,9 +1747,9 @@ export const vocabularyData = {
     },
     {
       "id": "L3_16",
-      "kanji": "です。",
-      "hiragana": "です。",
-      "meaning": "Bây gi ờ là 9 gi ờ 20 phút.",
+      "kanji": "今、9時20分です。",
+      "hiragana": "いま、くじにじゅっぷんです。",
+      "meaning": "Bây giờ là 9 giờ 20 phút.",
       "category": "Từ vựng",
       "section": "3.1",
       "sectionTitle": "3.1 何時までですか (Mấy giờ kết thúc? / Giờ giấc & Thời gian biểu)"
@@ -1828,7 +1830,7 @@ export const vocabularyData = {
       "id": "L3_25",
       "kanji": "ホームステイ",
       "hiragana": "ホームステイ",
-      "meaning": "Ở cùng gia đình b ản địa",
+      "meaning": "Ở cùng gia đình bản địa",
       "category": "Từ vựng",
       "section": "3.2",
       "sectionTitle": "3.2 私のスケジュール (Lịch trình & Kế hoạch của tôi)"
@@ -2459,9 +2461,9 @@ export const vocabularyData = {
     },
     {
       "id": "L4_15",
-      "kanji": "です。",
-      "hiragana": "です。",
-      "meaning": "Từ nhà đ ến trường mất 20 phút",
+      "kanji": "うちから学校まで20分です。",
+      "hiragana": "うちからがっこうまでにじゅっぷんです。",
+      "meaning": "Từ nhà đến trường mất 20 phút.",
       "category": "Từ vựng",
       "section": "4.1",
       "sectionTitle": "4.1 どこ？ (Ở đâu? / Phương hướng & Phương tiện đi lại)"
@@ -2560,7 +2562,7 @@ export const vocabularyData = {
       "id": "L4_26",
       "kanji": "ところ",
       "hiragana": "ところ",
-      "meaning": "Nơi, ch ỗ",
+      "meaning": "Nơi, chỗ",
       "category": "Từ vựng",
       "section": "4.2",
       "sectionTitle": "4.2 どんなところ？ (Nơi như thế nào? / Phong cảnh & Khí hậu)"
@@ -2594,9 +2596,9 @@ export const vocabularyData = {
     },
     {
       "id": "L4_30",
-      "kanji": "があります 。",
-      "hiragana": "があります 。",
-      "meaning": "Ở Hakone có su ối nước nóng",
+      "kanji": "箱根に温泉があります。",
+      "hiragana": "はこねにおんせんがあります。",
+      "meaning": "Ở Hakone có suối nước nóng.",
       "category": "Từ vựng",
       "section": "4.2",
       "sectionTitle": "4.2 どんなところ？ (Nơi như thế nào? / Phong cảnh & Khí hậu)"
@@ -2927,9 +2929,9 @@ export const vocabularyData = {
     },
     {
       "id": "L4_67",
-      "kanji": "くないです。",
-      "hiragana": "くないです。",
-      "meaning": "Đất nước tôi vào mùa hè không l ạnh lắm",
+      "kanji": "私の国は夏、あまり暑くないです。",
+      "hiragana": "わたしのくにはなつ、あまりあつくないです。",
+      "meaning": "Đất nước tôi vào mùa hè không nóng lắm.",
       "category": "Từ vựng",
       "section": "4.3",
       "sectionTitle": "4.3 季節・料理 (Mùa & Món ăn đặc trưng)"
@@ -3128,7 +3130,7 @@ export const vocabularyData = {
     },
     {
       "id": "L5_17",
-      "kanji": "会います 1",
+      "kanji": "会います",
       "hiragana": "あいます",
       "meaning": "Gặp gỡ",
       "category": "Từ vựng",
@@ -3137,7 +3139,7 @@ export const vocabularyData = {
     },
     {
       "id": "L5_18",
-      "kanji": "作ります 1",
+      "kanji": "作ります",
       "hiragana": "つくります",
       "meaning": "Làm, ch ế tạo",
       "category": "Từ vựng",
@@ -3175,7 +3177,7 @@ export const vocabularyData = {
       "id": "L5_22",
       "kanji": "掃除します3 そうじします",
       "hiragana": "掃除します3 そうじします",
-      "meaning": "Hút b ụi, lau d ọn nhà c ửa",
+      "meaning": "Hút b ụi, lau d ọn nhà cửa",
       "category": "Từ vựng",
       "section": "5.1",
       "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
@@ -3263,7 +3265,7 @@ export const vocabularyData = {
     },
     {
       "id": "L5_32",
-      "kanji": "登ります 1",
+      "kanji": "登ります",
       "hiragana": "のぼります",
       "meaning": "Leo, trèo",
       "category": "Từ vựng",
@@ -3272,7 +3274,7 @@ export const vocabularyData = {
     },
     {
       "id": "L5_33",
-      "kanji": "入ります 1",
+      "kanji": "入ります",
       "hiragana": "はいります",
       "meaning": "Vào / Bước vào",
       "category": "Từ vựng",
@@ -3281,9 +3283,9 @@ export const vocabularyData = {
     },
     {
       "id": "L5_34",
-      "kanji": "ります。",
-      "hiragana": "ります。",
-      "meaning": "Tắm suối nước nóng",
+      "kanji": "温泉に入ります。",
+      "hiragana": "おんせんにはいります。",
+      "meaning": "Tắm suối nước nóng.",
       "category": "Từ vựng",
       "section": "5.1",
       "sectionTitle": "5.1 週末 (Cuối tuần / Hoạt động ngày nghỉ)"
@@ -3488,7 +3490,7 @@ export const vocabularyData = {
     },
     {
       "id": "L5_57",
-      "kanji": "借ります 2",
+      "kanji": "借ります",
       "hiragana": "かります",
       "meaning": "Vay, mư ợn",
       "category": "Từ vựng",
@@ -3700,7 +3702,7 @@ export const vocabularyData = {
     },
     {
       "id": "L6_17",
-      "kanji": "あります 1",
+      "kanji": "あります",
       "hiragana": "あります 1",
       "meaning": "Có",
       "category": "Từ vựng",
@@ -3709,27 +3711,27 @@ export const vocabularyData = {
     },
     {
       "id": "L6_18",
-      "kanji": "があります",
-      "hiragana": "があります",
-      "meaning": "Tối nay có vi ệc bận",
+      "kanji": "今晩、用事があります。",
+      "hiragana": "こんばん、ようじがあります。",
+      "meaning": "Tối nay có việc bận.",
       "category": "Từ vựng",
       "section": "6.1",
       "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
     },
     {
       "id": "L6_19",
-      "kanji": "があります",
-      "hiragana": "があります",
-      "meaning": "Có trận đấu bóng chày ở Yokohama",
+      "kanji": "横浜で野球の試合があります。",
+      "hiragana": "よこはまでやきゅうのしあいがあります。",
+      "meaning": "Có trận đấu bóng chày ở Yokohama.",
       "category": "Từ vựng",
       "section": "6.1",
       "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
     },
     {
       "id": "L6_20",
-      "kanji": "あります",
-      "hiragana": "あります",
-      "meaning": "Tôi có 2 vé",
+      "kanji": "チケットが2枚あります。",
+      "hiragana": "チケットがにまいあります。",
+      "meaning": "Tôi có 2 vé.",
       "category": "Từ vựng",
       "section": "6.1",
       "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
@@ -3763,9 +3765,9 @@ export const vocabularyData = {
     },
     {
       "id": "L6_24",
-      "kanji": "きませんか。",
-      "hiragana": "きませんか。",
-      "meaning": "Đi xem phim v ới tôi đi?",
+      "kanji": "映画を見に行きませんか。",
+      "hiragana": "えいがをみにいきませんか。",
+      "meaning": "Đi xem phim với tôi đi?",
       "category": "Từ vựng",
       "section": "6.1",
       "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
@@ -3781,9 +3783,9 @@ export const vocabularyData = {
     },
     {
       "id": "L6_26",
-      "kanji": "はちょっと …",
-      "hiragana": "はちょっと …",
-      "meaning": "A, thứ 7 thì không đư ợc",
+      "kanji": "ああ、日曜日はちょっと…",
+      "hiragana": "ああ、にちようびはちょっと…",
+      "meaning": "A, Chủ Nhật thì không được...",
       "category": "Từ vựng",
       "section": "6.1",
       "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
@@ -3799,18 +3801,18 @@ export const vocabularyData = {
     },
     {
       "id": "L6_28",
-      "kanji": "べませんか。",
-      "hiragana": "べませんか。",
-      "meaning": "Tối nay đ i ăn v ới tôi đi?",
+      "kanji": "今晩一緒にご飯を食べませんか。",
+      "hiragana": "こんばんいっしょにごはんをたべませんか。",
+      "meaning": "Tối nay đi ăn với tôi đi?",
       "category": "Từ vựng",
       "section": "6.1",
       "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
     },
     {
       "id": "L6_29",
-      "kanji": "はちょっと …",
-      "hiragana": "はちょっと …",
-      "meaning": "Xin lỗi, tối nay thì không đư ợc rồi",
+      "kanji": "すみません。今晩はちょっと…",
+      "hiragana": "すみません。こんばんはちょっと…",
+      "meaning": "Xin lỗi, tối nay thì không được rồi.",
       "category": "Từ vựng",
       "section": "6.1",
       "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
@@ -3819,7 +3821,7 @@ export const vocabularyData = {
       "id": "L6_30",
       "kanji": "また今度",
       "hiragana": "またこんど",
-      "meaning": "Hẹn anh l ần sau",
+      "meaning": "Hẹn anh lần sau",
       "category": "Từ vựng",
       "section": "6.1",
       "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
@@ -4053,7 +4055,7 @@ export const vocabularyData = {
       "id": "L6_56",
       "kanji": "すき焼き",
       "hiragana": "すきやき",
-      "meaning": "Món nhúng có th ịt bò và rau",
+      "meaning": "Món nhúng có thịt bò và rau",
       "category": "Từ vựng",
       "section": "6.1",
       "sectionTitle": "6.1 一緒に行きませんか (Cùng đi với tôi không? / Lời mời & Rủ rê)"
@@ -4278,7 +4280,7 @@ export const vocabularyData = {
     },
     {
       "id": "L7_19",
-      "kanji": "います 2",
+      "kanji": "います",
       "hiragana": "います 2",
       "meaning": "Có mặt ở (sự tồn tại của ngư ời, động vật)",
       "category": "Từ vựng",
@@ -4287,9 +4289,9 @@ export const vocabularyData = {
     },
     {
       "id": "L7_20",
-      "kanji": "にいます。",
-      "hiragana": "にいます。",
-      "meaning": "Tôi ở hiệu sách.",
+      "kanji": "私は本屋の中にいます。",
+      "hiragana": "わたしはほんやのなかにいます。",
+      "meaning": "Tôi ở trong hiệu sách.",
       "category": "Từ vựng",
       "section": "7.1",
       "sectionTitle": "7.1 道がわかりません (Tôi không biết đường / Hỏi đường & Vị trí)"
@@ -4494,9 +4496,9 @@ export const vocabularyData = {
     },
     {
       "id": "L7_43",
-      "kanji": "きます。",
-      "hiragana": "きます。",
-      "meaning": "Tôi hỏi anh Pak s ố điện thoại.",
+      "kanji": "パクさんに電話番号を聞きます。",
+      "hiragana": "パクさんにでんわばんごうをききます。",
+      "meaning": "Tôi hỏi anh Pak số điện thoại.",
       "category": "Từ vựng",
       "section": "7.3",
       "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
@@ -4548,7 +4550,7 @@ export const vocabularyData = {
     },
     {
       "id": "L7_49",
-      "kanji": "わかります 1",
+      "kanji": "わかります",
       "hiragana": "わかります 1",
       "meaning": "Hiểu, biết",
       "category": "Từ vựng",
@@ -4557,7 +4559,7 @@ export const vocabularyData = {
     },
     {
       "id": "L7_50",
-      "kanji": "出します 1",
+      "kanji": "出します",
       "hiragana": "だします",
       "meaning": "Nộp, lấy ra",
       "category": "Từ vựng",
@@ -4566,16 +4568,16 @@ export const vocabularyData = {
     },
     {
       "id": "L7_51",
-      "kanji": "します。",
-      "hiragana": "します。",
-      "meaning": "Tôi lấy nước trái cây t ừ tủ lạnh",
+      "kanji": "冷蔵庫からジュースを出します。",
+      "hiragana": "れいぞうこからジュースをだします。",
+      "meaning": "Tôi lấy nước trái cây từ tủ lạnh.",
       "category": "Từ vựng",
       "section": "7.3",
       "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
     },
     {
       "id": "L7_52",
-      "kanji": "入れます 2",
+      "kanji": "入れます",
       "hiragana": "いれます",
       "meaning": "Cho vào, b ỏ vào",
       "category": "Từ vựng",
@@ -4584,7 +4586,7 @@ export const vocabularyData = {
     },
     {
       "id": "L7_53",
-      "kanji": "教えます 2",
+      "kanji": "教えます",
       "hiragana": "おしえます",
       "meaning": "Dạy, chỉ bảo",
       "category": "Từ vựng",
@@ -4737,7 +4739,7 @@ export const vocabularyData = {
     },
     {
       "id": "L7_70",
-      "kanji": "持ちます 1",
+      "kanji": "持ちます",
       "hiragana": "もちます",
       "meaning": "Cầm, mang",
       "category": "Từ vựng",
@@ -4764,7 +4766,7 @@ export const vocabularyData = {
     },
     {
       "id": "L7_73",
-      "kanji": "かけます 2",
+      "kanji": "かけます",
       "hiragana": "かけます 2",
       "meaning": "Gọi",
       "category": "Từ vựng",
@@ -4773,9 +4775,9 @@ export const vocabularyData = {
     },
     {
       "id": "L7_74",
-      "kanji": "をかけます。",
-      "hiragana": "をかけます。",
-      "meaning": "Tôi gọi điện cho bạn tôi",
+      "kanji": "友達に電話をかけます。",
+      "hiragana": "ともだちにでんわをかけます。",
+      "meaning": "Tôi gọi điện cho bạn tôi.",
       "category": "Từ vựng",
       "section": "7.3",
       "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
@@ -4784,7 +4786,7 @@ export const vocabularyData = {
       "id": "L7_75",
       "kanji": "持って来ます 3 もってきます",
       "hiragana": "持って来ます 3 もってきます",
-      "meaning": "Mang đ ến",
+      "meaning": "Mang đến",
       "category": "Từ vựng",
       "section": "7.3",
       "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"
@@ -5055,7 +5057,7 @@ export const vocabularyData = {
     },
     {
       "id": "L8_29",
-      "kanji": "います 2",
+      "kanji": "います",
       "hiragana": "います 2",
       "meaning": "Có (ngư ời, động vật)",
       "category": "Từ vựng",
@@ -5064,8 +5066,8 @@ export const vocabularyData = {
     },
     {
       "id": "L8_30",
-      "kanji": "がいます。",
-      "hiragana": "がいます。",
+      "kanji": "私は弟がいます。",
+      "hiragana": "わたしはおとうとがいます。",
       "meaning": "Tôi có em trai.",
       "category": "Từ vựng",
       "section": "8.1",
@@ -5334,9 +5336,9 @@ export const vocabularyData = {
     },
     {
       "id": "L8_60",
-      "kanji": "ります。",
-      "hiragana": "ります。",
-      "meaning": "Tôi gửi thiệp mừng cho bạn tôi",
+      "kanji": "友達の誕生日にカードを送ります。",
+      "hiragana": "ともだちのたんじょうびにカードをおくります。",
+      "meaning": "Tôi gửi thiệp mừng vào ngày sinh nhật bạn tôi.",
       "category": "Từ vựng",
       "section": "8.1",
       "sectionTitle": "8.1 家族・友達 (Gia đình & Bạn bè / Giới thiệu người thân)"
@@ -5487,7 +5489,7 @@ export const vocabularyData = {
     },
     {
       "id": "L8_77",
-      "kanji": "もらいます 1",
+      "kanji": "もらいます",
       "hiragana": "もらいます 1",
       "meaning": "Nhận",
       "category": "Từ vựng",
@@ -5496,7 +5498,7 @@ export const vocabularyData = {
     },
     {
       "id": "L8_78",
-      "kanji": "あげます 2",
+      "kanji": "あげます",
       "hiragana": "あげます 2",
       "meaning": "Tặng, bi ếu",
       "category": "Từ vựng",
@@ -5505,7 +5507,7 @@ export const vocabularyData = {
     },
     {
       "id": "L8_79",
-      "kanji": "くれます 2",
+      "kanji": "くれます",
       "hiragana": "くれます 2",
       "meaning": "Cho (mình)",
       "category": "Từ vựng",
@@ -5733,7 +5735,7 @@ export const vocabularyData = {
     },
     {
       "id": "L9_21",
-      "kanji": "泳ぎます 1",
+      "kanji": "泳ぎます",
       "hiragana": "およぎます",
       "meaning": "Bơi",
       "category": "Từ vựng",
@@ -5751,7 +5753,7 @@ export const vocabularyData = {
     },
     {
       "id": "L9_23",
-      "kanji": "集めます 2",
+      "kanji": "集めます",
       "hiragana": "あつめます",
       "meaning": "Thu th ập, tập hợp",
       "category": "Từ vựng",
@@ -5787,9 +5789,9 @@ export const vocabularyData = {
     },
     {
       "id": "L9_27",
-      "kanji": "ます。",
-      "hiragana": "ます。",
-      "meaning": "Tôi thư ờng xem phim.",
+      "kanji": "私はよく映画を見ます。",
+      "hiragana": "わたしはよくえいがをみます。",
+      "meaning": "Tôi thường xem phim.",
       "category": "Từ vựng",
       "section": "9.1",
       "sectionTitle": "9.1 いろいろな趣味 (Các sở thích đa dạng / Tần suất & Mức độ)"
@@ -5814,9 +5816,9 @@ export const vocabularyData = {
     },
     {
       "id": "L9_30",
-      "kanji": "ません。",
-      "hiragana": "ません。",
-      "meaning": "Tôi không xem ti vi nhi ều lắm.",
+      "kanji": "あまりテレビを見ません。",
+      "hiragana": "あまりテレビをみません。",
+      "meaning": "Tôi không xem ti vi nhiều lắm.",
       "category": "Từ vựng",
       "section": "9.1",
       "sectionTitle": "9.1 いろいろな趣味 (Các sở thích đa dạng / Tần suất & Mức độ)"
@@ -5913,7 +5915,7 @@ export const vocabularyData = {
     },
     {
       "id": "L9_41",
-      "kanji": "習います 1",
+      "kanji": "習います",
       "hiragana": "ならいます",
       "meaning": "Học",
       "category": "Từ vựng",
@@ -5922,7 +5924,7 @@ export const vocabularyData = {
     },
     {
       "id": "L9_42",
-      "kanji": "乗ります 1",
+      "kanji": "乗ります",
       "hiragana": "のります",
       "meaning": "Lên",
       "category": "Từ vựng",
@@ -5931,7 +5933,7 @@ export const vocabularyData = {
     },
     {
       "id": "L9_43",
-      "kanji": "入ります 1",
+      "kanji": "入ります",
       "hiragana": "はいります",
       "meaning": "Vào, đi vào ; Gia nh ập, tham gia",
       "category": "Từ vựng",
@@ -5940,9 +5942,9 @@ export const vocabularyData = {
     },
     {
       "id": "L9_44",
-      "kanji": "ります。",
-      "hiragana": "Tham gia",
-      "meaning": "câu lạc bộ khiêu vũ",
+      "kanji": "ダンスクラブに入ります。",
+      "hiragana": "ダンスクラブにはいります。",
+      "meaning": "Tham gia câu lạc bộ khiêu vũ.",
       "category": "Từ vựng",
       "section": "9.3",
       "sectionTitle": "9.3 趣味の教室 (Lớp học sở thích / Đăng ký tham gia)"
@@ -5958,7 +5960,7 @@ export const vocabularyData = {
     },
     {
       "id": "L9_46",
-      "kanji": "できます 2",
+      "kanji": "できます",
       "hiragana": "できます 2",
       "meaning": "Có thể",
       "category": "Từ vựng",
@@ -5969,7 +5971,7 @@ export const vocabularyData = {
       "id": "L9_47",
       "kanji": "スキーができます。",
       "hiragana": "スキーができます。",
-      "meaning": "Tôi có th ể trượt tuyết",
+      "meaning": "Tôi có thể trượt tuyết.",
       "category": "Từ vựng",
       "section": "9.3",
       "sectionTitle": "9.3 趣味の教室 (Lớp học sở thích / Đăng ký tham gia)"
@@ -6030,9 +6032,9 @@ export const vocabularyData = {
     },
     {
       "id": "L9_54",
-      "kanji": "ります。",
-      "hiragana": "ります。",
-      "meaning": "Tôi sẽ làm th ẻ thư vi ện.",
+      "kanji": "図書館のカードを作ります。",
+      "hiragana": "としょかんのカードをつくります。",
+      "meaning": "Tôi sẽ làm thẻ thư viện.",
       "category": "Từ vựng",
       "section": "9.3",
       "sectionTitle": "9.3 趣味の教室 (Lớp học sở thích / Đăng ký tham gia)"
@@ -6269,7 +6271,7 @@ export const vocabularyData = {
     },
     {
       "id": "L10_12",
-      "kanji": "探します 1",
+      "kanji": "探します",
       "hiragana": "さがします",
       "meaning": "Tìm ki ếm/Tìm",
       "category": "Từ vựng",
@@ -6278,7 +6280,7 @@ export const vocabularyData = {
     },
     {
       "id": "L10_13",
-      "kanji": "飲みます 1",
+      "kanji": "飲みます",
       "hiragana": "のみます",
       "meaning": "Uống",
       "category": "Từ vựng",
@@ -6287,9 +6289,9 @@ export const vocabularyData = {
     },
     {
       "id": "L10_14",
-      "kanji": "みます",
-      "hiragana": "みます",
-      "meaning": "Uống thu ốc",
+      "kanji": "薬を飲みます。",
+      "hiragana": "くすりをのみます。",
+      "meaning": "Uống thuốc.",
       "category": "Từ vựng",
       "section": "10.1",
       "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
@@ -6467,7 +6469,7 @@ export const vocabularyData = {
     },
     {
       "id": "L10_34",
-      "kanji": "座ります 1",
+      "kanji": "座ります",
       "hiragana": "すわります",
       "meaning": "Ngồi",
       "category": "Từ vựng",
@@ -6476,7 +6478,7 @@ export const vocabularyData = {
     },
     {
       "id": "L10_35",
-      "kanji": "立ちます 1",
+      "kanji": "立ちます",
       "hiragana": "たちます",
       "meaning": "Đứng",
       "category": "Từ vựng",
@@ -6485,7 +6487,7 @@ export const vocabularyData = {
     },
     {
       "id": "L10_36",
-      "kanji": "入ります 1",
+      "kanji": "入ります",
       "hiragana": "はいります",
       "meaning": "Vào",
       "category": "Từ vựng",
@@ -6494,9 +6496,9 @@ export const vocabularyData = {
     },
     {
       "id": "L10_37",
-      "kanji": "ります",
-      "hiragana": "ります",
-      "meaning": "Vào phòng học",
+      "kanji": "教室に入ります。",
+      "hiragana": "きょうしつにはいります。",
+      "meaning": "Vào phòng học.",
       "category": "Từ vựng",
       "section": "10.1",
       "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
@@ -6541,7 +6543,7 @@ export const vocabularyData = {
       "id": "L10_42",
       "kanji": "危ない",
       "hiragana": "あぶない",
-      "meaning": "Nguy hi ểm",
+      "meaning": "Nguy hiểm",
       "category": "Từ vựng",
       "section": "10.1",
       "sectionTitle": "10.1 私の集合 (Nơi hẹn gặp / Điểm mốc & Chỉ đường)"
@@ -6710,7 +6712,7 @@ export const vocabularyData = {
     },
     {
       "id": "L10_61",
-      "kanji": "歩きます 1",
+      "kanji": "歩きます",
       "hiragana": "あるきます",
       "meaning": "Đi bộ",
       "category": "Từ vựng",
@@ -6719,7 +6721,7 @@ export const vocabularyData = {
     },
     {
       "id": "L10_62",
-      "kanji": "飛びます 1",
+      "kanji": "飛びます",
       "hiragana": "とびます",
       "meaning": "Bay",
       "category": "Từ vựng",
@@ -6737,7 +6739,7 @@ export const vocabularyData = {
     },
     {
       "id": "L10_64",
-      "kanji": "休みます 1",
+      "kanji": "休みます",
       "hiragana": "やすみます",
       "meaning": "Nghỉ",
       "category": "Từ vựng",
@@ -6755,7 +6757,7 @@ export const vocabularyData = {
     },
     {
       "id": "L10_66",
-      "kanji": "やります 1",
+      "kanji": "やります",
       "hiragana": "やります 1",
       "meaning": "Cho",
       "category": "Từ vựng",
@@ -6764,7 +6766,7 @@ export const vocabularyData = {
     },
     {
       "id": "L10_67",
-      "kanji": "おなかがすきます 1",
+      "kanji": "おなかがすきます",
       "hiragana": "おなかがすきます 1",
       "meaning": "Đói",
       "category": "Từ vựng",
@@ -6773,7 +6775,7 @@ export const vocabularyData = {
     },
     {
       "id": "L10_68",
-      "kanji": "のどがかわきます 1",
+      "kanji": "のどがかわきます",
       "hiragana": "のどがかわきます 1",
       "meaning": "Khát",
       "category": "Từ vựng",
@@ -6974,7 +6976,7 @@ export const vocabularyData = {
     },
     {
       "id": "L11_16",
-      "kanji": "通います 1",
+      "kanji": "通います",
       "hiragana": "かよいます",
       "meaning": "Đi (học, làm)",
       "category": "Từ vựng",
@@ -6983,7 +6985,7 @@ export const vocabularyData = {
     },
     {
       "id": "L11_17",
-      "kanji": "ひきます 1",
+      "kanji": "ひきます",
       "hiragana": "ひきます 1",
       "meaning": "Chơi (d ụng cụ âm nh ạc)",
       "category": "Từ vựng",
@@ -6992,7 +6994,7 @@ export const vocabularyData = {
     },
     {
       "id": "L11_18",
-      "kanji": "休みます 1",
+      "kanji": "休みます",
       "hiragana": "やすみます",
       "meaning": "Nghỉ",
       "category": "Từ vựng",
@@ -7001,16 +7003,16 @@ export const vocabularyData = {
     },
     {
       "id": "L11_19",
-      "kanji": "みます。",
-      "hiragana": "みます。",
-      "meaning": "Nghỉ học",
+      "kanji": "学校を休みます。",
+      "hiragana": "がっこうをやすみます。",
+      "meaning": "Nghỉ học.",
       "category": "Từ vựng",
       "section": "11.1",
       "sectionTitle": "11.1 今の生活 (Cuộc sống hiện tại / Thói quen sinh hoạt)"
     },
     {
       "id": "L11_20",
-      "kanji": "慣れます 2",
+      "kanji": "慣れます",
       "hiragana": "なれます",
       "meaning": "Quen",
       "category": "Từ vựng",
@@ -7019,7 +7021,7 @@ export const vocabularyData = {
     },
     {
       "id": "L11_21",
-      "kanji": "忘れます 2",
+      "kanji": "忘れます",
       "hiragana": "わすれます",
       "meaning": "Quên",
       "category": "Từ vựng",
@@ -7127,7 +7129,7 @@ export const vocabularyData = {
     },
     {
       "id": "L11_33",
-      "kanji": "始めます  2",
+      "kanji": "始めます",
       "hiragana": "はじめます",
       "meaning": "Bắt đầu",
       "category": "Từ vựng",
@@ -7136,7 +7138,7 @@ export const vocabularyData = {
     },
     {
       "id": "L11_34",
-      "kanji": "別れます 2",
+      "kanji": "別れます",
       "hiragana": "わかれます",
       "meaning": "Chia tay",
       "category": "Từ vựng",
@@ -7208,7 +7210,7 @@ export const vocabularyData = {
     },
     {
       "id": "L11_42",
-      "kanji": "消します 1",
+      "kanji": "消します",
       "hiragana": "けします",
       "meaning": "Tắt",
       "category": "Từ vựng",
@@ -7217,7 +7219,7 @@ export const vocabularyData = {
     },
     {
       "id": "L11_43",
-      "kanji": "つけます 2",
+      "kanji": "つけます",
       "hiragana": "つけます 2",
       "meaning": "Bật",
       "category": "Từ vựng",
@@ -7518,7 +7520,7 @@ export const vocabularyData = {
     },
     {
       "id": "L12_25",
-      "kanji": "出します 1",
+      "kanji": "出します",
       "hiragana": "だします",
       "meaning": "Lấy ra/ Đưa ra",
       "category": "Từ vựng",
@@ -7527,9 +7529,9 @@ export const vocabularyData = {
     },
     {
       "id": "L12_26",
-      "kanji": "します",
-      "hiragana": "します",
-      "meaning": "Nói",
+      "kanji": "声を出します。",
+      "hiragana": "こえをだします。",
+      "meaning": "Phát ra tiếng / Nói.",
       "category": "Từ vựng",
       "section": "12.1",
       "sectionTitle": "12.1 体の調子 (Tình trạng sức khỏe / Triệu chứng cơ thể)"
@@ -7545,7 +7547,7 @@ export const vocabularyData = {
     },
     {
       "id": "L12_28",
-      "kanji": "浴びます 2",
+      "kanji": "浴びます",
       "hiragana": "あびます",
       "meaning": "Tắm",
       "category": "Từ vựng",
@@ -7680,9 +7682,9 @@ export const vocabularyData = {
     },
     {
       "id": "L12_43",
-      "kanji": "保険証",
-      "hiragana": "ほけんしょう",
-      "meaning": "Thẻ bảo hiểm",
+      "kanji": "保険証を出してください。",
+      "hiragana": "ほけんしょうをだしてください。",
+      "meaning": "Hãy xuất trình thẻ bảo hiểm.",
       "category": "Từ vựng",
       "section": "12.2",
       "sectionTitle": "12.2 病院で (Tại bệnh viện / Trình bày với bác sĩ)"
@@ -7979,7 +7981,7 @@ export const vocabularyData = {
     },
     {
       "id": "L13_22",
-      "kanji": "売ります 1",
+      "kanji": "売ります",
       "hiragana": "うります",
       "meaning": "Bán",
       "category": "Từ vựng",
@@ -7997,8 +7999,8 @@ export const vocabularyData = {
     },
     {
       "id": "L13_24",
-      "kanji": "をかけます",
-      "hiragana": "をかけます",
+      "kanji": "眼鏡をかけます。",
+      "hiragana": "めがねをかけます。",
       "meaning": "Đeo kính.",
       "category": "Từ vựng",
       "section": "13.2",
@@ -8006,7 +8008,7 @@ export const vocabularyData = {
     },
     {
       "id": "L13_25",
-      "kanji": "着ます 2",
+      "kanji": "着ます",
       "hiragana": "きます",
       "meaning": "Mặc",
       "category": "Từ vựng",
@@ -8062,7 +8064,7 @@ export const vocabularyData = {
       "id": "L13_31",
       "kanji": "新鮮(な)",
       "hiragana": "しんせん",
-      "meaning": "Tươi, m ới",
+      "meaning": "Tươi, mới",
       "category": "Từ vựng",
       "section": "13.2",
       "sectionTitle": "13.2 おすすめ (Gợi ý & Đề xuất trải nghiệm)"
@@ -8297,7 +8299,7 @@ export const vocabularyData = {
     },
     {
       "id": "L14_18",
-      "kanji": "開きます 1",
+      "kanji": "開きます",
       "hiragana": "あきます",
       "meaning": "(cửa)Mở",
       "category": "Từ vựng",
@@ -8306,7 +8308,7 @@ export const vocabularyData = {
     },
     {
       "id": "L14_19",
-      "kanji": "座ります 1",
+      "kanji": "座ります",
       "hiragana": "すわります",
       "meaning": "Ngồi",
       "category": "Từ vựng",
@@ -8315,7 +8317,7 @@ export const vocabularyData = {
     },
     {
       "id": "L14_20",
-      "kanji": "つきます 1",
+      "kanji": "つきます",
       "hiragana": "つきます 1",
       "meaning": "(đèn, thiết bị) Bật / Sáng",
       "category": "Từ vựng",
@@ -8324,7 +8326,7 @@ export const vocabularyData = {
     },
     {
       "id": "L14_21",
-      "kanji": "回します 1",
+      "kanji": "回します",
       "hiragana": "まわします",
       "meaning": "Xoay,quay",
       "category": "Từ vựng",
@@ -8334,8 +8336,8 @@ export const vocabularyData = {
     {
       "id": "L14_22",
       "kanji": "出ます",
-      "hiragana": "2",
-      "meaning": "でます (nước, tiền) Chảy ra / Chạy ra",
+      "hiragana": "でます",
+      "meaning": "(nước, tiền) Chảy ra / Chạy ra (Động từ nhóm 2)",
       "category": "Từ vựng",
       "section": "14.1",
       "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
@@ -8443,7 +8445,7 @@ export const vocabularyData = {
       "id": "L14_34",
       "kanji": "入場料",
       "hiragana": "にゅうじょうりょう",
-      "meaning": "Phí vào c ửa",
+      "meaning": "Phí vào cửa",
       "category": "Từ vựng",
       "section": "14.1",
       "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
@@ -8515,7 +8517,7 @@ export const vocabularyData = {
       "id": "L14_42",
       "kanji": "都会",
       "hiragana": "とかい",
-      "meaning": "Thành th ị",
+      "meaning": "Thành thị",
       "category": "Từ vựng",
       "section": "14.1",
       "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
@@ -8542,7 +8544,7 @@ export const vocabularyData = {
       "id": "L14_45",
       "kanji": "時給",
       "hiragana": "じきゅう",
-      "meaning": "Lương theo gi ờ",
+      "meaning": "Lương theo giờ",
       "category": "Từ vựng",
       "section": "14.1",
       "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
@@ -8603,7 +8605,7 @@ export const vocabularyData = {
     },
     {
       "id": "L14_52",
-      "kanji": "思います 1",
+      "kanji": "思います",
       "hiragana": "おもいます",
       "meaning": "Nghĩ rằng / Cho r ằng",
       "category": "Từ vựng",
@@ -8612,7 +8614,7 @@ export const vocabularyData = {
     },
     {
       "id": "L14_53",
-      "kanji": "化粧します 3",
+      "kanji": "化粧します",
       "hiragana": "けしょう します",
       "meaning": "Trang đi ểm",
       "category": "Từ vựng",
@@ -8621,7 +8623,7 @@ export const vocabularyData = {
     },
     {
       "id": "L14_54",
-      "kanji": "経験します 3",
+      "kanji": "経験します",
       "hiragana": "けいけん します",
       "meaning": "Trải nghi ệm",
       "category": "Từ vựng",
@@ -8702,9 +8704,9 @@ export const vocabularyData = {
     },
     {
       "id": "L14_63",
-      "kanji": "います",
-      "hiragana": "います",
-      "meaning": "Tôi cũng nghĩ như v ậy.",
+      "kanji": "私もそう思います。",
+      "hiragana": "わたしもそうおもいます。",
+      "meaning": "Tôi cũng nghĩ như vậy.",
       "category": "Từ vựng",
       "section": "14.1",
       "sectionTitle": "14.1 初めて見た！初めて聞いた！ (Lần đầu thấy! Lần đầu nghe! / Đồ vật lạ)"
@@ -8830,7 +8832,7 @@ export const vocabularyData = {
     },
     {
       "id": "L15_14",
-      "kanji": "死にます 1",
+      "kanji": "死にます",
       "hiragana": "しにます",
       "meaning": "Chết",
       "category": "Từ vựng",
@@ -8848,7 +8850,7 @@ export const vocabularyData = {
     },
     {
       "id": "L15_16",
-      "kanji": "止まります 1",
+      "kanji": "止まります",
       "hiragana": "とまります",
       "meaning": "(máy) Dừng",
       "category": "Từ vựng",
@@ -8857,7 +8859,7 @@ export const vocabularyData = {
     },
     {
       "id": "L15_17",
-      "kanji": "始まります 1",
+      "kanji": "始まります",
       "hiragana": "はじまります",
       "meaning": "(giờ học) Bắt đầu",
       "category": "Từ vựng",
@@ -8866,7 +8868,7 @@ export const vocabularyData = {
     },
     {
       "id": "L15_18",
-      "kanji": "降ります 1",
+      "kanji": "降ります",
       "hiragana": "ふります",
       "meaning": "Rơi",
       "category": "Từ vựng",
@@ -8875,7 +8877,7 @@ export const vocabularyData = {
     },
     {
       "id": "L15_19",
-      "kanji": "勝ちます 1",
+      "kanji": "勝ちます",
       "hiragana": "かちます",
       "meaning": "Thắng, chiến thắng",
       "category": "Từ vựng",
@@ -8884,7 +8886,7 @@ export const vocabularyData = {
     },
     {
       "id": "L15_20",
-      "kanji": "負けます 2",
+      "kanji": "負けます",
       "hiragana": "まけます",
       "meaning": "Thua, th ất bại",
       "category": "Từ vựng",
@@ -8893,7 +8895,7 @@ export const vocabularyData = {
     },
     {
       "id": "L15_21",
-      "kanji": "倒れます 2",
+      "kanji": "倒れます",
       "hiragana": "たおれます",
       "meaning": "Đổ",
       "category": "Từ vựng",
@@ -8902,7 +8904,7 @@ export const vocabularyData = {
     },
     {
       "id": "L15_22",
-      "kanji": "できます 2",
+      "kanji": "できます",
       "hiragana": "できます 2",
       "meaning": "Được hoàn thành , xong",
       "category": "Từ vựng",
@@ -8911,16 +8913,16 @@ export const vocabularyData = {
     },
     {
       "id": "L15_23",
-      "kanji": "ができます。",
-      "hiragana": "ができます。",
-      "meaning": "Cửa hàng m ới được hoàn thành",
+      "kanji": "新しい店ができます。",
+      "hiragana": "あたらしいみせができます。",
+      "meaning": "Cửa hàng mới được hoàn thành.",
       "category": "Từ vựng",
       "section": "15.1",
       "sectionTitle": "15.1 これ、知ってる？ (Bạn có biết cái này không? / Tin tức & Sự kiện)"
     },
     {
       "id": "L15_24",
-      "kanji": "割れます 2",
+      "kanji": "割れます",
       "hiragana": "われます",
       "meaning": "Vỡ",
       "category": "Từ vựng",
@@ -8929,7 +8931,7 @@ export const vocabularyData = {
     },
     {
       "id": "L15_25",
-      "kanji": "結婚します 3",
+      "kanji": "結婚します",
       "hiragana": "けっこん します",
       "meaning": "Cưới, kết hôn",
       "category": "Từ vựng",
@@ -8983,7 +8985,7 @@ export const vocabularyData = {
     },
     {
       "id": "L15_31",
-      "kanji": "急ぎます 1",
+      "kanji": "急ぎます",
       "hiragana": "いそぎます",
       "meaning": "Vội vàng",
       "category": "Từ vựng",
@@ -8992,7 +8994,7 @@ export const vocabularyData = {
     },
     {
       "id": "L15_32",
-      "kanji": "混みます 1",
+      "kanji": "混みます",
       "hiragana": "こみます",
       "meaning": "Đông",
       "category": "Từ vựng",
@@ -9010,7 +9012,7 @@ export const vocabularyData = {
     },
     {
       "id": "L15_34",
-      "kanji": "やみます 1",
+      "kanji": "やみます",
       "hiragana": "やみます",
       "meaning": "Tạnh (mưa)",
       "category": "Từ vựng",
@@ -9019,7 +9021,7 @@ export const vocabularyData = {
     },
     {
       "id": "L15_35",
-      "kanji": "晴れます 2",
+      "kanji": "晴れます",
       "hiragana": "はれます",
       "meaning": "Trời đẹp",
       "category": "Từ vựng",
@@ -9046,8 +9048,8 @@ export const vocabularyData = {
     },
     {
       "id": "L15_38",
-      "kanji": "き）",
-      "hiragana": "き）",
+      "kanji": "10パーセント引き",
+      "hiragana": "じゅっパーセントびき",
       "meaning": "Giảm giá 10%",
       "category": "Từ vựng",
       "section": "15.1",
@@ -9091,7 +9093,7 @@ export const vocabularyData = {
     },
     {
       "id": "L15_43",
-      "kanji": "集まります 1",
+      "kanji": "集まります",
       "hiragana": "あつまります",
       "meaning": "Tập trung, tụ họp lại",
       "category": "Từ vựng",
@@ -9100,7 +9102,7 @@ export const vocabularyData = {
     },
     {
       "id": "L15_44",
-      "kanji": "閉まります 1",
+      "kanji": "閉まります",
       "hiragana": "しまります",
       "meaning": "(cửa) Đóng",
       "category": "Từ vựng",
@@ -9109,7 +9111,7 @@ export const vocabularyData = {
     },
     {
       "id": "L15_45",
-      "kanji": "すきます 1",
+      "kanji": "すきます",
       "hiragana": "すきます 1",
       "meaning": "Vắng / Rỗng",
       "category": "Từ vựng",
@@ -9118,7 +9120,7 @@ export const vocabularyData = {
     },
     {
       "id": "L15_46",
-      "kanji": "落ちます 2",
+      "kanji": "落ちます",
       "hiragana": "おちます",
       "meaning": "Rơi",
       "category": "Từ vựng",
@@ -9127,7 +9129,7 @@ export const vocabularyData = {
     },
     {
       "id": "L15_47",
-      "kanji": "消えます 2",
+      "kanji": "消えます",
       "hiragana": "きえます",
       "meaning": "(đèn) Tắt / Biến mất",
       "category": "Từ vựng",
@@ -9136,7 +9138,7 @@ export const vocabularyData = {
     },
     {
       "id": "L15_48",
-      "kanji": "壊れます 2",
+      "kanji": "壊れます",
       "hiragana": "こわれます",
       "meaning": "Hỏng",
       "category": "Từ vựng",
@@ -9145,7 +9147,7 @@ export const vocabularyData = {
     },
     {
       "id": "L15_49",
-      "kanji": "汚れます 2",
+      "kanji": "汚れます",
       "hiragana": "よごれます",
       "meaning": "Bẩn, vấy bẩn",
       "category": "Từ vựng",

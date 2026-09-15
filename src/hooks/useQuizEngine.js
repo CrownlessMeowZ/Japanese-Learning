@@ -1,5 +1,4 @@
 import { useState, useCallback, useMemo } from 'react';
-import { useProgressStore } from '../store/progressStore';
 
 /**
  * Quiz State Machine Enum
@@ -143,14 +142,6 @@ export const useQuizEngine = () => {
 
     if (isCorrect) {
       setScore((prevScore) => prevScore + 1);
-      const targetId = currentQ.correctAnswer?.id || currentQ.correctAnswer?.kanji;
-      if (targetId) {
-        useProgressStore.getState().recordRescueSuccess(targetId);
-      }
-    } else {
-      if (currentQ.correctAnswer) {
-        useProgressStore.getState().recordMistake(currentQ.correctAnswer);
-      }
     }
 
     return isCorrect;

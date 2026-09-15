@@ -40,7 +40,7 @@ export default function App() {
       return false;
     }
   });
-  const [currentRoute, setCurrentRoute] = useState('dashboard'); // 'dashboard' | 'welcome' | 'kana' | 'kanji' | 'quiz' | 'vocab' | 'grammar' | 'kaiwa' | 'translator'
+  const [currentRoute, setCurrentRoute] = useState('welcome'); // 'welcome' | 'dashboard' | 'kana' | 'kanji' | 'quiz' | 'vocab' | 'grammar' | 'kaiwa' | 'translator'
   const [activeLessonId, setActiveLessonId] = useState(1);
   const [isBackupModalOpen, setIsBackupModalOpen] = useState(false);
   const [isOnline, setIsOnline] = useState(typeof navigator !== 'undefined' ? navigator.onLine : true);
@@ -147,6 +147,16 @@ export default function App() {
               </div>
             ) : null}
 
+            {/* 0. Nút Trang Chủ (Welcome Screen) */}
+            <button
+              type="button"
+              onClick={handleOpenWelcome}
+              className={`sakura-nav-btn ${currentRoute === 'welcome' ? 'active' : ''}`}
+              title="Về màn hình mở đầu giới thiệu & tính năng nổi bật"
+            >
+              🌸 Trang Chủ
+            </button>
+
             {/* 1. Nút Khóa Học (Dashboard) */}
             <button
               type="button"
@@ -231,6 +241,8 @@ export default function App() {
               <WelcomeScreen
                 onStartLearning={handleOpenDashboard}
                 onOpenTranslator={handleOpenTranslator}
+                onOpenKana={handleOpenKana}
+                onOpenKanji={handleOpenKanji}
                 onSelectLesson={(lessonId) => {
                   setActiveLessonId(lessonId);
                   setCurrentRoute('vocab');

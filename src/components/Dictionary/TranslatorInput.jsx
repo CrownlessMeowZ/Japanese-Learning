@@ -80,7 +80,7 @@ export const TranslatorInput = ({
         value={sourceText}
         onChange={(e) => onSourceTextChange(e.target.value)}
         onKeyDown={(e) => {
-          if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+          if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
             onTranslate();
           }

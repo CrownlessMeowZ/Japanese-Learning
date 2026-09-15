@@ -10,7 +10,7 @@ import '../../styles/sakura.css';
  * - Thống kê 965 từ vựng, 15 bài học sơ cấp
  * - Nút kêu gọi hành động (CTA) nổi bật để người dùng bắt đầu ngay
  */
-export const WelcomeScreen = ({ onStartLearning, onOpenTranslator, onSelectLesson }) => {
+export const WelcomeScreen = ({ onStartLearning, onOpenTranslator, onSelectLesson, onOpenKana, onOpenKanji }) => {
   const { dailyStreak } = useProgress();
 
   return (
@@ -49,6 +49,35 @@ export const WelcomeScreen = ({ onStartLearning, onOpenTranslator, onSelectLesso
             <span>🔍 Tra Cứu Từ Điển & Dịch AI</span>
           </button>
         </div>
+
+        {/* Quick Hub Shortcuts */}
+        {(onOpenKana || onOpenKanji) && (
+          <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+            <span style={{ fontSize: '0.88rem', color: '#888', fontWeight: '600' }}>Học cấp tốc:</span>
+            {onOpenKana && (
+              <button
+                type="button"
+                onClick={onOpenKana}
+                className="sakura-nav-btn"
+                style={{ fontSize: '0.85rem', padding: '6px 14px', borderRadius: '12px' }}
+                title="Học bảng chữ cái Hiragana & Katakana"
+              >
+                🔤 Bảng Chữ Cái (Kana)
+              </button>
+            )}
+            {onOpenKanji && (
+              <button
+                type="button"
+                onClick={onOpenKanji}
+                className="sakura-nav-btn"
+                style={{ fontSize: '0.85rem', padding: '6px 14px', borderRadius: '12px' }}
+                title="Luyện viết 80 Hán tự N5 trên Canvas"
+              >
+                🈸 Hán Tự N5 (Kanji)
+              </button>
+            )}
+          </div>
+        )}
 
         {/* Streak Status if learner has progress */}
         {dailyStreak.count > 0 && (

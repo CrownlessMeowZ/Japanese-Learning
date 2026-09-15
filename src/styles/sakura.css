@@ -828,4 +828,207 @@
   }
 }
 
+/* ==========================================================================
+   14. GLOBAL BUTTON FOCUS & OUTLINE SANITIZATION
+   Triệt tiêu hoàn toàn viền đen mặc định của trình duyệt khi click / bỏ chọn
+   ========================================================================== */
+button {
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus {
+  outline: none;
+}
+
+button:focus-visible {
+  outline: 2px solid #e91e8c !important;
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   15. KANA INTERACTIVE HOVER & SELECTION ANIMATIONS
+   Hiệu ứng rê chuột phóng to + hiện viền, rời chuột bé lại + mất viền
+   ========================================================================== */
+
+/* 1. Nút tùy chọn Bảng chữ cái & Hình thức kiểm tra (KanaQuizSetup) */
+.kana-pill-option {
+  padding: 10px 22px;
+  background-color: #ffffff;
+  border: 2px solid transparent !important;
+  border-radius: 16px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #475569;
+  cursor: pointer;
+  outline: none !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.kana-pill-option:hover {
+  transform: scale(1.05);
+  border-color: #e91e8c !important;
+  color: #e91e8c;
+  box-shadow: 0 6px 18px rgba(233, 30, 140, 0.2);
+}
+
+.kana-pill-option.active {
+  background-color: #fff0f6 !important;
+  border-color: #e91e8c !important;
+  color: #e91e8c !important;
+  box-shadow: 0 3px 12px rgba(233, 30, 140, 0.22);
+}
+
+.kana-pill-option.active:hover {
+  transform: scale(1.05);
+  border-color: #d8157e !important;
+  box-shadow: 0 8px 22px rgba(233, 30, 140, 0.3);
+}
+
+/* 2. Thẻ chọn hàng chữ cái (Checklist các hàng Kana) */
+.kana-row-pill {
+  background-color: #ffffff;
+  border: 2px solid transparent !important;
+  border-radius: 14px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  outline: none !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+}
+
+.kana-row-pill:hover {
+  transform: scale(1.03);
+  border-color: #f472b6 !important;
+  box-shadow: 0 6px 18px rgba(233, 30, 140, 0.18);
+}
+
+.kana-row-pill.selected {
+  border-color: #e91e8c !important;
+  background-color: #fff0f6 !important;
+  box-shadow: 0 3px 12px rgba(233, 30, 140, 0.18);
+}
+
+.kana-row-pill.selected:hover {
+  transform: scale(1.03);
+  border-color: #d8157e !important;
+  box-shadow: 0 8px 22px rgba(233, 30, 140, 0.28);
+}
+
+/* 3. Nút thao tác nhanh Toolbar */
+.kana-quick-btn {
+  padding: 6px 14px;
+  background-color: #ffffff;
+  border: 1.5px solid transparent !important;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #475569;
+  cursor: pointer;
+  outline: none !important;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.kana-quick-btn:hover {
+  transform: scale(1.06);
+  border-color: #e91e8c !important;
+  color: #e91e8c;
+  box-shadow: 0 4px 14px rgba(233, 30, 140, 0.2);
+}
+
+/* 4. Nút 4 lựa chọn trắc nghiệm (Multiple Choice Quiz - Screenshot 114951) */
+.kana-choice-btn {
+  width: 100%;
+  padding: 18px 16px;
+  font-size: 1.35rem;
+  font-weight: 800;
+  background-color: #ffffff;
+  border: 2px solid transparent !important;
+  border-radius: 16px;
+  color: #1e293b;
+  cursor: pointer;
+  outline: none !important;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.kana-choice-btn:hover {
+  transform: scale(1.06);
+  border-color: #e91e8c !important;
+  color: #e91e8c;
+  background-color: #fff0f6;
+  box-shadow: 0 8px 24px rgba(233, 30, 140, 0.25);
+}
+
+.kana-choice-btn:active {
+  transform: scale(0.98);
+}
+
+/* 5. Nút chuyển đổi Tab chính (Bảng Tra Cứu vs Luyện Tập Phản Xạ) */
+.kana-nav-tab-btn {
+  padding: 10px 22px;
+  background-color: #ffffff;
+  color: #4a5568;
+  border: 2px solid transparent !important;
+  border-radius: 18px;
+  font-size: 0.94rem;
+  font-weight: 700;
+  cursor: pointer;
+  outline: none !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.kana-nav-tab-btn:hover {
+  transform: scale(1.04);
+  border-color: #e91e8c !important;
+  color: #e91e8c;
+  box-shadow: 0 4px 16px rgba(233, 30, 140, 0.2);
+}
+
+.kana-nav-tab-btn.active {
+  background-color: #e91e8c !important;
+  color: #ffffff !important;
+  border-color: #e91e8c !important;
+  box-shadow: 0 4px 16px rgba(233, 30, 140, 0.35);
+}
+
+.kana-nav-tab-btn.active:hover {
+  transform: scale(1.04);
+  background-color: #d8157e !important;
+  border-color: #d8157e !important;
+}
 

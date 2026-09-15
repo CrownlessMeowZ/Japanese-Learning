@@ -1,9 +1,9 @@
 import React from 'react';
-import { KANA_SECTIONS } from '../../data/kanaData';
+import { getKanaSections } from '../../data/kanaData';
 
 /**
  * KanaMatrixView - Bảng tra cứu tương tác Kana (Hiragana / Katakana)
- * Hiển thị ma trận ký tự Seion, Dakuon, Yoon kèm phát âm qua Web Speech API
+ * Hiển thị ma trận ký tự Seion, Dakuon, Yoon và Extended Katakana kèm phát âm qua Web Speech API
  */
 export const KanaMatrixView = ({
   chartScript,
@@ -11,6 +11,8 @@ export const KanaMatrixView = ({
   onLaunchQuiz,
   onSpeakKana,
 }) => {
+  const sections = getKanaSections(chartScript);
+
   return (
     <div style={styles.cardBox}>
       {/* Sub-toggle: Hiragana vs Katakana */}
@@ -47,8 +49,8 @@ export const KanaMatrixView = ({
         </button>
       </div>
 
-      {/* Render Sections (Seion, Dakuon, Yoon) */}
-      {KANA_SECTIONS.map((section) => (
+      {/* Render Sections (Seion, Dakuon, Yoon, Extended Katakana) */}
+      {sections.map((section) => (
         <div key={section.id} style={styles.chartSection}>
           <div style={styles.sectionHeader}>
             <h3 style={styles.sectionTitle}>{section.title}</h3>
@@ -61,7 +63,10 @@ export const KanaMatrixView = ({
                 <div style={styles.rowTitleLabel}>{row.name}</div>
                 <div style={styles.kanaGridRow}>
                   {row.items.map((item, idx) => {
-                    const char = chartScript === 'hiragana' ? item.hira : item.kata;
+                    const char = chartScript === 'hiragana'
+                      ? (item.hira || item.kata)
+                      : (item.kata || item.hira);
+
                     return (
                       <div
                         key={idx}
@@ -108,7 +113,7 @@ const styles = {
     backgroundColor: '#f8fafc',
     padding: '4px',
     borderRadius: '16px',
-    border: '1px solid #e2e8f0',
+    border: '1.5px solid #e2e8f0',
     gap: '4px',
   },
   scriptBtn: {
@@ -120,12 +125,14 @@ const styles = {
     fontWeight: '700',
     fontSize: '0.9rem',
     cursor: 'pointer',
+    outline: 'none',
     transition: 'all 0.2s ease',
   },
   scriptBtnActive: {
     backgroundColor: '#ffffff',
     color: '#e91e8c',
-    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.06)',
+    outline: 'none',
+    boxShadow: '0 2px 8px rgba(233, 30, 140, 0.15)',
   },
   actionLaunchQuizBtn: {
     padding: '10px 22px',
@@ -136,6 +143,7 @@ const styles = {
     fontWeight: '800',
     fontSize: '0.92rem',
     cursor: 'pointer',
+    outline: 'none',
     boxShadow: '0 4px 12px rgba(233, 30, 140, 0.25)',
     transition: 'all 0.2s ease',
   },
@@ -164,7 +172,7 @@ const styles = {
     backgroundColor: '#f8fafc',
     borderRadius: '16px',
     padding: '12px 16px',
-    border: '1px solid #e2e8f0',
+    border: '1.5px solid #e2e8f0',
     display: 'flex',
     flexDirection: 'column',
     gap: '10px',

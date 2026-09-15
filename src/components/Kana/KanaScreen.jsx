@@ -56,8 +56,18 @@ export const KanaScreen = ({ onBack }) => {
     });
   }, []);
 
+  // Đổi bảng chữ cái và đồng bộ danh sách hàng hợp lệ
+  const handleSetQuizScript = useCallback((newScript) => {
+    setQuizScript(newScript);
+    const validRowIds = new Set(getAllRowIds(newScript));
+    setSelectedRows((prev) => {
+      const filtered = prev.filter((id) => validRowIds.has(id));
+      return filtered.length > 0 ? filtered : getSeionRowIds();
+    });
+  }, []);
+
   // Các action chọn nhanh
-  const selectAllRows = useCallback(() => setSelectedRows(getAllRowIds()), []);
+  const selectAllRows = useCallback(() => setSelectedRows(getAllRowIds(quizScript)), [quizScript]);
   const selectSeionOnly = useCallback(() => setSelectedRows(getSeionRowIds()), []);
   const clearAllRows = useCallback(() => setSelectedRows([]), []);
 
@@ -245,22 +255,18 @@ export const KanaScreen = ({ onBack }) => {
       <div style={styles.tabNavRow}>
         <button
           type="button"
-          style={{
-            ...styles.navTabBtn,
-            ...(activeTab === 'chart' ? styles.navTabBtnActive : {}),
-          }}
+          className={`kana-nav-tab-btn ${activeTab === 'chart' ? 'active' : ''}`}
           onClick={() => setActiveTab('chart')}
         >
           📖 Bảng Tra Cứu (Kana Chart)
         </button>
         <button
           type="button"
-          style={{
-            ...styles.navTabBtn,
-            ...(activeTab === 'setup' || activeTab === 'quiz' || activeTab === 'results'
-              ? styles.navTabBtnActive
-              : {}),
-          }}
+          className={`kana-nav-tab-btn ${
+            activeTab === 'setup' || activeTab === 'quiz' || activeTab === 'results'
+              ? 'active'
+              : ''
+          }`}
           onClick={() => setActiveTab('setup')}
         >
           🎯 Luyện Tập Phản Xạ (Kana Quiz)
@@ -284,7 +290,7 @@ export const KanaScreen = ({ onBack }) => {
       {activeTab === 'setup' && (
         <KanaQuizSetup
           quizScript={quizScript}
-          setQuizScript={setQuizScript}
+          setQuizScript={handleSetQuizScript}
           quizMode={quizMode}
           setQuizMode={setQuizMode}
           selectedRows={selectedRows}

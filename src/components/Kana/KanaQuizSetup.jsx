@@ -1,9 +1,13 @@
 import React from 'react';
-import { KANA_SECTIONS } from '../../data/kanaData';
+import { getKanaSections } from '../../data/kanaData';
+import '../../styles/sakura.css';
 
 /**
  * KanaQuizSetup - Màn hình cấu hình bài kiểm tra phản xạ Kana
- * Cho phép chọn bảng chữ cái, hình thức kiểm tra (gõ phím / trắc nghiệm) và các hàng ký tự
+ * Tích hợp hiệu ứng hoạt họa tương tác:
+ * - Rê chuột vào ô: Phóng to + Hiện viền hồng
+ * - Rời chuột sang chỗ khác: Bé lại về kích thước thường + Mất viền
+ * - Khi chọn cái khác: Thẻ cũ tự động mất viền bao quát hoàn toàn
  */
 export const KanaQuizSetup = ({
   quizScript,
@@ -18,6 +22,8 @@ export const KanaQuizSetup = ({
   totalSelectedChars,
   onStartQuiz,
 }) => {
+  const sections = getKanaSections(quizScript);
+
   return (
     <div style={styles.cardBox}>
       <div style={styles.setupHeader}>
@@ -35,30 +41,21 @@ export const KanaQuizSetup = ({
         <div style={styles.pillGroup}>
           <button
             type="button"
-            style={{
-              ...styles.pillOption,
-              ...(quizScript === 'hiragana' ? styles.pillOptionActive : {}),
-            }}
+            className={`kana-pill-option ${quizScript === 'hiragana' ? 'active' : ''}`}
             onClick={() => setQuizScript('hiragana')}
           >
             🌸 Hiragana
           </button>
           <button
             type="button"
-            style={{
-              ...styles.pillOption,
-              ...(quizScript === 'katakana' ? styles.pillOptionActive : {}),
-            }}
+            className={`kana-pill-option ${quizScript === 'katakana' ? 'active' : ''}`}
             onClick={() => setQuizScript('katakana')}
           >
             ⚡ Katakana
           </button>
           <button
             type="button"
-            style={{
-              ...styles.pillOption,
-              ...(quizScript === 'both' ? styles.pillOptionActive : {}),
-            }}
+            className={`kana-pill-option ${quizScript === 'both' ? 'active' : ''}`}
             onClick={() => setQuizScript('both')}
           >
             🔄 Trộn Lẫn Cả 2 Bảng
@@ -72,20 +69,14 @@ export const KanaQuizSetup = ({
         <div style={styles.pillGroup}>
           <button
             type="button"
-            style={{
-              ...styles.pillOption,
-              ...(quizMode === 'typing' ? styles.pillOptionActive : {}),
-            }}
+            className={`kana-pill-option ${quizMode === 'typing' ? 'active' : ''}`}
             onClick={() => setQuizMode('typing')}
           >
             ⌨️ Gõ Phím Phản Xạ (Speed Typing - Tofugu)
           </button>
           <button
             type="button"
-            style={{
-              ...styles.pillOption,
-              ...(quizMode === 'choice' ? styles.pillOptionActive : {}),
-            }}
+            className={`kana-pill-option ${quizMode === 'choice' ? 'active' : ''}`}
             onClick={() => setQuizMode('choice')}
           >
             🔘 Trắc Nghiệm 4 Đáp Án (Multiple Choice)
@@ -100,13 +91,13 @@ export const KanaQuizSetup = ({
             3. Chọn Hàng Chữ Luyện Tập ({totalSelectedChars} ký tự đã chọn):
           </label>
           <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-            <button type="button" style={styles.quickSelectBtn} onClick={selectAllRows}>
+            <button type="button" className="kana-quick-btn" onClick={selectAllRows}>
               ✓ Chọn Tất Cả
             </button>
-            <button type="button" style={styles.quickSelectBtn} onClick={selectSeionOnly}>
+            <button type="button" className="kana-quick-btn" onClick={selectSeionOnly}>
               🌸 Chỉ Âm Cơ Bản (46 chữ)
             </button>
-            <button type="button" style={styles.quickSelectBtn} onClick={clearAllRows}>
+            <button type="button" className="kana-quick-btn" onClick={clearAllRows}>
               ✕ Bỏ Chọn Hết
             </button>
           </div>
@@ -114,24 +105,41 @@ export const KanaQuizSetup = ({
 
         {/* Checklist các hàng theo từng nhóm âm */}
         <div style={styles.rowChecklistContainer}>
-          {KANA_SECTIONS.map((section) => (
-            <div key={section.id} style={{ marginBottom: '16px' }}>
+          {sections.map((section) => (
+            <div key={section.id} style={{ marginBottom: '18px' }}>
               <div style={styles.sectionDividerTitle}>{section.title}</div>
               <div style={styles.rowsPillsGrid}>
                 {section.rows.map((row) => {
                   const isSelected = selectedRows.includes(row.id);
-                  const previewChars = row.items.map((it) => it.hira).join(' ');
+
+                  // Preview chữ cái đúng theo bảng đang chọn (Hiragana, Katakana hoặc Cả hai)
+                  const previewChars = row.items
+                    .map((it) => {
+                      if (quizScript === 'katakana') {
+                        return it.kata;
+                      }
+                      if (quizScript === 'both') {
+                        return it.hira ? `${it.hira}/${it.kata}` : it.kata;
+                      }
+                      return it.hira || it.kata;
+                    })
+                    .join(' ');
+
                   return (
                     <div
                       key={row.id}
-                      style={{
-                        ...styles.rowCheckPill,
-                        ...(isSelected ? styles.rowCheckPillActive : {}),
-                      }}
+                      className={`kana-row-pill ${isSelected ? 'selected' : ''}`}
                       onClick={() => toggleRow(row.id)}
                     >
-                      <span style={styles.rowCheckbox}>{isSelected ? '✓' : ''}</span>
-                      <div>
+                      <span
+                        style={{
+                          ...styles.rowCheckbox,
+                          ...(isSelected ? styles.rowCheckboxActive : {}),
+                        }}
+                      >
+                        {isSelected ? '✓' : ''}
+                      </span>
+                      <div style={{ minWidth: 0, flex: 1 }}>
                         <div style={styles.rowCheckName}>{row.name}</div>
                         <div style={styles.rowCheckPreview}>{previewChars}</div>
                       </div>
@@ -187,25 +195,8 @@ const styles = {
   },
   pillGroup: {
     display: 'flex',
-    gap: '10px',
+    gap: '12px',
     flexWrap: 'wrap',
-  },
-  pillOption: {
-    padding: '10px 20px',
-    backgroundColor: '#f8fafc',
-    border: '1.5px solid #cbd5e0',
-    borderRadius: '16px',
-    fontSize: '0.9rem',
-    fontWeight: '700',
-    color: '#475569',
-    cursor: 'pointer',
-    transition: 'all 0.2s ease',
-  },
-  pillOptionActive: {
-    backgroundColor: '#fff0f6',
-    borderColor: '#e91e8c',
-    color: '#e91e8c',
-    boxShadow: '0 2px 8px rgba(233, 30, 140, 0.15)',
   },
   rowSelectorToolbar: {
     display: 'flex',
@@ -215,78 +206,67 @@ const styles = {
     gap: '8px',
     marginBottom: '12px',
   },
-  quickSelectBtn: {
-    padding: '4px 12px',
-    backgroundColor: '#ffffff',
-    border: '1px solid #cbd5e0',
-    borderRadius: '12px',
-    fontSize: '0.78rem',
-    fontWeight: '700',
-    color: '#475569',
-    cursor: 'pointer',
-    transition: 'all 0.2s ease',
-  },
   rowChecklistContainer: {
     backgroundColor: '#f8fafc',
     borderRadius: '18px',
     padding: '16px',
-    border: '1px solid #e2e8f0',
-    maxHeight: '400px',
+    border: '1px solid #f1f5f9',
+    maxHeight: '440px',
     overflowY: 'auto',
   },
   sectionDividerTitle: {
-    fontSize: '0.84rem',
+    fontSize: '0.86rem',
     fontWeight: '800',
-    color: '#64748b',
-    marginBottom: '8px',
+    color: '#475569',
+    marginBottom: '10px',
+    paddingBottom: '4px',
+    borderBottom: '1px dashed #e2e8f0',
   },
   rowsPillsGrid: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
-    gap: '8px',
-  },
-  rowCheckPill: {
-    backgroundColor: '#ffffff',
-    border: '1.5px solid #e2e8f0',
-    borderRadius: '12px',
-    padding: '8px 12px',
-    display: 'flex',
-    alignItems: 'center',
+    gridTemplateColumns: 'repeat(auto-fill, minmax(230px, 1fr))',
     gap: '10px',
-    cursor: 'pointer',
-    transition: 'all 0.2s ease',
-    userSelect: 'none',
-  },
-  rowCheckPillActive: {
-    borderColor: '#e91e8c',
-    backgroundColor: '#fff0f6',
   },
   rowCheckbox: {
-    width: '18px',
-    height: '18px',
+    width: '20px',
+    height: '20px',
     borderRadius: '6px',
-    border: '1.5px solid #cbd5e0',
+    border: '1.5px solid #cbd5e1',
     backgroundColor: '#ffffff',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     fontSize: '0.75rem',
     fontWeight: '900',
-    color: '#e91e8c',
+    color: '#ffffff',
+    transition: 'all 0.2s ease',
+    flexShrink: 0,
+  },
+  rowCheckboxActive: {
+    borderColor: '#e91e8c',
+    backgroundColor: '#e91e8c',
+    color: '#ffffff',
   },
   rowCheckName: {
-    fontSize: '0.85rem',
+    fontSize: '0.86rem',
     fontWeight: '700',
     color: '#1e293b',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
   },
   rowCheckPreview: {
-    fontSize: '0.75rem',
-    color: '#94a3b8',
+    fontSize: '0.78rem',
+    color: '#64748b',
+    marginTop: '2px',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
   },
   startActionRow: {
     display: 'flex',
     justifyContent: 'center',
-    paddingTop: '16px',
+    paddingTop: '18px',
     borderTop: '1px solid #f8e7ee',
   },
   startQuizLargeBtn: {
@@ -298,6 +278,7 @@ const styles = {
     fontSize: '1.05rem',
     fontWeight: '800',
     cursor: 'pointer',
+    outline: 'none',
     boxShadow: '0 6px 20px rgba(233, 30, 140, 0.35)',
     transition: 'all 0.2s ease',
   },

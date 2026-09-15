@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import {
   romajiToHiragana,
   romajiToJapanese,
@@ -64,17 +64,28 @@ export const Translator = ({ onBack }) => {
   }, [sourceText, sourceLang]);
 
   /**
-   * Tra cứu Offline từ cơ sở dữ liệu từ vựng nội bộ
+   * Tra cứu Offline từ cơ sở dữ liệu từ vựng nội bộ (>965 từ Dekiru Nihongo & Nhật dụng)
    */
   const handleOfflineLookup = useCallback((query) => {
-    const results = searchLocalDictionary(query, 1);
+    const trimmed = (query || '').trim();
+    if (!trimmed) return;
+
+    const convertedJp = romajiToJapanese(trimmed);
+    const hiraJp = romajiToHiragana(trimmed);
+
+    // Tìm kiếm trong kho từ điển nội bộ theo nhiều biến thể (từ gốc, romaji chuyển đổi, hiragana)
+    const directResults = searchLocalDictionary(trimmed, 1);
+    const convertedResults = directResults.length > 0 ? [] : searchLocalDictionary(convertedJp, 1);
+    const hiraResults = (directResults.length > 0 || convertedResults.length > 0) ? [] : searchLocalDictionary(hiraJp, 1);
+    const results = directResults.concat(convertedResults, hiraResults);
+
     if (results.length > 0) {
       const best = results[0];
       const resultText = sourceLang === 'ja' ? best.meaning : `${best.kanji} (${best.hiragana})`;
 
       if (sourceLang === 'ja') {
         setTranslatedText(best.meaning);
-        setSourcePhonetic(best.hiragana);
+        setSourcePhonetic(best.hiragana ? `${trimmed} (${best.hiragana})` : best.hiragana);
         setTargetPhonetic('');
       } else {
         setTranslatedText(resultText);
@@ -87,10 +98,10 @@ export const Translator = ({ onBack }) => {
 
       // Lưu vào lịch sử tra cứu
       setHistory((prev) => {
-        const filtered = prev.filter((item) => item.sourceText.toLowerCase() !== query.toLowerCase());
+        const filtered = prev.filter((item) => item.sourceText.toLowerCase() !== trimmed.toLowerCase());
         return [
           {
-            sourceText: query,
+            sourceText: trimmed,
             translatedText: resultText,
             sourceLang,
             targetLang,
@@ -101,8 +112,8 @@ export const Translator = ({ onBack }) => {
       });
     } else {
       setIsOfflineResult(false);
-      // Khi offline và không tìm thấy kết quả chính xác, thử tìm từ viết gần đúng nhất
-      const fuzzy = getFuzzySuggestions(query, 1);
+      // Khi không tìm thấy kết quả chính xác, tìm từ viết gần đúng nhất
+      const fuzzy = getFuzzySuggestions(trimmed, 1);
       if (fuzzy.length > 0 && fuzzy[0].dist <= 2) {
         const best = fuzzy[0];
         setSpellSuggestion({
@@ -116,16 +127,16 @@ export const Translator = ({ onBack }) => {
       }
       if (!navigator.onLine) {
         setErrorMessage(
-          '📴 Bạn đang ngoại tuyến. Từ này chưa có trong bộ từ vựng có sẵn. Vui lòng kết nối internet để dịch bằng Google AI.'
+          '📴 Bạn đang ngoại tuyến. Từ này chưa có trong bộ từ vựng có sẵn. Vui lòng kết nối internet để dịch văn bản dài.'
         );
       } else {
-        setErrorMessage('⚠️ Không thể kết nối đến máy chủ Google Dịch. Vui lòng thử lại sau.');
+        setErrorMessage('⚠️ Không tìm thấy bản dịch phù hợp. Vui lòng kiểm tra lại từ khóa.');
       }
     }
   }, [sourceLang, targetLang]);
 
   /**
-   * Gọi Dịch Thuật (Kết hợp Google AI + Offline Fallback)
+   * Gọi Dịch Thuật Đa Tầng (Google AI + MyMemory API + Offline Dictionary)
    */
   const handleTranslate = useCallback(async (overrideText = null) => {
     const textToProcess = typeof overrideText === 'string' ? overrideText : sourceText;
@@ -182,10 +193,13 @@ export const Translator = ({ onBack }) => {
       return;
     }
 
-    // 2. Nếu Online: Gọi Google Translate với cơ chế Multi-client Fallback & Spellcheck
-    const googleClients = ['dict-chrome-ex', 'at', 'gtx'];
-    let data = null;
-    let lastError = null;
+    // 2. Nếu Online: Thử Engine 1: Google Translate
+    let fullTranslatedText = '';
+    let srcTranslit = '';
+    let tgtTranslit = '';
+    let detectedSuggestion = null;
+
+    const googleClients = ['gtx', 'dict-chrome-ex', 'at'];
 
     for (const client of googleClients) {
       try {
@@ -194,44 +208,71 @@ export const Translator = ({ onBack }) => {
         )}`;
         const response = await fetch(endpoint);
         if (response.ok) {
-          data = await response.json();
-          break;
+          const data = await response.json();
+          if (Array.isArray(data) && Array.isArray(data[0])) {
+            for (const item of data[0]) {
+              if (!Array.isArray(item)) continue;
+              if (typeof item[0] === 'string') fullTranslatedText += item[0];
+              if (typeof item[2] === 'string' && item[2].trim()) tgtTranslit = item[2].trim();
+              if (typeof item[3] === 'string' && item[3].trim()) srcTranslit = item[3].trim();
+            }
+          }
+          if (Array.isArray(data) && Array.isArray(data[7]) && data[7].length >= 2) {
+            const gText = typeof data[7][1] === 'string' ? data[7][1].trim() : '';
+            if (
+              gText &&
+              gText.toLowerCase() !== trimmed.toLowerCase() &&
+              gText.toLowerCase() !== queryToSend.toLowerCase()
+            ) {
+              detectedSuggestion = {
+                text: gText,
+                display: gText,
+                source: 'google',
+              };
+            }
+          }
+          if (fullTranslatedText) {
+            break;
+          }
         }
-      } catch (err) {
-        lastError = err;
+      } catch {
+        // Tiếp tục thử client khác hoặc engine tiếp theo
       }
     }
 
-    if (!data) {
-      console.warn('[Translator] All Google endpoints failed, falling back to local dictionary:', lastError);
+    // 3. Engine 2 Fallback: MyMemory Translate API (miễn phí, dịch câu 2 chiều chuẩn xác khi Google 429)
+    if (!fullTranslatedText) {
+      try {
+        const myMemoryEndpoint = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(
+          queryToSend
+        )}&langpair=${actualSourceLang}|${actualTargetLang}`;
+        const mmRes = await fetch(myMemoryEndpoint);
+        if (mmRes.ok) {
+          const mmData = await mmRes.json();
+          if (mmData?.responseData?.translatedText) {
+            let cleanText = mmData.responseData.translatedText;
+            cleanText = cleanText
+              .replace(/&quot;/g, '"')
+              .replace(/&#39;/g, "'")
+              .replace(/&amp;/g, '&')
+              .replace(/&lt;/g, '<')
+              .replace(/&gt;/g, '>');
+            fullTranslatedText = cleanText;
+          }
+        }
+      } catch (err) {
+        console.warn('[Translator] MyMemory fallback error:', err);
+      }
+    }
+
+    // 4. Engine 3 Fallback: Từ điển nội bộ Dekiru Nihongo
+    if (!fullTranslatedText) {
       handleOfflineLookup(trimmed);
       setIsLoading(false);
       return;
     }
 
     try {
-      let fullTranslatedText = '';
-      let srcTranslit = '';
-      let tgtTranslit = '';
-
-      if (Array.isArray(data) && Array.isArray(data[0])) {
-        for (const item of data[0]) {
-          if (!Array.isArray(item)) continue;
-
-          if (typeof item[0] === 'string') {
-            fullTranslatedText += item[0];
-          }
-
-          if (typeof item[2] === 'string' && item[2].trim()) {
-            tgtTranslit = item[2].trim();
-          }
-
-          if (typeof item[3] === 'string' && item[3].trim()) {
-            srcTranslit = item[3].trim();
-          }
-        }
-      }
-
       setTranslatedText(fullTranslatedText);
 
       if (isRomaji) {
@@ -241,6 +282,7 @@ export const Translator = ({ onBack }) => {
       }
       setTargetPhonetic(tgtTranslit);
       setIsOfflineResult(false);
+      setErrorMessage(null);
 
       // Lưu vào lịch sử tra cứu
       if (fullTranslatedText) {
@@ -261,24 +303,7 @@ export const Translator = ({ onBack }) => {
         });
       }
 
-      // --- 3. Bóc tách Gợi Ý Sửa Lỗi Chính Tả ("Did you mean...?") ---
-      let detectedSuggestion = null;
-
-      if (Array.isArray(data) && Array.isArray(data[7]) && data[7].length >= 2) {
-        const gText = typeof data[7][1] === 'string' ? data[7][1].trim() : '';
-        if (
-          gText &&
-          gText.toLowerCase() !== trimmed.toLowerCase() &&
-          gText.toLowerCase() !== queryToSend.toLowerCase()
-        ) {
-          detectedSuggestion = {
-            text: gText,
-            display: gText,
-            source: 'google',
-          };
-        }
-      }
-
+      // Gợi ý sửa chính tả
       if (!detectedSuggestion && (isRomaji || actualSourceLang === 'ja')) {
         const fuzzy = getFuzzySuggestions(trimmed, 1);
         if (fuzzy.length > 0 && fuzzy[0].dist <= 2) {
@@ -299,12 +324,31 @@ export const Translator = ({ onBack }) => {
 
       setSpellSuggestion(detectedSuggestion);
     } catch (err) {
-      console.warn('[Translator] Parse error, falling back to local dictionary:', err);
+      console.warn('[Translator] Output update error:', err);
       handleOfflineLookup(trimmed);
     } finally {
       setIsLoading(false);
     }
   }, [sourceText, sourceLang, targetLang, handleOfflineLookup]);
+
+  // Tự động dịch theo thời gian thực (Real-time Debounced Auto-Translate) khi người dùng gõ phím
+  useEffect(() => {
+    const trimmed = sourceText.trim();
+    const timer = setTimeout(() => {
+      if (!trimmed) {
+        setTranslatedText('');
+        setSourcePhonetic('');
+        setTargetPhonetic('');
+        setSpellSuggestion(null);
+        setErrorMessage(null);
+        setIsOfflineResult(false);
+      } else {
+        handleTranslate();
+      }
+    }, 400);
+
+    return () => clearTimeout(timer);
+  }, [sourceText, sourceLang, targetLang, handleTranslate]);
 
   // Hook nhận diện giọng nói Web Speech STT
   const { isListening, startListening, stopListening, isSupported: isSpeechSupported } =
@@ -534,7 +578,7 @@ export const Translator = ({ onBack }) => {
                 <span style={styles.spinner} /> Đang dịch...
               </span>
             ) : (
-              <span>✨ Dịch ngay (Ctrl + Enter)</span>
+              <span>✨ Dịch ngay (Enter)</span>
             )}
           </button>
         </div>
