@@ -29,11 +29,7 @@ export const KanjiGrid = ({
           <div
             key={item.id}
             onClick={() => onSelectKanji && onSelectKanji(item)}
-            style={{
-              ...styles.card,
-              borderColor: isLearned ? '#a7f3d0' : '#fce7f3',
-              backgroundColor: isLearned ? '#f0fdf4' : '#ffffff',
-            }}
+            className={`kanji-grid-card ${isLearned ? 'learned' : ''}`}
           >
             {/* Huy hiệu góc */}
             <div style={styles.badgeRow}>
@@ -71,18 +67,6 @@ const styles = {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fill, minmax(170px, 1fr))',
     gap: '16px',
-  },
-  card: {
-    borderRadius: '18px',
-    border: '1.5px solid #fce7f3',
-    padding: '16px 14px',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    textAlign: 'center',
-    cursor: 'pointer',
-    boxShadow: '0 4px 16px rgba(233, 30, 140, 0.05)',
-    transition: 'transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease',
   },
   badgeRow: {
     width: '100%',

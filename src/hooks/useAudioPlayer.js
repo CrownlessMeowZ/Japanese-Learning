@@ -69,7 +69,7 @@ class AudioManager {
     return text.replace(/\[(.*?)\]/g, '$1').trim();
   }
 
-  play(textOrUrl) {
+  play(textOrUrl, speed = 1.0) {
     if (!textOrUrl || typeof textOrUrl !== 'string') return;
     const input = textOrUrl.trim();
 
@@ -82,9 +82,12 @@ class AudioManager {
     // Dừng âm thanh trước đó ngay lập tức (Chống đè âm)
     this.stopAll();
 
+    const playbackSpeed = typeof speed === 'number' && speed > 0 ? speed : 1.0;
+
     // Mode 1: HTML5 Audio (File MP3/WAV tĩnh)
     if (this.isAudioUrl(input)) {
       const audio = new Audio(input);
+      audio.playbackRate = playbackSpeed;
       this.currentAudio = audio;
       this.notify(true, input);
 
@@ -100,7 +103,7 @@ class AudioManager {
         if (this.currentAudio !== audio) return;
         console.warn(`[AudioManager] Không thể load file: ${input}, fallback sang TTS.`);
         this.currentAudio = null;
-        this.playSpeech(input);
+        this.playSpeech(input, playbackSpeed);
       };
 
       audio.play().catch((err) => {
@@ -108,7 +111,7 @@ class AudioManager {
           console.warn('[AudioManager] Play error:', err);
           if (this.currentAudio === audio) {
             this.currentAudio = null;
-            this.playSpeech(input);
+            this.playSpeech(input, playbackSpeed);
           }
         }
       });
@@ -116,10 +119,10 @@ class AudioManager {
     }
 
     // Mode 2: Web Speech Synthesis Fallback (Nhật ngữ)
-    this.playSpeech(input);
+    this.playSpeech(input, playbackSpeed);
   }
 
-  playSpeech(text) {
+  playSpeech(text, speed = 1.0) {
     if (typeof window === 'undefined' || !('speechSynthesis' in window)) {
       console.warn('[AudioManager] Web Speech API không được hỗ trợ trên trình duyệt này.');
       this.notify(false, null);
@@ -129,7 +132,8 @@ class AudioManager {
     const cleanText = this.cleanJapaneseText(text);
     const utterance = new SpeechSynthesisUtterance(cleanText);
     utterance.lang = 'ja-JP';
-    utterance.rate = 0.88; // Tốc độ chuẩn cho người học ngoại ngữ
+    const rateMultiplier = typeof speed === 'number' && speed > 0 ? speed : 1.0;
+    utterance.rate = Math.max(0.5, Math.min(2.0, 0.88 * rateMultiplier)); // Hỗ trợ dải tốc độ linh hoạt (0.75x - 1.25x)
 
     this.currentUtterance = utterance;
 
@@ -184,10 +188,12 @@ export const useAudioPlayer = (specificTarget = null) => {
   }, []);
 
   /**
-   * Phát âm thanh (HTML5 Audio hoặc Web Speech API)
+   * Phát âm thanh (HTML5 Audio hoặc Web Speech API) với tùy chọn tốc độ phát
+   * @param {string} textOrUrl 
+   * @param {number} [speed=1.0] Tốc độ phát (0.75 - 1.25)
    */
-  const playAudio = useCallback((textOrUrl) => {
-    audioManager.play(textOrUrl);
+  const playAudio = useCallback((textOrUrl, speed = 1.0) => {
+    audioManager.play(textOrUrl, speed);
   }, []);
 
   /**

@@ -2,69 +2,9 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { KaiwaCard } from './KaiwaCard';
 import { useAudioPlayer } from '../../hooks/useAudioPlayer';
 
-/**
- * Default fallback Kaiwa items cho các bài học cơ bản nếu chưa có dữ liệu riêng
- */
-const DEFAULT_KAIWA_BY_LESSON = {
-  1: [
-    {
-      id: 'k1-1',
-      japanese_text: 'はじめまして。よろしくおねがいします。',
-      hiragana: 'はじめまして。よろしくおねがいします。',
-      romaji: 'Hajimemashite. Yoroshiku onegaishimasu.',
-      vietnamese_meaning: 'Rất vui được gặp bạn. Xin hãy giúp đỡ tôi.',
-      context_usage: 'Chào hỏi lần đầu tiên gặp mặt trong môi trường công sở hoặc giao tiếp hàng ngày.',
-      category: 'Chào hỏi',
-    },
-    {
-      id: 'k1-2',
-      japanese_text: 'こちらはタナカさんです。',
-      hiragana: 'こちらはタナカさんです。',
-      romaji: 'Kochira wa Tanaka-san desu.',
-      vietnamese_meaning: 'Đây là anh/chị Tanaka.',
-      context_usage: 'Giới thiệu người thứ ba với đối phương một cách lịch sự.',
-      category: 'Giới thiệu',
-    },
-    {
-      id: 'k1-3',
-      japanese_text: 'すみません、もういちどおねがいします。',
-      hiragana: 'すみません、もういちどおねがいします。',
-      romaji: 'Sumimasen, mou ichido onegaishimasu.',
-      vietnamese_meaning: 'Xin lỗi, bạn có thể nhắc lại một lần nữa được không?',
-      context_usage: 'Khi không nghe rõ hoặc cần người đối diện nói lại chậm hơn.',
-      category: 'Hỏi lại',
-    },
-  ],
-  4: [
-    {
-      id: 'k4-1',
-      japanese_text: 'すみません、ぎんこうはどこですか。',
-      hiragana: 'すみません、ぎんこうはどこですか。',
-      romaji: 'Sumimasen, ginkou wa doko desu ka.',
-      vietnamese_meaning: 'Xin lỗi, ngân hàng ở đâu vậy ạ?',
-      context_usage: 'Hỏi đường đến một địa điểm công cộng.',
-      category: 'Hỏi đường',
-    },
-    {
-      id: 'k4-2',
-      japanese_text: 'ゆうびんきょくはぎんこうのとなりです。',
-      hiragana: 'ゆうびんきょくはぎんこうのとなりです。',
-      romaji: 'Yuubinkyoku wa ginkou no tonari desu.',
-      vietnamese_meaning: 'Bưu điện ở ngay bên cạnh ngân hàng.',
-      context_usage: 'Chỉ dẫn vị trí tương đối giữa hai địa điểm.',
-      category: 'Chỉ đường',
-    },
-    {
-      id: 'k4-3',
-      japanese_text: 'ここからえきまでどのくらいですか。',
-      hiragana: 'ここからえきまでどのくらいですか。',
-      romaji: 'Koko kara eki made dono kurai desu ka.',
-      vietnamese_meaning: 'Từ đây tới nhà ga mất khoảng bao lâu?',
-      context_usage: 'Hỏi thời gian hoặc khoảng cách di chuyển.',
-      category: 'Di chuyển',
-    },
-  ],
-};
+import { kaiwaData } from '../../data/kaiwaData';
+
+export const DEFAULT_KAIWA_BY_LESSON = kaiwaData;
 
 /**
  * KaiwaScreen Component
@@ -85,26 +25,7 @@ export const KaiwaScreen = ({ lessonId, kaiwaList = [], onBack }) => {
   // Dữ liệu hiển thị (kết hợp data truyền vào hoặc fallback theo lessonId)
   const items = useMemo(() => {
     if (kaiwaList && kaiwaList.length > 0) return kaiwaList;
-    return DEFAULT_KAIWA_BY_LESSON[lessonId] || [
-      {
-        id: `k-def-${lessonId}-1`,
-        japanese_text: 'こんにちは、きょうはいいてんきですね。',
-        hiragana: 'こんにちは、きょうはいいてんきですね。',
-        romaji: 'Konnichiwa, kyou wa ii tenki desu ne.',
-        vietnamese_meaning: 'Xin chào, hôm nay thời tiết đẹp quá nhỉ.',
-        context_usage: `Giao tiếp mở đầu câu chuyện bài ${lessonId}.`,
-        category: 'Chào hỏi',
-      },
-      {
-        id: `k-def-${lessonId}-2`,
-        japanese_text: 'ありがとうございます。助かりました。',
-        hiragana: 'ありがとうございます。たすかりました。',
-        romaji: 'Arigatou gozaimasu. Tasakarimashita.',
-        vietnamese_meaning: 'Cảm ơn bạn rất nhiều. Đã đỡ cho tôi quá.',
-        context_usage: 'Bày tỏ lòng biết ơn chân thành khi nhận được sự giúp đỡ.',
-        category: 'Cảm ơn',
-      },
-    ];
+    return kaiwaData[lessonId] || kaiwaData[String(lessonId)] || [];
   }, [lessonId, kaiwaList]);
 
   // Categories filter

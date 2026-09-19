@@ -263,11 +263,11 @@ export const useProgressStore = create(
         set({ mistake_vault: vault });
       },
 
-      /**
+       /**
        * Ghi nhận khi học viên ôn tập đúng một mục trong Hộp Cứu Hộ
-       * Khi trả lời đúng liên tiếp >= 2 lần, từ đó được coi là Tốt Nghiệp và xóa khỏi Vault
+       * Khi trả lời đúng liên tiếp đạt đủ số lần sai (wrongCount), từ đó được coi là Tốt Nghiệp và xóa khỏi Vault
        * @param {string|number} id ID của item
-       * @returns {boolean} true nếu tốt nghiệp (đạt 2 lần đúng), false nếu chưa
+       * @returns {boolean} true nếu tốt nghiệp (đạt đủ số lần đúng bằng số lần sai), false nếu chưa
        */
       recordRescueSuccess: (id) => {
         if (!id) return false;
@@ -275,10 +275,11 @@ export const useProgressStore = create(
         const existing = vault[id];
         if (!existing) return false;
 
+        const targetCorrect = Math.max(1, existing.wrongCount || 1);
         const nextCorrect = (existing.consecutiveCorrect || 0) + 1;
         let isGraduated = false;
 
-        if (nextCorrect >= 2) {
+        if (nextCorrect >= targetCorrect) {
           delete vault[id];
           isGraduated = true;
         } else {

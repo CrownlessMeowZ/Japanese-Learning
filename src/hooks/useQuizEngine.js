@@ -119,11 +119,12 @@ export const useQuizEngine = () => {
   }, []);
 
   /**
-   * Xử lý khi người dùng chọn một đáp án
-   * @param {Object} option - Đáp án được chọn
+   * Xử lý khi người dùng chọn một đáp án hoặc nhập câu trả lời tự luận
+   * @param {Object} option - Đáp án được chọn hoặc object câu trả lời tự luận { userInput, isCorrect }
+   * @param {boolean|null} [customIsCorrect=null] - Cho phép truyền cờ đúng/sai tùy biến (dành cho chế độ gõ Typing)
    * @returns {boolean|null} Trả về boolean isCorrect nếu xử lý thành công
    */
-  const handleAnswer = useCallback((option) => {
+  const handleAnswer = useCallback((option, customIsCorrect = null) => {
     if (status !== QUIZ_STATUS.PLAYING || selectedAnswer !== null) {
       return null;
     }
@@ -134,11 +135,18 @@ export const useQuizEngine = () => {
     setSelectedAnswer(option);
 
     // Kiểm tra tính đúng đắn
-    const isCorrect = Boolean(
-      (option.id && currentQ.correctAnswer.id && option.id === currentQ.correctAnswer.id) ||
-      (option.kanji && currentQ.correctAnswer.kanji && option.kanji === currentQ.correctAnswer.kanji) ||
-      option === currentQ.correctAnswer
-    );
+    let isCorrect;
+    if (typeof customIsCorrect === 'boolean') {
+      isCorrect = customIsCorrect;
+    } else if (typeof option === 'object' && option !== null && 'isCorrect' in option) {
+      isCorrect = Boolean(option.isCorrect);
+    } else {
+      isCorrect = Boolean(
+        (option?.id && currentQ.correctAnswer.id && option.id === currentQ.correctAnswer.id) ||
+        (option?.kanji && currentQ.correctAnswer.kanji && option.kanji === currentQ.correctAnswer.kanji) ||
+        option === currentQ.correctAnswer
+      );
+    }
 
     if (isCorrect) {
       setScore((prevScore) => prevScore + 1);
@@ -181,7 +189,10 @@ export const useQuizEngine = () => {
   }, [status, questions, currentIndex]);
 
   const isAnswerCorrect = useMemo(() => {
-    if (!selectedAnswer || !currentQuestion) return null;
+    if (selectedAnswer === null || !currentQuestion) return null;
+    if (typeof selectedAnswer === 'object' && selectedAnswer !== null && 'isCorrect' in selectedAnswer) {
+      return Boolean(selectedAnswer.isCorrect);
+    }
     return (
       (selectedAnswer.id && currentQuestion.correctAnswer.id && selectedAnswer.id === currentQuestion.correctAnswer.id) ||
       (selectedAnswer.kanji && currentQuestion.correctAnswer.kanji && selectedAnswer.kanji === currentQuestion.correctAnswer.kanji) ||

@@ -1,37 +1,44 @@
 /* ==========================================================================
-   Quiz Screen Option Button Styles
-   Đảm bảo hiệu ứng :hover mượt mà và triệt tiêu hoàn toàn outline mặc định.
-   Trạng thái chuyển câu hỏi được reset sạch sẽ thông qua React Keys.
+   Quiz Screen Styles - Sakura EdTech Theme
+   Đảm bảo hiệu ứng :hover mượt mà (scale 1.03x - 1.05x), không viền đen bao quanh.
+   Hỗ trợ viền bao quát rõ ràng, đẹp mắt sau khi chọn đáp án (xanh lá / đỏ).
    ========================================================================== */
 
+/* 1. Nút Lựa Chọn Trắc Nghiệm (4 Đáp án) */
 .quiz-option-btn {
   width: 100%;
   min-height: 68px;
-  padding: 14px 16px;
+  padding: 14px 18px;
   background-color: #ffffff;
   border: 2px solid #edf2f7;
-  border-radius: 14px;
+  border-radius: 16px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   font-family: inherit;
-  font-size: 1rem;
+  font-size: 1.08rem;
+  font-weight: 600;
   color: #2d3748;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   outline: none !important;
   -webkit-tap-highlight-color: transparent;
   user-select: none;
   position: relative;
 }
 
-/* Hover: Phóng to nhẹ và viền xanh dương đậm khi lướt qua */
+/* Hover: Phóng to nhẹ và bừng sáng viền hồng hoa anh đào */
 .quiz-option-btn:hover:not(:disabled) {
-  transform: scale(1.02);
-  border-color: #2b6cb0;
-  box-shadow: 0 6px 18px rgba(43, 108, 176, 0.15);
+  transform: scale(1.03);
+  border-color: #e91e8c !important;
+  color: #e91e8c;
+  box-shadow: 0 6px 20px rgba(233, 30, 140, 0.2);
 }
 
 /* Active: Hơi lún xuống tạo cảm giác tactile phản hồi click */
@@ -42,4 +49,178 @@
 /* Disabled: Vô hiệu hoá hiệu ứng chuột khi đã có kết quả */
 .quiz-option-btn:disabled {
   cursor: default;
+}
+
+/* Trạng thái đáp án ĐÚNG: Viền bao quát xanh lá 2.5px rõ nét, nền xanh nhạt, bóng nổi bật */
+.quiz-option-btn.correct {
+  background-color: #f0fff4 !important;
+  border: 2.5px solid #28a745 !important;
+  color: #15803d !important;
+  box-shadow: 0 4px 18px rgba(40, 167, 69, 0.28) !important;
+  transform: scale(1.02);
+}
+
+/* Trạng thái đáp án SAI (được chọn): Viền bao quát đỏ 2.5px rõ nét, nền đỏ nhạt, bóng nổi bật */
+.quiz-option-btn.wrong {
+  background-color: #fff5f5 !important;
+  border: 2.5px solid #dc3545 !important;
+  color: #b91c1c !important;
+  box-shadow: 0 4px 18px rgba(220, 53, 69, 0.28) !important;
+}
+
+/* Các đáp án còn lại khi đã có kết quả */
+.quiz-option-btn.faded {
+  opacity: 0.38 !important;
+  cursor: not-allowed !important;
+  border-color: #e2e8f0 !important;
+}
+
+/* 2. Chip & Pill Tùy Chọn Dạng Đề (Mode Switch Pills) */
+.quiz-mode-pill {
+  padding: 10px 18px;
+  background-color: #ffffff;
+  border: 2px solid transparent !important;
+  border-radius: 16px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #475569;
+  cursor: pointer;
+  outline: none !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.quiz-mode-pill:hover {
+  transform: scale(1.05);
+  border-color: #e91e8c !important;
+  color: #e91e8c;
+  box-shadow: 0 6px 18px rgba(233, 30, 140, 0.2);
+}
+
+.quiz-mode-pill.active {
+  background-color: #fff0f6 !important;
+  border-color: #e91e8c !important;
+  color: #e91e8c !important;
+  box-shadow: 0 3px 12px rgba(233, 30, 140, 0.22);
+}
+
+.quiz-mode-pill.active:hover {
+  transform: scale(1.05);
+  border-color: #d8157e !important;
+  box-shadow: 0 8px 22px rgba(233, 30, 140, 0.3);
+}
+
+/* 3. Chip Lọc Phạm Vi Bài Học & Số Lượng Câu Hỏi */
+.quiz-chip {
+  padding: 8px 16px;
+  background-color: #ffffff;
+  border: 2px solid transparent !important;
+  border-radius: 14px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #475569;
+  cursor: pointer;
+  outline: none !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.quiz-chip:hover {
+  transform: scale(1.05);
+  border-color: #e91e8c !important;
+  color: #e91e8c;
+  box-shadow: 0 4px 14px rgba(233, 30, 140, 0.18);
+}
+
+.quiz-chip.active {
+  background-color: #fff0f6 !important;
+  border-color: #e91e8c !important;
+  color: #e91e8c !important;
+  font-weight: 700;
+  box-shadow: 0 3px 10px rgba(233, 30, 140, 0.2);
+}
+
+.quiz-chip.active:hover {
+  transform: scale(1.05);
+  border-color: #d8157e !important;
+}
+
+/* 4. Nút Nghe To ở Chế Độ Luyện Nghe (Listening Mode Centerpiece) */
+.quiz-listening-audio-btn {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 22px 42px;
+  background: linear-gradient(135deg, #fff0f6 0%, #ffffff 100%);
+  border: 2px solid #fbcfe8 !important;
+  border-radius: 24px;
+  color: #e91e8c;
+  cursor: pointer;
+  outline: none !important;
+  box-shadow: 0 6px 20px rgba(233, 30, 140, 0.15);
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+}
+
+.quiz-listening-audio-btn:hover {
+  transform: scale(1.06);
+  border-color: #e91e8c !important;
+  box-shadow: 0 8px 28px rgba(233, 30, 140, 0.28);
+}
+
+.quiz-listening-audio-btn:active {
+  transform: scale(0.98);
+}
+
+/* Hiệu ứng sóng âm lan tỏa (Pulse wave) */
+@keyframes quizAudioPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(233, 30, 140, 0.45);
+  }
+  70% {
+    box-shadow: 0 0 0 18px rgba(233, 30, 140, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(233, 30, 140, 0);
+  }
+}
+
+.quiz-pulse-anim {
+  animation: quizAudioPulse 2.2s infinite ease-out;
+}
+
+/* 5. Nút Thao Tác Chuẩn Sakura (Hành Động) */
+.quiz-action-btn {
+  outline: none !important;
+  cursor: pointer;
+  user-select: none;
+  border: 2px solid transparent !important;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.quiz-action-btn:hover {
+  transform: scale(1.04);
 }

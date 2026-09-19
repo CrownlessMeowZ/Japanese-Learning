@@ -12,6 +12,7 @@
   "dependencies": {
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
+    "wanakana": "^5.3.1",
     "zustand": "^5.0.15"
   },
   "devDependencies": {

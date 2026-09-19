@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { vocabularyData } from '../data/vocabulary';
 import { grammarData } from '../data/grammar';
 import '../styles/sakura.css';
@@ -24,6 +25,16 @@ export const LessonModal = ({
   const grammars = grammarData[lessonId] || grammarData[String(lessonId)] || [];
   const isQuizDisabled = words.length < 4;
 
+  // Khóa cuộn trang nền khi mở Modal
+  useEffect(() => {
+    if (!lessonId) return;
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = originalOverflow;
+    };
+  }, [lessonId]);
+
   // Hỗ trợ phím ESC để đóng Modal thuận tiện
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -44,7 +55,7 @@ export const LessonModal = ({
     onClose();
   };
 
-  return (
+  return createPortal(
     <div
       className="lesson-modal-overlay"
       onClick={(e) => {
@@ -186,7 +197,8 @@ export const LessonModal = ({
           </span>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 

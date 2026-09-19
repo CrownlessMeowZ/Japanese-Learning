@@ -1,4 +1,5 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { KanjiCanvasPad } from './KanjiCanvasPad';
 import { KanjiStrokeAnimator } from './KanjiStrokeAnimator';
 
@@ -14,6 +15,16 @@ export const KanjiDetailModal = ({
 }) => {
   const [activeTab, setActiveTab] = useState('write'); // 'write' | 'stroke'
 
+  // Khóa cuộn trang nền khi mở Modal
+  useEffect(() => {
+    if (!isOpen || !kanjiItem) return;
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = originalOverflow;
+    };
+  }, [isOpen, kanjiItem]);
+
   // Phát âm chữ/từ bằng Web Speech API
   const speak = useCallback((text) => {
     if (!text || !('speechSynthesis' in window)) return;
@@ -26,7 +37,7 @@ export const KanjiDetailModal = ({
 
   if (!isOpen || !kanjiItem) return null;
 
-  return (
+  return createPortal(
     <div style={styles.overlay} onClick={onClose}>
       <div style={styles.modalBox} onClick={(e) => e.stopPropagation()}>
         {/* Header Modal */}
@@ -170,7 +181,8 @@ export const KanjiDetailModal = ({
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 
@@ -181,13 +193,17 @@ const styles = {
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba(15, 23, 42, 0.6)',
-    backdropFilter: 'blur(5px)',
+    width: '100vw',
+    height: '100vh',
+    backgroundColor: 'rgba(15, 23, 42, 0.65)',
+    backdropFilter: 'blur(6px)',
+    WebkitBackdropFilter: 'blur(6px)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    zIndex: 9999,
+    zIndex: 99999,
     padding: '16px',
+    boxSizing: 'border-box',
     animation: 'sakuraFadeOnly 0.2s ease',
   },
   modalBox: {

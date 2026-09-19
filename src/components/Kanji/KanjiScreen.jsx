@@ -3,11 +3,16 @@ import { kanjiData } from '../../data/kanjiData';
 import { useProgress } from '../../hooks/useProgress';
 import { KanjiGrid } from './KanjiGrid';
 import { KanjiDetailModal } from './KanjiDetailModal';
+import { KanjiQuiz } from './KanjiQuiz';
 
 /**
  * KanjiScreen - Màn hình Học & Luyện Viết Hán Tự N5 (Dekiru Nihongo)
+ * Hỗ trợ 2 chế độ:
+ * 1. 'grid': Xem bảng danh sách, tra cứu âm Hán-Việt & luyện viết Canvas
+ * 2. 'quiz': Đấu trường trắc nghiệm phản xạ Hán tự N5
  */
 export const KanjiScreen = ({ onBack }) => {
+  const [activeTab, setActiveTab] = useState('grid'); // 'grid' | 'quiz'
   const [selectedLesson, setSelectedLesson] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [activeKanji, setActiveKanji] = useState(null);
@@ -60,7 +65,7 @@ export const KanjiScreen = ({ onBack }) => {
     <div className="sakura-tab-view" style={styles.container}>
       {/* Top Navigation Row */}
       <div style={styles.topRow}>
-        <button type="button" style={styles.backBtn} onClick={onBack}>
+        <button type="button" className="kanji-action-btn" style={styles.backBtn} onClick={onBack}>
           ⬅ Quay lại Dashboard
         </button>
 
@@ -77,53 +82,85 @@ export const KanjiScreen = ({ onBack }) => {
           🈸 Học & Luyện Viết Hán Tự (Kanji N5)
         </h1>
         <p style={styles.subTitle}>
-          Nắm vững âm Hán Việt, quy tắc thứ tự nét và tự tay cầm bút luyện viết ngay trên Canvas.
+          Nắm vững âm Hán Việt, quy tắc thứ tự nét, luyện viết trên Canvas và thử thách phản xạ với Đấu trường Quiz.
         </p>
       </div>
 
-      {/* Thanh Tìm kiếm & Bộ lọc bài */}
-      <div style={styles.filterSection}>
-        <input
-          type="text"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder="🔍 Tìm theo Chữ Hán, Âm Hán Việt (vd: NHẬT, HỌC), nghĩa tiếng Việt..."
-          style={styles.searchInput}
-        />
-
-        {/* Tab lọc bài học */}
-        <div style={styles.lessonTabs}>
-          {availableLessons.map((les) => (
-            <button
-              key={les}
-              type="button"
-              onClick={() => setSelectedLesson(les)}
-              className={`sakura-subtab-btn ${selectedLesson === les ? 'active' : ''}`}
-            >
-              {les === 'all' ? 'Tất cả bài' : `Bài ${les}`}
-            </button>
-          ))}
-        </div>
+      {/* Mode Switcher Tabs */}
+      <div style={styles.viewModeTabs}>
+        <button
+          type="button"
+          onClick={() => setActiveTab('grid')}
+          className={`kanji-nav-tab-btn ${activeTab === 'grid' ? 'active' : ''}`}
+        >
+          🈸 Bảng Chữ Hán & Bàn Vẽ ({stats.total} chữ)
+        </button>
+        <button
+          type="button"
+          onClick={() => setActiveTab('quiz')}
+          className={`kanji-nav-tab-btn ${activeTab === 'quiz' ? 'active' : ''}`}
+        >
+          🎯 Đấu Trường Kanji Quiz
+        </button>
       </div>
 
-      {/* Lưới chữ Hán */}
-      <div style={{ marginTop: '20px' }}>
-        <KanjiGrid
-          kanjiList={filteredKanji}
+      {/* TAB CONTENT */}
+      {activeTab === 'quiz' ? (
+        <KanjiQuiz
+          kanjiList={kanjiData}
           learnedMap={kanjiLearned}
-          onSelectKanji={(item) => setActiveKanji(item)}
+          onMarkLearned={(id) => {
+            if (!kanjiLearned[id]) toggleKanjiLearned(id);
+          }}
+          onBackToGrid={() => setActiveTab('grid')}
         />
-      </div>
+      ) : (
+        <>
+          {/* Thanh Tìm kiếm & Bộ lọc bài */}
+          <div style={styles.filterSection}>
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="🔍 Tìm theo Chữ Hán, Âm Hán Việt (vd: NHẬT, HỌC), nghĩa tiếng Việt..."
+              style={styles.searchInput}
+            />
 
-      {/* Modal Chi tiết & Bàn vẽ Canvas */}
-      {activeKanji && (
-        <KanjiDetailModal
-          kanjiItem={activeKanji}
-          isOpen={Boolean(activeKanji)}
-          onClose={() => setActiveKanji(null)}
-          isLearned={Boolean(kanjiLearned[activeKanji.id || activeKanji.character])}
-          onToggleLearned={(id) => toggleKanjiLearned(id)}
-        />
+            {/* Tab lọc bài học */}
+            <div style={styles.lessonTabs}>
+              {availableLessons.map((les) => (
+                <button
+                  key={les}
+                  type="button"
+                  onClick={() => setSelectedLesson(les)}
+                  className={`kanji-quiz-chip ${selectedLesson === les ? 'active' : ''}`}
+                >
+                  {les === 'all' ? 'Tất cả bài' : `Bài ${les}`}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Lưới chữ Hán */}
+          <div style={{ marginTop: '20px' }}>
+            <KanjiGrid
+              kanjiList={filteredKanji}
+              learnedMap={kanjiLearned}
+              onSelectKanji={(item) => setActiveKanji(item)}
+            />
+          </div>
+
+          {/* Modal Chi tiết & Bàn vẽ Canvas */}
+          {activeKanji && (
+            <KanjiDetailModal
+              kanjiItem={activeKanji}
+              isOpen={Boolean(activeKanji)}
+              onClose={() => setActiveKanji(null)}
+              isLearned={Boolean(kanjiLearned[activeKanji.id || activeKanji.character])}
+              onToggleLearned={(id) => toggleKanjiLearned(id)}
+            />
+          )}
+        </>
       )}
     </div>
   );
@@ -147,11 +184,12 @@ const styles = {
     padding: '9px 18px',
     backgroundColor: '#ffffff',
     color: '#4a5568',
-    border: '1.5px solid #cbd5e0',
-    borderRadius: '12px',
+    border: '2px solid transparent',
+    borderRadius: '14px',
     fontSize: '0.9rem',
     fontWeight: '700',
     cursor: 'pointer',
+    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)',
     transition: 'all 0.2s ease',
   },
   statsPill: {
@@ -214,6 +252,13 @@ const styles = {
   lessonTabs: {
     display: 'flex',
     gap: '8px',
+    flexWrap: 'wrap',
+  },
+  viewModeTabs: {
+    display: 'flex',
+    justifyContent: 'center',
+    gap: '12px',
+    marginBottom: '24px',
     flexWrap: 'wrap',
   },
 };

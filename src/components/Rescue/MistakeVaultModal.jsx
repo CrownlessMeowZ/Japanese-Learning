@@ -1,4 +1,5 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo, useCallback, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { findDictionaryItem } from '../../store/progressStore';
 
 /**
@@ -18,6 +19,16 @@ export const MistakeVaultModal = ({
   const [practiceIndex, setPracticeIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
   const [recentGraduatedText, setRecentGraduatedText] = useState(null);
+
+  // Khóa cuộn trang nền khi mở Modal để modal luôn nằm trọn giữa màn hình
+  useEffect(() => {
+    if (!isOpen) return;
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = originalOverflow;
+    };
+  }, [isOpen]);
 
   // Chuyển đối tượng mistakeVault thành mảng và sắp xếp theo số lần sai giảm dần
   const mistakeList = useMemo(() => {
@@ -106,7 +117,7 @@ export const MistakeVaultModal = ({
 
   if (!isOpen) return null;
 
-  return (
+  return createPortal(
     <div style={styles.overlay} onClick={onClose}>
       <div style={styles.modalBox} onClick={(e) => e.stopPropagation()}>
         {/* Modal Top Header */}
@@ -153,7 +164,7 @@ export const MistakeVaultModal = ({
                 {/* Thanh công cụ hành động */}
                 <div style={styles.toolbarRow}>
                   <div style={styles.helperText}>
-                    💡 Trả lời đúng <strong>2 lần liên tiếp</strong> để tốt nghiệp khỏi danh sách điểm yếu!
+                    💡 Trả lời đúng <strong>liên tiếp đủ số lần sai</strong> để tốt nghiệp khỏi danh sách điểm yếu!
                   </div>
 
                   <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
@@ -180,44 +191,46 @@ export const MistakeVaultModal = ({
 
                 {/* Danh sách các thẻ từ yếu */}
                 <div style={styles.itemsListContainer}>
-                  {mistakeList.map((item) => (
-                    <div key={item.id} style={styles.itemCard}>
-                      <div style={styles.itemMainInfo}>
-                        <div style={styles.itemKanjiRow}>
-                          <span style={styles.itemKanji}>{item.text}</span>
-                          {item.reading && item.reading !== item.text && (
-                            <span style={styles.itemReading}>
-                              【{item.reading}】
-                            </span>
-                          )}
-                          <button
-                            type="button"
-                            style={styles.miniSpeakerBtn}
-                            onClick={() => speakWord(item.text)}
-                            title="Nghe phát âm"
-                          >
-                            🔊
-                          </button>
-                        </div>
+                  {mistakeList.map((item) => {
+                    const targetCount = Math.max(1, item.wrongCount || 1);
+                    return (
+                      <div key={item.id} style={styles.itemCard}>
+                        <div style={styles.itemMainInfo}>
+                          <div style={styles.itemKanjiRow}>
+                            <span style={styles.itemKanji}>{item.text}</span>
+                            {item.reading && item.reading !== item.text && (
+                              <span style={styles.itemReading}>
+                                【{item.reading}】
+                              </span>
+                            )}
+                            <button
+                              type="button"
+                              style={styles.miniSpeakerBtn}
+                              onClick={() => speakWord(item.text)}
+                              title="Nghe phát âm"
+                            >
+                              🔊
+                            </button>
+                          </div>
 
-                        <div style={styles.itemMeaning}>
-                          👉 {item.meaning}
-                        </div>
+                          <div style={styles.itemMeaning}>
+                            👉 {item.meaning}
+                          </div>
 
-                        <div style={styles.badgesRow}>
-                          <span style={styles.wrongBadge}>
-                            ❌ Sai {item.wrongCount} lần
-                          </span>
-                          <span style={styles.rescueBadge}>
-                            🎯 Đã sửa đúng: {item.consecutiveCorrect || 0}/2
-                          </span>
-                          {item.lessonId && (
-                            <span style={styles.lessonBadge}>
-                              Bài {item.lessonId}
+                          <div style={styles.badgesRow}>
+                            <span style={styles.wrongBadge}>
+                              ❌ Sai {item.wrongCount} lần
                             </span>
-                          )}
+                            <span style={styles.rescueBadge}>
+                              🎯 Đã sửa đúng: {item.consecutiveCorrect || 0}/{targetCount}
+                            </span>
+                            {item.lessonId && (
+                              <span style={styles.lessonBadge}>
+                                Bài {item.lessonId}
+                              </span>
+                            )}
+                          </div>
                         </div>
-                      </div>
 
                       {onClearMistake && (
                         <button
@@ -230,8 +243,9 @@ export const MistakeVaultModal = ({
                         </button>
                       )}
                     </div>
-                  ))}
-                </div>
+                  );
+                })}
+              </div>
               </div>
             )}
           </div>
@@ -317,7 +331,7 @@ export const MistakeVaultModal = ({
                 style={styles.failBtn}
                 onClick={handleFailItem}
               >
-                ❌ Vẫn chưa nhớ (0/2)
+                ❌ Vẫn chưa nhớ (0/{Math.max(1, currentItem.wrongCount || 1)})
               </button>
 
               <button
@@ -325,13 +339,14 @@ export const MistakeVaultModal = ({
                 style={styles.passBtn}
                 onClick={handlePassItem}
               >
-                ✅ Đã nhớ (+1)
+                ✅ Đã nhớ (+1) ({currentItem.consecutiveCorrect || 0}/{Math.max(1, currentItem.wrongCount || 1)})
               </button>
             </div>
           </div>
         )}
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 
@@ -342,13 +357,17 @@ const styles = {
     left: 0,
     right: 0,
     bottom: 0,
+    width: '100vw',
+    height: '100vh',
     backgroundColor: 'rgba(15, 23, 42, 0.65)',
     backdropFilter: 'blur(6px)',
+    WebkitBackdropFilter: 'blur(6px)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    zIndex: 9999,
+    zIndex: 99999,
     padding: '16px',
+    boxSizing: 'border-box',
     animation: 'sakuraFadeOnly 0.2s ease',
   },
   modalBox: {

@@ -1,4 +1,5 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { useProgress } from '../../hooks/useProgress';
 
 /**
@@ -8,6 +9,16 @@ export const BackupRestoreModal = ({ isOpen, onClose }) => {
   const fileInputRef = useRef(null);
   const [message, setMessage] = useState(null); // { type: 'success' | 'error', text: '' }
   const [confirmReset, setConfirmReset] = useState(false);
+
+  // Khóa cuộn trang nền khi mở Modal
+  useEffect(() => {
+    if (!isOpen) return;
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = originalOverflow;
+    };
+  }, [isOpen]);
 
   const {
     learnedItems,
@@ -126,7 +137,7 @@ export const BackupRestoreModal = ({ isOpen, onClose }) => {
   const kanjiLearnedCount = Object.keys(kanjiLearned || {}).length;
   const mistakeCount = Object.keys(mistakeVault || {}).length;
 
-  return (
+  return createPortal(
     <div style={styles.overlay} onClick={onClose}>
       <div style={styles.modalBox} onClick={(e) => e.stopPropagation()}>
         {/* Header Modal */}
@@ -248,7 +259,8 @@ export const BackupRestoreModal = ({ isOpen, onClose }) => {
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 
@@ -259,13 +271,17 @@ const styles = {
     left: 0,
     right: 0,
     bottom: 0,
+    width: '100vw',
+    height: '100vh',
     backgroundColor: 'rgba(15, 23, 42, 0.65)',
-    backdropFilter: 'blur(5px)',
+    backdropFilter: 'blur(6px)',
+    WebkitBackdropFilter: 'blur(6px)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    zIndex: 9999,
+    zIndex: 99999,
     padding: '16px',
+    boxSizing: 'border-box',
     animation: 'sakuraFadeOnly 0.2s ease',
   },
   modalBox: {
