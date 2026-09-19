@@ -20,7 +20,7 @@
 
 ## 📖 Giới Thiệu (Overview)
 
-**Nihongo Master (日本語マスター)** là một ứng dụng Web học tiếng Nhật thế hệ mới theo mô hình **Client-side Native / Offline-First Progressive Web App (PWA)**, được thiết kế chuyên sâu dành cho giáo trình **Dekiru Nihongo Sơ cấp (15 Bài học trọn bộ)**, hệ thống bảng chữ cái **Hiragana & Katakana mở rộng** và kho tàng **80 Hán tự N5 cơ bản**.
+**Nihongo Master (日本語マスター)** là một ứng dụng Web học tiếng Nhật thế hệ mới theo mô hình **Client-side Native / Offline-First Progressive Web App (PWA)**, được thiết kế chuyên sâu dành cho giáo trình **Dekiru Nihongo Sơ cấp (15 Bài học trọn bộ)**, hệ thống bảng chữ cái **Hiragana & Katakana mở rộng** và kho tàng **60 Hán tự N5 cơ bản**.
 
 Vượt lên trên những ứng dụng hiển thị tĩnh thông thường, **Nihongo Master** được thai nghén từ sự kết hợp hài hòa giữa **Khoa học Máy tính (Computer Science)**, **Khoa học Nhận thức (Cognitive Science)** và **Nghệ thuật Thẩm mỹ Nhật Bản**:
 
@@ -28,7 +28,7 @@ Vượt lên trên những ứng dụng hiển thị tĩnh thông thường, **N
 * 🎙️ **Phòng Luyện Nói AI (Speech Shadowing & Smart Mic):** Luyện phản xạ hội thoại thực tế (60 bài đàm thoại đời sống) và chấm điểm phát âm tiếng Nhật thời gian thực (`ja-JP`) bằng thuật toán **Quy hoạch động (Dynamic Programming - Levenshtein Distance đa tầng)**. Giải quyết dứt điểm lỗi tự ngắt mic với cơ chế **3 tầng bảo vệ thông minh (Initial Grace Period 5s, Trailing Silence 1.8s, Safety Timeout 10s)**.
 * ⌨️ **Đấu Trường Đa Dạng & Bộ Gõ WanaKana IME:** Tích hợp cả 3 hình thức kiểm tra: **Trắc nghiệm 4 đáp án**, **Gõ từ vựng (Typing Mode)** và **Luyện nghe chép chính tả (Audio Dictation)**. Bàn phím rớt âm tự động (`watashi` ➔ `わたし`, `ko-hi-` ➔ `コーヒー`), hỗ trợ chấp nhận linh hoạt Kanji, Kana, Romaji, tiếng Việt có/không dấu và bộ gợi ý 2 cấp độ.
 * 🎛️ **Bộ Điều Khiển Tốc Độ Âm Thanh (Audio Speed Controller):** Cho phép tùy chỉnh tốc độ nghe linh hoạt 3 mức (`0.75x`, `1.0x`, `1.25x`), hỗ trợ người học nghe rõ từng âm tiết tiếng Nhật trước khi chuyển sang tốc độ tự nhiên.
-* 🈸 **Đấu Trường Kanji & Nghệ Thuật Thư Pháp (Shodō Canvas):** Luyện nét 80 chữ Hán trực tiếp trên bảng vẽ Canvas tương tác với lưới chữ điền chuẩn truyền thống, đi kèm **Đấu trường Kanji Quiz 3 dạng đề thi chuyên sâu** (Kanji ➔ Nghĩa/Hán Việt, Nghĩa ➔ Kanji, Furigana Onyomi/Kunyomi).
+* 🈸 **Đấu Trường Kanji & Nghệ Thuật Thư Pháp (Shodō Canvas):** Luyện nét 60 chữ Hán trực tiếp trên bảng vẽ Canvas tương tác với lưới chữ điền chuẩn truyền thống, đi kèm **Đấu trường Kanji Quiz 3 dạng đề thi chuyên sâu** (Kanji ➔ Nghĩa/Hán Việt, Nghĩa ➔ Kanji, Furigana Onyomi/Kunyomi).
 * ⚡ **Bảng Chữ Cái Kana Master & Katakana Đột Phá:** Toàn bộ bảng Hiragana & Katakana, bổ sung âm Katakana Dakuten `ヴ (vu)` và **8 hàng Katakana mở rộng** chuẩn Tofugu; hỗ trợ chế độ trắc nghiệm độc lập và **Speed Typing** thần tốc.
 * ⚠️ **Sổ Tay Điểm Yếu & Hộp Cứu Hộ (Mistake Vault):** Tự động âm thầm ghi nhận các từ vựng làm sai trong bài tập, tính toán mục tiêu luyện tập động theo số lượng từ sai thực tế và cho phép học viên tốt nghiệp sau 2 lần sửa đúng.
 * 📖 **Bộ Dịch & Từ Điển Đa Tầng (Multi-Tier Real-Time):** Tra cứu tức thì $0\text{ms}$ kho từ điển nội bộ 965+ từ khi offline; tự động dịch thời gian thực (Debounced 400ms) với cơ chế fallback 3 tầng linh hoạt: **Google Translate API ➔ MyMemory API ➔ Offline Lexicon**.
@@ -89,8 +89,8 @@ giảm kích thước bundle      tuyệt đối vào việc học      hiệu �
 │                             DATA & STATE PERSISTENCE LAYER                             │
 │   Zustand Store (Persist LocalStorage)      │ srsAlgo.js (SM-2 Core Engine)            │
 │   typingValidator.js (Flexible Matcher)     │ stringUtils.js (Phonetic Levenshtein)    │
-│   vocabulary.js / .json (965+ Pink Book)    │ grammar.js (68 Points 15 Lessons)        │
-│   kaiwaData.js (60 Real-life Dialogues)     │ kanjiData.js (80 N5 Kanji & Radicals)    │
+│   vocabulary.js / .json (965+ Pink Book)    │ grammar.js (65 Points 15 Lessons)        │
+│   kaiwaData.js (60 Real-life Dialogues)     │ kanjiData.js (60 N5 Kanji & Radicals)    │
 │   offlineDictionary.js (0ms Fast Search)    │ GPU Sakura Particle CSS Layer            │
 └────────────────────────────────────────────────────────────────────────────────────────┘
 ```
@@ -189,7 +189,7 @@ Hệ thống âm thanh được nâng cấp toàn diện:
 | :---: | :--- | :--- |
 | 🌸 | **Đại Sảnh Đón Tiếp (Welcome Hub)** | Màn hình Hero ấn tượng chuẩn EdTech quốc tế, tôn vinh 4 chỉ số vàng (15 bài học, 965+ từ vựng, SM-2, 100% PWA Offline), phím tắt học cấp tốc và nút Trang Chủ điều hướng linh hoạt. |
 | 🎴 | **Thẻ Ghi Nhớ Flashcard 3D** | Lật thẻ không gian 3D mượt mà, tích hợp phát âm bản ngữ, phiên âm Furigana và chấm điểm chu kỳ Spaced Repetition (SM-2). |
-| 🈸 | **Hán Tự N5 & Bảng Vẽ Canvas** | 80 Hán tự căn bản N5 kèm âm Hán-Việt, Onyomi, Kunyomi và số nét; bảng vẽ Canvas luyện viết chữ Hán với lưới chữ điền $2 \times 2$ truyền thống. |
+| 🈸 | **Hán Tự N5 & Bảng Vẽ Canvas** | 60 Hán tự căn bản N5 kèm âm Hán-Việt, Onyomi, Kunyomi và số nét; bảng vẽ Canvas luyện viết chữ Hán với lưới chữ điền $2 \times 2$ truyền thống. |
 | ⚔️ | **Đấu Trường Kanji Quiz** | 3 chế độ thi đấu chuyên sâu: Hán tự ➔ Nghĩa/Hán Việt, Nghĩa ➔ Hán tự, Đọc Furigana; tính năng lọc chữ chưa thuộc và thử thách lại chữ sai. |
 | ⛩️ | **Bảng Chữ Cái Kana Master (Tofugu)** | Bảng Hiragana & Katakana toàn diện, bổ sung Katakana Dakuten `ヴ` và **8 hàng Katakana mở rộng**; chế độ **Speed Typing** gõ phím phản xạ Romaji và trắc nghiệm độc lập. |
 | 🎙️ | **Phòng Luyện Nói Kaiwa AI** | Luyện phát âm trực tiếp qua Micro cho 60 câu đối thoại đời sống; sửa triệt để lỗi ngắt mic với Grace Period 5s, tự chốt điểm 1.8s sau khi nói, chấm điểm Levenshtein đa tầng với thang màu trực quan. |
@@ -221,10 +221,10 @@ Japanese Learning/
 │   │   ├── Backup/             # BackupRestoreModal.jsx (Sao lưu & Khôi phục JSON)
 │   │   ├── Dictionary/         # Translator.jsx, OfflineLexiconCard... (Dịch thuật AI đa tầng & Từ điển)
 │   │   ├── Garden/             # SakuraGarden.jsx (Vườn Bonsai tương tác 5 cấp độ)
-│   │   ├── Grammar/            # GrammarCard.jsx, GrammarScreen.jsx (Ngữ pháp 68 điểm 15 bài)
+│   │   ├── Grammar/            # GrammarCard.jsx, GrammarScreen.jsx (Ngữ pháp 65 điểm 15 bài)
 │   │   ├── Kaiwa/              # KaiwaCard.jsx, KaiwaScreen.jsx (Voice AI & Luyện nói Shadowing)
 │   │   ├── Kana/               # KanaScreen.jsx, KanaMatrixView, KanaSpeedTyping... (Tofugu Kana)
-│   │   ├── Kanji/              # KanjiScreen.jsx, KanjiCanvasPad.jsx, KanjiQuiz.jsx (80 Hán tự & Đấu trường Quiz)
+│   │   ├── Kanji/              # KanjiScreen.jsx, KanjiCanvasPad.jsx, KanjiQuiz.jsx (60 Hán tự & Đấu trường Quiz)
 │   │   ├── Quiz/               # QuizScreen.jsx (Quiz Engine), QuizTypingInput.jsx (WanaKana Typing & Dictation)
 │   │   ├── Rescue/             # MistakeVaultModal.jsx (Hộp Cứu Hộ Điểm Yếu & Ôn Tập SM-2)
 │   │   ├── Splash/             # SplashScreen.jsx (Màn hình mở đầu danh ngôn Zen)
@@ -234,10 +234,10 @@ Japanese Learning/
 │   │   ├── FuriganaSwitch.jsx  # Công tắc bật/tắt Furigana toàn app
 │   │   └── FuriganaText.jsx    # Component hiển thị thẻ <ruby> tối ưu
 │   ├── data/                   # Cơ sở tri thức ứng dụng
-│   │   ├── grammar.js          # Dữ liệu ngữ pháp 68 mẫu của 15 bài Dekiru
+│   │   ├── grammar.js          # Dữ liệu ngữ pháp 65 mẫu của 15 bài Dekiru
 │   │   ├── kaiwaData.js        # Dữ liệu 60 bài hội thoại thực tế kèm bối cảnh đời sống
 │   │   ├── kanaData.js         # Bảng chữ cái Hiragana & Katakana mở rộng 8 hàng
-│   │   ├── kanjiData.js        # 80 chữ Hán N5 căn bản kèm âm Hán Việt
+│   │   ├── kanjiData.js        # 60 chữ Hán N5 căn bản kèm âm Hán Việt
 │   │   ├── offlineDictionary.js# Từ điển offline tra cứu tức thì 0ms
 │   │   ├── vocabulary.js       # 965+ từ vựng đối chiếu chuẩn sách hồng Dekiru
 │   │   └── vocabulary.json     # Dữ liệu JSON từ vựng đầy đủ
