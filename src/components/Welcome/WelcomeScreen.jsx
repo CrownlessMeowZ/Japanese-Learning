@@ -79,9 +79,9 @@ export const WelcomeScreen = ({ onStartLearning, onOpenTranslator, onSelectLesso
             {onOpenMatch && (
               <button
                 type="button"
-                onClick={() => onOpenMatch('all')}
+                onClick={() => onOpenMatch(null)}
                 className="sakura-nav-btn"
-                style={{ fontSize: '0.85rem', padding: '6px 14px', borderRadius: '12px', backgroundColor: '#fdf2f8', color: '#be185d', borderColor: '#fbcfe8' }}
+                style={{ fontSize: '0.85rem', padding: '6px 14px', borderRadius: '12px' }}
                 title="Minigame Đấu phản xạ Sakura Match 60 giây"
               >
                 🌸 Đấu Phản Xạ Match
