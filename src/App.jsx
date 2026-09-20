@@ -18,6 +18,7 @@ const VocabScreen = lazy(() => import('./components/Vocab/VocabScreen').then((m)
 const Translator = lazy(() => import('./components/Dictionary/Translator').then((m) => ({ default: m.Translator })));
 const KanaScreen = lazy(() => import('./components/Kana/KanaScreen').then((m) => ({ default: m.KanaScreen })));
 const KanjiScreen = lazy(() => import('./components/Kanji/KanjiScreen').then((m) => ({ default: m.KanjiScreen })));
+const SakuraMatchScreen = lazy(() => import('./components/Match/SakuraMatchScreen').then((m) => ({ default: m.SakuraMatchScreen })));
 const BackupRestoreModal = lazy(() => import('./components/Backup/BackupRestoreModal').then((m) => ({ default: m.BackupRestoreModal })));
 
 /**
@@ -98,6 +99,11 @@ export default function App() {
 
   const handleOpenKanji = () => {
     setCurrentRoute('kanji');
+  };
+
+  const handleOpenMatch = (lessonId = 1) => {
+    setActiveLessonId(lessonId);
+    setCurrentRoute('match');
   };
 
   const handleBackToDashboard = () => {
@@ -197,6 +203,16 @@ export default function App() {
               🔍 Từ Điển
             </button>
 
+            {/* 4b. Nút Đấu Phản Xạ Sakura Match */}
+            <button
+              type="button"
+              onClick={() => handleOpenMatch(activeLessonId || 1)}
+              className={`sakura-nav-btn ${currentRoute === 'match' ? 'active' : ''}`}
+              title="Minigame Đấu Phản Xạ Nối Từ Vựng 60 Giây"
+            >
+              🌸 Sakura Match
+            </button>
+
             {/* 5. Global Furigana Switch (Phiên Âm) */}
             <FuriganaSwitch />
 
@@ -243,6 +259,7 @@ export default function App() {
                 onOpenTranslator={handleOpenTranslator}
                 onOpenKana={handleOpenKana}
                 onOpenKanji={handleOpenKanji}
+                onOpenMatch={handleOpenMatch}
                 onSelectLesson={(lessonId) => {
                   setActiveLessonId(lessonId);
                   setCurrentRoute('vocab');
@@ -256,9 +273,18 @@ export default function App() {
                 onSelectVocab={handleOpenVocab}
                 onSelectGrammar={handleOpenGrammar}
                 onSelectKaiwa={handleOpenKaiwa}
+                onSelectMatch={handleOpenMatch}
+                onOpenMatch={handleOpenMatch}
                 onOpenTranslator={handleOpenTranslator}
                 onOpenKana={handleOpenKana}
                 onOpenKanji={handleOpenKanji}
+              />
+            )}
+
+            {currentRoute === 'match' && (
+              <SakuraMatchScreen
+                initialLessonId={activeLessonId}
+                onBack={handleBackToDashboard}
               />
             )}
 

@@ -1,0 +1,277 @@
+/* ==========================================================================
+   Sakura Match - Minigame Nối Từ Phản Xạ 60 Giây (Bước 5)
+   Phong cách Sakura EdTech: Hiện đại, thanh thoát, hiệu ứng 60fps
+   ========================================================================== */
+
+/* 1. Khung chứa chính (Screen Container) */
+.match-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+  position: relative;
+}
+
+/* 2. Thanh trạng thái trên đỉnh (Header HUD) */
+.match-hud-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  padding: 14px 22px;
+  border-radius: 20px;
+  border: 1.5px solid #fce7f3;
+  box-shadow: 0 4px 20px rgba(233, 30, 140, 0.08);
+  margin-bottom: 22px;
+}
+
+.match-stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.match-stat-label {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.match-stat-value {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #1e293b;
+  line-height: 1.2;
+}
+
+/* 3. Đồng hồ đếm ngược (Countdown Timer) */
+.match-timer-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 14px;
+  font-size: 1.25rem;
+  font-weight: 800;
+  background-color: #fdf2f8;
+  color: #be185d;
+  border: 1.5px solid #fbcfe8;
+  transition: all 0.3s ease;
+}
+
+.match-timer-danger {
+  background-color: #fef2f2 !important;
+  color: #dc2626 !important;
+  border-color: #fca5a5 !important;
+  animation: matchTimerPulse 0.8s ease-in-out infinite alternate;
+}
+
+@keyframes matchTimerPulse {
+  0% { transform: scale(1); box-shadow: 0 0 0 rgba(220, 38, 38, 0); }
+  100% { transform: scale(1.08); box-shadow: 0 0 14px rgba(220, 38, 38, 0.35); }
+}
+
+/* 4. Combo Banner rực rỡ */
+.match-combo-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 14px;
+  border-radius: 12px;
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #ffffff;
+  background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+  animation: comboPop 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes comboPop {
+  0% { transform: scale(0.6); opacity: 0; }
+  70% { transform: scale(1.15); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* 5. Lưới bàn cờ (Game Grid) */
+.match-grid {
+  display: grid;
+  gap: 14px;
+  margin: 0 auto;
+  perspective: 1000px;
+}
+
+.match-grid-4x3 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.match-grid-4x4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.match-grid-5x4 {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+@media (max-width: 768px) {
+  .match-grid-4x3,
+  .match-grid-4x4,
+  .match-grid-5x4 {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .match-grid-4x3,
+  .match-grid-4x4,
+  .match-grid-5x4 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+}
+
+/* 6. Thẻ từ vựng tương tác (Match Card) */
+.match-card {
+  position: relative;
+  min-height: 108px;
+  background: #ffffff;
+  border-radius: 16px;
+  border: 2px solid #e2e8f0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 10px;
+  text-align: center;
+  user-select: none;
+  transition: transform 0.18s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.18s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.18s ease,
+              background-color 0.18s ease,
+              opacity 0.3s ease;
+}
+
+.match-card:hover:not(.matched):not(.disabled) {
+  transform: translateY(-3px) scale(1.02);
+  border-color: #f472b6;
+  box-shadow: 0 8px 22px rgba(233, 30, 140, 0.14);
+}
+
+.match-card:active:not(.matched):not(.disabled) {
+  transform: scale(0.97);
+}
+
+/* Trạng thái Thẻ được chọn */
+.match-card.selected {
+  border-color: #e91e8c !important;
+  background: linear-gradient(135deg, #ffffff 0%, #fdf2f8 100%) !important;
+  box-shadow: 0 0 0 3px rgba(233, 30, 140, 0.25), 0 8px 24px rgba(233, 30, 140, 0.2) !important;
+  transform: translateY(-4px) scale(1.03) !important;
+}
+
+/* Trạng thái Ghép đúng (Matched) */
+.match-card.matched {
+  border-color: #10b981 !important;
+  background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%) !important;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.3) !important;
+  opacity: 0.55;
+  cursor: default;
+  pointer-events: none;
+  animation: matchSuccessPulse 0.5s ease-out;
+}
+
+@keyframes matchSuccessPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); background-color: #d1fae5; }
+  100% { transform: scale(1); }
+}
+
+/* Trạng thái Ghép sai (Mismatched) */
+.match-card.mismatch {
+  border-color: #ef4444 !important;
+  background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%) !important;
+  animation: cardShake 0.45s ease-in-out;
+}
+
+@keyframes cardShake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+/* Chữ hiển thị trong thẻ */
+.match-card-lang-tag {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 6px;
+  text-transform: uppercase;
+}
+
+.match-card-jp .match-card-lang-tag {
+  background-color: #fce7f3;
+  color: #be185d;
+}
+
+.match-card-vi .match-card-lang-tag {
+  background-color: #e0f2fe;
+  color: #0369a1;
+}
+
+.match-card-text {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1.35;
+  word-break: break-word;
+}
+
+.match-card-jp .match-card-text {
+  font-size: 1.28rem;
+  font-weight: 800;
+}
+
+/* 7. Modal Chiến Thắng & Hết Giờ (Game Over / Victory Overlay) */
+.match-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 10000;
+  animation: modalBackdropFade 0.25s ease-out;
+}
+
+@keyframes modalBackdropFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.match-modal-box {
+  background: #ffffff;
+  border-radius: 28px;
+  width: 100%;
+  max-width: 480px;
+  padding: 32px 28px;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+  border: 2px solid #fce7f3;
+  animation: modalSlideUp 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes modalSlideUp {
+  from { transform: translateY(30px) scale(0.92); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}

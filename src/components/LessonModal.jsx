@@ -19,6 +19,7 @@ export const LessonModal = ({
   onSelectGrammar,
   onSelectKaiwa,
   onSelectQuiz,
+  onSelectMatch,
 }) => {
   // Lấy dữ liệu bài học để hiển thị số liệu thực tế
   const words = vocabularyData[String(lessonId)] || [];
@@ -184,6 +185,32 @@ export const LessonModal = ({
                 {isQuizDisabled
                   ? '⚠️ Cần tối thiểu 4 từ vựng để tạo bài trắc nghiệm'
                   : 'Ôn tập thông minh theo thuật toán Spaced Repetition'}
+              </p>
+            </div>
+            <span className="skill-arrow">➔</span>
+          </button>
+
+          {/* 5. 🌸 Sakura Match (Nối từ 60s) */}
+          <button
+            type="button"
+            className="skill-card-item"
+            style={{ borderLeft: '4px solid #e91e8c' }}
+            onClick={() => handleAction(onSelectMatch)}
+            disabled={isQuizDisabled}
+            title={isQuizDisabled ? 'Cần tối thiểu 4 từ vựng để ghép thẻ' : ''}
+          >
+            <div className="skill-icon-circle" style={{ backgroundColor: '#fdf2f8', color: '#be185d' }}>
+              🌸
+            </div>
+            <div style={{ flex: 1 }}>
+              <div style={styles.skillHeaderRow}>
+                <span style={styles.skillTitle}>Sakura Match</span>
+                <span className="skill-badge" style={{ backgroundColor: '#fdf2f8', color: '#be185d' }}>
+                  60s Speed
+                </span>
+              </div>
+              <p style={styles.skillDesc}>
+                Đấu phản xạ nối thẻ từ vựng & nghĩa, nhân điểm Combo rực rỡ
               </p>
             </div>
             <span className="skill-arrow">➔</span>

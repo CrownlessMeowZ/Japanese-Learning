@@ -20,7 +20,7 @@ const LESSONS = Array.from({ length: 15 }, (_, i) => i + 1);
  * - Mỗi thẻ bài học chỉ hiển thị thông tin trọng tâm + 1 nút duy nhất: [ 🚀 Vào Bài Học ]
  * - Khi click sẽ kích hoạt LessonModal với 4 lựa chọn kỹ năng chuyên sâu (Từ Vựng, Ngữ Pháp, Giao Tiếp, Quiz)
  */
-export const Dashboard = ({ onSelectQuiz, onSelectVocab, onSelectGrammar, onSelectKaiwa, onOpenTranslator, onOpenKana, onOpenKanji }) => {
+export const Dashboard = ({ onSelectQuiz, onSelectVocab, onSelectGrammar, onSelectKaiwa, onSelectMatch, onOpenMatch, onOpenTranslator, onOpenKana, onOpenKanji }) => {
   const {
     dailyStreak,
     getCompletionRate,
@@ -103,6 +103,30 @@ export const Dashboard = ({ onSelectQuiz, onSelectVocab, onSelectGrammar, onSele
               title="Tra cứu từ vựng và dịch song ngữ"
             >
               🔍 Tra Cứu Từ Điển
+            </button>
+          )}
+          {onOpenMatch && (
+            <button
+              type="button"
+              style={{
+                backgroundColor: '#fdf2f8',
+                color: '#be185d',
+                padding: '7px 16px',
+                borderRadius: '20px',
+                fontSize: '0.85rem',
+                fontWeight: '700',
+                border: '1.5px solid #fbcfe8',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                transition: 'all 0.2s',
+                boxShadow: '0 2px 6px rgba(233, 30, 140, 0.08)',
+              }}
+              onClick={() => onOpenMatch('all')}
+              title="Đấu phản xạ Sakura Match 60 giây"
+            >
+              🌸 Đấu Phản Xạ Match
             </button>
           )}
           <button
@@ -194,6 +218,7 @@ export const Dashboard = ({ onSelectQuiz, onSelectVocab, onSelectGrammar, onSele
           onSelectGrammar={onSelectGrammar}
           onSelectKaiwa={onSelectKaiwa}
           onSelectQuiz={onSelectQuiz}
+          onSelectMatch={onSelectMatch}
         />
       )}
 

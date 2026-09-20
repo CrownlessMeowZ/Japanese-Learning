@@ -10,7 +10,7 @@ import '../../styles/sakura.css';
  * - Thống kê 965 từ vựng, 15 bài học sơ cấp
  * - Nút kêu gọi hành động (CTA) nổi bật để người dùng bắt đầu ngay
  */
-export const WelcomeScreen = ({ onStartLearning, onOpenTranslator, onSelectLesson, onOpenKana, onOpenKanji }) => {
+export const WelcomeScreen = ({ onStartLearning, onOpenTranslator, onSelectLesson, onOpenKana, onOpenKanji, onOpenMatch }) => {
   const { dailyStreak } = useProgress();
 
   return (
@@ -51,7 +51,7 @@ export const WelcomeScreen = ({ onStartLearning, onOpenTranslator, onSelectLesso
         </div>
 
         {/* Quick Hub Shortcuts */}
-        {(onOpenKana || onOpenKanji) && (
+        {(onOpenKana || onOpenKanji || onOpenMatch) && (
           <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
             <span style={{ fontSize: '0.88rem', color: '#888', fontWeight: '600' }}>Học cấp tốc:</span>
             {onOpenKana && (
@@ -71,9 +71,20 @@ export const WelcomeScreen = ({ onStartLearning, onOpenTranslator, onSelectLesso
                 onClick={onOpenKanji}
                 className="sakura-nav-btn"
                 style={{ fontSize: '0.85rem', padding: '6px 14px', borderRadius: '12px' }}
-                title="Luyện viết 80 Hán tự N5 trên Canvas"
+                title="Luyện viết 60 Hán tự N5 trên Canvas"
               >
                 🈸 Hán Tự N5 (Kanji)
+              </button>
+            )}
+            {onOpenMatch && (
+              <button
+                type="button"
+                onClick={() => onOpenMatch('all')}
+                className="sakura-nav-btn"
+                style={{ fontSize: '0.85rem', padding: '6px 14px', borderRadius: '12px', backgroundColor: '#fdf2f8', color: '#be185d', borderColor: '#fbcfe8' }}
+                title="Minigame Đấu phản xạ Sakura Match 60 giây"
+              >
+                🌸 Đấu Phản Xạ Match
               </button>
             )}
           </div>
