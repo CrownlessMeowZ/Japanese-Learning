@@ -632,22 +632,23 @@ export const SakuraMatchScreen = ({ initialLessonId = null, onBack }) => {
       {/* 1. THANH TRẠNG THÁI TRÊN ĐỈNH (HUD BAR) */}
       <div className="match-hud-bar">
         {/* Nút Quay lại Dashboard, Chọn bài khác & Huy hiệu bài học */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+        <div className="match-hud-left">
           <button
             type="button"
             onClick={onBack}
             style={{
-              padding: '8px 16px',
+              padding: '6px 14px',
               backgroundColor: '#ffffff',
               border: '1.5px solid #e2e8f0',
               borderRadius: '12px',
               color: '#475569',
               fontWeight: '700',
-              fontSize: '0.88rem',
+              fontSize: '0.84rem',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
-              gap: '6px'
+              gap: '6px',
+              whiteSpace: 'nowrap'
             }}
           >
             ⬅ Dashboard
@@ -664,7 +665,7 @@ export const SakuraMatchScreen = ({ initialLessonId = null, onBack }) => {
               setGameState('lobby');
             }}
             style={{
-              padding: '8px 14px',
+              padding: '6px 13px',
               backgroundColor: '#ffffff',
               border: '1.5px solid #fbcfe8',
               borderRadius: '12px',
@@ -674,7 +675,8 @@ export const SakuraMatchScreen = ({ initialLessonId = null, onBack }) => {
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
-              gap: '6px'
+              gap: '6px',
+              whiteSpace: 'nowrap'
             }}
             title="Quay lại sảnh chọn bài học khác"
           >
@@ -688,47 +690,42 @@ export const SakuraMatchScreen = ({ initialLessonId = null, onBack }) => {
             backgroundColor: '#fdf2f8',
             padding: '5px 12px',
             borderRadius: '10px',
-            border: '1px solid #fbcfe8'
+            border: '1px solid #fbcfe8',
+            whiteSpace: 'nowrap'
           }}>
             {selectedLesson === 'all' ? '🌸 Toàn Bộ 15 Bài' : `Bài ${selectedLesson}`} • {currentConfig.name}
           </span>
         </div>
 
-        {/* Điểm số hiện tại */}
-        <div className="match-stat-item">
-          <span className="match-stat-label">Điểm số</span>
-          <span className="match-stat-value" style={{ color: '#e91e8c' }}>
-            {score}
-          </span>
-        </div>
+        {/* Khối trung tâm: Điểm số, Thời gian, Đã dọn */}
+        <div className="match-hud-center">
+          <div className="match-stat-item">
+            <span className="match-stat-label">Điểm số</span>
+            <span className="match-stat-value" style={{ color: '#e91e8c' }}>
+              {score}
+            </span>
+          </div>
 
-        {/* Đồng hồ đếm ngược 60s */}
-        <div className="match-stat-item">
-          <span className="match-stat-label">Thời gian</span>
-          <div className={`match-timer-badge ${isTimeUrgent ? 'match-timer-danger' : ''}`}>
-            <span>⏱️</span>
-            <span>{String(Math.floor(secondsLeft / 60)).padStart(2, '0')}:{String(secondsLeft % 60).padStart(2, '0')}</span>
+          <div className="match-stat-item">
+            <span className="match-stat-label">Thời gian</span>
+            <div className={`match-timer-badge ${isTimeUrgent ? 'match-timer-danger' : ''}`}>
+              <span>⏱️</span>
+              <span>{String(Math.floor(secondsLeft / 60)).padStart(2, '0')}:{String(secondsLeft % 60).padStart(2, '0')}</span>
+            </div>
+          </div>
+
+          <div className="match-stat-item">
+            <span className="match-stat-label">Đã dọn</span>
+            <span className="match-stat-value" style={{ color: '#0284c7' }}>
+              {matchedPairIds.size}/{currentConfig.pairs}
+            </span>
           </div>
         </div>
 
-        {/* Tiến độ hoàn thành cặp thẻ */}
-        <div className="match-stat-item">
-          <span className="match-stat-label">Đã dọn</span>
-          <span className="match-stat-value" style={{ color: '#0284c7' }}>
-            {matchedPairIds.size}/{currentConfig.pairs}
-          </span>
-        </div>
-
-        {/* Cột phải: Kỷ Lục + Âm Thanh (Hàng trên) & Đổi Bàn Mới (Hàng dưới) */}
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'stretch',
-          gap: '6px',
-          minWidth: '150px'
-        }}>
+        {/* Khối bên phải: Kỷ Lục + Âm Thanh (Hàng trên) & Đổi Bàn Mới (Hàng dưới) */}
+        <div className="match-hud-right">
           {/* Hàng trên: Nút Kỷ lục & Loa */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', width: '100%' }}>
             <button
               type="button"
               onClick={() => setIsHighscoreModalOpen(true)}
