@@ -33,7 +33,20 @@ function shuffleArray(array) {
 function loadHighscoresFromStorage() {
   try {
     const raw = localStorage.getItem(HIGHSCORE_STORAGE_KEY);
-    return raw ? JSON.parse(raw) : {};
+    if (!raw) return {};
+    const parsed = JSON.parse(raw);
+    let hasCleaned = false;
+    // Tự động làm sạch các giá trị lỗi cũ (như 999s hoặc 1s do đóng băng thời gian trước đó)
+    Object.keys(parsed).forEach((k) => {
+      if (parsed[k]?.bestTime >= 999 || parsed[k]?.bestTime === 1) {
+        parsed[k].bestTime = null;
+        hasCleaned = true;
+      }
+    });
+    if (hasCleaned) {
+      localStorage.setItem(HIGHSCORE_STORAGE_KEY, JSON.stringify(parsed));
+    }
+    return parsed;
   } catch {
     return {};
   }
@@ -42,17 +55,28 @@ function loadHighscoresFromStorage() {
 /**
  * Lưu Highscores vào LocalStorage
  */
-function saveHighscoreToStorage(key, newScore, timeTaken) {
+function saveHighscoreToStorage(key, newScore, timeTaken, isClear = false) {
   try {
     const current = loadHighscoresFromStorage();
-    const prev = current[key] || { highScore: 0, bestTime: 999, gamesPlayed: 0 };
+    const prev = current[key] || { highScore: 0, bestTime: null, gamesPlayed: 0 };
 
     const isNewHighscore = newScore > (prev.highScore || 0);
+
+    // Chỉ lưu thời gian phá đảo khi người chơi thực sự dọn sạch bàn cờ
+    let updatedBestTime = prev.bestTime;
+    if (isClear && timeTaken) {
+      if (!prev.bestTime || prev.bestTime >= 999 || prev.bestTime <= 1) {
+        updatedBestTime = timeTaken;
+      } else {
+        updatedBestTime = Math.min(timeTaken, prev.bestTime);
+      }
+    }
+
     const updated = {
       ...current,
       [key]: {
         highScore: Math.max(newScore, prev.highScore || 0),
-        bestTime: newScore > 0 ? Math.min(timeTaken, prev.bestTime || 999) : prev.bestTime,
+        bestTime: updatedBestTime,
         gamesPlayed: (prev.gamesPlayed || 0) + 1,
         lastPlayed: new Date().toISOString().slice(0, 10),
       },
@@ -126,22 +150,31 @@ export const SakuraMatchScreen = ({ initialLessonId = 1, onBack }) => {
   const [mismatchIds, setMismatchIds] = useState([]);
   
   const [score, setScore] = useState(0);
+  const scoreRef = useRef(0);
   const [combo, setCombo] = useState(0);
   const [maxCombo, setMaxCombo] = useState(0);
   const [secondsLeft, setSecondsLeft] = useState(() => currentConfig.seconds);
+  const [finalTimeTaken, setFinalTimeTaken] = useState(0);
   const [isSoundMuted, setIsSoundMuted] = useState(false);
   const [isNewRecord, setIsNewRecord] = useState(false);
   const [isHighscoreModalOpen, setIsHighscoreModalOpen] = useState(false);
   const [highscores, setHighscores] = useState(() => loadHighscoresFromStorage());
+  const [gameSessionId, setGameSessionId] = useState(0);
 
+  const startTimeRef = useRef(null);
   const timerRef = useRef(null);
   const isCheckingRef = useRef(false);
   const { playAudio, stopAudio } = useAudioPlayer();
 
   // Khởi tạo bàn cờ mới
   const initGame = useCallback((targetPool = vocabPool, targetConfig = currentConfig) => {
-    if (timerRef.current) clearInterval(timerRef.current);
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
     isCheckingRef.current = false;
+    startTimeRef.current = Date.now();
+    scoreRef.current = 0;
 
     setCards(generateCardsFromPool(targetPool, targetConfig.pairs));
     setSelectedCardIds([]);
@@ -151,8 +184,10 @@ export const SakuraMatchScreen = ({ initialLessonId = 1, onBack }) => {
     setCombo(0);
     setMaxCombo(0);
     setSecondsLeft(targetConfig.seconds);
+    setFinalTimeTaken(0);
     setIsNewRecord(false);
     setGameState('playing');
+    setGameSessionId((prev) => prev + 1);
   }, [vocabPool, currentConfig]);
 
   // Đổi bài học
@@ -174,7 +209,10 @@ export const SakuraMatchScreen = ({ initialLessonId = 1, onBack }) => {
   // Dọn dẹp âm thanh và timer khi rời component
   useEffect(() => {
     return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+        timerRef.current = null;
+      }
       stopAudio();
     };
   }, [stopAudio]);
@@ -182,19 +220,32 @@ export const SakuraMatchScreen = ({ initialLessonId = 1, onBack }) => {
   // Quản lý đồng hồ đếm ngược
   useEffect(() => {
     if (gameState !== 'playing') {
-      if (timerRef.current) clearInterval(timerRef.current);
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+        timerRef.current = null;
+      }
       return;
+    }
+
+    startTimeRef.current = Date.now();
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
     }
 
     timerRef.current = setInterval(() => {
       setSecondsLeft((prev) => {
         if (prev <= 1) {
           clearInterval(timerRef.current);
+          timerRef.current = null;
           setGameState('timeout');
+          setFinalTimeTaken(currentConfig.seconds);
           soundEffects.playMatchError();
-          // Cập nhật số ván chơi vào bảng kỷ lục
+
+          // Cập nhật số ván chơi và điểm số đã đạt được trước khi hết giờ vào bảng kỷ lục
           const lessonKey = String(selectedLesson);
-          const { updated } = saveHighscoreToStorage(lessonKey, 0, currentConfig.seconds);
+          const currentScore = scoreRef.current;
+          const { updated } = saveHighscoreToStorage(lessonKey, currentScore, null, false);
           setHighscores(updated);
           return 0;
         }
@@ -208,9 +259,12 @@ export const SakuraMatchScreen = ({ initialLessonId = 1, onBack }) => {
     }, 1000);
 
     return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+        timerRef.current = null;
+      }
     };
-  }, [gameState, selectedLesson, currentConfig.seconds]);
+  }, [gameState, gameSessionId, selectedLesson, currentConfig.seconds]);
 
   // Xử lý khi người chơi bấm chọn một thẻ
   const handleCardClick = useCallback((clickedCard) => {
@@ -250,7 +304,11 @@ export const SakuraMatchScreen = ({ initialLessonId = 1, onBack }) => {
         // Tính điểm: Điểm cơ bản 100đ * hệ số combo
         const comboMultiplier = 1 + (nextCombo - 1) * 0.5;
         const pointsEarned = Math.round(100 * comboMultiplier);
-        setScore((prev) => prev + pointsEarned);
+        setScore((prev) => {
+          const nextScore = prev + pointsEarned;
+          scoreRef.current = nextScore;
+          return nextScore;
+        });
 
         soundEffects.playMatchSuccess(nextCombo);
 
@@ -263,20 +321,27 @@ export const SakuraMatchScreen = ({ initialLessonId = 1, onBack }) => {
 
         // KIỂM TRA ĐIỀU KIỆN CHIẾN THẮNG (DỌN SẠCH BÀN CỜ)
         if (nextMatched.size === currentConfig.pairs) {
-          if (timerRef.current) clearInterval(timerRef.current);
+          if (timerRef.current) {
+            clearInterval(timerRef.current);
+            timerRef.current = null;
+          }
           soundEffects.playVictory();
 
+          // Tính toán thời gian thực tế đã bỏ ra từ khi bắt đầu
+          const actualTimeTaken = Math.max(1, Math.round((Date.now() - startTimeRef.current) / 1000));
+          setFinalTimeTaken(actualTimeTaken);
+
           // Thưởng điểm thời gian còn lại: mỗi giây còn lại = 30đ
-          const timeBonus = secondsLeft * 30;
+          const timeBonus = Math.max(0, secondsLeft) * 30;
           const finalScore = score + pointsEarned + timeBonus;
-          const timeTaken = currentConfig.seconds - secondsLeft;
+          scoreRef.current = finalScore;
 
           setScore(finalScore);
           setGameState('victory');
 
           // Lưu kỷ lục vào LocalStorage
           const lessonKey = String(selectedLesson);
-          const { updated, isNewHighscore } = saveHighscoreToStorage(lessonKey, finalScore, timeTaken);
+          const { updated, isNewHighscore } = saveHighscoreToStorage(lessonKey, finalScore, actualTimeTaken, true);
           setHighscores(updated);
           setIsNewRecord(isNewHighscore);
         }
@@ -294,13 +359,16 @@ export const SakuraMatchScreen = ({ initialLessonId = 1, onBack }) => {
         }, 450);
       }
     }
-  }, [gameState, matchedPairIds, selectedCardIds, cards, combo, currentConfig.pairs, currentConfig.seconds, secondsLeft, score, selectedLesson]);
+  }, [gameState, matchedPairIds, selectedCardIds, cards, combo, currentConfig.pairs, secondsLeft, score, selectedLesson]);
 
-  // Bật/tắt âm thanh hiệu ứng
+  // Bật/tắt âm thanh hiệu ứng & giọng đọc AI
   const toggleSound = () => {
     const nextVal = !isSoundMuted;
     setIsSoundMuted(nextVal);
     soundEffects.setEnabled(!nextVal);
+    if (nextVal) {
+      stopAudio();
+    }
   };
 
   const lessonKey = String(selectedLesson);
@@ -474,7 +542,7 @@ export const SakuraMatchScreen = ({ initialLessonId = 1, onBack }) => {
         {/* Nút Làm Mới Bàn Cờ */}
         <button
           type="button"
-          onClick={initGame}
+          onClick={() => initGame()}
           style={{
             padding: '6px 14px',
             backgroundColor: '#fce7f3',
@@ -518,7 +586,7 @@ export const SakuraMatchScreen = ({ initialLessonId = 1, onBack }) => {
               isMatched={isMatched}
               isMismatch={isMismatch}
               onClick={handleCardClick}
-              onPlayAudio={playAudio}
+              onPlayAudio={isSoundMuted ? undefined : playAudio}
             />
           );
         })}
@@ -529,7 +597,7 @@ export const SakuraMatchScreen = ({ initialLessonId = 1, onBack }) => {
         isOpen={gameState === 'victory' || gameState === 'timeout'}
         isVictory={gameState === 'victory'}
         score={score}
-        timeTaken={currentConfig.seconds - secondsLeft}
+        timeTaken={finalTimeTaken}
         remainingSeconds={secondsLeft}
         matchedPairsCount={matchedPairIds.size}
         totalPairsCount={currentConfig.pairs}

@@ -80,7 +80,8 @@ export const MatchHighscoreModal = ({
           {/* Mục: Tất Cả 15 Bài */}
           {(() => {
             const allStats = highscores['all'] || {};
-            const hasPlayed = Boolean(allStats.highScore);
+            const hasPlayed = Boolean(allStats.highScore || allStats.gamesPlayed);
+            const validBestTime = allStats.bestTime && allStats.bestTime < 999 ? allStats.bestTime : null;
             return (
               <div style={{
                 padding: '12px 16px',
@@ -105,10 +106,10 @@ export const MatchHighscoreModal = ({
                 <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
                   <div style={{ textAlign: 'right' }}>
                     <div style={{ fontSize: '1.15rem', fontWeight: '900', color: '#be185d' }}>
-                      {allStats.highScore ? `${allStats.highScore} đ` : '---'}
+                      {allStats.highScore ? `${allStats.highScore} đ` : (hasPlayed ? '0 đ' : '---')}
                     </div>
                     <div style={{ fontSize: '0.76rem', color: '#64748b' }}>
-                      {allStats.bestTime ? `⏱️ ${allStats.bestTime}s` : '---'}
+                      {validBestTime ? `⏱️ ${validBestTime}s` : '---'}
                     </div>
                   </div>
 
@@ -141,7 +142,8 @@ export const MatchHighscoreModal = ({
           {/* 15 Bài Học Cụ Thể */}
           {lessonsList.map((lsId) => {
             const stats = highscores[lsId] || {};
-            const hasPlayed = Boolean(stats.highScore);
+            const hasPlayed = Boolean(stats.highScore || stats.gamesPlayed);
+            const validBestTime = stats.bestTime && stats.bestTime < 999 ? stats.bestTime : null;
 
             return (
               <div
@@ -185,10 +187,10 @@ export const MatchHighscoreModal = ({
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                   <div style={{ textAlign: 'right' }}>
                     <div style={{ fontSize: '1.05rem', fontWeight: '800', color: hasPlayed ? '#ea580c' : '#94a3b8' }}>
-                      {stats.highScore ? `${stats.highScore} đ` : '---'}
+                      {stats.highScore ? `${stats.highScore} đ` : (hasPlayed ? '0 đ' : '---')}
                     </div>
                     <div style={{ fontSize: '0.72rem', color: '#94a3b8' }}>
-                      {stats.bestTime ? `⏱️ ${stats.bestTime}s` : ''}
+                      {validBestTime ? `⏱️ ${validBestTime}s` : ''}
                     </div>
                   </div>
 
