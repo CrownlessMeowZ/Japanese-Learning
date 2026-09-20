@@ -123,7 +123,7 @@ export const Dashboard = ({ onSelectQuiz, onSelectVocab, onSelectGrammar, onSele
                 transition: 'all 0.2s',
                 boxShadow: '0 2px 6px rgba(233, 30, 140, 0.08)',
               }}
-              onClick={() => onOpenMatch('all')}
+              onClick={() => onOpenMatch(null)}
               title="Đấu phản xạ Sakura Match 60 giây"
             >
               🌸 Đấu Phản Xạ Match

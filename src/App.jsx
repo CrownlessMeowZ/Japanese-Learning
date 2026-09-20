@@ -206,7 +206,7 @@ export default function App() {
             {/* 4b. Nút Đấu Phản Xạ Sakura Match */}
             <button
               type="button"
-              onClick={() => handleOpenMatch(activeLessonId || 1)}
+              onClick={() => handleOpenMatch(null)}
               className={`sakura-nav-btn ${currentRoute === 'match' ? 'active' : ''}`}
               title="Minigame Đấu Phản Xạ Nối Từ Vựng 60 Giây"
             >
