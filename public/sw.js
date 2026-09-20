@@ -11,9 +11,16 @@ const STATIC_ASSETS = [
   '/favicon.svg',
 ];
 
+// Kiểm tra nếu đang chạy ở môi trường phát triển (localhost / 127.0.0.1)
+const isDevHost =
+  self.location.hostname === 'localhost' ||
+  self.location.hostname === '127.0.0.1' ||
+  self.location.port === '5173';
+
 // 1. Cài đặt Service Worker và lưu trước các file tĩnh cốt lõi
 self.addEventListener('install', (event) => {
   self.skipWaiting();
+  if (isDevHost) return; // Không lưu cache trên localhost
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       return cache.addAll(STATIC_ASSETS);
@@ -23,6 +30,17 @@ self.addEventListener('install', (event) => {
 
 // 2. Kích hoạt và dọn dẹp các cache cũ nếu có
 self.addEventListener('activate', (event) => {
+  if (isDevHost) {
+    // Trên localhost: Xóa sạch cache và tự hủy đăng ký
+    event.waitUntil(
+      caches.keys()
+        .then((keys) => Promise.all(keys.map((k) => caches.delete(k))))
+        .then(() => self.registration.unregister())
+        .then(() => self.clients.claim())
+    );
+    return;
+  }
+
   event.waitUntil(
     caches.keys().then((keys) => {
       return Promise.all(
@@ -39,6 +57,11 @@ self.addEventListener('activate', (event) => {
 
 // 3. Xử lý Fetch Request: Cache-First cho App Shell & Network-First cho API
 self.addEventListener('fetch', (event) => {
+  // Trên localhost: Tuyệt đối không can thiệp để Vite HMR tải code tức thì
+  if (isDevHost) {
+    return;
+  }
+
   const requestUrl = new URL(event.request.url);
 
   // Đối với API bên ngoài (Google Translate API): Network First, không lưu cache API

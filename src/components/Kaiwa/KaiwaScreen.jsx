@@ -14,6 +14,16 @@ export const KaiwaScreen = ({ lessonId, kaiwaList = [], onBack }) => {
   const { stopAudio } = useAudioPlayer();
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const [isBrave, setIsBrave] = useState(false);
+
+  // Phát hiện trình duyệt Brave
+  useEffect(() => {
+    if (navigator.brave && typeof navigator.brave.isBrave === 'function') {
+      navigator.brave.isBrave().then((res) => {
+        if (res) setIsBrave(true);
+      });
+    }
+  }, []);
 
   // Dọn dẹp âm thanh singleton khi rời màn hình
   useEffect(() => {
@@ -72,6 +82,34 @@ export const KaiwaScreen = ({ lessonId, kaiwaList = [], onBack }) => {
           Lắng nghe phát âm chuẩn bằng loa 🔊 và bấm mic 🎤 để đọc thử, hệ thống AI sẽ phân tích tỷ lệ chính xác tức thì.
         </p>
       </div>
+ 
+      {/* Cảnh báo đặc thù cho người dùng Brave */}
+      {isBrave && (
+        <div style={{
+          backgroundColor: '#fffbeb',
+          border: '1.5px solid #fcd34d',
+          borderRadius: '14px',
+          padding: '12px 18px',
+          marginBottom: '20px',
+          display: 'flex',
+          alignItems: 'flex-start',
+          gap: '12px',
+          color: '#92400e',
+          fontSize: '0.9rem',
+          lineHeight: '1.5',
+          boxShadow: '0 2px 8px rgba(245, 158, 11, 0.08)',
+        }}>
+          <span style={{ fontSize: '1.4rem', flexShrink: 0 }}>🦁</span>
+          <div>
+            <div style={{ fontWeight: '800', marginBottom: '3px' }}>
+              Phát hiện bạn đang sử dụng Brave Browser:
+            </div>
+            <span>
+              Trình duyệt Brave có chính sách bảo mật chặn hoàn toàn dịch vụ giọng nói Google Speech API trên toàn hệ thống. Để sử dụng Micro 🎤 và chấm điểm phát âm AI, vui lòng mở trang web này trên <strong>Google Chrome</strong> hoặc <strong>Microsoft Edge</strong>.
+            </span>
+          </div>
+        </div>
+      )}
 
       {/* Search & Category Filter Bar */}
       <div style={styles.filterSection}>

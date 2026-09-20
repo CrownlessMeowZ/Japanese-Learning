@@ -11,16 +11,22 @@ export function registerServiceWorker() {
   if (import.meta.env.DEV) {
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.getRegistrations().then((registrations) => {
+        let hadOldController = Boolean(navigator.serviceWorker.controller);
         for (const reg of registrations) {
           reg.unregister();
           console.log('[PWA DEV] Đã gỡ Service Worker để hỗ trợ cập nhật code tức thì (Zero Cache):', reg.scope);
         }
+        if ('caches' in window) {
+          caches.keys().then((keys) => {
+            keys.forEach((key) => caches.delete(key));
+          });
+        }
+        // Nếu trang đang bị kẹt dưới Service Worker cũ, reload tự động 1 lần để giải phóng hoàn toàn
+        if (hadOldController) {
+          console.log('[PWA DEV] Đang tự động giải phóng trang khỏi cache cũ...');
+          window.location.reload();
+        }
       });
-      if ('caches' in window) {
-        caches.keys().then((keys) => {
-          keys.forEach((key) => caches.delete(key));
-        });
-      }
     }
     return;
   }

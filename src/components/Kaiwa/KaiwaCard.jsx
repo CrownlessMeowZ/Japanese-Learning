@@ -286,12 +286,12 @@ export const KaiwaCard = React.memo(({ item }) => {
 
           {/* Hướng dẫn khắc phục chuyên biệt cho Brave & mạng */}
           {error === 'network' && (
-            <div style={{ fontSize: '0.8rem', color: '#4a5568', lineHeight: '1.45', backgroundColor: '#ffffff', padding: '8px 12px', borderRadius: '8px', border: '1px solid #fed7aa' }}>
-              💡 <strong>Cách xử lý nhanh:</strong>
+            <div style={{ fontSize: '0.82rem', color: '#4a5568', lineHeight: '1.5', backgroundColor: '#ffffff', padding: '10px 14px', borderRadius: '10px', border: '1px solid #fed7aa' }}>
+              💡 <strong>Lưu ý quan trọng về trình duyệt:</strong>
               <ul style={{ margin: '4px 0 0 16px', padding: 0 }}>
-                <li>Nếu bạn dùng <strong>Brave Browser</strong>: Hãy vào <code>brave://settings/system</code> và gạt BẬT tùy chọn <em>"Use Google services for speech recognition"</em> rồi khởi động lại Brave.</li>
-                <li>Hoặc mở trang web này trên <strong>Google Chrome</strong> / <strong>Microsoft Edge</strong> để sử dụng nhận diện giọng nói mượt mà nhất.</li>
-                <li>Tạm tắt tiện ích chặn quảng cáo / VPN nếu đang chặn kết nối Google Speech API.</li>
+                <li><strong>Trình duyệt Brave:</strong> Do chính sách bảo vệ quyền riêng tư nghiêm ngặt (Shields), Brave đã loại bỏ hoàn toàn dịch vụ nhận diện giọng nói của Google. Vì vậy, tính năng Mic Web Speech API không thể hoạt động trên Brave (sẽ luôn tự ngắt và báo lỗi Network sau 0.5s).</li>
+                <li>👉 <strong>Giải pháp:</strong> Bạn vui lòng mở ứng dụng này trên <strong>Google Chrome</strong> hoặc <strong>Microsoft Edge</strong> để luyện nói mượt mà nhất (hai trình duyệt này đã tích hợp sẵn dịch vụ nhận diện giọng nói 100%).</li>
+                <li>Nếu bạn đang dùng Chrome/Edge mà vẫn gặp lỗi này: Hãy kiểm tra lại kết nối mạng Internet hoặc tạm tắt VPN.</li>
               </ul>
             </div>
           )}
