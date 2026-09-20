@@ -1,16 +1,40 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
+
+const DIFFICULTY_CONFIG = {
+  easy: { name: 'Khởi Động (4x3)', pairs: 6, seconds: 45 },
+  normal: { name: 'Chuẩn Mực (4x4)', pairs: 8, seconds: 60 },
+  hard: { name: 'Thần Tốc (5x4)', pairs: 10, seconds: 75 },
+};
+
+function getHighscoreData(highscores, difficulty, key) {
+  const compositeKey = `${difficulty}_${key}`;
+  if (highscores[compositeKey]) return highscores[compositeKey];
+  if (difficulty === 'normal' && highscores[key]) return highscores[key];
+  return {};
+}
 
 /**
  * MatchHighscoreModal Component - Bảng Vàng Kỷ Lục Cá Nhân Sakura Match
- * Hiển thị điểm số kỷ lục, thời gian nhanh nhất và số trận đã chơi của từng bài học
+ * Hiển thị điểm số kỷ lục, thời gian nhanh nhất và số trận đã chơi theo từng chế độ
  */
 export const MatchHighscoreModal = ({
   isOpen,
   onClose,
   highscores = {},
   onSelectLesson,
+  initialDifficulty = 'normal',
 }) => {
+  const [prevIsOpen, setPrevIsOpen] = useState(isOpen);
+  const [activeDiff, setActiveDiff] = useState(initialDifficulty);
+
+  if (isOpen !== prevIsOpen) {
+    setPrevIsOpen(isOpen);
+    if (isOpen) {
+      setActiveDiff(initialDifficulty);
+    }
+  }
+
   useEffect(() => {
     if (!isOpen) return;
     const handleKeyDown = (e) => {
@@ -37,7 +61,7 @@ export const MatchHighscoreModal = ({
     >
       <div className="match-modal-box" style={{ maxWidth: '580px', maxHeight: '85vh', display: 'flex', flexDirection: 'column' }}>
         {/* Header */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <span style={{ fontSize: '1.8rem' }}>🏆</span>
             <div style={{ textAlign: 'left' }}>
@@ -68,6 +92,43 @@ export const MatchHighscoreModal = ({
           </button>
         </div>
 
+        {/* Bộ chọn tab 3 chế độ khó */}
+        <div style={{
+          display: 'flex',
+          gap: '8px',
+          marginBottom: '16px',
+          backgroundColor: '#f8fafc',
+          padding: '6px',
+          borderRadius: '14px',
+          border: '1px solid #e2e8f0',
+        }}>
+          {Object.entries(DIFFICULTY_CONFIG).map(([key, cfg]) => {
+            const isActive = activeDiff === key;
+            return (
+              <button
+                key={`modal-tab-${key}`}
+                type="button"
+                onClick={() => setActiveDiff(key)}
+                style={{
+                  flex: 1,
+                  padding: '8px 10px',
+                  borderRadius: '10px',
+                  border: isActive ? '1.5px solid #e91e8c' : '1px solid transparent',
+                  backgroundColor: isActive ? '#ffffff' : 'transparent',
+                  color: isActive ? '#be185d' : '#64748b',
+                  fontWeight: '800',
+                  fontSize: '0.82rem',
+                  cursor: 'pointer',
+                  boxShadow: isActive ? '0 2px 8px rgba(233, 30, 140, 0.12)' : 'none',
+                  transition: 'all 0.15s ease'
+                }}
+              >
+                {cfg.name} ({cfg.seconds}s)
+              </button>
+            );
+          })}
+        </div>
+
         {/* Danh sách 15 bài học */}
         <div style={{
           overflowY: 'auto',
@@ -79,7 +140,7 @@ export const MatchHighscoreModal = ({
         }}>
           {/* Mục: Tất Cả 15 Bài */}
           {(() => {
-            const allStats = highscores['all'] || {};
+            const allStats = getHighscoreData(highscores, activeDiff, 'all');
             const hasPlayed = Boolean(allStats.highScore || allStats.gamesPlayed);
             const validBestTime = allStats.bestTime && allStats.bestTime < 999 ? allStats.bestTime : null;
             return (
@@ -117,7 +178,7 @@ export const MatchHighscoreModal = ({
                     <button
                       type="button"
                       onClick={() => {
-                        onSelectLesson('all');
+                        onSelectLesson('all', activeDiff);
                         onClose();
                       }}
                       style={{
@@ -141,7 +202,7 @@ export const MatchHighscoreModal = ({
 
           {/* 15 Bài Học Cụ Thể */}
           {lessonsList.map((lsId) => {
-            const stats = highscores[lsId] || {};
+            const stats = getHighscoreData(highscores, activeDiff, lsId);
             const hasPlayed = Boolean(stats.highScore || stats.gamesPlayed);
             const validBestTime = stats.bestTime && stats.bestTime < 999 ? stats.bestTime : null;
 
@@ -198,7 +259,7 @@ export const MatchHighscoreModal = ({
                     <button
                       type="button"
                       onClick={() => {
-                        onSelectLesson(Number(lsId));
+                        onSelectLesson(Number(lsId), activeDiff);
                         onClose();
                       }}
                       style={{

@@ -52,13 +52,21 @@ function loadHighscoresFromStorage() {
   }
 }
 
+function getHighscoreItem(highscores, difficulty, key) {
+  const compositeKey = `${difficulty}_${key}`;
+  if (highscores[compositeKey]) return highscores[compositeKey];
+  if (difficulty === 'normal' && highscores[key]) return highscores[key];
+  return { highScore: 0, bestTime: null, gamesPlayed: 0 };
+}
+
 /**
- * Lưu Highscores vào LocalStorage
+ * Lưu Highscores vào LocalStorage theo từng chế độ khó
  */
-function saveHighscoreToStorage(key, newScore, timeTaken, isClear = false) {
+function saveHighscoreToStorage(difficulty, key, newScore, timeTaken, isClear = false) {
   try {
     const current = loadHighscoresFromStorage();
-    const prev = current[key] || { highScore: 0, bestTime: null, gamesPlayed: 0 };
+    const compositeKey = `${difficulty}_${key}`;
+    const prev = current[compositeKey] || (difficulty === 'normal' ? current[key] : null) || { highScore: 0, bestTime: null, gamesPlayed: 0 };
 
     const isNewHighscore = newScore > (prev.highScore || 0);
 
@@ -74,7 +82,7 @@ function saveHighscoreToStorage(key, newScore, timeTaken, isClear = false) {
 
     const updated = {
       ...current,
-      [key]: {
+      [compositeKey]: {
         highScore: Math.max(newScore, prev.highScore || 0),
         bestTime: updatedBestTime,
         gamesPlayed: (prev.gamesPlayed || 0) + 1,
@@ -201,19 +209,16 @@ export const SakuraMatchScreen = ({ initialLessonId = null, onBack }) => {
   }, [vocabPool, currentConfig]);
 
   // Đổi bài học
-  const handleSelectLesson = (lsId) => {
+  const handleSelectLesson = (lsId, targetDiff = difficulty) => {
     setSelectedLesson(lsId);
+    if (targetDiff !== difficulty) {
+      setDifficulty(targetDiff);
+    }
+    const newCfg = DIFFICULTY_CONFIG[targetDiff] || currentConfig;
     const newPool = lsId === 'all'
       ? Object.values(vocabularyData).flat()
       : (vocabularyData[String(lsId)] || []);
-    initGame(newPool, currentConfig);
-  };
-
-  // Đổi độ khó
-  const handleSelectDifficulty = (diffKey) => {
-    setDifficulty(diffKey);
-    const newCfg = DIFFICULTY_CONFIG[diffKey];
-    initGame(vocabPool, newCfg);
+    initGame(newPool, newCfg);
   };
 
   // Dọn dẹp âm thanh và timer khi rời component
@@ -252,10 +257,10 @@ export const SakuraMatchScreen = ({ initialLessonId = null, onBack }) => {
           setFinalTimeTaken(currentConfig.seconds);
           soundEffects.playMatchError();
 
-          // Cập nhật số ván chơi và điểm số đã đạt được trước khi hết giờ vào bảng kỷ lục
+          // Cập nhật số ván chơi và điểm số đã đạt được trước khi hết giờ vào bảng kỷ lục theo độ khó
           const lessonKey = String(selectedLesson);
           const currentScore = scoreRef.current;
-          const { updated } = saveHighscoreToStorage(lessonKey, currentScore, null, false);
+          const { updated } = saveHighscoreToStorage(difficulty, lessonKey, currentScore, null, false);
           setHighscores(updated);
           return 0;
         }
@@ -274,7 +279,7 @@ export const SakuraMatchScreen = ({ initialLessonId = null, onBack }) => {
         timerRef.current = null;
       }
     };
-  }, [gameState, gameSessionId, selectedLesson, currentConfig.seconds]);
+  }, [gameState, gameSessionId, selectedLesson, currentConfig.seconds, difficulty]);
 
   // Xử lý khi người chơi bấm chọn một thẻ
   const handleCardClick = useCallback((clickedCard) => {
@@ -349,9 +354,9 @@ export const SakuraMatchScreen = ({ initialLessonId = null, onBack }) => {
           setScore(finalScore);
           setGameState('victory');
 
-          // Lưu kỷ lục vào LocalStorage
+          // Lưu kỷ lục vào LocalStorage theo độ khó
           const lessonKey = String(selectedLesson);
-          const { updated, isNewHighscore } = saveHighscoreToStorage(lessonKey, finalScore, actualTimeTaken, true);
+          const { updated, isNewHighscore } = saveHighscoreToStorage(difficulty, lessonKey, finalScore, actualTimeTaken, true);
           setHighscores(updated);
           setIsNewRecord(isNewHighscore);
         }
@@ -369,7 +374,7 @@ export const SakuraMatchScreen = ({ initialLessonId = null, onBack }) => {
         }, 450);
       }
     }
-  }, [gameState, matchedPairIds, selectedCardIds, cards, combo, currentConfig.pairs, secondsLeft, score, selectedLesson]);
+  }, [gameState, matchedPairIds, selectedCardIds, cards, combo, currentConfig.pairs, secondsLeft, score, selectedLesson, difficulty]);
 
   // Bật/tắt âm thanh hiệu ứng & giọng đọc AI
   const toggleSound = () => {
@@ -382,7 +387,7 @@ export const SakuraMatchScreen = ({ initialLessonId = null, onBack }) => {
   };
 
   const lessonKey = String(selectedLesson);
-  const currentLessonHighscore = highscores[lessonKey]?.highScore || 0;
+  const currentLessonHighscore = getHighscoreItem(highscores, difficulty, lessonKey).highScore;
   const isTimeUrgent = secondsLeft <= 10 && gameState === 'playing';
 
   if (gameState === 'lobby') {
@@ -510,7 +515,7 @@ export const SakuraMatchScreen = ({ initialLessonId = null, onBack }) => {
             </div>
             <div style={{ fontSize: '0.84rem', color: '#64748b', marginTop: '4px' }}>
               Xáo trộn ngẫu nhiên từ vựng trong tất cả 15 bài học ({Object.values(vocabularyData).flat().length} từ)
-              {highscores['all']?.highScore ? ` • Kỷ lục: ${highscores['all'].highScore}đ` : ''}
+              {getHighscoreItem(highscores, difficulty, 'all').highScore ? ` • Kỷ lục (${currentConfig.name}): ${getHighscoreItem(highscores, difficulty, 'all').highScore}đ` : ''}
             </div>
           </div>
 
@@ -542,7 +547,7 @@ export const SakuraMatchScreen = ({ initialLessonId = null, onBack }) => {
         }}>
           {Array.from({ length: 15 }, (_, i) => i + 1).map((num) => {
             const vocabCount = vocabularyData[String(num)]?.length || 0;
-            const hs = highscores[String(num)];
+            const hs = getHighscoreItem(highscores, difficulty, String(num));
             const hasScore = Boolean(hs?.highScore);
 
             return (
@@ -613,8 +618,9 @@ export const SakuraMatchScreen = ({ initialLessonId = null, onBack }) => {
           isOpen={isHighscoreModalOpen}
           onClose={() => setIsHighscoreModalOpen(false)}
           highscores={highscores}
-          onSelectLesson={(lsId) => {
-            handleSelectLesson(lsId);
+          initialDifficulty={difficulty}
+          onSelectLesson={(lsId, targetDiff) => {
+            handleSelectLesson(lsId, targetDiff || difficulty);
           }}
         />
       </div>
@@ -625,8 +631,8 @@ export const SakuraMatchScreen = ({ initialLessonId = null, onBack }) => {
     <div className="match-container">
       {/* 1. THANH TRẠNG THÁI TRÊN ĐỈNH (HUD BAR) */}
       <div className="match-hud-bar">
-        {/* Nút Quay lại Dashboard */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        {/* Nút Quay lại Dashboard, Chọn bài khác & Huy hiệu bài học */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
           <button
             type="button"
             onClick={onBack}
@@ -674,6 +680,18 @@ export const SakuraMatchScreen = ({ initialLessonId = null, onBack }) => {
           >
             📋 Chọn bài khác
           </button>
+
+          <span style={{
+            fontSize: '0.82rem',
+            fontWeight: '800',
+            color: '#be185d',
+            backgroundColor: '#fdf2f8',
+            padding: '5px 12px',
+            borderRadius: '10px',
+            border: '1px solid #fbcfe8'
+          }}>
+            {selectedLesson === 'all' ? '🌸 Toàn Bộ 15 Bài' : `Bài ${selectedLesson}`} • {currentConfig.name}
+          </span>
         </div>
 
         {/* Điểm số hiện tại */}
@@ -701,140 +719,87 @@ export const SakuraMatchScreen = ({ initialLessonId = null, onBack }) => {
           </span>
         </div>
 
-        {/* Nút Bảng Vàng & Âm Thanh */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        {/* Cột phải: Kỷ Lục + Âm Thanh (Hàng trên) & Đổi Bàn Mới (Hàng dưới) */}
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'stretch',
+          gap: '6px',
+          minWidth: '150px'
+        }}>
+          {/* Hàng trên: Nút Kỷ lục & Loa */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <button
+              type="button"
+              onClick={() => setIsHighscoreModalOpen(true)}
+              style={{
+                flex: 1,
+                padding: '4px 10px',
+                backgroundColor: '#fffbeb',
+                border: '1.5px solid #fde68a',
+                borderRadius: '10px',
+                color: '#d97706',
+                fontWeight: '800',
+                fontSize: '0.8rem',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '4px',
+                whiteSpace: 'nowrap'
+              }}
+              title="Xem bảng vàng kỷ lục theo từng chế độ"
+            >
+              <span>🏆</span>
+              <span>Kỷ lục ({currentLessonHighscore}đ)</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={toggleSound}
+              style={{
+                padding: '4px 8px',
+                backgroundColor: '#f1f5f9',
+                border: '1.5px solid #cbd5e1',
+                borderRadius: '10px',
+                fontSize: '0.9rem',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+              title={isSoundMuted ? 'Bật âm thanh' : 'Tắt âm thanh'}
+            >
+              {isSoundMuted ? '🔇' : '🔊'}
+            </button>
+          </div>
+
+          {/* Hàng dưới: Nút Đổi bàn mới */}
           <button
             type="button"
-            onClick={() => setIsHighscoreModalOpen(true)}
+            onClick={() => initGame()}
             style={{
-              padding: '6px 12px',
-              backgroundColor: '#fffbeb',
-              border: '1.5px solid #fde68a',
-              borderRadius: '12px',
-              color: '#d97706',
+              width: '100%',
+              padding: '4px 10px',
+              backgroundColor: '#fce7f3',
+              color: '#be185d',
+              border: '1px solid #fbcfe8',
+              borderRadius: '10px',
               fontWeight: '800',
-              fontSize: '0.82rem',
+              fontSize: '0.78rem',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
-              gap: '4px'
+              justifyContent: 'center',
+              gap: '4px',
+              transition: 'all 0.15s ease'
             }}
-            title="Xem bảng vàng kỷ lục cá nhân"
+            title="Xáo trộn lại bộ thẻ từ vựng mới"
           >
-            <span>🏆</span>
-            <span>Kỷ lục ({currentLessonHighscore}đ)</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={toggleSound}
-            style={{
-              padding: '6px 10px',
-              backgroundColor: '#f1f5f9',
-              border: '1.5px solid #cbd5e1',
-              borderRadius: '12px',
-              fontSize: '1rem',
-              cursor: 'pointer'
-            }}
-            title={isSoundMuted ? 'Bật âm thanh' : 'Tắt âm thanh'}
-          >
-            {isSoundMuted ? '🔇' : '🔊'}
+            <span>🔄</span>
+            <span>Đổi bàn mới</span>
           </button>
         </div>
-      </div>
-
-      {/* 2. THANH CHỌN BÀI HỌC & ĐỘ KHÓ */}
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        flexWrap: 'wrap',
-        gap: '12px',
-        marginBottom: '18px',
-        padding: '8px 16px',
-        backgroundColor: '#ffffff',
-        borderRadius: '16px',
-        border: '1px solid #f1f5f9'
-      }}>
-        {/* Lựa chọn bài học */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-          <span style={{ fontSize: '0.84rem', fontWeight: '700', color: '#64748b' }}>
-            Bài học:
-          </span>
-          <select
-            value={selectedLesson}
-            onChange={(e) => {
-              const val = e.target.value === 'all' ? 'all' : Number(e.target.value);
-              handleSelectLesson(val);
-            }}
-            style={{
-              padding: '6px 12px',
-              borderRadius: '10px',
-              border: '1.5px solid #cbd5e1',
-              fontWeight: '700',
-              fontSize: '0.86rem',
-              color: '#1e293b',
-              backgroundColor: '#f8fafc',
-              cursor: 'pointer',
-              outline: 'none'
-            }}
-          >
-            <option value="all">🌸 Toàn Bộ 15 Bài (Đại Chiến)</option>
-            {Array.from({ length: 15 }, (_, i) => i + 1).map((num) => (
-              <option key={`opt-ls-${num}`} value={num}>
-                Bài {num} ({vocabularyData[String(num)]?.length || 0} từ)
-              </option>
-            ))}
-          </select>
-        </div>
-
-        {/* Lựa chọn độ khó */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-          <span style={{ fontSize: '0.84rem', fontWeight: '700', color: '#64748b' }}>
-            Chế độ:
-          </span>
-          {Object.entries(DIFFICULTY_CONFIG).map(([key, cfg]) => (
-            <button
-              key={`diff-${key}`}
-              type="button"
-              onClick={() => handleSelectDifficulty(key)}
-              style={{
-                padding: '4px 10px',
-                borderRadius: '8px',
-                border: difficulty === key ? '1.5px solid #e91e8c' : '1px solid #cbd5e1',
-                backgroundColor: difficulty === key ? '#fdf2f8' : '#ffffff',
-                color: difficulty === key ? '#be185d' : '#64748b',
-                fontWeight: '700',
-                fontSize: '0.8rem',
-                cursor: 'pointer',
-                transition: 'all 0.15s ease'
-              }}
-            >
-              {cfg.name}
-            </button>
-          ))}
-        </div>
-
-        {/* Nút Làm Mới Bàn Cờ */}
-        <button
-          type="button"
-          onClick={() => initGame()}
-          style={{
-            padding: '6px 14px',
-            backgroundColor: '#fce7f3',
-            color: '#be185d',
-            border: 'none',
-            borderRadius: '10px',
-            fontWeight: '700',
-            fontSize: '0.82rem',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '4px'
-          }}
-        >
-          🔄 Đổi bàn mới
-        </button>
       </div>
 
       {/* 3. COMBO BANNER NỔI BẬT NẾU CÓ CHUỖI LIÊN TIẾP */}
@@ -891,8 +856,9 @@ export const SakuraMatchScreen = ({ initialLessonId = null, onBack }) => {
         isOpen={isHighscoreModalOpen}
         onClose={() => setIsHighscoreModalOpen(false)}
         highscores={highscores}
-        onSelectLesson={(lsId) => {
-          handleSelectLesson(lsId);
+        initialDifficulty={difficulty}
+        onSelectLesson={(lsId, targetDiff) => {
+          handleSelectLesson(lsId, targetDiff || difficulty);
         }}
       />
     </div>
