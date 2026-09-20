@@ -224,3 +224,27 @@
 .quiz-action-btn:hover {
   transform: scale(1.04);
 }
+
+/* 6. Hiệu ứng Sóng Âm (Sound Wave Visualizer) dành riêng cho Dictation Studio */
+@keyframes dictationSoundWave {
+  0%, 100% {
+    height: 6px;
+  }
+  50% {
+    height: 26px;
+  }
+}
+
+.dictation-wave-bar {
+  width: 4px;
+  background: linear-gradient(180deg, #ec4899 0%, #be185d 100%);
+  border-radius: 4px;
+  animation: dictationSoundWave 1.1s ease-in-out infinite;
+}
+.dictation-wave-bar:nth-child(1) { height: 10px; animation-delay: 0.0s; }
+.dictation-wave-bar:nth-child(2) { height: 18px; animation-delay: 0.2s; }
+.dictation-wave-bar:nth-child(3) { height: 26px; animation-delay: 0.4s; }
+.dictation-wave-bar:nth-child(4) { height: 16px; animation-delay: 0.1s; }
+.dictation-wave-bar:nth-child(5) { height: 22px; animation-delay: 0.3s; }
+.dictation-wave-bar:nth-child(6) { height: 12px; animation-delay: 0.5s; }
+.dictation-wave-bar:nth-child(7) { height: 8px;  animation-delay: 0.25s; }

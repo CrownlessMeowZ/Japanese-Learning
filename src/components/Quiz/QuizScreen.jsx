@@ -543,10 +543,16 @@ export const QuizScreen = ({ lessonId = 1, rawQuestions = [], onBack }) => {
         {/* =========================================================
             FORMAT 1: TỰ LUẬN GÕ PHÍM (TYPING MODE)
            ========================================================= */}
+        {/* =========================================================
+            FORMAT 1: TỰ LUẬN GÕ TỪ VỰNG (TYPING MODE)
+           ========================================================= */}
         {questionFormat === 'typing' && (
           <div>
             {quizMode === 'vi_to_ja' && (
               <div style={styles.questionPrompt}>
+                <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '3px 10px', backgroundColor: '#e0f2fe', color: '#0369a1', borderRadius: '12px', fontSize: '0.78rem', fontWeight: '800', marginBottom: '8px' }}>
+                  ⌨️ LUYỆN GÕ TỪ VỰNG (TYPING MODE)
+                </div>
                 <span style={styles.promptSubLabel}>🇻🇳 Nghĩa tiếng Việt (Hãy gõ từ tiếng Nhật tương ứng):</span>
                 <h1 style={styles.promptMainText}>
                   {target.meaning || target.meaning_vi || target.vietnamese}
@@ -556,6 +562,9 @@ export const QuizScreen = ({ lessonId = 1, rawQuestions = [], onBack }) => {
 
             {quizMode === 'ja_to_vi' && (
               <div style={{ ...styles.questionPrompt, borderLeftColor: '#e91e8c' }}>
+                <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '3px 10px', backgroundColor: '#fce7f3', color: '#be185d', borderRadius: '12px', fontSize: '0.78rem', fontWeight: '800', marginBottom: '8px' }}>
+                  ⌨️ LUYỆN GÕ NGHĨA TIẾNG VIỆT (TYPING MODE)
+                </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <span style={styles.promptSubLabel}>🇯🇵 Từ tiếng Nhật (Hãy gõ nghĩa tiếng Việt tương ứng):</span>
                   <button
@@ -590,49 +599,74 @@ export const QuizScreen = ({ lessonId = 1, rawQuestions = [], onBack }) => {
         )}
 
         {/* =========================================================
-            FORMAT 2: NGHE CHÉP CHÍNH TẢ (DICTATION MODE)
+            FORMAT 2: NGHE CHÉP CHÍNH TẢ (AUDIO DICTATION LAB)
            ========================================================= */}
         {questionFormat === 'dictation' && (
           <div>
             <div style={{
               ...styles.questionPrompt,
               borderLeftColor: isAnswered ? (selectedAnswer?.isCorrect ? '#28a745' : '#dc3545') : '#e91e8c',
+              background: 'linear-gradient(135deg, #ffffff 0%, #fdf2f8 100%)',
               textAlign: 'center',
-              padding: '24px 20px',
+              padding: '26px 20px',
+              borderRadius: '20px',
+              boxShadow: '0 4px 20px rgba(233, 30, 140, 0.08)',
             }}>
               {!isAnswered ? (
                 <>
-                  <span style={styles.promptSubLabel}>
-                    ✍️ Lắng nghe phát âm và chép lại từ vựng tiếng Nhật:
-                  </span>
-                  <div style={{ margin: '16px 0' }}>
+                  <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '4px 14px', backgroundColor: '#fce7f3', color: '#be185d', borderRadius: '16px', fontSize: '0.8rem', fontWeight: '800', marginBottom: '10px' }}>
+                    🎧 PHÒNG LUYỆN NGHE CHÉP CHÍNH TẢ (AUDIO DICTATION)
+                  </div>
+                  <div style={styles.promptSubLabel}>
+                    Lắng nghe kỹ phát âm của người bản xứ và chép lại từ vựng:
+                  </div>
+
+                  {/* Nút Nghe Lớn Có Sóng Âm (Pulse Audio Button) */}
+                  <div style={{ margin: '16px 0 10px' }}>
                     <button
                       type="button"
                       className="quiz-listening-audio-btn quiz-pulse-anim"
                       onClick={() => playAudio(getAudioTarget(target), audioSpeed)}
                       title="Bấm để nghe lại phát âm"
                     >
-                      <span style={{ fontSize: '2.5rem' }}>🔊</span>
-                      <span style={{ fontWeight: '700', fontSize: '1.05rem' }}>
-                        Bấm để nghe lại ({audioSpeed}x)
+                      <span style={{ fontSize: '2.4rem' }}>🔊</span>
+                      <span style={{ fontWeight: '800', fontSize: '1.1rem' }}>
+                        Phát âm lại ({audioSpeed}x)
                       </span>
                     </button>
                   </div>
-                  <div style={{ fontSize: '0.84rem', color: '#718096' }}>
-                    (Gõ bằng Hiragana, Katakana hoặc Romaji đều được chấp nhận)
+
+                  {/* Hoạt ảnh Sóng Âm (Sound Waveform Bars) */}
+                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '4px', height: '28px', margin: '8px 0 10px' }}>
+                    <div className="dictation-wave-bar" />
+                    <div className="dictation-wave-bar" />
+                    <div className="dictation-wave-bar" />
+                    <div className="dictation-wave-bar" />
+                    <div className="dictation-wave-bar" />
+                    <div className="dictation-wave-bar" />
+                    <div className="dictation-wave-bar" />
+                  </div>
+
+                  <div style={{ fontSize: '0.83rem', color: '#64748b' }}>
+                    💡 Âm thanh tự phát khi đổi câu. Gõ bằng <strong>Hiragana</strong>, <strong>Katakana</strong> hoặc <strong>Romaji</strong>.
                   </div>
                 </>
               ) : (
                 <div>
-                  <span style={{ fontSize: '0.88rem', color: selectedAnswer?.isCorrect ? '#28a745' : '#dc3545', fontWeight: '700' }}>
-                    {selectedAnswer?.isCorrect ? '✓ Đáp án chuẩn xác:' : '✗ Đáp án đúng:'}
+                  <span style={{ fontSize: '0.9rem', color: selectedAnswer?.isCorrect ? '#28a745' : '#dc3545', fontWeight: '800' }}>
+                    {selectedAnswer?.isCorrect ? '✓ Bạn đã chép chính xác:' : '✗ Đáp án chuẩn:'}
                   </span>
-                  <h1 style={{ fontSize: '2.3rem', color: '#1a202c', margin: '8px 0 6px' }}>
+                  <h1 style={{ fontSize: '2.4rem', color: '#1a202c', margin: '8px 0 6px' }}>
                     <FuriganaText kanji={target.kanji} kana={target.hiragana} />
                   </h1>
-                  <p style={{ margin: 0, color: '#4a5568', fontSize: '1.1rem', fontWeight: '600' }}>
+                  <p style={{ margin: '0 0 10px', color: '#4a5568', fontSize: '1.15rem', fontWeight: '600' }}>
                     {target.meaning || target.meaning_vi}
                   </p>
+                  {selectedAnswer?.userInput && (
+                    <div style={{ fontSize: '0.86rem', color: '#64748b', backgroundColor: '#f8fafc', padding: '6px 14px', borderRadius: '10px', display: 'inline-block' }}>
+                      Từ bạn đã chép: <strong style={{ color: selectedAnswer?.isCorrect ? '#16a34a' : '#e11d48' }}>「{selectedAnswer.userInput}」</strong>
+                    </div>
+                  )}
                 </div>
               )}
             </div>

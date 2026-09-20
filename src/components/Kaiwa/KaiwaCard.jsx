@@ -242,39 +242,65 @@ export const KaiwaCard = React.memo(({ item }) => {
       )}
 
       {/* 5. Thông báo lỗi hoặc chưa nghe thấy tiếng */}
+      {/* 5. Thông Báo Lỗi Nhận Diện Giọng Nói (Chi tiết & Thân thiện) */}
       {error && !isListening && (
         <div
           style={{
             marginTop: '12px',
-            padding: '10px 14px',
-            borderRadius: '12px',
+            padding: '12px 16px',
+            borderRadius: '14px',
             backgroundColor: '#fffaf0',
-            border: '1px solid #feebc8',
+            border: '1.5px solid #feebc8',
             fontSize: '0.85rem',
             color: '#c05621',
             display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
+            flexDirection: 'column',
             gap: '8px',
           }}
         >
-          <span>⚠️ {typeof error === 'string' ? error : 'Chưa nhận diện được. Hãy thử lại!'}</span>
-          <button
-            type="button"
-            onClick={handleRetrySpeaking}
-            style={{
-              padding: '4px 10px',
-              backgroundColor: '#dd6b20',
-              color: '#ffffff',
-              border: 'none',
-              borderRadius: '10px',
-              fontWeight: '700',
-              fontSize: '0.78rem',
-              cursor: 'pointer',
-            }}
-          >
-            Nói lại
-          </button>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '8px' }}>
+            <div style={{ fontWeight: '700', fontSize: '0.9rem', color: '#c53030' }}>
+              {error === 'network' && '⚠️ Không thể kết nối dịch vụ giọng nói Google (Lỗi Network)'}
+              {error === 'not-allowed' && '⚠️ Trình duyệt chưa được cấp quyền truy cập Micro'}
+              {error === 'no-speech' && '⚠️ Chưa nghe thấy âm thanh phát ra'}
+              {error !== 'network' && error !== 'not-allowed' && error !== 'no-speech' && `⚠️ ${typeof error === 'string' ? error : 'Chưa nhận diện được. Hãy thử lại!'}`}
+            </div>
+            <button
+              type="button"
+              onClick={handleRetrySpeaking}
+              style={{
+                padding: '4px 12px',
+                backgroundColor: '#dd6b20',
+                color: '#ffffff',
+                border: 'none',
+                borderRadius: '10px',
+                fontWeight: '700',
+                fontSize: '0.8rem',
+                cursor: 'pointer',
+                flexShrink: 0,
+              }}
+            >
+              🔄 Thử lại
+            </button>
+          </div>
+
+          {/* Hướng dẫn khắc phục chuyên biệt cho Brave & mạng */}
+          {error === 'network' && (
+            <div style={{ fontSize: '0.8rem', color: '#4a5568', lineHeight: '1.45', backgroundColor: '#ffffff', padding: '8px 12px', borderRadius: '8px', border: '1px solid #fed7aa' }}>
+              💡 <strong>Cách xử lý nhanh:</strong>
+              <ul style={{ margin: '4px 0 0 16px', padding: 0 }}>
+                <li>Nếu bạn dùng <strong>Brave Browser</strong>: Hãy vào <code>brave://settings/system</code> và gạt BẬT tùy chọn <em>"Use Google services for speech recognition"</em> rồi khởi động lại Brave.</li>
+                <li>Hoặc mở trang web này trên <strong>Google Chrome</strong> / <strong>Microsoft Edge</strong> để sử dụng nhận diện giọng nói mượt mà nhất.</li>
+                <li>Tạm tắt tiện ích chặn quảng cáo / VPN nếu đang chặn kết nối Google Speech API.</li>
+              </ul>
+            </div>
+          )}
+
+          {error === 'not-allowed' && (
+            <div style={{ fontSize: '0.8rem', color: '#4a5568', lineHeight: '1.45' }}>
+              👉 Hãy nhấp vào <strong>biểu tượng ổ khóa 🔒</strong> ở góc trái thanh địa chỉ trình duyệt và chuyển mục <strong>Microphone</strong> sang <strong>Cho phép (Allow)</strong>.
+            </div>
+          )}
         </div>
       )}
 
