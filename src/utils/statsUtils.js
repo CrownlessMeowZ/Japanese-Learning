@@ -1,5 +1,5 @@
-import { vocabularyData } from '../data/vocabulary';
-import { grammarData } from '../data/grammar';
+import { vocabularyData } from '../data/vocabulary.js';
+import { grammarData } from '../data/grammar.js';
 
 const TOTAL_VOCABULARY = 965;
 const TOTAL_KANJI = 80;
