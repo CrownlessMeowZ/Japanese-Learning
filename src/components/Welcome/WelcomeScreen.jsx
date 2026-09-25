@@ -10,7 +10,7 @@ import '../../styles/sakura.css';
  * - Thống kê 965 từ vựng, 15 bài học sơ cấp
  * - Nút kêu gọi hành động (CTA) nổi bật để người dùng bắt đầu ngay
  */
-export const WelcomeScreen = ({ onStartLearning, onOpenTranslator, onSelectLesson, onOpenKana, onOpenKanji, onOpenMatch }) => {
+export const WelcomeScreen = ({ onStartLearning, onOpenTranslator, onSelectLesson, onOpenKana, onOpenKanji, onOpenMatch, onOpenStats }) => {
   const { dailyStreak } = useProgress();
 
   return (
@@ -51,7 +51,7 @@ export const WelcomeScreen = ({ onStartLearning, onOpenTranslator, onSelectLesso
         </div>
 
         {/* Quick Hub Shortcuts */}
-        {(onOpenKana || onOpenKanji || onOpenMatch) && (
+        {(onOpenKana || onOpenKanji || onOpenMatch || onOpenStats) && (
           <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
             <span style={{ fontSize: '0.88rem', color: '#888', fontWeight: '600' }}>Học cấp tốc:</span>
             {onOpenKana && (
@@ -85,6 +85,17 @@ export const WelcomeScreen = ({ onStartLearning, onOpenTranslator, onSelectLesso
                 title="Minigame Đấu phản xạ Sakura Match 60 giây"
               >
                 🌸 Đấu Phản Xạ Match
+              </button>
+            )}
+            {onOpenStats && (
+              <button
+                type="button"
+                onClick={onOpenStats}
+                className="sakura-nav-btn"
+                style={{ fontSize: '0.85rem', padding: '6px 14px', borderRadius: '12px' }}
+                title="Xem Biểu đồ Radar Năng Lực 5 Chiều & Lịch Trình 365 Ngày"
+              >
+                📊 Radar & Thống Kê
               </button>
             )}
           </div>

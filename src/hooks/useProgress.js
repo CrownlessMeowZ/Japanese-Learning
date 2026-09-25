@@ -86,12 +86,18 @@ export const useProgress = () => {
   const rawMistakeVault = useProgressStore((state) => state.mistake_vault);
   const mistakeVault = useMemo(() => healMistakeVault(rawMistakeVault), [rawMistakeVault]);
   const kanjiLearned = useProgressStore((state) => state.kanji_learned || {});
+  const activityHistory = useProgressStore((state) => state.activity_history || {});
+  const kaiwaScores = useProgressStore((state) => state.kaiwa_scores || {});
+  const kanaPractice = useProgressStore((state) => state.kana_practice || {});
   const waterBonsai = useProgressStore((state) => state.waterBonsai);
   const recordMistake = useProgressStore((state) => state.recordMistake);
   const recordRescueSuccess = useProgressStore((state) => state.recordRescueSuccess);
   const clearMistake = useProgressStore((state) => state.clearMistake);
   const clearAllMistakes = useProgressStore((state) => state.clearAllMistakes);
   const toggleKanjiLearned = useProgressStore((state) => state.toggleKanjiLearned);
+  const logActivity = useProgressStore((state) => state.logActivity);
+  const recordKaiwaScore = useProgressStore((state) => state.recordKaiwaScore);
+  const recordKanaPractice = useProgressStore((state) => state.recordKanaPractice);
   const importAllData = useProgressStore((state) => state.importAllData);
   const resetAllProgress = useProgressStore((state) => state.resetAllProgress);
 
@@ -107,6 +113,9 @@ export const useProgress = () => {
     bonsaiState,
     mistakeVault,
     kanjiLearned,
+    activityHistory,
+    kaiwaScores,
+    kanaPractice,
     setCurrentLesson,
     markAsLearned,
     checkIsLearned,
@@ -120,6 +129,9 @@ export const useProgress = () => {
     recordRescueSuccess,
     clearMistake,
     clearAllMistakes,
+    logActivity,
+    recordKaiwaScore,
+    recordKanaPractice,
     importAllData,
     resetAllProgress,
   };

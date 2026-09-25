@@ -148,11 +148,55 @@ export const useProgressStore = create(
       // Danh sách chữ Hán (Kanji) đã ghi nhớ
       kanji_learned: {},
 
+      // Lịch sử hoạt động theo ngày (Activity History cho Heatmap 365 ngày: { [YYYY-MM-DD]: count })
+      activity_history: {},
+
+      // Điểm số luyện nói Kaiwa ({ [dialogueId]: highestScore })
+      kaiwa_scores: {},
+
+      // Thống kê luyện bảng chữ cái Kana
+      kana_practice: {
+        totalPracticed: 0,
+        correctAnswers: 0,
+        lastPracticedAt: null,
+      },
+
       setCurrentLesson: (lessonId) => {
         const numericId = parseInt(lessonId, 10);
         if (numericId >= 1 && numericId <= 15) {
           set({ current_lesson: numericId });
         }
+      },
+
+      logActivity: (count = 1, dateStr = getTodayDateString()) => {
+        const history = { ...(get().activity_history || {}) };
+        history[dateStr] = (history[dateStr] || 0) + count;
+        set({ activity_history: history });
+      },
+
+      recordKaiwaScore: (dialogueId, score) => {
+        if (!dialogueId) return;
+        const currentScores = { ...(get().kaiwa_scores || {}) };
+        const existing = currentScores[dialogueId] || 0;
+        if (score > existing) {
+          currentScores[dialogueId] = score;
+        }
+        set({ kaiwa_scores: currentScores });
+        get().logActivity(1);
+        get().updateActivityStreak();
+      },
+
+      recordKanaPractice: (correctCount = 1, totalCount = 1) => {
+        const current = get().kana_practice || { totalPracticed: 0, correctAnswers: 0 };
+        set({
+          kana_practice: {
+            totalPracticed: (current.totalPracticed || 0) + totalCount,
+            correctAnswers: (current.correctAnswers || 0) + correctCount,
+            lastPracticedAt: new Date().toISOString(),
+          },
+        });
+        get().logActivity(1);
+        get().updateActivityStreak();
       },
 
       updateActivityStreak: () => {
@@ -165,6 +209,14 @@ export const useProgressStore = create(
             bestStreak: Math.max(daily_streak.bestStreak, updated.count),
           },
         });
+
+        // Đồng thời ghi nhận vào activity_history ngày hôm nay
+        const today = getTodayDateString();
+        const history = { ...(get().activity_history || {}) };
+        if (!history[today]) {
+          history[today] = 1;
+          set({ activity_history: history });
+        }
       },
 
       /**
@@ -395,6 +447,18 @@ export const useProgressStore = create(
 
         const validLesson = parseInt(importedData.current_lesson, 10) || get().current_lesson || 1;
 
+        const validActivity = importedData.activity_history && typeof importedData.activity_history === 'object'
+          ? importedData.activity_history
+          : (get().activity_history || {});
+
+        const validKaiwa = importedData.kaiwa_scores && typeof importedData.kaiwa_scores === 'object'
+          ? importedData.kaiwa_scores
+          : (get().kaiwa_scores || {});
+
+        const validKana = importedData.kana_practice && typeof importedData.kana_practice === 'object'
+          ? importedData.kana_practice
+          : (get().kana_practice || { totalPracticed: 0, correctAnswers: 0, lastPracticedAt: null });
+
         set({
           learned_items: validLearned,
           kanji_learned: validKanji,
@@ -402,6 +466,9 @@ export const useProgressStore = create(
           bonsai_state: validBonsai,
           daily_streak: validStreak,
           current_lesson: validLesson,
+          activity_history: validActivity,
+          kaiwa_scores: validKaiwa,
+          kana_practice: validKana,
         });
 
         return true;
@@ -425,6 +492,13 @@ export const useProgressStore = create(
             waterCount: 0,
           },
           mistake_vault: {},
+          activity_history: {},
+          kaiwa_scores: {},
+          kana_practice: {
+            totalPracticed: 0,
+            correctAnswers: 0,
+            lastPracticedAt: null,
+          },
         });
       },
 
@@ -477,7 +551,8 @@ export const useProgressStore = create(
           get().recordRescueSuccess(id);
         }
 
-        // Cập nhật streak học tập hàng ngày
+        // Cập nhật streak học tập hàng ngày & ghi nhận activity
+        get().logActivity(1);
         get().updateActivityStreak();
       },
     }),
@@ -492,6 +567,19 @@ export const useProgressStore = create(
           }
           if (!state.kanji_learned) {
             state.kanji_learned = {};
+          }
+          if (!state.activity_history) {
+            state.activity_history = {};
+          }
+          if (!state.kaiwa_scores) {
+            state.kaiwa_scores = {};
+          }
+          if (!state.kana_practice) {
+            state.kana_practice = {
+              totalPracticed: 0,
+              correctAnswers: 0,
+              lastPracticedAt: null,
+            };
           }
         }
       },

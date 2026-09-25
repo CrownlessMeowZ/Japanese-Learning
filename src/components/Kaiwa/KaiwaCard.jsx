@@ -3,6 +3,7 @@ import { useAudioPlayer } from '../../hooks/useAudioPlayer';
 import { useSpeechRecognition } from '../../hooks/useSpeechRecognition';
 import { calculateMatchPercentage } from '../../utils/stringUtils';
 import { FuriganaText } from '../FuriganaText';
+import { useProgressStore } from '../../store/progressStore';
 
 /**
  * KaiwaCard Component - Nâng cấp toàn diện Bước 3
@@ -27,8 +28,11 @@ export const KaiwaCard = React.memo(({ item }) => {
       if (!spokenText) return;
       const result = calculateMatchPercentage(spokenText, targetJapanese, targetHiragana);
       setMatchResult(result);
+      if (result && typeof result.percentage === 'number' && item?.id) {
+        useProgressStore.getState().recordKaiwaScore(item.id, result.percentage);
+      }
     },
-    [targetJapanese, targetHiragana]
+    [targetJapanese, targetHiragana, item]
   );
 
   const {

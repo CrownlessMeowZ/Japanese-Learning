@@ -9,6 +9,7 @@ import { KanaQuizSetup } from './KanaQuizSetup';
 import { KanaSpeedTyping } from './KanaSpeedTyping';
 import { KanaQuizMultipleChoice } from './KanaQuizMultipleChoice';
 import { KanaResultsModal } from './KanaResultsModal';
+import { useProgressStore } from '../../store/progressStore';
 import '../../styles/sakura.css';
 
 /**
@@ -35,6 +36,21 @@ export const KanaScreen = ({ onBack }) => {
   const [showAnswerFeedback, setShowAnswerFeedback] = useState(null); // { correct: bool, text: string } | null
   const [stats, setStats] = useState({ correct: 0, wrong: 0, troubleItems: [] });
   const inputRef = useRef(null);
+  const recordedQuizRef = useRef(false);
+
+  // Ghi nhận thành tích luyện tập Kana vào Progress Store khi hoàn thành Quiz
+  useEffect(() => {
+    if (activeTab === 'quiz') {
+      recordedQuizRef.current = false;
+    } else if (activeTab === 'results' && !recordedQuizRef.current && quizQuestions.length > 0) {
+      recordedQuizRef.current = true;
+      try {
+        useProgressStore.getState().recordKanaPractice(stats.correct, quizQuestions.length);
+      } catch {
+        // ignore
+      }
+    }
+  }, [activeTab, quizQuestions.length, stats.correct]);
 
   // Phát âm chữ cái tiếng Nhật (Web Speech API)
   const speakKana = useCallback((character) => {

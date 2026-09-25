@@ -5,6 +5,7 @@ import { MatchVictoryModal } from './MatchVictoryModal';
 import { MatchHighscoreModal } from './MatchHighscoreModal';
 import { soundEffects } from '../../utils/soundEffects';
 import { useAudioPlayer } from '../../hooks/useAudioPlayer';
+import { useProgressStore } from '../../store/progressStore';
 import '../../styles/match.css';
 
 const HIGHSCORE_STORAGE_KEY = 'nihongo_master_sakura_match_highscores';
@@ -90,6 +91,15 @@ function saveHighscoreToStorage(difficulty, key, newScore, timeTaken, isClear = 
       },
     };
     localStorage.setItem(HIGHSCORE_STORAGE_KEY, JSON.stringify(updated));
+
+    // Ghi nhận hoạt động vào Heatmap & cập nhật Streak
+    try {
+      useProgressStore.getState().logActivity(1);
+      useProgressStore.getState().updateActivityStreak();
+    } catch {
+      // ignore
+    }
+
     return { updated, isNewHighscore };
   } catch {
     return { updated: {}, isNewHighscore: false };

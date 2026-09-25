@@ -19,6 +19,7 @@ const Translator = lazy(() => import('./components/Dictionary/Translator').then(
 const KanaScreen = lazy(() => import('./components/Kana/KanaScreen').then((m) => ({ default: m.KanaScreen })));
 const KanjiScreen = lazy(() => import('./components/Kanji/KanjiScreen').then((m) => ({ default: m.KanjiScreen })));
 const SakuraMatchScreen = lazy(() => import('./components/Match/SakuraMatchScreen').then((m) => ({ default: m.SakuraMatchScreen })));
+const StatsScreen = lazy(() => import('./components/Stats/StatsScreen').then((m) => ({ default: m.StatsScreen })));
 const BackupRestoreModal = lazy(() => import('./components/Backup/BackupRestoreModal').then((m) => ({ default: m.BackupRestoreModal })));
 
 /**
@@ -104,6 +105,10 @@ export default function App() {
   const handleOpenMatch = (lessonId = 1) => {
     setActiveLessonId(lessonId);
     setCurrentRoute('match');
+  };
+
+  const handleOpenStats = () => {
+    setCurrentRoute('stats');
   };
 
   const handleBackToDashboard = () => {
@@ -213,6 +218,16 @@ export default function App() {
               🌸 Sakura Match
             </button>
 
+            {/* 4c. Nút Trung Tâm Thống Kê & Radar Năng Lực (Bước 6) */}
+            <button
+              type="button"
+              onClick={handleOpenStats}
+              className={`sakura-nav-btn ${currentRoute === 'stats' ? 'active' : ''}`}
+              title="Trung tâm thống kê 5 kỹ năng & lịch cày cuốc 365 ngày"
+            >
+              📊 Thống Kê
+            </button>
+
             {/* 5. Global Furigana Switch (Phiên Âm) */}
             <FuriganaSwitch />
 
@@ -260,6 +275,7 @@ export default function App() {
                 onOpenKana={handleOpenKana}
                 onOpenKanji={handleOpenKanji}
                 onOpenMatch={handleOpenMatch}
+                onOpenStats={handleOpenStats}
                 onSelectLesson={(lessonId) => {
                   setActiveLessonId(lessonId);
                   setCurrentRoute('vocab');
@@ -275,9 +291,20 @@ export default function App() {
                 onSelectKaiwa={handleOpenKaiwa}
                 onSelectMatch={handleOpenMatch}
                 onOpenMatch={handleOpenMatch}
+                onOpenStats={handleOpenStats}
                 onOpenTranslator={handleOpenTranslator}
                 onOpenKana={handleOpenKana}
                 onOpenKanji={handleOpenKanji}
+              />
+            )}
+
+            {currentRoute === 'stats' && (
+              <StatsScreen
+                onBack={handleBackToDashboard}
+                onSelectLesson={(lessonId) => {
+                  setActiveLessonId(lessonId);
+                  setCurrentRoute('vocab');
+                }}
               />
             )}
 
