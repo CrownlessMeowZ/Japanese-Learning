@@ -1,6 +1,6 @@
 # 🌸 Nihongo Master (日本語マスター)
 
-> **Hệ sinh thái học tiếng Nhật chuẩn Takumi (匠) – Tinh tế theo triết lý Wabi-sabi (侘寂), bền bỉ cùng tinh thần Kaizen (改善), tích hợp Khoa học Nhận thức (SuperMemo-2), Trí tuệ Âm thanh (Web Speech AI), Bộ gõ WanaKana IME và Tối ưu hóa Phần mềm Đỉnh cao.**
+> **Hệ sinh thái học tiếng Nhật chuẩn Takumi (匠) – Tinh tế theo triết lý Wabi-sabi (侘寂), bền bỉ cùng tinh thần Kaizen (改善), tích hợp Khoa học Nhận thức (SuperMemo-2), Trí tuệ Âm thanh (Web Speech AI), Bộ gõ WanaKana IME, Minigame Đấu Phản Xạ Sakura Match và Radar Năng Lực 5 Chiều.**
 
 [![React](https://img.shields.io/badge/React-19.2-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
 [![Vite](https://img.shields.io/badge/Vite-8.3-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
@@ -20,17 +20,19 @@
 
 ## 📖 Giới Thiệu (Overview)
 
-**Nihongo Master (日本語マスター)** là một ứng dụng Web học tiếng Nhật thế hệ mới theo mô hình **Client-side Native / Offline-First Progressive Web App (PWA)**, được thiết kế chuyên sâu dành cho giáo trình **Dekiru Nihongo Sơ cấp (15 Bài học trọn bộ)**, hệ thống bảng chữ cái **Hiragana & Katakana mở rộng** và kho tàng **60 Hán tự N5 cơ bản**.
+**Nihongo Master (日本語マスター)** là một ứng dụng Web học tiếng Nhật thế hệ mới theo mô hình **Client-side Native / Offline-First Progressive Web App (PWA)**, được thiết kế chuyên sâu dành cho giáo trình **Dekiru Nihongo Sơ cấp (15 Bài học trọn bộ)**, hệ thống bảng chữ cái **Hiragana & Katakana mở rộng** và kho tàng **80 Hán tự N5 cơ bản**.
 
 Vượt lên trên những ứng dụng hiển thị tĩnh thông thường, **Nihongo Master** được thai nghén từ sự kết hợp hài hòa giữa **Khoa học Máy tính (Computer Science)**, **Khoa học Nhận thức (Cognitive Science)** và **Nghệ thuật Thẩm mỹ Nhật Bản**:
 
-* 🧠 **Khoa học Trí nhớ Dài hạn:** Áp dụng thuật toán Spaced Repetition (**SuperMemo-2 / SM-2**) nhằm bẻ gãy đường cong lãng quên (Ebbinghaus Forgetting Curve), đưa 965 từ vựng và 65 mẫu ngữ pháp chuẩn sách hồng vào sâu trong trí nhớ dài hạn.
+* 🧠 **Khoa học Trí nhớ Dài hạn:** Áp dụng thuật toán Spaced Repetition (**SuperMemo-2 / SM-2**) nhằm bẻ gãy đường cong lãng quên (Ebbinghaus Forgetting Curve), đưa 965 từ vựng và 68 mẫu ngữ pháp chuẩn sách hồng vào sâu trong trí nhớ dài hạn.
 * 🎙️ **Phòng Luyện Nói AI (Speech Shadowing & Smart Mic):** Luyện phản xạ hội thoại thực tế (60 bài đàm thoại đời sống) và chấm điểm phát âm tiếng Nhật thời gian thực (`ja-JP`) bằng thuật toán **Quy hoạch động (Dynamic Programming - Levenshtein Distance đa tầng)**. Khắc phục dứt điểm lỗi tự ngắt mic với cơ chế **3 tầng bảo vệ thông minh (Initial Grace Period 5s, Trailing Silence 1.8s, Safety Timeout 10s)**, tích hợp luồng văn bản thời gian thực (Interim results) và tự động nhận diện tương thích trình duyệt (khuyến nghị Google Chrome & Microsoft Edge).
 * ⌨️ **Đấu Trường Đa Dạng & Bộ Gõ WanaKana IME:** Tích hợp cả 3 hình thức kiểm tra: **Trắc nghiệm 4 đáp án**, **Tự luận gõ từ vựng (Typing Mode)** và **Phòng thu chép chính tả (Audio Dictation Lab)**. Bàn phím rớt âm tự động (`watashi` ➔ `わたし`, `ko-hi-` ➔ `コーヒー`), hỗ trợ chấp nhận linh hoạt Kanji, Kana, Romaji, tiếng Việt có/không dấu và bộ gợi ý 2 cấp độ.
 * 🎧 **Phòng Thu Chép Chính Tả (Dictation Lab) & Sóng Âm Trực Quan:** Thiết kế chuyên biệt cho việc rèn luyện đôi tai phân tích âm vị (trường âm, âm ngắt, âm đục). Tự động phát âm khi sang câu, thanh visualizer 7 cột sóng âm nhảy theo nhịp, tích hợp bộ tùy chỉnh tốc độ nghe linh hoạt 3 mức (`0.75x`, `1.0x`, `1.25x`) và bảng đối chiếu từ đã chép.
 * 📝 **Đấu Trường Quiz Tổng Hợp 15 Bài:** Hỗ trợ thi riêng từng bài hoặc thi gộp liên bài (**Bài 1-3, 1-5, 1-10, toàn bộ 15 bài**), cơ chế **Đảo chiều đề thi linh hoạt** (Từ ➔ Nghĩa / Nghĩa ➔ Từ) và **Hộp cứu hộ từ làm sai (Targeted Retry)**.
-* 🈸 **Đấu Trường Kanji & Nghệ Thuật Thư Pháp (Shodō Canvas):** Luyện nét 60 chữ Hán trực tiếp trên bảng vẽ Canvas tương tác với lưới chữ điền chuẩn truyền thống, đi kèm **Đấu trường Kanji Quiz 3 dạng đề thi chuyên sâu** (Kanji ➔ Nghĩa/Hán Việt, Nghĩa ➔ Kanji, Furigana Onyomi/Kunyomi) và bộ lọc chữ chưa thuộc.
-* ⚡ **Bảng Chữ Cái Kana Master & Katakana Đột Phá:** Toàn bộ bảng Hiragana & Katakana, bổ sung âm Katakana Dakuten `ヴ (vu)` và **8 hàng Katakana mở rộng** chuẩn Tofugu; hỗ trợ chế độ trắc nghiệm độc lập và **Speed Typing** thần tốc.
+* 🈸 **Đấu Trường Kanji & Nghệ Thuật Thư Pháp (Shodō Canvas):** Luyện nét 80 chữ Hán trực tiếp trên bảng vẽ Canvas tương tác với lưới chữ điền chuẩn truyền thống, đi kèm **Đấu trường Kanji Quiz 3 dạng đề thi chuyên sâu** (Kanji ➔ Nghĩa/Hán Việt, Nghĩa ➔ Kanji, Furigana Onyomi/Kunyomi) và bộ lọc chữ chưa thuộc.
+* ⚡ **Bảng Chữ Cái Kana Master & Katakana Đột Phá:** Toàn bộ bảng Hiragana & Katakana (104 âm), bổ sung âm Katakana Dakuten `ヴ (vu)` và **8 hàng Katakana mở rộng** chuẩn Tofugu; hỗ trợ chế độ trắc nghiệm độc lập và **Speed Typing** thần tốc.
+* 🌸 **Minigame Đấu Phản Xạ Sakura Match (60 Giây):** Trò chơi lật thẻ nối từ vựng tiếng Nhật - tiếng Việt với 3 cấp độ thử thách (`4x3 Khởi động`, `4x4 Chuẩn mực`, `5x4 Thần tốc`), tính điểm combo streak, thưởng thời gian dọn sạch bàn cờ và bảng vàng kỷ lục Highscores lưu trữ an toàn.
+* 📊 **Trung Tâm Thống Kê & Radar Năng Lực 5 Chiều:** Đồ thị mạng nhện SVG thuần 60fps trực quan hóa 5 kỹ năng (Từ vựng, Hán tự, Chữ cái, Ngữ pháp, Nghe & nói), hệ thống phân bậc danh hiệu (Tân binh ➔ Nihongo Master), Lời khuyên AI cá nhân hóa, Ma trận nhiệt cày cuốc 365 ngày (Activity Heatmap 53 tuần) và lưới chi tiết 15 bài học.
 * ⚠️ **Sổ Tay Điểm Yếu & Hộp Cứu Hộ (Mistake Vault):** Tự động âm thầm ghi nhận các từ vựng làm sai trong bài tập, tính toán mục tiêu luyện tập động theo số lượng từ sai thực tế và cho phép học viên tốt nghiệp sau 2 lần sửa đúng.
 * 📖 **Bộ Dịch & Từ Điển Đa Tầng (Multi-Tier Real-Time):** Tra cứu tức thì $0\text{ms}$ kho từ điển nội bộ 965 từ khi offline; tự động dịch thời gian thực (Debounced 400ms) với cơ chế fallback 3 tầng linh hoạt: **Google Translate API ➔ MyMemory API ➔ Offline Lexicon**.
 * 💾 **Ký Ức An Toàn (JSON Backup & Restore):** Cơ chế sao lưu và khôi phục toàn bộ tiến trình học tập, chuỗi Streak và lịch sử SM-2 sang định dạng file JSON chỉ với một cú click, bảo toàn dữ liệu offline.
@@ -62,6 +64,7 @@ giảm kích thước bundle      tuyệt đối vào việc học      hiệu �
 3. **Takumi (匠 - Tay nghề nghệ nhân tỉ mỉ):**  
    * **GPU Sakura Animation:** Cánh hoa anh đào rơi tự nhiên trong không gian đa chiều, được tính toán và xử lý hoàn toàn bằng GPU Compositing Layer (`translate3d`, `will-change: transform`), tiêu tốn xấp xỉ 0% CPU và bảo toàn 60fps mượt mà.
    * **Zero-Collision Audio Engine:** Thiết kế theo Singleton Pattern, ngăn chặn hoàn toàn hiện tượng âm thanh bị phát đè lên nhau khi thao tác nhanh giữa các thẻ từ vựng hoặc câu hội thoại.
+   * **Pure SVG Visualizations:** Radar năng lực và Activity Heatmap được kết xuất hoàn toàn bằng SVG thuần và CSS Grid phần cứng, không kéo theo các thư viện ngoài nặng nề.
    * **Instant Furigana Switch:** Kỹ thuật CSS Data-attribute Selector `[data-furigana="hidden"]` cho phép bật/tắt toàn bộ phiên âm Kana trên chữ Hán mà **không gây re-render bất kỳ component React nào**.
 
 ---
@@ -76,7 +79,7 @@ giảm kích thước bundle      tuyệt đối vào việc học      hiệu �
 │   WelcomeScreen (Hero Hub)     │ Dashboard (15 Lessons)   │ KanjiScreen (Canvas Pad)   │
 │   VocabScreen (3D Cards)       │ KaiwaScreen (Voice AI)   │ KanaScreen (Tofugu Matrix) │
 │   GrammarScreen (Formulas)     │ QuizScreen (3 Formats)   │ Translator (Multi-Tier API)│
-│   KanjiQuiz (3 Arena Modes)    │ QuizTypingInput (IME)    │ MistakeVaultModal (Rescue) │
+│   SakuraMatchScreen (60s Game) │ StatsScreen (5D Radar)   │ MistakeVaultModal (Rescue) │
 │   BackupRestoreModal (JSON IO) │ FuriganaSwitch (CSS Data)│ SplashScreen (Zen Splash)  │
 └────────────────────────▲──────────────────────────────────────▲────────────────────────┘
                          │                                      │
@@ -84,15 +87,16 @@ giảm kích thước bundle      tuyệt đối vào việc học      hiệu �
 │                                APPLICATION LOGIC & HOOKS                               │
 │   useQuizEngine (State Machine)             │ useAudioPlayer (Playback Speed Singleton)│
 │   useSpeechRecognition (Smart 3-Tier Mic)   │ useProgress (Facade SRS SM-2 Engine)     │
+│   soundEffects.js (Web Audio Synthesizer)   │ statsUtils.js (Radar & Heatmap Engines)  │
 └────────────────────────▲──────────────────────────────────────▲────────────────────────┘
                          │                                      │
 ┌────────────────────────┴──────────────────────────────────────┴────────────────────────┐
 │                             DATA & STATE PERSISTENCE LAYER                             │
 │   Zustand Store (Persist LocalStorage)      │ srsAlgo.js (SM-2 Core Engine)            │
 │   typingValidator.js (Flexible Matcher)     │ stringUtils.js (Phonetic Levenshtein)    │
-│   vocabulary.js / .json (965+ Pink Book)    │ grammar.js (65 Points 15 Lessons)        │
-│   kaiwaData.js (60 Real-life Dialogues)     │ kanjiData.js (60 N5 Kanji & Radicals)    │
-│   offlineDictionary.js (0ms Fast Search)    │ GPU Sakura Particle CSS Layer            │
+│   vocabulary.js (965 Words Pink Book)       │ grammar.js (68 Points 15 Lessons)        │
+│   kaiwaData.js (60 Real-life Dialogues)     │ kanjiData.js (80 N5 Kanji & Radicals)    │
+│   kanaData.js (104 Hiragana & Katakana)     │ offlineDictionary.js (0ms Fast Search)   │
 └────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -107,6 +111,8 @@ giảm kích thước bundle      tuyệt đối vào việc học      hiệu �
 | **Code Quality** | **Oxlint 1.8 (Rust-based)** | Công cụ kiểm tra mã nguồn siêu nhanh bằng Rust, đạt chuẩn 0 lỗi và 0 cảnh báo kỹ thuật |
 | **Voice Processing** | **Web Speech API (`ja-JP`)** | Nhận dạng giọng nói tự nhiên từ trình duyệt, tích hợp thuật toán xử lý chống ngắt sớm |
 | **Audio Engine** | **HTML5 Audio + Web Speech TTS** | Quản lý phát âm chuẩn bản ngữ qua cơ chế Singleton chống xung đột, hỗ trợ thay đổi tốc độ playback |
+| **Web Audio Synthesizer**| **Web Audio API Context** | Tạo hiệu ứng âm thanh lật bài, ghép đúng, ghép sai trong Sakura Match mà không cần file MP3 ngoài |
+| **Vector Graphics** | **Pure SVG 60fps** | Kết xuất biểu đồ mạng nhện 5 trục và cây Bonsai tương tác không phụ thuộc thư viện bên ngoài |
 | **Styling & Furigana** | **Modular CSS + GPU Compositing** | Hiệu ứng cánh hoa anh đào rơi 60fps và cơ chế ẩn/hiện Furigana 0ms re-render |
 | **Data Engineering** | **Python (Pandas, OpenPyXL)** | Pipeline tự động hóa trích xuất và chuẩn hóa dữ liệu từ Excel sang ES6 JavaScript |
 
@@ -171,23 +177,44 @@ Hệ thống luyện gõ từ vựng và chép chính tả cho phép người h�
 
 ---
 
-### 4. Thuật Toán Xáo Trộn Ngẫu Nhiên Fisher-Yates $O(N)$
-Quiz Engine và Kana Multiple-Choice Quiz cài đặt thuật toán **Fisher-Yates (Knuth) Shuffle**:
+### 4. Thuật Toán Xáo Trộn Ngẫu Nhiên Fisher-Yates $O(N)$ & Đấu Phản Xạ Sakura Match
+Quiz Engine và Minigame Sakura Match ứng dụng giải thuật xáo trộn **Fisher-Yates (Knuth) Shuffle**:
 
-* **Độ phức tạp:** Thời gian $O(N)$, Không gian $O(N)$.
-* **Cơ chế tạo phương án gây nhiễu (Distractor Generation):**
-  1. Trích xuất câu hỏi mục tiêu từ danh sách đến hạn ôn tập (`dueQuestions`).
-  2. Lọc bỏ các từ đồng nghĩa hoặc đáp án trùng lặp khỏi ngân hàng câu hỏi tổng thể.
-  3. Xáo trộn ngẫu nhiên tập ứng viên, chọn đúng 3 đáp án sai kết hợp cùng 1 đáp án đúng và xáo trộn lần cuối để đảm bảo vị trí đáp án phân phối hoàn toàn đồng đều, không thiên vị.
+* **Xáo trộn mảng tối ưu:** Hoán đổi phần tử từ cuối mảng về đầu theo thời gian $O(N)$ không phát sinh mảng phụ.
+* **Cơ chế ghép cặp đối ngẫu trong Sakura Match:**
+  1. Trích xuất $K$ từ vựng ngẫu nhiên từ bài học đã chọn (6 cặp cho bàn $4\times3$, 8 cặp cho bàn $4\times4$, 10 cặp cho bàn $5\times4$).
+  2. Tách mỗi từ thành 2 thẻ: 1 thẻ tiếng Nhật (Kanji/Kana) và 1 thẻ nghĩa tiếng Việt có cùng `pairId`.
+  3. Xáo trộn ngẫu nhiên toàn bộ $2K$ thẻ trước khi phân bổ vào lưới.
+* **Công thức tính điểm Gamification:**
+  $$\text{Score} = \sum (\text{Base} \times (1 + \text{Combo} \times 0.2)) + \max(0, \text{SecondsLeft}) \times 30$$
+  - Thưởng lớn cho người chơi duy trì chuỗi ghép đúng liên tục và dọn sạch bàn cờ trước thời hạn.
 
 ---
 
-### 5. Quản Lý Âm Thanh Chuẩn Singleton & Audio Speed Controller
-Hệ thống âm thanh được nâng cấp toàn diện:
+### 5. Thuật Toán Tính Điểm Năng Lực 5 Chiều & Đồ Họa Radar Vector SVG
+Đồ thị mạng nhện trong Trung Tâm Thống Kê tổng hợp dữ liệu học tập đa nguồn thành 5 trục năng lực:
 
-* Quản trị instance âm thanh duy nhất thông qua **Singleton Pattern**, loại bỏ hoàn toàn hiện tượng chồng đè tiếng.
-* **Điều khiển tốc độ phát âm (Playback Speed):** Hỗ trợ 3 mốc tốc độ `0.75x`, `1.0x`, `1.25x`. Tốc độ được ánh xạ đồng bộ cho cả `HTML5 Audio` (`playbackRate`) và `Web Speech Synthesis` (`utterance.rate`).
-* Tự động giải phóng tài nguyên và event listener khi component unmount thông qua hook `useAudioPlayer`.
+* **Trục Từ vựng (Vocabulary):** Tỉ lệ từ vựng đã học trên tổng số 965 từ (tối đa 80%) kết hợp tỉ lệ từ đã chuyển vào trí nhớ dài hạn $I \ge 14$ ngày (thưởng tối đa 20%).
+* **Trục Hán tự (Kanji):** Tỉ lệ chữ Hán N5 đã thuộc trên tổng số 80 chữ.
+* **Trục Bảng chữ cái (Kana):** Đánh giá dựa trên độ chính xác khi làm bài Quiz tốc độ và số lượng từ vựng thực tế đã đọc thành thạo.
+* **Trục Ngữ pháp (Grammar):** Tỉ lệ mẫu câu ngữ pháp đã nắm vững trên tổng số 68 mẫu câu của 15 bài Dekiru.
+* **Trục Nghe & Nói (Kaiwa Shadowing):** Tỉ lệ bài hội thoại đã thực hành luyện nói và điểm phát âm trung bình qua Micro.
+* **Dựng hình ngũ giác SVG thời gian thực:**
+  - Tọa độ đỉnh tại góc $\theta_i = -\frac{\pi}{2} + \frac{2\pi i}{5}$:
+    $$x_i = cx + r_i \cos(\theta_i), \quad y_i = cy + r_i \sin(\theta_i)$$
+  - Vẽ đa giác dữ liệu có bóng đổ và các vành đai đồng tâm 5 tầng (`20%`, `40%`, `60%`, `80%`, `100%`).
+* **Hệ thống phân cấp & AI Recommendation:**
+  - Xếp hạng 5 bậc: *👑 Nihongo Master* ($\ge 90$), *🏯 Cao Thủ N5* ($\ge 70$), *⚔️ Chiến Binh Tiếng Nhật* ($\ge 45$), *🌿 Người Học Chăm Chỉ* ($\ge 20$), *🌸 Tân Binh Nhập Môn* ($< 20$).
+  - Tự động trích xuất kỹ năng có điểm số thấp nhất để hiển thị lời khuyên chiến lược ôn luyện.
+
+---
+
+### 6. Thuật Toán Ma Trận Nhiệt 365 Ngày (Activity Heatmap & Retroactive Seeding)
+Giao diện lịch cày cuốc theo dõi thói quen học tập xuyên suốt 53 tuần:
+
+* **Tự động truy hồi dữ liệu cũ (Retroactive Seeding):** Tự động đọc lại các mốc thời gian lưu trữ trong `learnedAt`, `lastReviewedAt`, `kanji_learned` và `bonsai_state.lastWateredDate` để học viên cũ mở ra là thấy ngay lịch sử cày cuốc của mình mà không bị bắt đầu lại từ 0.
+* **Ma trận tuần tự 53 tuần $\times$ 7 ngày:** Căn chỉnh chính xác ngày kết thúc là thứ Bảy của tuần hiện tại để đảm bảo lưới luôn cân đối, kèm tính năng cuộn ngang mượt mà trên di động.
+* **Phân cấp màu nhiệt sắc hoa anh đào:** 5 mức độ hiển thị từ Level 0 (chưa học) đến Level 4 (cày cuốc tích cực $\ge 7$ hoạt động/ngày).
 
 ---
 
@@ -195,16 +222,17 @@ Hệ thống âm thanh được nâng cấp toàn diện:
 
 | Biểu tượng | Tính năng | Mô tả chi tiết |
 | :---: | :--- | :--- |
-| 🌸 | **Đại Sảnh Đón Tiếp (Welcome Hub)** | Màn hình Hero ấn tượng chuẩn EdTech quốc tế, tôn vinh 4 chỉ số vàng (15 bài học, 965 từ vựng, 65 ngữ pháp, 100% PWA Offline), phím tắt học cấp tốc và nút Trang Chủ điều hướng linh hoạt. |
+| 🌸 | **Đại Sảnh Đón Tiếp (Welcome Hub)** | Màn hình Hero ấn tượng chuẩn EdTech quốc tế, tôn vinh các chỉ số vàng (15 bài học, 965 từ vựng, 68 ngữ pháp, 80 chữ Hán, 100% PWA Offline), phím tắt học cấp tốc và nút Trang Chủ điều hướng linh hoạt. |
 | 🎴 | **Thẻ Ghi Nhớ Flashcard 3D** | Lật thẻ không gian 3D mượt mà, tích hợp phát âm bản ngữ, phiên âm Furigana và chấm điểm chu kỳ Spaced Repetition (SM-2). |
-| 🈸 | **Hán Tự N5 & Bảng Vẽ Canvas** | 60 Hán tự căn bản N5 kèm âm Hán-Việt, Onyomi, Kunyomi và số nét; bảng vẽ Canvas luyện viết chữ Hán với lưới chữ điền $2 \times 2$ truyền thống. |
+| 🈸 | **Hán Tự N5 & Bảng Vẽ Canvas** | 80 Hán tự căn bản N5 kèm âm Hán-Việt, Onyomi, Kunyomi và số nét; bảng vẽ Canvas luyện viết chữ Hán với lưới chữ điền $2 \times 2$ truyền thống. |
 | ⚔️ | **Đấu Trường Kanji Quiz** | 3 chế độ thi đấu chuyên sâu: Hán tự ➔ Nghĩa/Hán Việt, Nghĩa ➔ Hán tự, Đọc Furigana; tính năng lọc chữ chưa thuộc và thử thách lại chữ sai. |
-| ⛩️ | **Bảng Chữ Cái Kana Master (Tofugu)** | Bảng Hiragana & Katakana toàn diện, bổ sung Katakana Dakuten `ヴ` và **8 hàng Katakana mở rộng**; chế độ **Speed Typing** gõ phím phản xạ Romaji và trắc nghiệm độc lập. |
+| ⛩️ | **Bảng Chữ Cái Kana Master (Tofugu)** | Bảng Hiragana & Katakana toàn diện (104 âm), bổ sung Katakana Dakuten `ヴ` và **8 hàng Katakana mở rộng**; chế độ **Speed Typing** gõ phím phản xạ Romaji và trắc nghiệm độc lập. |
 | 🎙️ | **Phòng Luyện Nói Kaiwa AI** | Luyện phát âm trực tiếp qua Micro cho 60 câu đối thoại đời sống; sửa triệt để lỗi ngắt mic với Grace Period 5s, tự chốt điểm 1.8s sau khi nói, luồng văn bản thời gian thực (interim results), chấm điểm Levenshtein đa tầng với thang màu trực quan (tối ưu nhất trên Chrome & Edge). |
 | ⌨️ | **Luyện Gõ Từ Vựng (Typing Mode)** | Bộ gõ WanaKana rớt âm tự động, thanh chuyển đổi IME tức thì `[あ] [ア] [ABC] [VI]`, chấp nhận đáp án linh hoạt (Kanji, Kana, Romaji, tiếng Việt có/không dấu) và điều khiển Enter 2 nấc. |
 | 🎧 | **Phòng Thu Chép Chính Tả (Dictation Lab)** | Ẩn hoàn toàn chữ viết, chỉ phát âm thanh với thanh visualizer 7 cột sóng âm và bộ điều chỉnh tốc độ `0.75x`, `1.0x`, `1.25x`; yêu cầu nghe và gõ lại chính xác từ vựng tiếng Nhật, đối chiếu ngay từ bạn đã chép với đáp án chuẩn. |
 | 📝 | **Đấu Trường Quiz Tổng Hợp 15 Bài** | Thử thách phản xạ kiến thức theo từng bài học hoặc thi gộp liên bài (1-3, 1-5, 1-10, tất cả 15 bài), đảo chiều đề thi (Từ sang Nghĩa / Nghĩa sang Từ), cứu hộ từ làm sai (Targeted Retry), lưu điểm chuỗi Streak và tích hợp Spaced Repetition SM-2. |
-| 📊 | **Bảng Điều Khiển (Dashboard)** | Theo dõi tiến trình học tập của 15 bài Dekiru Nihongo, thống kê số lượng thẻ cần ôn tập và quản lý chuỗi ngày học tập liên tục. |
+| 🌸 | **Minigame Đấu Phản Xạ Sakura Match** | Lật thẻ ghép từ 60 giây, 3 kích thước bàn cờ (`4x3`, `4x4`, `5x4`), hiệu ứng âm thanh Web Audio sống động và bảng vàng kỷ lục cá nhân Highscores theo từng độ khó. |
+| 📊 | **Trung Tâm Thống Kê & Radar 5 Chiều** | Biểu đồ mạng nhện SVG 5 kỹ năng, 4 thẻ chỉ số tổng quan, bảng xếp hạng danh hiệu, lời khuyên AI cá nhân hóa, ma trận nhiệt cày cuốc 365 ngày và lưới tiến độ 15 bài học Dekiru Nihongo. |
 | 🌿 | **Vườn Bonsai Tăng Trưởng (Sakura Garden)** | Cây Bonsai hoa anh đào tương tác đồ họa SVG tiến hóa qua 5 cấp độ theo chuỗi Streak, kèm tính năng tưới cây và danh ngôn Zen Nhật Bản. |
 | ⚠️ | **Sổ Tay Điểm Yếu & Hộp Cứu Hộ (Mistake Vault)** | Tự động âm thầm gom các từ hay làm sai trong Quiz & Flashcard, mục tiêu luyện tập động theo số lượng từ sai thực tế với cơ chế tốt nghiệp sau 2 lần sửa đúng. |
 | 📖 | **Từ Điển & Dịch Thuật Đa Tầng** | Tra cứu tức thì từ điển 965 từ vựng nội bộ không cần mạng; dịch tự động thời gian thực (Debounced 400ms) với cơ chế dự phòng 3 tầng (Google API ➔ MyMemory ➔ Offline). |
@@ -229,24 +257,26 @@ Japanese Learning/
 │   │   ├── Backup/             # BackupRestoreModal.jsx (Sao lưu & Khôi phục JSON)
 │   │   ├── Dictionary/         # Translator.jsx, OfflineLexiconCard... (Dịch thuật AI đa tầng & Từ điển)
 │   │   ├── Garden/             # SakuraGarden.jsx (Vườn Bonsai tương tác 5 cấp độ)
-│   │   ├── Grammar/            # GrammarCard.jsx, GrammarScreen.jsx (Ngữ pháp 65 điểm 15 bài)
+│   │   ├── Grammar/            # GrammarCard.jsx, GrammarScreen.jsx (Ngữ pháp 68 mẫu 15 bài)
 │   │   ├── Kaiwa/              # KaiwaCard.jsx, KaiwaScreen.jsx (Voice AI & Luyện nói Shadowing)
-│   │   ├── Kana/               # KanaScreen.jsx, KanaMatrixView, KanaSpeedTyping... (Tofugu Kana)
-│   │   ├── Kanji/              # KanjiScreen.jsx, KanjiCanvasPad.jsx, KanjiQuiz.jsx, KanjiGrid.jsx, KanjiDetailModal.jsx, KanjiStrokeAnimator.jsx
+│   │   ├── Kana/               # KanaScreen.jsx, KanaMatrixView, KanaSpeedTyping... (104 âm Kana)
+│   │   ├── Kanji/              # KanjiScreen.jsx, KanjiCanvasPad.jsx, KanjiQuiz.jsx (80 Hán tự N5)
+│   │   ├── Match/              # SakuraMatchScreen.jsx, MatchCard.jsx, MatchVictoryModal.jsx (Minigame 60s)
 │   │   ├── Quiz/               # QuizScreen.jsx (Quiz Engine), QuizTypingInput.jsx (WanaKana Typing & Dictation)
 │   │   ├── Rescue/             # MistakeVaultModal.jsx (Hộp Cứu Hộ Điểm Yếu & Ôn Tập SM-2)
 │   │   ├── Splash/             # SplashScreen.jsx (Màn hình mở đầu danh ngôn Zen)
+│   │   ├── Stats/              # StatsScreen.jsx, StatsRadarChart.jsx, StatsHeatmap.jsx (Radar 5D & Heatmap)
 │   │   ├── Vocab/              # Flashcard.jsx (3D flip), VocabScreen.jsx
 │   │   ├── Welcome/            # WelcomeScreen.jsx (Hero Onboarding Landing Hub)
 │   │   ├── Dashboard.jsx       # Bảng tiến độ 15 bài học & Lộ trình Dekiru
 │   │   ├── FuriganaSwitch.jsx  # Công tắc bật/tắt Furigana toàn app
 │   │   ├── FuriganaText.jsx    # Component hiển thị thẻ <ruby> tối ưu
 │   │   └── LessonModal.jsx     # Modal chọn bài học và điều hướng tập trung
-│   ├── data/                   # Cơ sở tri thức ứng dụng (965 từ vựng, 65 ngữ pháp, 60 kaiwa, 60 kanji)
-│   │   ├── grammar.js          # Dữ liệu ngữ pháp 65 mẫu của 15 bài Dekiru
+│   ├── data/                   # Cơ sở tri thức ứng dụng (965 từ vựng, 68 ngữ pháp, 60 kaiwa, 80 kanji)
+│   │   ├── grammar.js          # Dữ liệu ngữ pháp 68 mẫu của 15 bài Dekiru
 │   │   ├── kaiwaData.js        # Dữ liệu 60 bài hội thoại thực tế kèm bối cảnh đời sống
-│   │   ├── kanaData.js         # Bảng chữ cái Hiragana & Katakana mở rộng 8 hàng
-│   │   ├── kanjiData.js        # 60 chữ Hán N5 căn bản kèm âm Hán Việt & nét vẽ SVG
+│   │   ├── kanaData.js         # Bảng chữ cái Hiragana & Katakana mở rộng (104 âm)
+│   │   ├── kanjiData.js        # 80 chữ Hán N5 căn bản kèm âm Hán Việt & nét vẽ SVG
 │   │   ├── offlineDictionary.js# Từ điển offline tra cứu tức thì 0ms
 │   │   ├── vocabulary.js       # 965 từ vựng đối chiếu chuẩn sách hồng Dekiru
 │   │   └── vocabulary.json     # Dữ liệu JSON từ vựng đầy đủ
@@ -256,16 +286,20 @@ Japanese Learning/
 │   │   ├── useQuizEngine.js    # Logic bài tập, trắc nghiệm, tự luận & Fisher-Yates shuffle
 │   │   └── useSpeechRecognition.js # Web Speech API wrapper với Smart 3-Tier Auto-Stop
 │   ├── store/                  # Quản lý trạng thái tập trung (Zustand)
-│   │   ├── progressStore.js    # Lưu trữ streak, thẻ SRS và lịch sử học tập
+│   │   ├── progressStore.js    # Lưu trữ streak, thẻ SRS, kết quả luyện tập và lịch sử hoạt động
 │   │   └── settingsStore.js    # Cài đặt người dùng (Furigana display toggle)
 │   ├── styles/                 # Stylesheet hệ thống
 │   │   ├── furigana.css        # Quy tắc ẩn hiện Furigana không re-render
+│   │   ├── match.css           # Hiệu ứng thẻ bài lật, rung động và lưới Minigame Sakura Match
 │   │   ├── quiz.css            # Giao diện câu hỏi, bộ gõ từ vựng & chép chính tả (kèm soundwave animation)
-│   │   └── sakura.css          # Thư viện màu sắc và GPU Sakura Animation
+│   │   ├── sakura.css          # Thư viện màu sắc và GPU Sakura Animation
+│   │   └── stats.css           # Giao diện Radar mạng nhện, thẻ chỉ số và Activity Heatmap
 │   ├── utils/                  # Thư viện thuật toán cốt lõi
 │   │   ├── localDictionary.js  # Tra cứu từ điển nội bộ
 │   │   ├── romajiConverter.js  # Bộ chuyển dịch ngữ âm Romaji <-> Kana
+│   │   ├── soundEffects.js     # Web Audio API Synthesizer (SFX lật thẻ, ăn điểm, chiến thắng)
 │   │   ├── srsAlgo.js          # Thuật toán SuperMemo-2 (SM-2)
+│   │   ├── statsUtils.js       # Thuật toán Radar 5 kỹ năng, ma trận 365 ngày & tiến độ 15 bài
 │   │   ├── stringUtils.js      # Giải thuật Levenshtein & Chuẩn hóa ngữ âm tiếng Nhật
 │   │   └── typingValidator.js  # Bộ kiểm duyệt đáp án tự luận linh hoạt đa tầng
 │   ├── App.css                 # Phong cách giao diện toàn cục
@@ -288,7 +322,7 @@ Japanese Learning/
 * **Python**: Phiên bản `3.9+` (chỉ cần khi muốn chạy script Mini-ETL trích xuất ngữ pháp từ Excel).
 * **Khuyến nghị về Trình duyệt (Browser Compatibility):**
   * 🌟 **Google Chrome** hoặc **Microsoft Edge (Khuyến nghị cao nhất):** Hỗ trợ tối ưu 100% tất cả các tính năng của ứng dụng, bao gồm cả **Phòng Luyện Nói AI & Chấm điểm phát âm bằng Micro** (sử dụng Web Speech API tích hợp sẵn dịch vụ nhận diện giọng nói đám mây).
-  * 🦁 **Brave Browser / Firefox / Cốc Cốc:** Hoạt động xuất sắc 99% các tính năng (Từ vựng, Ngữ pháp, Bảng vẽ Kanji Canvas, Đấu trường Quiz, Gõ WanaKana, Phòng thu chép chính tả Dictation Lab, Dịch thuật...). *Lưu ý riêng với Brave:* Do chính sách bảo mật riêng tư khắt khe (Shields), Brave loại bỏ hoàn toàn backend Google Speech Recognition, nên tính năng bấm Mic chấm điểm sẽ tự ngắt; người học chỉ cần chuyển sang Chrome hoặc Edge khi muốn thi luyện nói.
+  * 🦁 **Brave Browser / Firefox / Cốc Cốc:** Hoạt động xuất sắc 99% các tính năng (Từ vựng, Ngữ pháp, Bảng vẽ Kanji Canvas, Đấu trường Quiz, Gõ WanaKana, Phòng thu chép chính tả Dictation Lab, Minigame Sakura Match, Trung tâm Thống kê Radar, Dịch thuật...). *Lưu ý riêng với Brave:* Do chính sách bảo mật riêng tư khắt khe (Shields), Brave loại bỏ hoàn toàn backend Google Speech Recognition, nên tính năng bấm Mic chấm điểm sẽ tự ngắt; người học chỉ cần chuyển sang Chrome hoặc Edge khi muốn thi luyện nói.
 
 ---
 
