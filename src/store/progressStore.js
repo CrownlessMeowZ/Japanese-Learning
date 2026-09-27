@@ -6,7 +6,7 @@ import { grammarData } from '../data/grammar';
 
 let dictionaryCache = null;
 
-export const getDictionaryCache = () => {
+const getDictionaryCache = () => {
   if (!dictionaryCache) {
     dictionaryCache = new Map();
 

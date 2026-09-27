@@ -7,7 +7,7 @@ import { levenshteinDistance } from './stringUtils.js';
  * @param {string} str 
  * @returns {string}
  */
-export const removeVietnameseAccents = (str) => {
+const removeVietnameseAccents = (str) => {
   if (!str || typeof str !== 'string') return '';
   return str
     .normalize('NFD')
@@ -24,7 +24,7 @@ export const removeVietnameseAccents = (str) => {
  * @param {string} str 
  * @returns {string}
  */
-export const cleanText = (str) => {
+const cleanText = (str) => {
   if (!str || typeof str !== 'string') return '';
   return str
     .replace(/[\s。、！？!?・…「」『』（）()\-–—_~〜:;,.]/g, '')
@@ -38,7 +38,7 @@ export const cleanText = (str) => {
  * @param {Object} target 
  * @returns {Set<string>} Tập hợp các chuỗi đáp án chuẩn hóa hợp lệ
  */
-export const getValidJapaneseAnswers = (target) => {
+const getValidJapaneseAnswers = (target) => {
   const validSet = new Set();
   if (!target) return validSet;
 
@@ -108,7 +108,7 @@ export const getValidJapaneseAnswers = (target) => {
  * @param {Object} target 
  * @returns {{ accented: string[], unaccented: string[] }}
  */
-export const getValidVietnameseAnswers = (target) => {
+const getValidVietnameseAnswers = (target) => {
   if (!target) return { accented: [], unaccented: [] };
 
   const rawMeaning = target.meaning || target.meaning_vi || target.vietnamese || '';

@@ -23,7 +23,7 @@ export const QUIZ_STATUS = {
  * @complexity Time: O(N) - Duyệt ngược từ N-1 về 1, mỗi bước hoán vị O(1).
  * @complexity Space: O(N) - Tạo bản sao mảng, không mutate trực tiếp dữ liệu nguồn.
  */
-export const fisherYatesShuffle = (array) => {
+const fisherYatesShuffle = (array) => {
   if (!Array.isArray(array) || array.length <= 1) {
     return array ? [...array] : [];
   }

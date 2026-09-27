@@ -6,6 +6,7 @@ import {
   katakanaToHiragana,
   kanaToRomaji
 } from './romajiConverter.js';
+import { levenshteinDistance } from './stringUtils.js';
 
 // Tập hợp toàn bộ kho từ vựng (> 1.150 từ & mẫu câu) thành mảng phẳng có đánh chỉ mục Romaji tự động
 let cachedAllWords = null;
@@ -15,26 +16,6 @@ let romajiIndexMap = null;
 function cleanJapaneseText(str) {
   if (!str) return '';
   return str.replace(/[（）()]/g, '').trim();
-}
-
-/**
- * Tính khoảng cách Levenshtein giữa 2 chuỗi để nhận diện lỗi chính tả
- */
-function levenshteinDistance(s1, s2) {
-  if (s1 === s2) return 0;
-  if (!s1.length) return s2.length;
-  if (!s2.length) return s1.length;
-
-  let prev = Array.from({ length: s2.length + 1 }, (_, i) => i);
-  for (let i = 1; i <= s1.length; i++) {
-    let curr = [i];
-    for (let j = 1; j <= s2.length; j++) {
-      const cost = s1[i - 1] === s2[j - 1] ? 0 : 1;
-      curr[j] = Math.min(curr[j - 1] + 1, prev[j] + 1, prev[j - 1] + cost);
-    }
-    prev = curr;
-  }
-  return prev[s2.length];
 }
 
 function getAllVocabularyWords() {

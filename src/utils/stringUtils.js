@@ -1,9 +1,9 @@
+import * as wanakana from 'wanakana';
+
 /**
  * String Utility Module - Sakura EdTech System
  * Thuật toán so khớp chuỗi & Đánh giá độ chính xác ngữ âm tiếng Nhật (Phonetic Speech Scoring)
  */
-
-import { katakanaToHiragana, romajiToHiragana, kanaToRomaji } from './romajiConverter.js';
 
 /**
  * Thuật toán Levenshtein Distance bằng Quy hoạch động (Dynamic Programming).
@@ -63,7 +63,7 @@ export const levenshteinDistance = (s1, s2) => {
  * @param {string} text 
  * @returns {string}
  */
-export const cleanJapaneseTextForComparison = (text) => {
+const cleanJapaneseTextForComparison = (text) => {
   if (!text || typeof text !== 'string') return '';
   return text
     .replace(/\[(.*?)\]/g, '$1') // Bỏ ngoặc vuông giữ kana
@@ -74,26 +74,20 @@ export const cleanJapaneseTextForComparison = (text) => {
 
 /**
  * Chuẩn hóa ngữ âm tiếng Nhật (Phonetic Normalization):
- * - Đưa Katakana về Hiragana
- * - Đưa Romaji về Hiragana nếu người học nói lẫn âm Latin
- * - Chuẩn hóa ngữ âm các trợ từ: は -> わ, を -> お, へ -> え
+ * - Đưa Katakana / Romaji về Hiragana qua wanakana
+ * - Chuẩn hóa ngữ âm các trợ từ: は -> わ, を -> お
  * @param {string} text 
  * @returns {string}
  */
-export const normalizeToPhoneticKana = (text) => {
+const normalizeToPhoneticKana = (text) => {
   if (!text || typeof text !== 'string') return '';
 
   let str = cleanJapaneseTextForComparison(text);
 
-  // 1. Chuyển Katakana sang Hiragana
-  str = katakanaToHiragana(str);
+  // Chuyển Katakana và Romaji sang Hiragana bằng wanakana
+  str = wanakana.toHiragana(str);
 
-  // 2. Chuyển Romaji sang Hiragana nếu có
-  if (/[a-zA-Z]/.test(str)) {
-    str = romajiToHiragana(str);
-  }
-
-  // 3. Chuẩn hóa trợ từ ngữ âm (chỉ thay thế trợ từ đơn lẻ hoặc ở ranh giới từ)
+  // Chuẩn hóa trợ từ ngữ âm
   str = str
     .replace(/は(?=です|ます|[あ-ん]|$)/g, 'わ')
     .replace(/を/g, 'お');
@@ -156,9 +150,9 @@ export const calculateMatchPercentage = (spokenStr, targetJapanese = '', targetH
   const maxLenClean = Math.max(spokenClean.length, targetClean.length);
   const scoreClean = maxLenClean > 0 ? Math.max(0, 1 - distClean / maxLenClean) : 0;
 
-  // 5. So khớp trên tầng Romaji (rất tốt cho việc bù trừ các âm ngắt sokuon / trường âm bị nuốt nhẹ)
-  const romajiSpoken = kanaToRomaji(spokenKana);
-  const romajiTarget = kanaToRomaji(targetKana);
+  // 5. So khớp trên tầng Romaji qua wanakana
+  const romajiSpoken = wanakana.toRomaji(spokenKana);
+  const romajiTarget = wanakana.toRomaji(targetKana);
   const distRomaji = levenshteinDistance(romajiSpoken, romajiTarget);
   const maxLenRomaji = Math.max(romajiSpoken.length, romajiTarget.length);
   const scoreRomaji = maxLenRomaji > 0 ? Math.max(0, 1 - distRomaji / maxLenRomaji) : 0;
