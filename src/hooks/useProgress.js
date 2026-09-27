@@ -1,15 +1,117 @@
 import { useCallback, useMemo } from 'react';
+import { useShallow } from 'zustand/react/shallow';
 import { useProgressStore, healMistakeVault } from '../store/progressStore';
 import { getTodayDateString } from '../utils/srsAlgo';
 
-export const useProgress = () => {
-  const learnedItems = useProgressStore((state) => state.learned_items);
-  const currentLesson = useProgressStore((state) => state.current_lesson);
-  const dailyStreak = useProgressStore((state) => state.daily_streak);
+/**
+ * ⚡ Atomic Selectors - Chọn lọc nguyên tử cho từng thuộc tính
+ * Triệt tiêu hoàn toàn re-render thừa thãi cho các component chỉ đọc 1 trường duy nhất
+ */
+export const useDailyStreak = () => useProgressStore((state) => state.daily_streak);
+export const useBonsaiState = () => useProgressStore((state) => state.bonsai_state);
+export const useLearnedItems = () => useProgressStore((state) => state.learned_items);
+export const useKanjiLearned = () => useProgressStore((state) => state.kanji_learned || {});
+export const useCurrentLesson = () => useProgressStore((state) => state.current_lesson);
+export const useActivityHistory = () => useProgressStore((state) => state.activity_history || {});
+export const useKaiwaScores = () => useProgressStore((state) => state.kaiwa_scores || {});
+export const useKanaPractice = () => useProgressStore((state) => state.kana_practice || {});
 
-  const setCurrentLesson = useProgressStore((state) => state.setCurrentLesson);
-  const toggleLearnedItem = useProgressStore((state) => state.toggleLearnedItem);
-  const reviewItem = useProgressStore((state) => state.reviewItem);
+/**
+ * Hook chuyên biệt chỉ lấy Sổ tay điểm yếu (đã tự động phục hồi)
+ */
+export const useMistakeVault = () => {
+  const raw = useProgressStore((state) => state.mistake_vault);
+  return useMemo(() => healMistakeVault(raw), [raw]);
+};
+
+/**
+ * Hook chuyên biệt chỉ chứa các hàm hành động (Actions Only)
+ * Các hàm này có tham chiếu ổn định tuyệt đối, component gọi chúng KHÔNG BAO GIỜ bị re-render
+ */
+export const useProgressActions = () => {
+  return useProgressStore(
+    useShallow((state) => ({
+      setCurrentLesson: state.setCurrentLesson,
+      toggleLearnedItem: state.toggleLearnedItem,
+      reviewItem: state.reviewItem,
+      waterBonsai: state.waterBonsai,
+      recordMistake: state.recordMistake,
+      recordRescueSuccess: state.recordRescueSuccess,
+      clearMistake: state.clearMistake,
+      clearAllMistakes: state.clearAllMistakes,
+      toggleKanjiLearned: state.toggleKanjiLearned,
+      logActivity: state.logActivity,
+      recordKaiwaScore: state.recordKaiwaScore,
+      recordKanaPractice: state.recordKanaPractice,
+      importAllData: state.importAllData,
+      resetAllProgress: state.resetAllProgress,
+    }))
+  );
+};
+
+/**
+ * Facade Hook: useProgress (Bảo toàn 100% tương thích ngược)
+ * Sử dụng useShallow để so sánh nông các thuộc tính state, ngăn chặn re-render thừa
+ */
+export const useProgress = () => {
+  const stateData = useProgressStore(
+    useShallow((state) => ({
+      currentLesson: state.current_lesson,
+      dailyStreak: state.daily_streak,
+      learnedItems: state.learned_items,
+      bonsaiState: state.bonsai_state,
+      rawMistakeVault: state.mistake_vault,
+      kanjiLearned: state.kanji_learned || {},
+      activityHistory: state.activity_history || {},
+      kaiwaScores: state.kaiwa_scores || {},
+      kanaPractice: state.kana_practice || {},
+      setCurrentLesson: state.setCurrentLesson,
+      toggleLearnedItem: state.toggleLearnedItem,
+      reviewItem: state.reviewItem,
+      waterBonsai: state.waterBonsai,
+      recordMistake: state.recordMistake,
+      recordRescueSuccess: state.recordRescueSuccess,
+      clearMistake: state.clearMistake,
+      clearAllMistakes: state.clearAllMistakes,
+      toggleKanjiLearned: state.toggleKanjiLearned,
+      logActivity: state.logActivity,
+      recordKaiwaScore: state.recordKaiwaScore,
+      recordKanaPractice: state.recordKanaPractice,
+      importAllData: state.importAllData,
+      resetAllProgress: state.resetAllProgress,
+    }))
+  );
+
+  const {
+    currentLesson,
+    dailyStreak,
+    learnedItems,
+    bonsaiState,
+    rawMistakeVault,
+    kanjiLearned,
+    activityHistory,
+    kaiwaScores,
+    kanaPractice,
+    setCurrentLesson,
+    toggleLearnedItem,
+    reviewItem,
+    waterBonsai,
+    recordMistake,
+    recordRescueSuccess,
+    clearMistake,
+    clearAllMistakes,
+    toggleKanjiLearned,
+    logActivity,
+    recordKaiwaScore,
+    recordKanaPractice,
+    importAllData,
+    resetAllProgress,
+  } = stateData;
+
+  const mistakeVault = useMemo(
+    () => healMistakeVault(rawMistakeVault),
+    [rawMistakeVault]
+  );
 
   const markAsLearned = useCallback(
     (id, type = 'vocab') => {
@@ -25,12 +127,6 @@ export const useProgress = () => {
     [learnedItems]
   );
 
-  /**
-   * Lọc và trả về danh sách các ID đã đến hạn ôn tập (nextReviewDate <= hôm nay) hoặc chưa từng học
-   * @param {string|number} lessonId ID bài học (phục vụ context hoặc filter)
-   * @param {Array<string|number|object>} lessonItemIds Danh sách ID hoặc object có .id
-   * @returns {Array<string|number>} Danh sách các ID cần ôn tập
-   */
   const getDueItems = useCallback(
     (lessonId, lessonItemIds = []) => {
       const today = getTodayDateString();
@@ -81,25 +177,6 @@ export const useProgress = () => {
     },
     [learnedItems]
   );
-
-  const bonsaiState = useProgressStore((state) => state.bonsai_state);
-  const rawMistakeVault = useProgressStore((state) => state.mistake_vault);
-  const mistakeVault = useMemo(() => healMistakeVault(rawMistakeVault), [rawMistakeVault]);
-  const kanjiLearned = useProgressStore((state) => state.kanji_learned || {});
-  const activityHistory = useProgressStore((state) => state.activity_history || {});
-  const kaiwaScores = useProgressStore((state) => state.kaiwa_scores || {});
-  const kanaPractice = useProgressStore((state) => state.kana_practice || {});
-  const waterBonsai = useProgressStore((state) => state.waterBonsai);
-  const recordMistake = useProgressStore((state) => state.recordMistake);
-  const recordRescueSuccess = useProgressStore((state) => state.recordRescueSuccess);
-  const clearMistake = useProgressStore((state) => state.clearMistake);
-  const clearAllMistakes = useProgressStore((state) => state.clearAllMistakes);
-  const toggleKanjiLearned = useProgressStore((state) => state.toggleKanjiLearned);
-  const logActivity = useProgressStore((state) => state.logActivity);
-  const recordKaiwaScore = useProgressStore((state) => state.recordKaiwaScore);
-  const recordKanaPractice = useProgressStore((state) => state.recordKanaPractice);
-  const importAllData = useProgressStore((state) => state.importAllData);
-  const resetAllProgress = useProgressStore((state) => state.resetAllProgress);
 
   const checkIsKanjiLearned = useCallback(
     (id) => Boolean(kanjiLearned[id]),

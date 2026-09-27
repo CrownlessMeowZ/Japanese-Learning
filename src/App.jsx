@@ -3,7 +3,7 @@ import { SplashScreen } from './components/Splash/SplashScreen';
 import { WelcomeScreen } from './components/Welcome/WelcomeScreen';
 import { Dashboard } from './components/Dashboard';
 import { FuriganaSwitch } from './components/FuriganaSwitch';
-import { useProgress } from './hooks/useProgress';
+import { useDailyStreak } from './hooks/useProgress';
 import { vocabularyData } from './data/vocabulary';
 import { grammarData } from './data/grammar';
 import './styles/furigana.css';
@@ -46,7 +46,7 @@ export default function App() {
   const [activeLessonId, setActiveLessonId] = useState(1);
   const [isBackupModalOpen, setIsBackupModalOpen] = useState(false);
   const [isOnline, setIsOnline] = useState(typeof navigator !== 'undefined' ? navigator.onLine : true);
-  const { dailyStreak } = useProgress();
+  const dailyStreak = useDailyStreak();
 
   // Lắng nghe trạng thái kết nối mạng Online / Offline
   useEffect(() => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useProgress } from '../../hooks/useProgress';
+import { useDailyStreak } from '../../hooks/useProgress';
 import '../../styles/sakura.css';
 
 /**
@@ -11,7 +11,7 @@ import '../../styles/sakura.css';
  * - Nút kêu gọi hành động (CTA) nổi bật để người dùng bắt đầu ngay
  */
 export const WelcomeScreen = ({ onStartLearning, onOpenTranslator, onSelectLesson, onOpenKana, onOpenKanji, onOpenMatch, onOpenStats }) => {
-  const { dailyStreak } = useProgress();
+  const dailyStreak = useDailyStreak();
 
   return (
     <div style={styles.container}>
