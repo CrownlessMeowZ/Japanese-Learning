@@ -105,8 +105,8 @@ giảm kích thước bundle      tuyệt đối vào việc học      hiệu �
 | Phân hệ | Công nghệ / Tiêu chuẩn | Vai trò kỹ thuật & Giá trị mang lại |
 | :--- | :--- | :--- |
 | **Core Framework** | **React 19.2 + Vite 8.3** | Render UI siêu tốc, kiến trúc component hiện đại, HMR tức thì |
-| **State Management** | **Zustand 5.0 + Persist** | Quản lý trạng thái tập trung, lưu trữ tiến trình & streak vào `LocalStorage` với chi phí bộ nhớ tối thiểu |
-| **Japanese IME Engine** | **WanaKana 5.3** | Xử lý rớt âm Romaji sang Hiragana/Katakana thời gian thực, quản lý âm ngắt và âm mũi lơ lửng |
+| **State Management** | **Zustand 5.0 + Atomic Selectors** | Quản lý trạng thái tập trung với Atomic Selectors & `useShallow`, triệt tiêu re-render thừa, lưu trữ tiến trình & streak vào `LocalStorage` |
+| **Japanese IME Engine** | **WanaKana 5.3** | Xử lý rớt âm Romaji sang Hiragana/Katakana thời gian thực, quản lý âm ngắt và âm mũi lơ lửng, chuẩn hóa ngữ âm quốc tế |
 | **Code Splitting** | **`React.lazy()` + `<Suspense>`** | Tách nhỏ các màn hình chức năng thành các chunk độc lập, tối ưu thời gian tải trang ban đầu |
 | **Code Quality** | **Oxlint 1.8 (Rust-based)** | Công cụ kiểm tra mã nguồn siêu nhanh bằng Rust, đạt chuẩn 0 lỗi và 0 cảnh báo kỹ thuật |
 | **Voice Processing** | **Web Speech API (`ja-JP`)** | Nhận dạng giọng nói tự nhiên từ trình duyệt, tích hợp thuật toán xử lý chống ngắt sớm |
@@ -262,7 +262,10 @@ Japanese Learning/
 │   │   ├── Kana/               # KanaScreen.jsx, KanaMatrixView, KanaSpeedTyping... (104 âm Kana)
 │   │   ├── Kanji/              # KanjiScreen.jsx, KanjiCanvasPad.jsx, KanjiQuiz.jsx (80 Hán tự N5)
 │   │   ├── Match/              # SakuraMatchScreen.jsx, MatchCard.jsx, MatchVictoryModal.jsx (Minigame 60s)
-│   │   ├── Quiz/               # QuizScreen.jsx (Quiz Engine), QuizTypingInput.jsx (WanaKana Typing & Dictation)
+│   │   ├── Quiz/               # Phân hệ Luyện tập & Kiểm tra (Orchestrator Pattern)
+│   │   │   ├── views/          # 4 Dumb Views: QuizConfigView, QuizChoiceView, QuizDictationView, QuizResultView
+│   │   │   ├── QuizScreen.jsx  # Orchestrator Controller điều phối luồng thi, trạng thái & SM-2
+│   │   │   └── QuizTypingInput.jsx # Bộ gõ thông minh WanaKana IME & gợi ý đa tầng
 │   │   ├── Rescue/             # MistakeVaultModal.jsx (Hộp Cứu Hộ Điểm Yếu & Ôn Tập SM-2)
 │   │   ├── Splash/             # SplashScreen.jsx (Màn hình mở đầu danh ngôn Zen)
 │   │   ├── Stats/              # StatsScreen.jsx, StatsRadarChart.jsx, StatsHeatmap.jsx (Radar 5D & Heatmap)
@@ -282,7 +285,7 @@ Japanese Learning/
 │   │   └── vocabulary.json     # Dữ liệu JSON từ vựng đầy đủ
 │   ├── hooks/                  # Custom Hooks tách bạch logic nghiệp vụ
 │   │   ├── useAudioPlayer.js   # Singleton Audio Manager & Playback Speed Controller
-│   │   ├── useProgress.js      # Facade hook quản lý tiến độ & SM-2
+│   │   ├── useProgress.js      # Facade Hook & Atomic Selectors (useDailyStreak, useBonsaiState...) bọc useShallow
 │   │   ├── useQuizEngine.js    # Logic bài tập, trắc nghiệm, tự luận & Fisher-Yates shuffle
 │   │   └── useSpeechRecognition.js # Web Speech API wrapper với Smart 3-Tier Auto-Stop
 │   ├── store/                  # Quản lý trạng thái tập trung (Zustand)
@@ -295,12 +298,12 @@ Japanese Learning/
 │   │   ├── sakura.css          # Thư viện màu sắc và GPU Sakura Animation
 │   │   └── stats.css           # Giao diện Radar mạng nhện, thẻ chỉ số và Activity Heatmap
 │   ├── utils/                  # Thư viện thuật toán cốt lõi
-│   │   ├── localDictionary.js  # Tra cứu từ điển nội bộ
-│   │   ├── romajiConverter.js  # Bộ chuyển dịch ngữ âm Romaji <-> Kana
+│   │   ├── localDictionary.js  # Tra cứu từ điển nội bộ (Levenshtein O(min(M, N)) tái sử dụng)
+│   │   ├── romajiConverter.js  # Bộ chuyển ngữ âm Romaji <-> Kana chuẩn hóa qua WanaKana & từ điển từ mượn
 │   │   ├── soundEffects.js     # Web Audio API Synthesizer (SFX lật thẻ, ăn điểm, chiến thắng)
 │   │   ├── srsAlgo.js          # Thuật toán SuperMemo-2 (SM-2)
 │   │   ├── statsUtils.js       # Thuật toán Radar 5 kỹ năng, ma trận 365 ngày & tiến độ 15 bài
-│   │   ├── stringUtils.js      # Giải thuật Levenshtein & Chuẩn hóa ngữ âm tiếng Nhật
+│   │   ├── stringUtils.js      # Giải thuật Levenshtein & Chuẩn hóa ngữ âm tiếng Nhật qua WanaKana
 │   │   └── typingValidator.js  # Bộ kiểm duyệt đáp án tự luận linh hoạt đa tầng
 │   ├── App.css                 # Phong cách giao diện toàn cục
 │   ├── App.jsx                 # Root layout & State-based tab routing
