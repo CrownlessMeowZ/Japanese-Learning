@@ -42,6 +42,7 @@ export const Translator = ({ onBack }) => {
   // Mẫu câu gợi ý nhanh cho người học
   const samplePhrases = useMemo(
     () => [
+      { text: 'michishirube', from: 'ja', to: 'vi', label: 'michishirube (Kim chỉ nam / Biển chỉ đường)' },
       { text: 'mannaka', from: 'ja', to: 'vi', label: 'mannaka (Ở giữa / Chính giữa)' },
       { text: 'biiru', from: 'ja', to: 'vi', label: 'biiru (Bia - Katakana)' },
       { text: 'biru', from: 'ja', to: 'vi', label: 'biru (Tòa nhà - Katakana)' },

@@ -6,7 +6,7 @@ import {
   katakanaToHiragana,
   kanaToRomaji
 } from './romajiConverter.js';
-import { levenshteinDistance } from './stringUtils.js';
+import { levenshteinDistance, removeVietnameseAccents } from './stringUtils.js';
 
 // Tập hợp toàn bộ kho từ vựng (> 1.150 từ & mẫu câu) thành mảng phẳng có đánh chỉ mục Romaji tự động
 let cachedAllWords = null;
@@ -129,12 +129,14 @@ export function searchLocalDictionary(query, maxResults = 6) {
   const allWords = getAllVocabularyWords();
   const jpHiragana = romajiToHiragana(raw);
   const jpDirect = romajiToJapanese(raw);
+  const rawNoAccent = removeVietnameseAccents(raw);
 
   const exactMatches = [];
   const partialMatches = [];
 
   for (const word of allWords) {
     const meaning = (word.meaning || '').toLowerCase();
+    const meaningNoAccent = removeVietnameseAccents(meaning);
 
     // 1. Kiểm tra khớp chính xác (Exact match)
     const isExact =
@@ -146,7 +148,8 @@ export function searchLocalDictionary(query, maxResults = 6) {
       word.cleanHira === jpDirect ||
       (jpDirect && word.hiraNorm === katakanaToHiragana(jpDirect)) ||
       (jpHiragana && word.hiraNorm === jpHiragana) ||
-      meaning === raw;
+      meaning === raw ||
+      (rawNoAccent && meaningNoAccent === rawNoAccent);
 
     if (isExact) {
       exactMatches.push(word);
@@ -156,6 +159,7 @@ export function searchLocalDictionary(query, maxResults = 6) {
     // 2. Kiểm tra khớp một phần (Partial match)
     const isPartial =
       meaning.includes(raw) ||
+      (rawNoAccent && meaningNoAccent.includes(rawNoAccent)) ||
       word.cleanKanji.includes(raw) ||
       word.cleanHira.includes(raw) ||
       (word.romaji && word.romaji.includes(raw)) ||

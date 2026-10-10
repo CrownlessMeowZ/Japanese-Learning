@@ -5,6 +5,7 @@ import { useAudioPlayer } from '../../hooks/useAudioPlayer';
 import { useProgress } from '../../hooks/useProgress';
 import { vocabularyData } from '../../data/vocabulary';
 import { romajiToHiragana } from '../../utils/romajiConverter';
+import { removeVietnameseAccents } from '../../utils/stringUtils';
 
 /**
  * VocabScreen Component
@@ -49,6 +50,7 @@ export const VocabScreen = ({
     }
 
     // Tự động chuyển đổi chuỗi Romaji người dùng gõ sang Hiragana (vd: namae -> なまえ)
+    const rawNoAccent = removeVietnameseAccents(rawQ);
     const hiraganaQ = romajiToHiragana(rawQ);
 
     return allWords.filter((item) => {
@@ -58,13 +60,17 @@ export const VocabScreen = ({
         item.section === selectedSection;
 
       const meaningLower = item.meaning?.toLowerCase() || '';
+      const meaningNoAccent = removeVietnameseAccents(meaningLower);
       const kanjiLower = item.kanji?.toLowerCase() || '';
       const hiraganaLower = item.hiragana?.toLowerCase() || '';
+      const romajiLower = (item.romaji || '').toLowerCase();
 
       const matchSearch =
         meaningLower.includes(rawQ) ||
+        (rawNoAccent && meaningNoAccent.includes(rawNoAccent)) ||
         kanjiLower.includes(rawQ) ||
         hiraganaLower.includes(rawQ) ||
+        (romajiLower && romajiLower.includes(rawQ)) ||
         (hiraganaQ && (hiraganaLower.includes(hiraganaQ) || kanjiLower.includes(hiraganaQ)));
 
       return matchSection && matchSearch;

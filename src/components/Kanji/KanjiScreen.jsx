@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { kanjiData } from '../../data/kanjiData';
 import { useProgress } from '../../hooks/useProgress';
+import { removeVietnameseAccents } from '../../utils/stringUtils';
 import { KanjiGrid } from './KanjiGrid';
 import { KanjiDetailModal } from './KanjiDetailModal';
 import { KanjiQuiz } from './KanjiQuiz';
@@ -38,13 +39,16 @@ export const KanjiScreen = ({ onBack }) => {
       // 2. Lọc theo tìm kiếm (Chữ Hán, Âm Hán Việt, Nghĩa, Âm On/Kun)
       if (!rawQ) return true;
 
+      const rawNoAccent = removeVietnameseAccents(rawQ);
       const matchChar = item.character.includes(rawQ);
       const matchHanViet = item.hanViet?.toLowerCase().includes(rawQ);
+      const matchHanVietNoAccent = rawNoAccent && item.hanViet ? removeVietnameseAccents(item.hanViet).includes(rawNoAccent) : false;
       const matchMeaning = item.meaning?.toLowerCase().includes(rawQ);
+      const matchMeaningNoAccent = rawNoAccent && item.meaning ? removeVietnameseAccents(item.meaning).includes(rawNoAccent) : false;
       const matchOnyomi = item.onyomi?.some((on) => on.toLowerCase().includes(rawQ));
       const matchKunyomi = item.kunyomi?.some((kun) => kun.toLowerCase().includes(rawQ));
 
-      return matchChar || matchHanViet || matchMeaning || matchOnyomi || matchKunyomi;
+      return matchChar || matchHanViet || matchHanVietNoAccent || matchMeaning || matchMeaningNoAccent || matchOnyomi || matchKunyomi;
     });
   }, [selectedLesson, searchQuery]);
 

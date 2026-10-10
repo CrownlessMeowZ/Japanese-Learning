@@ -184,3 +184,18 @@ export const calculateMatchPercentage = (spokenStr, targetJapanese = '', targetH
     cleanTarget: targetJapanese,
   };
 };
+
+/**
+ * Loại bỏ dấu tiếng Việt để phục vụ so khớp & tìm kiếm không dấu linh hoạt
+ * @param {string} str - Chuỗi tiếng Việt
+ * @returns {string} Chuỗi không dấu, chữ thường
+ */
+export const removeVietnameseAccents = (str) => {
+  if (!str || typeof str !== 'string') return '';
+  return str
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[đĐ]/g, (m) => (m === 'đ' ? 'd' : 'D'))
+    .toLowerCase()
+    .trim();
+};
