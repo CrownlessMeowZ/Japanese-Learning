@@ -208,4 +208,13 @@ export const offlineDictionary = [
   { kanji: '日本語', hiragana: 'にほんご', romaji: 'nihongo', meaning: 'Tiếng Nhật', category: 'Ngôn ngữ' },
   { kanji: 'ベトナム語', hiragana: 'ベトナムご', romaji: 'betonamugo', meaning: 'Tiếng Việt', category: 'Ngôn ngữ' },
   { kanji: '英語', hiragana: 'えいご', romaji: 'eigo', meaning: 'Tiếng Anh', category: 'Ngôn ngữ' },
+
+  // --- TỪ VỰNG THƠ CA, VĂN HỌC & ĐỜI SỐNG MỞ RỘNG ---
+  { kanji: '道しるべ', hiragana: 'みちしるべ', romaji: 'michishirube', meaning: 'Biển chỉ đường / Kim chỉ nam / Người dẫn lối', category: 'Đời sống & Thơ ca' },
+  { kanji: '道標', hiragana: 'どうひょう / みちしるべ', romaji: 'douhyou / michishirube', meaning: 'Cột mốc chỉ đường / Biển chỉ dẫn', category: 'Đời sống' },
+  { kanji: '声', hiragana: 'こえ', romaji: 'koe', meaning: 'Giọng nói, tiếng nói, thanh âm', category: 'Con người' },
+  { kanji: '心', hiragana: 'こころ', romaji: 'kokoro', meaning: 'Trái tim, tấm lòng, tâm hồn', category: 'Tâm hồn' },
+  { kanji: '光', hiragana: 'ひかり', romaji: 'hikari', meaning: 'Ánh sáng, tia sáng', category: 'Tự nhiên' },
+  { kanji: '希望', hiragana: 'きぼう', romaji: 'kibou', meaning: 'Hi vọng, ước vọng', category: 'Tâm hồn' },
+  { kanji: '夢', hiragana: 'ゆめ', romaji: 'yume', meaning: 'Giấc mơ, ước mơ', category: 'Tâm hồn' },
 ];

@@ -2,6 +2,8 @@ import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import {
   romajiToHiragana,
   romajiToJapanese,
+  kanaToRomaji,
+  COMMON_KATAKANA_MAP,
   isProbablyRomaji,
 } from '../../utils/romajiConverter';
 import {
@@ -9,6 +11,7 @@ import {
   getExactWordByRomaji,
   getFuzzySuggestions,
 } from '../../utils/localDictionary';
+import { levenshteinDistance } from '../../utils/stringUtils';
 import { useSpeechRecognition } from '../../hooks/useSpeechRecognition';
 import { TranslatorInput } from './TranslatorInput';
 import { TranslatorOutput } from './TranslatorOutput';
@@ -170,20 +173,24 @@ export const Translator = ({ onBack }) => {
 
     if (sourceLang === 'ja' && isRomaji) {
       if (exactLocalWord) {
-        queryToSend = exactLocalWord.hiragana || exactLocalWord.kanji;
+        queryToSend = exactLocalWord.kanji || exactLocalWord.hiragana;
+      } else if (COMMON_KATAKANA_MAP[trimmed.toLowerCase()]) {
+        queryToSend = COMMON_KATAKANA_MAP[trimmed.toLowerCase()];
       } else {
-        queryToSend = romajiToJapanese(trimmed);
+        queryToSend = trimmed;
       }
-      setSourcePhonetic(`${trimmed} (${queryToSend})`);
+      setSourcePhonetic(`${trimmed} (${exactLocalWord?.hiragana || romajiToJapanese(trimmed)})`);
     } else if (sourceLang === 'vi' && isRomaji) {
       if (exactLocalWord) {
-        queryToSend = exactLocalWord.hiragana || exactLocalWord.kanji;
+        queryToSend = exactLocalWord.kanji || exactLocalWord.hiragana;
+      } else if (COMMON_KATAKANA_MAP[trimmed.toLowerCase()]) {
+        queryToSend = COMMON_KATAKANA_MAP[trimmed.toLowerCase()];
       } else {
-        queryToSend = romajiToJapanese(trimmed);
+        queryToSend = trimmed;
       }
       actualSourceLang = 'ja';
       actualTargetLang = 'vi';
-      setSourcePhonetic(`${trimmed} (${queryToSend})`);
+      setSourcePhonetic(`${trimmed} (${exactLocalWord?.hiragana || romajiToJapanese(trimmed)})`);
     }
 
     // 1. Nếu thiết bị đang Offline: Tra cứu trực tiếp từ điển nội bộ
@@ -272,14 +279,35 @@ export const Translator = ({ onBack }) => {
       return;
     }
 
+    // 5. Nhận diện lỗi Google Transliteration (dịch JA sang VI mà ra phiên âm không nghĩa như "Michishibe" cho "michishirube")
+    const isTranslitFailure =
+      actualSourceLang === 'ja' &&
+      actualTargetLang === 'vi' &&
+      fullTranslatedText &&
+      (
+        fullTranslatedText.toLowerCase().trim() === trimmed.toLowerCase().trim() ||
+        (isRomaji && levenshteinDistance(fullTranslatedText.toLowerCase().replace(/[^a-z]/g, ''), trimmed.toLowerCase().replace(/[^a-z]/g, '')) <= 3) ||
+        (!isRomaji && levenshteinDistance(fullTranslatedText.toLowerCase().replace(/[^a-z]/g, ''), kanaToRomaji(trimmed).toLowerCase().replace(/[^a-z]/g, '')) <= 3)
+      );
+
+    if (isTranslitFailure) {
+      const localMatches = searchLocalDictionary(trimmed, 1);
+      if (localMatches.length > 0) {
+        fullTranslatedText = localMatches[0].meaning;
+        setIsOfflineResult(true);
+      }
+    }
+
     try {
       setTranslatedText(fullTranslatedText);
 
       if (isRomaji) {
-        setSourcePhonetic(`${trimmed} (${queryToSend})`);
+        const kanaReading = exactLocalWord?.hiragana || romajiToJapanese(trimmed);
+        setSourcePhonetic(`${trimmed} (${kanaReading})`);
       } else {
         setSourcePhonetic(srcTranslit);
       }
+
       setTargetPhonetic(tgtTranslit);
       setIsOfflineResult(false);
       setErrorMessage(null);
