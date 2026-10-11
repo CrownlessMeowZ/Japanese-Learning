@@ -16,7 +16,7 @@ export const KanjiCanvasPad = ({
   const [hasDrawn, setHasDrawn] = useState(false);
   const [history, setHistory] = useState([]); // Lưu các bước vẽ để Undo
 
-  // Thiết lập Canvas Retina / Hi-DPI
+  // Xử lý Hi-DPI/Retina: Nhân tỷ lệ theo DPR để nét vẽ Canvas luôn sắc nét trên màn hình độ phân giải cao
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;

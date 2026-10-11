@@ -6,6 +6,7 @@ import { grammarData } from '../data/grammar';
 
 let dictionaryCache = null;
 
+// Khởi tạo Map đánh chỉ mục từ vựng & ngữ pháp (O(1) lookup): Tối ưu tốc độ tra cứu và tự phục hồi ID
 const getDictionaryCache = () => {
   if (!dictionaryCache) {
     dictionaryCache = new Map();
@@ -106,6 +107,7 @@ export const healMistakeVault = (vault) => {
   return healed;
 };
 
+// Tính streak theo ngày lịch địa phương (diffDays): 1 ngày -> tăng chuỗi; cùng ngày -> giữ nguyên; >=2 ngày -> reset về 1
 const calculateStreak = (lastDate, currentStreak) => {
   const today = getTodayDateString();
   if (!lastDate) return { count: 1, lastDate: today };

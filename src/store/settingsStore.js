@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 
+// Đồng bộ thuộc tính data-furigana lên thẻ <html> để CSS ẩn/hiện phiên âm tức thì mà không gây re-render component React
 const syncDomAttribute = (show) => {
   if (typeof document !== 'undefined') {
     document.documentElement.setAttribute('data-furigana', show ? 'visible' : 'hidden');

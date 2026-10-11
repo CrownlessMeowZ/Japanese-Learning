@@ -127,6 +127,7 @@ export const useProgress = () => {
     [learnedItems]
   );
 
+  // Lọc các từ cần ôn tập hôm nay theo thuật toán SM-2 (chưa học hoặc nextReviewDate <= hôm nay)
   const getDueItems = useCallback(
     (lessonId, lessonItemIds = []) => {
       const today = getTodayDateString();
@@ -155,6 +156,7 @@ export const useProgress = () => {
     [learnedItems]
   );
 
+  // Tính tỷ lệ % hoàn thành và số từ đã thuộc trong bài học
   const getCompletionRate = useCallback(
     (lessonId, items = []) => {
       if (!items || items.length === 0) {

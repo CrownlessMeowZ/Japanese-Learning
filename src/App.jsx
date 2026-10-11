@@ -10,7 +10,7 @@ import './styles/furigana.css';
 import './styles/sakura.css';
 import './App.css';
 
-// Code Splitting: Lazy-load các màn hình lớn để giảm tối đa kích thước bundle khởi động ban đầu
+// Code Splitting (React.lazy): Tách các tab thành bundle riêng, tải theo nhu cầu (On-demand) để app khởi động tức thì
 const QuizScreen = lazy(() => import('./components/Quiz/QuizScreen').then((m) => ({ default: m.QuizScreen })));
 const GrammarScreen = lazy(() => import('./components/Grammar/GrammarScreen').then((m) => ({ default: m.GrammarScreen })));
 const KaiwaScreen = lazy(() => import('./components/Kaiwa/KaiwaScreen').then((m) => ({ default: m.KaiwaScreen })));
@@ -42,6 +42,9 @@ export default function App() {
       return false;
     }
   });
+
+  // State-Based Routing: Quản lý điều hướng qua state thay cho thư viện router
+  // Lợi ích: Nhẹ, không tốn tài nguyên, hoạt động 100% ổn định trên PWA Offline & GitHub Pages
   const [currentRoute, setCurrentRoute] = useState('welcome'); // 'welcome' | 'dashboard' | 'kana' | 'kanji' | 'quiz' | 'vocab' | 'grammar' | 'kaiwa' | 'translator'
   const [activeLessonId, setActiveLessonId] = useState(1);
   const [isBackupModalOpen, setIsBackupModalOpen] = useState(false);
