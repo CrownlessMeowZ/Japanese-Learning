@@ -336,6 +336,7 @@ Japanese Learning/
 │   ├── main.jsx                # Điểm khởi chạy React DOM
 │   └── registerServiceWorker.js# Quản lý vòng đời PWA & Dev Zero-Cache auto unregister
 ├── index.html                  # File HTML gốc (PWA enabled)
+├── master_roadmap.md           # Lộ trình kỹ thuật tổng thể & 6 kế hoạch tiến hóa tương lai
 ├── package.json                # Danh mục phụ thuộc & kịch bản npm
 ├── start.bat                   # Kịch bản khởi chạy 1-click trên Windows
 └── vite.config.js              # Cấu hình tối ưu Vite Bundler & no-store dev header
@@ -418,7 +419,9 @@ Dự án **Nihongo Master** không ngừng phát triển theo triết lý **Kaiz
 | **P-5** | 🌸 **Đấu Trường Trí Tuệ Kotoba Wordle** | Minigame giải đố từ vựng mỗi ngày (2 – 5/6 ô); bộ gõ lai IME (gõ Romaji rớt Kana) + Popover bong bóng biến âm kiểu tin nhắn; thông báo trước loại chữ (`🌸 Hiragana`, `🔷 Katakana`, `🈸 Kanji`) & tự đổi bàn phím; trợ lý AI Hint bảo mật khi $\le 3$ lượt; chống gian lận (phạt tính giờ khi out-tab $> 2\text{s}$, khóa paste); bảng vàng thi đấu cùng bạn bè. |
 | **P-6** | ☕ **Kiến Trúc Fullstack Với Java Spring Boot 3** | Chuyển đổi sang hệ thống Fullstack Doanh nghiệp: Tầng **Java Core Engine** xử lý so màu Wordle $O(1)$ bằng `HashMap`/`HashSet`; RESTful API chuẩn mực; bảo mật **Spring Security 6 + Stateless JWT**; Lập lịch Cronjob `@Scheduled` bốc từ 00:00 hằng ngày; lưu trữ đám mây qua CSDL quan hệ **PostgreSQL/MySQL** và Caching **Redis** tốc độ cao. |
 
-> 💡 *Toàn bộ 6 giai đoạn phát triển trên đã được định hình kiến trúc toàn diện và sẽ được hiện thực hóa lần lượt theo các cột mốc tiếp theo của dự án.*
+> 📘 **Tài liệu Kỹ thuật Kiến trúc Toàn diện:**  
+> Bản đặc tả chi tiết về thuật toán, phân tích bảo mật Server-Side và sơ đồ luồng dữ liệu của 6 kế hoạch trên được ghi nhận tại:  
+> 👉 **[master_roadmap.md](master_roadmap.md)**
 
 ---
 
