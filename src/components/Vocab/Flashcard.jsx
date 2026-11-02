@@ -11,7 +11,6 @@ import { FuriganaText } from '../FuriganaText';
 export const Flashcard = ({
   item,
   onNext,
-  _onPrev,
   currentIndex = 0,
   totalCount = 0,
 }) => {

@@ -71,7 +71,7 @@ export const WelcomeScreen = ({ onStartLearning, onOpenTranslator, onSelectLesso
                 onClick={onOpenKanji}
                 className="sakura-nav-btn"
                 style={{ fontSize: '0.85rem', padding: '6px 14px', borderRadius: '12px' }}
-                title="Luyện viết 60 Hán tự N5 trên Canvas"
+                title="Luyện viết 80 Hán tự N5 trên Canvas"
               >
                 🈸 Hán Tự N5 (Kanji)
               </button>

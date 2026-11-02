@@ -103,12 +103,25 @@ export const KanaScreen = ({ onBack }) => {
       return;
     }
 
-    // Xáo trộn ngẫu nhiên và chuẩn bị sẵn 4 lựa chọn trắc nghiệm cho từng câu
-    const allRomaji = Array.from(new Set(pool.map((q) => q.romaji)));
-    const shuffled = [...pool].sort(() => Math.random() - 0.5).map((current) => {
+    // Xáo trộn Fisher-Yates chuẩn và đảm bảo đủ 4 đáp án ngay cả khi ôn lại < 4 chữ sai
+    const shuffleArr = (arr) => {
+      const copy = [...arr];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    };
+
+    const distractorSource = pool.length >= 4
+      ? pool
+      : getSelectedKanaItems(quizScript, getAllRowIds(quizScript));
+    const allRomaji = Array.from(new Set(distractorSource.map((q) => q.romaji)));
+
+    const shuffled = shuffleArr(pool).map((current) => {
       const wrongPool = allRomaji.filter((r) => r !== current.romaji);
-      const wrongShuffled = wrongPool.sort(() => Math.random() - 0.5).slice(0, 3);
-      const options = [current.romaji, ...wrongShuffled].sort(() => Math.random() - 0.5);
+      const wrongShuffled = shuffleArr(wrongPool).slice(0, 3);
+      const options = shuffleArr([current.romaji, ...wrongShuffled]);
       return {
         ...current,
         choiceOptions: options,

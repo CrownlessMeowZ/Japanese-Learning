@@ -27,6 +27,9 @@ export const BackupRestoreModal = ({ isOpen, onClose }) => {
     bonsaiState,
     dailyStreak,
     currentLesson,
+    activityHistory,
+    kaiwaScores,
+    kanaPractice,
     importAllData,
     resetAllProgress,
   } = useProgress();
@@ -46,6 +49,9 @@ export const BackupRestoreModal = ({ isOpen, onClose }) => {
         learned_items: learnedItems,
         kanji_learned: kanjiLearned,
         mistake_vault: mistakeVault,
+        activity_history: activityHistory,
+        kaiwa_scores: kaiwaScores,
+        kana_practice: kanaPractice,
       };
 
       const jsonStr = JSON.stringify(backupPayload, null, 2);

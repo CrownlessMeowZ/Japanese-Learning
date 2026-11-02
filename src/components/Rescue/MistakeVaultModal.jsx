@@ -16,9 +16,11 @@ export const MistakeVaultModal = ({
   onClearAll,
 }) => {
   const [activeMode, setActiveMode] = useState('list'); // 'list' | 'practice'
+  const [practiceQueue, setPracticeQueue] = useState([]);
   const [practiceIndex, setPracticeIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
   const [recentGraduatedText, setRecentGraduatedText] = useState(null);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   // Khóa cuộn trang nền khi mở Modal để modal luôn nằm trọn giữa màn hình
   useEffect(() => {
@@ -66,20 +68,26 @@ export const MistakeVaultModal = ({
     window.speechSynthesis.speak(utterance);
   }, []);
 
-  // Bắt đầu chế độ luyện tập cứu hộ
+  // Bắt đầu chế độ luyện tập cứu hộ (chốt danh sách snapshot để tránh nhảy thứ tự/index khi xóa hoặc tăng lỗi)
   const startPractice = () => {
     if (mistakeList.length === 0) return;
+    setPracticeQueue(mistakeList);
     setPracticeIndex(0);
     setIsFlipped(false);
     setRecentGraduatedText(null);
+    setIsTransitioning(false);
     setActiveMode('practice');
   };
 
-  const currentItem = mistakeList[practiceIndex];
+  const basePracticeItem = practiceQueue[practiceIndex];
+  const currentItem = basePracticeItem
+    ? { ...basePracticeItem, ...(mistakeVault?.[basePracticeItem.id] || {}) }
+    : null;
 
   // Xử lý khi người dùng chọn "Đã thuộc (+1)" trong phiên cứu hộ
   const handlePassItem = () => {
-    if (!currentItem) return;
+    if (!currentItem || isTransitioning) return;
+    setIsTransitioning(true);
 
     speakWord(currentItem.text);
     const isGraduated = onRescueSuccess ? onRescueSuccess(currentItem.id) : false;
@@ -91,7 +99,8 @@ export const MistakeVaultModal = ({
     setTimeout(() => {
       setRecentGraduatedText(null);
       setIsFlipped(false);
-      if (practiceIndex + 1 < mistakeList.length) {
+      setIsTransitioning(false);
+      if (practiceIndex + 1 < practiceQueue.length) {
         setPracticeIndex((prev) => prev + 1);
       } else {
         setActiveMode('list');
@@ -101,14 +110,14 @@ export const MistakeVaultModal = ({
 
   // Xử lý khi người dùng chọn "Chưa nhớ" trong phiên cứu hộ
   const handleFailItem = () => {
-    if (!currentItem) return;
+    if (!currentItem || isTransitioning) return;
 
     if (onRescueFail) {
       onRescueFail(currentItem);
     }
 
     setIsFlipped(false);
-    if (practiceIndex + 1 < mistakeList.length) {
+    if (practiceIndex + 1 < practiceQueue.length) {
       setPracticeIndex((prev) => prev + 1);
     } else {
       setActiveMode('list');
@@ -266,7 +275,7 @@ export const MistakeVaultModal = ({
               </button>
 
               <span style={styles.practiceCounter}>
-                Mục <strong>{practiceIndex + 1}</strong> / {mistakeList.length}
+                Mục <strong>{practiceIndex + 1}</strong> / {practiceQueue.length}
               </span>
 
               <span style={styles.wrongBadge}>

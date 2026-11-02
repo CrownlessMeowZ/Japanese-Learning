@@ -89,6 +89,7 @@ export const VocabScreen = ({
   };
 
   const handleStartFlashcard = () => {
+    if (filteredWords.length === 0) return;
     setFlashcardIndex(0);
     setViewMode('flashcard');
   };
@@ -97,7 +98,8 @@ export const VocabScreen = ({
   // VIEW: FLASHCARD MODE
   // -------------------------------------------------------------
   if (viewMode === 'flashcard') {
-    const currentWord = filteredWords[flashcardIndex] || allWords[flashcardIndex];
+    const safeIndex = filteredWords.length > 0 ? Math.min(flashcardIndex, filteredWords.length - 1) : 0;
+    const currentWord = filteredWords[safeIndex] || null;
 
     return (
       <div key="flashcard-mode" className="sakura-tab-view" style={styles.container}>
@@ -113,7 +115,7 @@ export const VocabScreen = ({
           <div style={styles.flashcardMeta}>
             <span style={styles.lessonTag}>Bài {lessonId}</span>
             <span style={{ color: '#718096', fontWeight: '600', fontSize: '0.9rem' }}>
-              Flashcard {filteredWords.length > 0 ? flashcardIndex + 1 : 0} / {filteredWords.length}
+              Flashcard {filteredWords.length > 0 ? safeIndex + 1 : 0} / {filteredWords.length}
             </span>
           </div>
         </div>
@@ -134,8 +136,7 @@ export const VocabScreen = ({
             <Flashcard
               item={currentWord}
               onNext={handleNextCard}
-              onPrev={handlePrevCard}
-              currentIndex={flashcardIndex}
+              currentIndex={safeIndex}
               totalCount={filteredWords.length}
             />
           ) : (
@@ -156,7 +157,7 @@ export const VocabScreen = ({
           </button>
 
           <span style={{ fontSize: '0.9rem', fontWeight: '700', color: '#4a5568' }}>
-            {filteredWords.length > 0 ? flashcardIndex + 1 : 0} / {filteredWords.length}
+            {filteredWords.length > 0 ? safeIndex + 1 : 0} / {filteredWords.length}
           </span>
 
           <button
@@ -184,8 +185,13 @@ export const VocabScreen = ({
 
         {/* Nút nổi bật: Học qua Flashcard */}
         <button
-          style={styles.flashcardHeroBtn}
+          style={{
+            ...styles.flashcardHeroBtn,
+            opacity: filteredWords.length === 0 ? 0.5 : 1,
+            cursor: filteredWords.length === 0 ? 'not-allowed' : 'pointer',
+          }}
           onClick={handleStartFlashcard}
+          disabled={filteredWords.length === 0}
           title="Bật chế độ lật thẻ ghi nhớ Flashcard 3D"
         >
           🎴 Học qua Flashcard ({filteredWords.length} từ)

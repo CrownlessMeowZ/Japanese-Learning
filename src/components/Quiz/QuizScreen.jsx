@@ -127,7 +127,7 @@ export const QuizScreen = ({ lessonId = 1, rawQuestions = [], onBack }) => {
   // --- BẮT ĐẦU PHIÊN ÔN TẬP ---
   const handleStartSession = useCallback((forceAll = false) => {
     const minRequired = questionFormat === 'choice' ? 4 : 1;
-    const shouldUseDue = !forceAll && onlyDue && dueQuestions.length >= minRequired;
+    const shouldUseDue = !forceAll && dueQuestions.length >= minRequired;
     const targetPool = shouldUseDue ? dueQuestions : activePool;
 
     if (!targetPool || targetPool.length === 0) return;
@@ -138,7 +138,7 @@ export const QuizScreen = ({ lessonId = 1, rawQuestions = [], onBack }) => {
 
     setWrongItems([]);
     startGame(targetPool, activePool, count);
-  }, [questionFormat, onlyDue, dueQuestions, activePool, questionCount, startGame]);
+  }, [questionFormat, dueQuestions, activePool, questionCount, startGame]);
 
   // --- XỬ LÝ CHỌN ĐÁP ÁN TRẮC NGHIỆM & SM-2 ---
   const onSelectOption = (opt) => {
@@ -318,7 +318,7 @@ export const QuizScreen = ({ lessonId = 1, rawQuestions = [], onBack }) => {
           wrongItems={wrongItems}
           onRetryMistakes={handleRetryMistakes}
           onQuitGame={quitGame}
-          onRestartSession={() => handleStartSession(false)}
+          onRestartSession={() => handleStartSession(!onlyDue)}
           onBack={onBack}
         />
       )}

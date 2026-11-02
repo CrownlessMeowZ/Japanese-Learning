@@ -47,7 +47,7 @@ export const GrammarScreen = ({ lessonId, grammarList = [], onBack }) => {
           <span style={{ fontSize: '3rem' }}>🌱</span>
           <h3 style={{ color: '#2d3748', margin: '14px 0 6px' }}>Đang cập nhật dữ liệu ngữ pháp</h3>
           <p style={{ color: '#718096', fontSize: '0.95rem', maxWidth: '440px', margin: '0 auto 20px' }}>
-            Nội dung ngữ pháp cho Bài {lessonId} đang được hoàn thiện. Bạn có thể học các bài có sẵn (Bài 4, 5, 6, 7).
+            Nội dung ngữ pháp cho Bài {lessonId} đang được hoàn thiện. Bạn có thể chọn bài học khác từ Bài 1 đến Bài 15.
           </p>
           <button style={styles.primaryBtn} onClick={onBack}>
             Quay về Dashboard

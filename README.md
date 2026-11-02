@@ -405,6 +405,23 @@ python scripts/export_grammar.py
 
 ---
 
+## 🗺️ Lộ Trình Phát Triển Tương Lai (Upcoming Roadmap)
+
+Dự án **Nihongo Master** không ngừng phát triển theo triết lý **Kaizen (改善)**. Dưới đây là bức tranh toàn cảnh về **6 tính năng & nâng cấp kiến trúc đột phá** sẽ tiếp tục được triển khai trong thời gian tới:
+
+| Giai đoạn | Tính năng định hướng | Công nghệ & Giá trị cốt lõi mang lại |
+| :---: | :--- | :--- |
+| **P-1** | 🧠 **Cỗ Máy Trí Nhớ Não Bộ FSRS** | Nâng cấp thuật toán SM-2 cổ điển lên giải thuật nhận thức **FSRS** (chuẩn Anki đời mới); theo dõi 3 biến số tâm lý học: Độ ổn định ($S$), Độ khó ($D$), Khả năng truy hồi ($R$); giảm 25% khối lượng ôn tập thừa mà vẫn bảo toàn 90% tỷ lệ nhớ. |
+| **P-2** | 🎙️ **Phòng Hội Thoại Nhập Vai Gemini AI** | Thực hành giao tiếp tự do không theo kịch bản: Gọi món quán ramen Shinjuku, mua vé tàu ga Tokyo, Konbini, Khách sạn Ryokan; phản hồi siêu tốc $< 1\text{s}$ qua **Google Gemini API**, sửa lỗi ngữ pháp nhẹ nhàng và phát âm chuẩn Tokyo. |
+| **P-3** | 🎵 **Trực Quan Hóa Cao Độ Ngữ Điệu (Pitch Accent)** | Phân tích tần số cơ bản F0 qua **Web Audio API `AnalyserNode`**; vẽ biểu đồ sóng âm đối chiếu trực quan cao độ trầm bổng chuẩn người Tokyo (*Atamadaka, Nakadaka, Odaka, Heiban*) ngay khi học viên thu âm. |
+| **P-4** | 📚 **Mở Rộng Giáo Trình Lên JLPT N4** | Bổ sung 15 bài học tiếp theo (Bài 16 – 30) của giáo trình Dekiru Nihongo Sơ Trung cấp; thêm 1.000 từ vựng N4, 60 mẫu ngữ pháp phức hợp (thể bị động, sai khiến, kính ngữ, khiêm nhường ngữ). |
+| **P-5** | 🌸 **Đấu Trường Trí Tuệ Kotoba Wordle** | Minigame giải đố từ vựng mỗi ngày (2 – 5/6 ô); bộ gõ lai IME (gõ Romaji rớt Kana) + Popover bong bóng biến âm kiểu tin nhắn; thông báo trước loại chữ (`🌸 Hiragana`, `🔷 Katakana`, `🈸 Kanji`) & tự đổi bàn phím; trợ lý AI Hint bảo mật khi $\le 3$ lượt; chống gian lận (phạt tính giờ khi out-tab $> 2\text{s}$, khóa paste); bảng vàng thi đấu cùng bạn bè. |
+| **P-6** | ☕ **Kiến Trúc Fullstack Với Java Spring Boot 3** | Chuyển đổi sang hệ thống Fullstack Doanh nghiệp: Tầng **Java Core Engine** xử lý so màu Wordle $O(1)$ bằng `HashMap`/`HashSet`; RESTful API chuẩn mực; bảo mật **Spring Security 6 + Stateless JWT**; Lập lịch Cronjob `@Scheduled` bốc từ 00:00 hằng ngày; lưu trữ đám mây qua CSDL quan hệ **PostgreSQL/MySQL** và Caching **Redis** tốc độ cao. |
+
+> 💡 *Toàn bộ 6 giai đoạn phát triển trên đã được định hình kiến trúc toàn diện và sẽ được hiện thực hóa lần lượt theo các cột mốc tiếp theo của dự án.*
+
+---
+
 ## 🤝 Đóng Góp & Phát Triển (Contributing)
 
 Mọi ý tưởng cải tiến, báo cáo lỗi (Issue) hoặc yêu cầu kéo (Pull Request) nhằm nâng tầm dự án đều được chào đón nồng nhiệt theo tinh thần cộng đồng mã nguồn mở:
