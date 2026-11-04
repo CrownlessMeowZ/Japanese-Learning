@@ -368,6 +368,16 @@
   color: #be123c;
 }
 
+/* 5. Kỹ năng Sakura Match */
+.skill-match:hover:not(:disabled) {
+  border-color: #f472b6;
+  box-shadow: 0 8px 24px rgba(233, 30, 140, 0.16);
+  background: linear-gradient(135deg, #ffffff 0%, #fdf2f8 100%);
+}
+.skill-match:hover:not(:disabled) .skill-arrow {
+  color: #be185d;
+}
+
 /* 8. LOADING SPINNER ANIMATION */
 @keyframes spin {
   0% { transform: rotate(0deg); }

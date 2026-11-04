@@ -193,8 +193,7 @@ export const LessonModal = ({
           {/* 5. 🌸 Sakura Match (Nối từ 60s) */}
           <button
             type="button"
-            className="skill-card-item"
-            style={{ borderLeft: '4px solid #e91e8c' }}
+            className="skill-card-item skill-match"
             onClick={() => handleAction(onSelectMatch)}
             disabled={isQuizDisabled}
             title={isQuizDisabled ? 'Cần tối thiểu 4 từ vựng để ghép thẻ' : ''}
@@ -210,7 +209,9 @@ export const LessonModal = ({
                 </span>
               </div>
               <p style={styles.skillDesc}>
-                Đấu phản xạ nối thẻ từ vựng & nghĩa, nhân điểm Combo rực rỡ
+                {isQuizDisabled
+                  ? '⚠️ Cần tối thiểu 4 từ vựng để ghép thẻ'
+                  : 'Đấu phản xạ nối thẻ từ vựng & nghĩa, nhân điểm Combo rực rỡ'}
               </p>
             </div>
             <span className="skill-arrow">➔</span>
