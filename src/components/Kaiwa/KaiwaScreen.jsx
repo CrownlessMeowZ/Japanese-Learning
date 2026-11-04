@@ -4,8 +4,6 @@ import { useAudioPlayer } from '../../hooks/useAudioPlayer';
 
 import { kaiwaData } from '../../data/kaiwaData';
 
-export const DEFAULT_KAIWA_BY_LESSON = kaiwaData;
-
 /**
  * KaiwaScreen Component
  * Màn hình danh sách hội thoại & luyện nói (Speech Recognition) theo bài học

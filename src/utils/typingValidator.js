@@ -1,22 +1,5 @@
 import * as wanakana from 'wanakana';
-import { levenshteinDistance } from './stringUtils.js';
-
-/**
- * Loại bỏ dấu tiếng Việt (Accents Removal)
- * Hỗ trợ người học có thể gõ "toi" hoặc "tôi" đều được chấp nhận hợp lệ
- * @param {string} str 
- * @returns {string}
- */
-const removeVietnameseAccents = (str) => {
-  if (!str || typeof str !== 'string') return '';
-  return str
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/đ/g, 'd')
-    .replace(/Đ/g, 'D')
-    .toLowerCase()
-    .trim();
-};
+import { levenshteinDistance, removeVietnameseAccents } from './stringUtils.js';
 
 /**
  * Làm sạch chuỗi cơ bản trước khi so khớp:

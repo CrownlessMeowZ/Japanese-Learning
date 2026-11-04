@@ -1,4 +1,4 @@
-import { useProgressStore } from '../../store/progressStore';
+import { useProgressStore } from '../../store/progressStore.js';
 
 export const HIGHSCORE_STORAGE_KEY = 'nihongo_master_sakura_match_highscores';
 

@@ -386,23 +386,6 @@ const styles = {
     justifyContent: 'center',
     maxWidth: '800px',
   },
-  tabBtn: {
-    padding: '6px 14px',
-    borderRadius: '16px',
-    border: '1px solid #cbd5e1',
-    backgroundColor: '#ffffff',
-    color: '#475569',
-    fontSize: '0.82rem',
-    fontWeight: '600',
-    cursor: 'pointer',
-    transition: 'all 0.2s ease',
-  },
-  tabBtnActive: {
-    backgroundColor: '#e91e8c',
-    color: '#ffffff',
-    borderColor: '#e91e8c',
-    boxShadow: '0 2px 8px rgba(233, 30, 140, 0.25)',
-  },
   wordGrid: {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
