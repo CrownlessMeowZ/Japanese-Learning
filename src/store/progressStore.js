@@ -1,8 +1,8 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import { calculateSM2, getTodayDateString, addDaysToDate } from '../utils/srsAlgo';
-import { vocabularyData } from '../data/vocabulary';
-import { grammarData } from '../data/grammar';
+import { calculateSM2, getTodayDateString, addDaysToDate } from '../utils/srsAlgo.js';
+import { vocabularyData } from '../data/vocabulary.js';
+import { grammarData } from '../data/grammar.js';
 
 let dictionaryCache = null;
 
@@ -37,7 +37,8 @@ const getDictionaryCache = () => {
           const lessonNum = parseInt(lessonKey, 10) || 1;
           for (let i = 0; i < grammars.length; i++) {
             const g = grammars[i];
-            const gId = g.id || `grammar_L${lessonNum}_${i + 1}`;
+            const fallbackId = `grammar_L${lessonNum}_${i + 1}`;
+            const gId = g.id || fallbackId;
             const entry = {
               ...g,
               id: gId,
@@ -49,7 +50,10 @@ const getDictionaryCache = () => {
               type: 'grammar',
             };
             dictionaryCache.set(gId, entry);
+            dictionaryCache.set(fallbackId, entry);
+            if (g.id) dictionaryCache.set(g.id, entry);
             if (g.title && !dictionaryCache.has(g.title)) dictionaryCache.set(g.title, entry);
+            if (g.structure && !dictionaryCache.has(g.structure)) dictionaryCache.set(g.structure, entry);
           }
         }
       }
@@ -74,6 +78,95 @@ export const findDictionaryItem = (query) => {
 };
 
 /**
+ * Factory Function & Schema Guard cho các mục trong Mistake Vault
+ * Đảm bảo:
+ * 1. Không bao giờ lưu chuỗi ID thô (như L01_G01, grammar_L1_1, L1_48) vào trường text hiển thị
+ * 2. Đầy đủ các trường chuẩn: id, text, reading, meaning, lessonId, type, wrongCount, consecutiveCorrect, lastMistakeAt
+ * 3. Tự động truy hồi từ điển O(1) để điền nghĩa/âm đọc nếu dữ liệu đầu vào bị thiếu
+ * @param {Object|string} item Dữ liệu truyền vào (object hoặc rawId)
+ * @param {Object|null} existing Bản ghi cũ trong vault (nếu đã từng làm sai trước đó)
+ * @returns {Object|null} Bản ghi Mistake Vault chuẩn hóa
+ */
+export const createMistakeVaultEntry = (item, existing = null) => {
+  if (!item) return null;
+  const rawId = typeof item === 'string'
+    ? item
+    : (item.id || item.kanji || item.hiragana || item.character || item.text);
+  if (!rawId) return null;
+
+  // 1. Tra cứu qua Dictionary Cache
+  const matched = findDictionaryItem(item) || findDictionaryItem(rawId);
+  const id = (matched && matched.id) || (typeof item === 'object' && item.id) || rawId;
+
+  // 2. Chốt chặn Schema chống ID thô (Schema Guard)
+  const isRawIdentifier = (str) =>
+    !str ||
+    str === id ||
+    /^L\d+(_[A-Z0-9]+|\d+)$/i.test(str) ||
+    /^grammar_/i.test(str);
+
+  let text = '';
+  if (matched) {
+    text = matched.kanji || matched.hiragana || matched.text || '';
+  }
+  if ((!text || isRawIdentifier(text)) && typeof item === 'object') {
+    const candidate = item.kanji || item.character || item.title || item.text || item.hiragana;
+    if (candidate && !isRawIdentifier(candidate)) {
+      text = candidate;
+    }
+  }
+  if (!text || isRawIdentifier(text)) {
+    if (typeof item === 'object' && item.reading && !isRawIdentifier(item.reading)) {
+      text = item.reading;
+    } else if (matched && matched.meaning) {
+      text = matched.meaning;
+    } else {
+      text = rawId;
+    }
+  }
+
+  // 3. Chuẩn hóa reading
+  const reading = (matched && (matched.hiragana || matched.reading)) ||
+    (typeof item === 'object' && (item.hiragana || item.romaji || item.reading)) ||
+    '';
+
+  // 4. Chuẩn hóa meaning
+  const meaning = (matched && (matched.meaning || matched.titleVi)) ||
+    (typeof item === 'object' && (item.meaning || item.meaning_vi || item.vietnamese || item.explanation || item.titleVi)) ||
+    '';
+
+  // 5. Chuẩn hóa lessonId
+  let lessonId = 1;
+  if (matched && matched.lessonId) {
+    lessonId = matched.lessonId;
+  } else if (typeof item === 'object' && (item.lessonId || item.lesson)) {
+    lessonId = parseInt(item.lessonId || item.lesson, 10) || 1;
+  } else {
+    const matchLesson = String(id).match(/^L(\d+)_/i);
+    if (matchLesson) {
+      lessonId = parseInt(matchLesson[1], 10) || 1;
+    }
+  }
+
+  // 6. Chuẩn hóa type
+  const type = (matched && matched.type) ||
+    (typeof item === 'object' && item.type) ||
+    'vocab';
+
+  return {
+    id,
+    text,
+    reading,
+    meaning,
+    lessonId,
+    type,
+    wrongCount: (existing?.wrongCount || 0) + 1,
+    consecutiveCorrect: 0,
+    lastMistakeAt: new Date().toISOString(),
+  };
+};
+
+/**
  * Tự động chữa lành các bản ghi trong Mistake Vault nếu bị lưu nhầm mã ID (vd: L1_48) thay vì chữ Kanji/Hiragana
  * @param {Object} vault Đối tượng mistake_vault
  * @returns {Object} Mistake vault đã được chữa lành thông tin
@@ -84,7 +177,7 @@ export const healMistakeVault = (vault) => {
 
   for (const [id, item] of Object.entries(healed)) {
     if (!item) continue;
-    const isRawIdText = !item.text || item.text === id || /^L\d+_\d+$/i.test(item.text);
+    const isRawIdText = !item.text || item.text === id || /^L\d+(_[A-Z0-9]+|\d+)$/i.test(item.text) || /^grammar_/i.test(item.text);
     const isMissingMeaning = !item.meaning;
     const isMissingReading = !item.reading && item.type !== 'grammar';
 
@@ -251,69 +344,14 @@ export const useProgressStore = create(
        */
       recordMistake: (item) => {
         if (!item) return;
+        const vault = healMistakeVault({ ...(get().mistake_vault || {}) });
         const rawId = typeof item === 'string' ? item : (item.id || item.kanji || item.hiragana || item.character || item.text);
         if (!rawId) return;
 
-        // Tra cứu dictionary để lấy đầy đủ kanji, hiragana, meaning, lessonId
-        const matched = findDictionaryItem(item) || findDictionaryItem(rawId);
-        const id = (matched && matched.id) || (typeof item === 'object' && item.id) || rawId;
+        const entry = createMistakeVaultEntry(item, vault[rawId]);
+        if (!entry) return;
 
-        // Xác định text hiển thị (Kanji/Hiragana/Cụm từ, tuyệt đối không dùng mã ID L1_48)
-        let text = '';
-        if (matched) {
-          text = matched.kanji || matched.hiragana || matched.text || '';
-        }
-        if (!text && typeof item === 'object') {
-          const candidate = item.kanji || item.character || item.title;
-          if (candidate && !/^L\d+_\d+$/i.test(candidate)) {
-            text = candidate;
-          } else if (item.text && !/^L\d+_\d+$/i.test(item.text)) {
-            text = item.text;
-          }
-        }
-        if (!text) {
-          text = (typeof item === 'object' && (item.hiragana || item.reading)) || rawId;
-        }
-
-        const reading = (matched && matched.hiragana) ||
-          (typeof item === 'object' && (item.hiragana || item.romaji || item.reading)) ||
-          '';
-
-        const meaning = (matched && matched.meaning) ||
-          (typeof item === 'object' && (item.meaning || item.meaning_vi || item.vietnamese || item.explanation)) ||
-          '';
-
-        let lessonId = 1;
-        if (matched && matched.lessonId) {
-          lessonId = matched.lessonId;
-        } else if (typeof item === 'object' && (item.lessonId || item.lesson)) {
-          lessonId = parseInt(item.lessonId || item.lesson, 10) || 1;
-        } else {
-          const matchLesson = String(id).match(/^L(\d+)_/i);
-          if (matchLesson) {
-            lessonId = parseInt(matchLesson[1], 10) || 1;
-          }
-        }
-
-        const type = (matched && matched.type) ||
-          (typeof item === 'object' && item.type) ||
-          'vocab';
-
-        const vault = healMistakeVault({ ...(get().mistake_vault || {}) });
-        const existing = vault[id];
-
-        vault[id] = {
-          id,
-          text,
-          reading,
-          meaning,
-          lessonId,
-          type,
-          wrongCount: (existing?.wrongCount || 0) + 1,
-          consecutiveCorrect: 0,
-          lastMistakeAt: new Date().toISOString(),
-        };
-
+        vault[entry.id] = entry;
         set({ mistake_vault: vault });
       },
 

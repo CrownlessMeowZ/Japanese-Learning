@@ -6,6 +6,9 @@ import {
   calculateCompetencyRadar,
   generate365DaysHeatmap,
   get15LessonsBreakdown,
+  TOTAL_VOCABULARY,
+  TOTAL_KANJI,
+  TOTAL_GRAMMAR,
 } from '../../utils/statsUtils';
 import '../../styles/stats.css';
 
@@ -133,7 +136,7 @@ export const StatsScreen = ({ onBack, onSelectLesson }) => {
             </div>
             <div className="stats-metric-value" style={{ color: '#be185d' }}>
               {radarData.skills.vocab.count}
-              <span style={{ fontSize: '0.95rem', color: '#94a3b8', fontWeight: '600' }}> / 965</span>
+              <span style={{ fontSize: '0.95rem', color: '#94a3b8', fontWeight: '600' }}> / {TOTAL_VOCABULARY}</span>
             </div>
           </div>
           <div className="stats-metric-desc">
@@ -152,11 +155,11 @@ export const StatsScreen = ({ onBack, onSelectLesson }) => {
             </div>
             <div className="stats-metric-value" style={{ color: '#d97706' }}>
               {radarData.skills.kanji.count}
-              <span style={{ fontSize: '0.95rem', color: '#94a3b8', fontWeight: '600' }}> / 80 chữ</span>
+              <span style={{ fontSize: '0.95rem', color: '#94a3b8', fontWeight: '600' }}> / {TOTAL_KANJI} chữ</span>
             </div>
           </div>
           <div className="stats-metric-desc">
-            📐 <strong>{radarData.skills.grammar.count}/68</strong> mẫu ngữ pháp đã học
+            📐 <strong>{radarData.skills.grammar.count}/{TOTAL_GRAMMAR}</strong> mẫu ngữ pháp đã học
           </div>
         </div>
 

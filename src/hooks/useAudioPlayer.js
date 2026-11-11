@@ -65,8 +65,11 @@ class AudioManager {
    */
   cleanJapaneseText(text) {
     if (!text) return '';
-    // Chuyển "私[わたし]は" thành "わたしは" hoặc giữ nguyên chữ Hán nếu không có ngoặc
-    return text.replace(/\[(.*?)\]/g, '$1').trim();
+    // Chuyển "私[わたし]は学生[がくせい]です" thành "わたしはがくせいです" để SpeechSynthesis đọc chuẩn âm kana, không bị đọc kép cả Hán tự lẫn Hiragana
+    return text
+      .replace(/([一-龠々〆ヶA-Za-z0-9]+)\[([ぁ-んァ-ヶ]+)\]/g, '$2')
+      .replace(/\[(.*?)\]/g, '$1')
+      .trim();
   }
 
   play(textOrUrl, speed = 1.0) {

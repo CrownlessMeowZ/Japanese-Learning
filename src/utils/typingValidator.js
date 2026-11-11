@@ -1,16 +1,17 @@
 import * as wanakana from 'wanakana';
 import { levenshteinDistance, removeVietnameseAccents } from './stringUtils.js';
+import { romajiToJapanese } from './romajiConverter.js';
 
 /**
  * Làm sạch chuỗi cơ bản trước khi so khớp:
- * Loại bỏ khoảng trắng thừa, dấu câu, ngoặc đơn
+ * Loại bỏ khoảng trắng thừa, dấu câu, ngoặc đơn, ký tự sóng tilde
  * @param {string} str 
  * @returns {string}
  */
 const cleanText = (str) => {
   if (!str || typeof str !== 'string') return '';
   return str
-    .replace(/[\s。、！？!?・…「」『』（）()\-–—_~〜:;,.]/g, '')
+    .replace(/[\s。、！？!?・…「」『』（）()\-–—_~〜～:;,.]/g, '')
     .trim()
     .toLowerCase();
 };
@@ -76,7 +77,7 @@ const getValidJapaneseAnswers = (target) => {
       // Hỗ trợ trường âm dạng dấu gạch ngang (koohii -> ko-hi-, biiru -> bi-ru)
       const hyphenated = asRomaji.replace(/([aeiou])\1/g, '$1-');
       validSet.add(hyphenated);
-      validSet.add(cleanText(hyphenated));
+      // Lưu ý: Không add cleanText(hyphenated) vì sẽ biến "bi-ru" thành "biru" gây nhận diện nhầm Bia với Tòa nhà!
     } catch {
       // Bỏ qua nếu lỗi parse
     }
@@ -190,6 +191,17 @@ export const verifyTypedAnswer = ({ userInput, target, direction = 'to_ja' }) =>
     // 3. Thử chuyển đổi input sang Romaji bằng WanaKana
     const inputAsRomaji = cleanText(wanakana.toRomaji(rawInput));
     if (validAnswers.has(inputAsRomaji)) {
+      return {
+        isCorrect: true,
+        feedback: '✓ Chính xác hoàn hảo!',
+        expectedAnswer: expected,
+        isFuzzyMatch: false
+      };
+    }
+
+    // 3.5 Thử chuyển đổi Romaji có trường âm macron (ō, ī, ū) qua từ điển Katakana thông dụng
+    const inputAsCommonJa = romajiToJapanese(rawInput);
+    if (inputAsCommonJa && (validAnswers.has(inputAsCommonJa) || validAnswers.has(cleanText(inputAsCommonJa)))) {
       return {
         isCorrect: true,
         feedback: '✓ Chính xác hoàn hảo!',

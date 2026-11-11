@@ -686,13 +686,13 @@ const styles = {
   mainCard: {
     backgroundColor: '#ffffff',
     borderRadius: '24px',
-    padding: '24px',
+    padding: 'clamp(14px, 4vw, 24px)',
     boxShadow: '0 12px 36px rgba(233, 30, 140, 0.08), 0 2px 8px rgba(0, 0, 0, 0.02)',
     border: '1.5px solid #fce7f3',
   },
   grid: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
     gap: '20px',
     marginBottom: '20px',
   },

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDailyStreak } from '../../hooks/useProgress';
+import { TOTAL_VOCABULARY, TOTAL_KANJI } from '../../utils/statsUtils';
 import '../../styles/sakura.css';
 
 /**
@@ -71,7 +72,7 @@ export const WelcomeScreen = ({ onStartLearning, onOpenTranslator, onSelectLesso
                 onClick={onOpenKanji}
                 className="sakura-nav-btn"
                 style={{ fontSize: '0.85rem', padding: '6px 14px', borderRadius: '12px' }}
-                title="Luyện viết 80 Hán tự N5 trên Canvas"
+                title={`Luyện viết ${TOTAL_KANJI} Hán tự N5 trên Canvas`}
               >
                 🈸 Hán Tự N5 (Kanji)
               </button>
@@ -118,7 +119,7 @@ export const WelcomeScreen = ({ onStartLearning, onOpenTranslator, onSelectLesso
         </div>
 
         <div style={styles.statBox}>
-          <div style={styles.statNumber}>965+</div>
+          <div style={styles.statNumber}>{TOTAL_VOCABULARY}+</div>
           <div style={styles.statLabel}>Từ vựng chuẩn giáo trình</div>
           <div style={styles.statDesc}>100% đối chiếu sách hồng, đủ Kanji & phiên âm</div>
         </div>
@@ -179,7 +180,7 @@ export const WelcomeScreen = ({ onStartLearning, onOpenTranslator, onSelectLesso
           <h3 style={styles.featureTitle}>Từ Điển Google AI & Romaji</h3>
           <p style={styles.featureDesc}>
             Dịch thuật song ngữ thông minh, tự động hiểu chữ Romaji (như <em>"watashi"</em> ➔ <em>"Tôi"</em>),
-            hiển thị cách đọc (Phonetic) chi tiết và tra cứu offline 965 từ vựng khi không có mạng.
+            hiển thị cách đọc (Phonetic) chi tiết và tra cứu offline {TOTAL_VOCABULARY} từ vựng khi không có mạng.
           </p>
         </div>
       </div>

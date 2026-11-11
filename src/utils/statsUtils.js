@@ -1,9 +1,19 @@
 import { vocabularyData } from '../data/vocabulary.js';
 import { grammarData } from '../data/grammar.js';
+import { kanjiData } from '../data/kanjiData.js';
 
-const TOTAL_VOCABULARY = 965;
-const TOTAL_KANJI = 80;
-const TOTAL_GRAMMAR = 68;
+// Single Source of Truth (SSOT): Tự động tính toán tổng số từ mảng dữ liệu thực tế
+export const TOTAL_VOCABULARY = Object.values(vocabularyData || {}).reduce(
+  (sum, list) => sum + (Array.isArray(list) ? list.length : 0),
+  0
+) || 965;
+
+export const TOTAL_KANJI = Array.isArray(kanjiData) ? kanjiData.length : 60;
+
+export const TOTAL_GRAMMAR = Object.values(grammarData || {}).reduce(
+  (sum, list) => sum + (Array.isArray(list) ? list.length : 0),
+  0
+) || 65;
 
 /**
  * Tính toán điểm số năng lực 5 chiều (Radar Competency)
