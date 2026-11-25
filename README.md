@@ -407,19 +407,22 @@ python scripts/export_grammar.py
 
 ## 🗺️ Lộ Trình Phát Triển Tương Lai (Upcoming Roadmap)
 
-Dự án **Nihongo Master** không ngừng phát triển theo triết lý **Kaizen (改善)**. Dưới đây là bức tranh toàn cảnh về **6 tính năng & nâng cấp kiến trúc đột phá** sẽ tiếp tục được triển khai trong thời gian tới:
+Dự án **Nihongo Master** không ngừng phát triển theo triết lý **Kaizen (改善)**. Dưới đây là lộ trình tiến hóa gồm **9 giai đoạn được sắp xếp theo mức độ ưu tiên & độ nghiêm trọng (`P0.1 ➔ P3.2`)**:
 
-| Giai đoạn | Tính năng định hướng | Công nghệ & Giá trị cốt lõi mang lại |
-| :---: | :--- | :--- |
-| **P-1** | 🧠 **Cỗ Máy Trí Nhớ Não Bộ FSRS** | Nâng cấp thuật toán SM-2 cổ điển lên giải thuật nhận thức **FSRS** (chuẩn Anki đời mới); theo dõi 3 biến số tâm lý học: Độ ổn định ($S$), Độ khó ($D$), Khả năng truy hồi ($R$); giảm 25% khối lượng ôn tập thừa mà vẫn bảo toàn 90% tỷ lệ nhớ. |
-| **P-2** | 🎙️ **Phòng Hội Thoại Nhập Vai Gemini AI** | Thực hành giao tiếp tự do không theo kịch bản: Gọi món quán ramen Shinjuku, mua vé tàu ga Tokyo, Konbini, Khách sạn Ryokan; phản hồi siêu tốc $< 1\text{s}$ qua **Google Gemini API**, sửa lỗi ngữ pháp nhẹ nhàng và phát âm chuẩn Tokyo. |
-| **P-3** | 🎵 **Trực Quan Hóa Cao Độ Ngữ Điệu (Pitch Accent)** | Phân tích tần số cơ bản F0 qua **Web Audio API `AnalyserNode`**; vẽ biểu đồ sóng âm đối chiếu trực quan cao độ trầm bổng chuẩn người Tokyo (*Atamadaka, Nakadaka, Odaka, Heiban*) ngay khi học viên thu âm. |
-| **P-4** | 📚 **Mở Rộng Giáo Trình Lên JLPT N4** | Bổ sung 15 bài học tiếp theo (Bài 16 – 30) của giáo trình Dekiru Nihongo Sơ Trung cấp; thêm 1.000 từ vựng N4, 60 mẫu ngữ pháp phức hợp (thể bị động, sai khiến, kính ngữ, khiêm nhường ngữ). |
-| **P-5** | 🌸 **Đấu Trường Trí Tuệ Kotoba Wordle** | Minigame giải đố từ vựng mỗi ngày (2 – 5/6 ô); bộ gõ lai IME (gõ Romaji rớt Kana) + Popover bong bóng biến âm kiểu tin nhắn; thông báo trước loại chữ (`🌸 Hiragana`, `🔷 Katakana`, `🈸 Kanji`) & tự đổi bàn phím; trợ lý AI Hint bảo mật khi $\le 3$ lượt; chống gian lận (phạt tính giờ khi out-tab $> 2\text{s}$, khóa paste); bảng vàng thi đấu cùng bạn bè. |
-| **P-6** | ☕ **Kiến Trúc Fullstack Với Java Spring Boot 3** | Chuyển đổi sang hệ thống Fullstack Doanh nghiệp: Tầng **Java Core Engine** xử lý so màu Wordle $O(1)$ bằng `HashMap`/`HashSet`; RESTful API chuẩn mực; bảo mật **Spring Security 6 + Stateless JWT**; Lập lịch Cronjob `@Scheduled` bốc từ 00:00 hằng ngày; lưu trữ đám mây qua CSDL quan hệ **PostgreSQL/MySQL** và Caching **Redis** tốc độ cao. |
+| Giai đoạn | Ưu tiên | Tính năng & Hạng mục định hướng | Công nghệ & Giá trị cốt lõi mang lại |
+| :---: | :---: | :--- | :--- |
+| **P0.1** | **Critical** *(Đang hoàn thiện)* | 🛠️ **Hotfix Nghiệp Vụ, Dữ Liệu Gốc & Hiển Thị Chữ Nhật** | Chuẩn hóa dữ liệu gốc (`しょうゆ`, `なんじ`, `chizu`, `strokeCount` 10 Hán tự), siết chấm điểm `to_vi` & Hint cấp 2, chuẩn hóa Canonical ID ngữ pháp `L01_G01` tương thích ngược `L01_G1`, thẻ `<ruby>` nằm trên Kanji, phím `Enter` lần 2, chống lộ đáp án, khóa double-click `KanaScreen`, khử trùng nghĩa `SakuraMatch`, font `Noto Sans JP` + `lang="ja"` + mở zoom mobile. |
+| **P0.2** | **High** | 🛡️ **Ổn Định Store, Mạng, ErrorBoundary & PWA Offline** | Sửa `Mistake Vault` key collision (`progressStore.js`), bỏ `\|\| {}` trong selector `useProgress.js` tránh lặp vô hạn React 19, tự kiểm tra reset Streak qua ngày, sửa lệch giờ UTC Heatmap (`statsUtils.js`), gộp kỷ lục `SakuraMatch` + `settings` vào Backup/Restore kèm Schema Guard; thêm `AbortController` & sửa stale `lang` ở `Translator.jsx`; bọc `ErrorBoundary` + pre-cache PWA Offline. **(*Xong P0.2 ➔ Merge `project-update-temp` về `main`*)**. |
+| **P1.1** | **High** *(Tiền đề Backend)* | 🔗 **Chuẩn Hóa Routing, Services Async & Sync Queue** | Gắn `react-router-dom`, tách toàn bộ 22 chỗ import cứng `src/data/*.js` sang tầng `src/services/` (`async/await`), chuẩn hóa Canonical IDs khớp lược đồ SQL và xây dựng hàng đợi **Sync Queue** sẵn sàng đồng bộ đám mây. |
+| **P1.2** | **Medium-High** | 🧠 **Cỗ Máy Trí Nhớ Não Bộ FSRS (`src/utils/fsrsAlgo.js`)** | Nâng cấp thuật toán SM-2 cổ điển lên giải thuật nhận thức **FSRS** (chuẩn Anki đời mới); theo dõi 3 biến số tâm lý học: Độ ổn định ($S$), Độ khó ($D$), Khả năng truy hồi ($R$); giảm 25% khối lượng ôn tập thừa mà vẫn bảo toàn 90% tỷ lệ nhớ. |
+| **P2.1** | **High** | ☕ **Backend Fullstack Java Core & Spring Boot 3** | Chuyển đổi sang kiến trúc Fullstack Doanh nghiệp: **Java Core Engine**, **Spring Boot 3**, bảo mật **Spring Security 6 + Stateless JWT**, CSDL quan hệ **PostgreSQL/MySQL** (JPA/Hibernate), **Redis Caching**, Cronjob `@Scheduled` 00:00 và RESTful API đồng bộ `/api/v1/progress/sync`. |
+| **P2.2** | **Medium** | 🌸 **Đấu Trường Trí Tuệ Kotoba Wordle (言葉ワードル)** | Minigame giải đố từ vựng mỗi ngày (2–6 ô) kết nối trực tiếp Backend + Cronjob 00:00 + Redis Sorted Sets từ **P2.1**; bàn phím lai IME + Popover biến âm; AI Hint bảo mật khi $\le 3$ lượt; chống gian lận Page Visibility $> 2\text{s}$, khóa paste; bảng vàng phòng đấu bạn bè. |
+| **P2.3** | **Medium** | 📚 **Mở Rộng Giáo Trình Lên JLPT N4 (Bài 16–30)** | Bổ sung 15 bài học tiếp theo (**Bài 16 – 30**) của giáo trình Dekiru Nihongo Sơ Trung cấp; thêm ~1.000 từ vựng N4, 60 mẫu ngữ pháp phức hợp (thể bị động, sai khiến, kính ngữ, khiêm nhường ngữ). |
+| **P3.1** | **Normal** | 🎙️ **Phòng Hội Thoại Nhập Vai Tình Huống Gemini AI** | Thực hành giao tiếp tự do không theo kịch bản: Quán ramen Shinjuku, ga tàu Tokyo, Konbini, Khách sạn Ryokan; phản hồi siêu tốc $< 1\text{s}$ qua **Google Gemini API**, nhận xét ngữ pháp tự nhiên & phát âm chuẩn Tokyo. |
+| **P3.2** | **Low / R&D** | 🎵 **Trực Quan Hóa Cao Độ Ngữ Điệu (Pitch Accent F0)** | Trích xuất đường cong tần số cơ bản **F0** qua **Web Audio API `AnalyserNode`**; vẽ biểu đồ sóng âm đối chiếu trực quan cao độ trầm bổng chuẩn người Tokyo (*Atamadaka, Nakadaka, Odaka, Heiban*) ngay khi học viên thu âm. |
 
 > 📘 **Tài liệu Kỹ thuật Kiến trúc Toàn diện:**  
-> Bản đặc tả chi tiết về thuật toán, phân tích bảo mật Server-Side và sơ đồ luồng dữ liệu của 6 kế hoạch trên được ghi nhận tại:  
+> Bản đặc tả chi tiết về lộ trình `P0.1 ➔ P3.2`, phân tích bảo mật Server-Side và sơ đồ luồng dữ liệu được ghi nhận tại:  
 > 👉 **[master_roadmap.md](master_roadmap.md)**
 
 ---

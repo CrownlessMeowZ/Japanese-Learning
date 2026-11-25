@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { useAudioPlayer } from '../../hooks/useAudioPlayer';
 import { useSpeechRecognition } from '../../hooks/useSpeechRecognition';
 import { calculateMatchPercentage } from '../../utils/stringUtils';
@@ -21,11 +21,12 @@ export const KaiwaCard = React.memo(({ item }) => {
 
   const { isPlaying, playAudio, stopAudio } = useAudioPlayer(soundTarget);
   const [matchResult, setMatchResult] = useState(null); // { percentage, isPass, feedbackLevel, cleanSpoken }
+  const isUnmountingRef = useRef(false);
 
   // Xử lý khi có kết quả từ Speech Recognition
   const handleSpeechResult = useCallback(
     (spokenText) => {
-      if (!spokenText) return;
+      if (!spokenText || isUnmountingRef.current) return;
       const result = calculateMatchPercentage(spokenText, targetJapanese, targetHiragana);
       setMatchResult(result);
       if (result && typeof result.percentage === 'number' && item?.id) {
@@ -49,14 +50,23 @@ export const KaiwaCard = React.memo(({ item }) => {
     onResult: handleSpeechResult,
   });
 
-  // Tự động dừng thu âm khi component unmount
+  const isListeningRef = useRef(isListening);
+  const stopListeningRef = useRef(stopListening);
   useEffect(() => {
+    isListeningRef.current = isListening;
+    stopListeningRef.current = stopListening;
+  }, [isListening, stopListening]);
+
+  // Tự động dừng thu âm chỉ khi component unmount (tránh gọi đúp recordKaiwaScore khi isListening chuyển false)
+  useEffect(() => {
+    isUnmountingRef.current = false;
     return () => {
-      if (isListening) {
-        stopListening();
+      isUnmountingRef.current = true;
+      if (isListeningRef.current) {
+        stopListeningRef.current();
       }
     };
-  }, [isListening, stopListening]);
+  }, []);
 
   const handleSpeakerClick = (e) => {
     e.stopPropagation();
@@ -186,10 +196,43 @@ export const KaiwaCard = React.memo(({ item }) => {
 
       {/* 2. Nội dung câu thoại tiếng Nhật & Romaji */}
       <div style={{ margin: '8px 0 14px' }}>
-        <div style={{ color: '#1a202c', fontWeight: '700', fontSize: '1.25rem', lineHeight: '1.6' }}>
-          <FuriganaText kanji={item.japanese_text} kana={item.hiragana} />
+        <div
+          lang="ja"
+          style={{ color: '#1a202c', fontWeight: '700', fontSize: '1.25rem', lineHeight: '2.1' }}
+        >
+          {(() => {
+            const jpStr = item.japanese_text || '';
+            const hiraStr = item.hiragana || '';
+            if (jpStr.includes('➔') && hiraStr.includes('➔')) {
+              const jpParts = jpStr.split('➔').map((s) => s.trim());
+              const hiraParts = hiraStr.split('➔').map((s) => s.trim());
+              if (jpParts.length === hiraParts.length) {
+                return jpParts.map((part, idx) => (
+                  <div
+                    key={idx}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'baseline',
+                      gap: '6px',
+                      marginTop: idx > 0 ? '6px' : 0,
+                      paddingLeft: idx > 0 ? '8px' : 0,
+                      borderLeft: idx > 0 ? '2.5px solid #f9a8d4' : 'none',
+                    }}
+                  >
+                    {idx > 0 && (
+                      <span style={{ color: '#e91e8c', fontWeight: '800', flexShrink: 0 }}>➔</span>
+                    )}
+                    <span style={{ flex: 1, minWidth: 0 }}>
+                      <FuriganaText kanji={part} kana={hiraParts[idx]} />
+                    </span>
+                  </div>
+                ));
+              }
+            }
+            return <FuriganaText kanji={jpStr} kana={hiraStr} />;
+          })()}
         </div>
-        <p style={{ fontSize: '0.92rem', color: '#718096', fontStyle: 'italic', margin: '6px 0 0' }}>
+        <p style={{ fontSize: '0.92rem', color: '#718096', fontStyle: 'italic', margin: '8px 0 0' }}>
           {item.romaji}
         </p>
       </div>
@@ -235,7 +278,7 @@ export const KaiwaCard = React.memo(({ item }) => {
           {/* Hiển thị chữ thu âm theo thời gian thực (Interim live preview) */}
           {(interimTranscript || transcript) ? (
             <div style={{ fontSize: '0.95rem', color: '#2d3748', fontWeight: '600', fontStyle: 'italic', marginTop: '6px' }}>
-              🎙️ Bạn đang nói: 「{interimTranscript || transcript}」
+              🎙️ Bạn đang nói: <span lang="ja">「{interimTranscript || transcript}」</span>
             </div>
           ) : (
             <div style={{ fontSize: '0.78rem', color: '#718096', marginTop: '4px' }}>
@@ -335,7 +378,7 @@ export const KaiwaCard = React.memo(({ item }) => {
               <div style={{ fontSize: '0.8rem', color: '#64748b', fontWeight: '600' }}>
                 Âm thanh nhận diện:
               </div>
-              <div style={{ fontSize: '1.02rem', fontWeight: '700', color: '#1e293b', marginTop: '2px' }}>
+              <div lang="ja" style={{ fontSize: '1.02rem', fontWeight: '700', color: '#1e293b', marginTop: '2px' }}>
                 「{matchResult.cleanSpoken}」
               </div>
             </div>

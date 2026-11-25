@@ -4,6 +4,33 @@ import { useProgressStore, healMistakeVault } from '../store/progressStore';
 import { getTodayDateString } from '../utils/srsAlgo';
 
 /**
+ * Chuẩn hóa danh sách các biến thể ID ngữ pháp để tương thích ngược (vd: L01_G01 <-> L01_G1 <-> grammar_L1_1)
+ * @param {string|number} id
+ * @returns {Array<string|number>}
+ */
+const getGrammarIdVariants = (id) => {
+  if (typeof id !== 'string') return [id];
+  const m = id.match(/^L(\d+)_G(\d+)$/i);
+  if (m) {
+    const lNum = parseInt(m[1], 10);
+    const gNum = parseInt(m[2], 10);
+    const canonical = `L${String(lNum).padStart(2, '0')}_G${String(gNum).padStart(2, '0')}`;
+    const legacyPaddedL = `L${String(lNum).padStart(2, '0')}_G${gNum}`;
+    const legacyRaw = `grammar_L${lNum}_${gNum}`;
+    return [...new Set([canonical, id, legacyPaddedL, legacyRaw])];
+  }
+  const gm = id.match(/^grammar_L(\d+)_(\d+)$/i);
+  if (gm) {
+    const lNum = parseInt(gm[1], 10);
+    const gNum = parseInt(gm[2], 10);
+    const canonical = `L${String(lNum).padStart(2, '0')}_G${String(gNum).padStart(2, '0')}`;
+    const legacyPaddedL = `L${String(lNum).padStart(2, '0')}_G${gNum}`;
+    return [...new Set([canonical, id, legacyPaddedL])];
+  }
+  return [id];
+};
+
+/**
  * ⚡ Atomic Selectors - Chọn lọc nguyên tử cho từng thuộc tính
  * Triệt tiêu hoàn toàn re-render thừa thãi cho các component chỉ đọc 1 trường duy nhất
  */
@@ -115,14 +142,24 @@ export const useProgress = () => {
 
   const markAsLearned = useCallback(
     (id, type = 'vocab') => {
+      if (type === 'grammar') {
+        const variants = getGrammarIdVariants(id);
+        const existingKeys = variants.filter((k) => Boolean(learnedItems[k]));
+        if (existingKeys.length > 0) {
+          existingKeys.forEach((key) => toggleLearnedItem(key, type));
+          return;
+        }
+        toggleLearnedItem(variants[0], type);
+        return;
+      }
       toggleLearnedItem(id, type);
     },
-    [toggleLearnedItem]
+    [toggleLearnedItem, learnedItems]
   );
 
   const checkIsLearned = useCallback(
     (id) => {
-      return Boolean(learnedItems[id]);
+      return getGrammarIdVariants(id).some((k) => Boolean(learnedItems[k]));
     },
     [learnedItems]
   );
@@ -143,7 +180,7 @@ export const useProgress = () => {
         )
         .filter((id) => {
           if (!id) return false;
-          const record = learnedItems[id];
+          const record = getGrammarIdVariants(id).map((k) => learnedItems[k]).find(Boolean);
           // Chưa từng học -> đến lượt học
           if (!record) return true;
           // Đã học -> kiểm tra xem đã đến hạn ôn tập chưa
@@ -168,8 +205,8 @@ export const useProgress = () => {
 
       for (let i = 0; i < totalCount; i++) {
         const item = items[i];
-        const key = item.id || item.kanji || item.hiragana || `${lessonId}_${i}`;
-        if (learnedItems[key]) {
+        const key = item.id || item.kanji || item.grammar_id || item.hiragana || `${lessonId}_${i}`;
+        if (getGrammarIdVariants(key).some((k) => Boolean(learnedItems[k]))) {
           learnedCount++;
         }
       }

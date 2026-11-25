@@ -91,7 +91,7 @@ export const Flashcard = ({
           </div>
 
           {/* Center: Main Word */}
-          <div style={styles.centerContent}>
+          <div lang="ja" style={styles.centerContent}>
             <div style={styles.kanjiText}>
               {displayKanji}
             </div>

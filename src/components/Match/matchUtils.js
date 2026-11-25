@@ -102,8 +102,45 @@ export function saveHighscoreToStorage(difficulty, key, newScore, timeTaken, isC
  * Tạo danh sách thẻ bài ngẫu nhiên từ kho từ vựng
  */
 export function generateCardsFromPool(pool, pairsCount) {
-  const shuffledPool = shuffleArray(pool.filter((v) => v.meaning || v.meaning_vi));
-  const selectedVocab = shuffledPool.slice(0, pairsCount);
+  const shuffledPool = shuffleArray(pool.filter((v) => v.meaning || v.meaning_vi || v.vietnamese));
+  const selectedVocab = [];
+  const usedIds = new Set();
+  const usedMeanings = new Set();
+  const usedJpTexts = new Set();
+
+  const normalizeMeaning = (item) =>
+    String(item.meaning || item.meaning_vi || item.vietnamese || '')
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, ' ');
+
+  const normalizeJp = (item) =>
+    String(item.kanji || item.hiragana || '').trim();
+
+  // Khử trùng nghĩa tiếng Việt và mặt chữ tiếng Nhật trên cùng 1 bàn cờ
+  for (const item of shuffledPool) {
+    if (selectedVocab.length >= pairsCount) break;
+    const viNorm = normalizeMeaning(item);
+    const jpNorm = normalizeJp(item);
+    if (!viNorm || !jpNorm) continue;
+    if (usedMeanings.has(viNorm) || usedJpTexts.has(jpNorm)) continue;
+
+    usedMeanings.add(viNorm);
+    usedJpTexts.add(jpNorm);
+    if (item.id) usedIds.add(item.id);
+    selectedVocab.push(item);
+  }
+
+  // Fallback dự phòng nếu pool nhỏ có ít hơn pairsCount nghĩa phân biệt
+  if (selectedVocab.length < pairsCount) {
+    for (const item of shuffledPool) {
+      if (selectedVocab.length >= pairsCount) break;
+      if (item.id && usedIds.has(item.id)) continue;
+      if (!item.id && selectedVocab.includes(item)) continue;
+      if (item.id) usedIds.add(item.id);
+      selectedVocab.push(item);
+    }
+  }
 
   const newCards = [];
   selectedVocab.forEach((item, index) => {

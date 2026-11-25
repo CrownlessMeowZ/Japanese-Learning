@@ -72,13 +72,18 @@ export function calculateCompetencyRadar(
   }
   kanaScore = Math.min(100, Math.max(0, Math.round(kanaScore)));
 
-  // 4. Kỹ năng Ngữ pháp (Grammar)
-  let grammarLearnedCount = 0;
-  for (const item of Object.values(learnedItems)) {
+  // 4. Kỹ năng Ngữ pháp (Grammar) - Khử trùng giữa mã chuẩn L01_G01 và mã cũ L01_G1
+  const learnedGrammarKeys = new Set();
+  for (const [key, item] of Object.entries(learnedItems || {})) {
     if (item && item.type === 'grammar') {
-      grammarLearnedCount++;
+      const gm = key.match(/^L(\d+)_G(\d+)$/i) || key.match(/^grammar_L(\d+)_(\d+)$/i);
+      const canonical = gm
+        ? `L${String(parseInt(gm[1], 10)).padStart(2, '0')}_G${String(parseInt(gm[2], 10)).padStart(2, '0')}`
+        : key;
+      learnedGrammarKeys.add(canonical);
     }
   }
+  const grammarLearnedCount = learnedGrammarKeys.size;
   const grammarScore = Math.min(100, Math.round((grammarLearnedCount / TOTAL_GRAMMAR) * 100));
 
   // 5. Kỹ năng Nghe & Nói (Listening & Speaking / Kaiwa Shadowing)
@@ -324,9 +329,19 @@ export function get15LessonsBreakdown(learnedItems = {}) {
     }
 
     let grammarLearned = 0;
-    for (const g of grammarList) {
-      const gId = g.id || `grammar_L${lsId}_${g.title}`;
-      if (learnedItems[gId] || learnedItems[g.title]) {
+    for (let gIdx = 0; gIdx < grammarList.length; gIdx++) {
+      const g = grammarList[gIdx];
+      const gId = g.id || g.grammar_id || `L${String(lsId).padStart(2, '0')}_G${String(gIdx + 1).padStart(2, '0')}`;
+      const legacyGId = `L${String(lsId).padStart(2, '0')}_G${gIdx + 1}`;
+      const legacyRawId = `grammar_L${lsId}_${gIdx + 1}`;
+      const legacyTitleId = `grammar_L${lsId}_${g.title}`;
+      if (
+        learnedItems[gId] ||
+        learnedItems[legacyGId] ||
+        learnedItems[legacyRawId] ||
+        learnedItems[legacyTitleId] ||
+        (g.title && learnedItems[g.title])
+      ) {
         grammarLearned++;
       }
     }

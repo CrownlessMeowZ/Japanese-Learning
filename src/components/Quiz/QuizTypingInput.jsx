@@ -90,13 +90,28 @@ export const QuizTypingInput = ({
     }, result.isCorrect);
   }, [isAnswered, inputVal, inputMode, target, direction, onCheckAnswer, onNextQuestion]);
 
-  // Lắng nghe phím Enter
+  // Lắng nghe phím Enter trên input
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
       e.preventDefault();
+      e.stopPropagation();
       handleSubmit();
     }
   };
+
+  // Lắng nghe phím Enter trên window khi đã trả lời (vì <input> bị disabled nên không nhận Enter lần 2)
+  useEffect(() => {
+    if (!isAnswered) return;
+    const handleWindowKeyDown = (e) => {
+      if (e.key === 'Enter' && !e.repeat) {
+        if (document.querySelector('[role="dialog"]')) return;
+        e.preventDefault();
+        onNextQuestion?.();
+      }
+    };
+    window.addEventListener('keydown', handleWindowKeyDown);
+    return () => window.removeEventListener('keydown', handleWindowKeyDown);
+  }, [isAnswered, onNextQuestion]);
 
   // Kích hoạt gợi ý
   const handleToggleHint = () => {
@@ -260,6 +275,7 @@ export const QuizTypingInput = ({
         <input
           ref={inputRef}
           type="text"
+          lang={direction === 'to_ja' && inputMode !== 'vietnamese' ? 'ja' : 'vi'}
           value={inputVal}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
@@ -336,7 +352,14 @@ export const QuizTypingInput = ({
       </div>
 
       {/* PHẢN HỒI KẾT QUẢ SAU KHI NỘP (FEEDBACK BANNER) */}
-      {isAnswered && (
+      {isAnswered && (() => {
+        const rawFeedback = (selectedAnswer?.feedback || (isCorrect ? 'Chính xác hoàn hảo!' : 'Chưa chính xác.'))
+          .replace(/^[✓✗]\s*/, '');
+        const tipMarkerIdx = rawFeedback.indexOf('💡');
+        const mainFeedback = tipMarkerIdx >= 0 ? rawFeedback.slice(0, tipMarkerIdx).trim() : rawFeedback;
+        const tipFeedback = tipMarkerIdx >= 0 ? rawFeedback.slice(tipMarkerIdx).trim() : '';
+
+        return (
         <div style={{
           padding: '16px 20px',
           borderRadius: '14px',
@@ -356,7 +379,7 @@ export const QuizTypingInput = ({
               color: isCorrect ? '#15803d' : '#b91c1c'
             }}>
               <span>{isCorrect ? '🎉' : '✗'}</span>
-              <span>{selectedAnswer?.feedback || (isCorrect ? 'Chính xác hoàn hảo!' : 'Chưa chính xác.')}</span>
+              <span>{mainFeedback}</span>
             </div>
 
             {/* Nút Nghe lại phát âm */}
@@ -381,6 +404,21 @@ export const QuizTypingInput = ({
               🔊 Nghe lại phát âm
             </button>
           </div>
+
+          {tipFeedback && (
+            <div style={{
+              fontSize: '0.9rem',
+              color: '#92400e',
+              backgroundColor: '#fffbeb',
+              border: '1px solid #fcd34d',
+              borderRadius: '10px',
+              padding: '8px 12px',
+              lineHeight: '1.45',
+              fontWeight: '600'
+            }}>
+              {tipFeedback}
+            </div>
+          )}
 
           <div style={{
             fontSize: '1rem',
@@ -412,7 +450,8 @@ export const QuizTypingInput = ({
             )}
           </div>
         </div>
-      )}
+        );
+      })()}
 
       {/* HÀNG NÚT THAO TÁC (KIỂM TRA HOẶC CÂU KẾ TIẾP) */}
       <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', marginTop: '6px' }}>

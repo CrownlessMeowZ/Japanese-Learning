@@ -20,7 +20,7 @@ export const COMMON_KATAKANA_MAP = {
   depaato: 'デパート', apaato: 'アパート', hoteru: 'ホテル',
   suupaa: 'スーパー', 'su-pa-': 'スーパー', 'sūpā': 'スーパー',
   keeki: 'ケーキ', 'ke-ki': 'ケーキ', 'kēki': 'ケーキ',
-  chizu: 'チーズ', chiizu: 'チーズ',
+  chiizu: 'チーズ',
   sandoicchi: 'サンドイッチ', bataa: 'バター',
   shatsu: 'シャツ', taoru: 'タオル', kamera: 'カメラ',
   pasokon: 'パソコン', sumaho: 'スマホ', nooto: 'ノート',

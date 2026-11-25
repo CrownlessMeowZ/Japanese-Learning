@@ -54,7 +54,10 @@ export const KanjiQuizPlayView = ({
       {/* Question Area */}
       <div style={styles.questionBox}>
         <div style={styles.subPromptText}>{currentQ.subPrompt}</div>
-        <div style={questionType === 'hanviet_to_kanji' ? styles.questionHanViet : styles.questionKanji}>
+        <div
+          lang={questionType === 'hanviet_to_kanji' ? 'vi' : 'ja'}
+          style={questionType === 'hanviet_to_kanji' ? styles.questionHanViet : styles.questionKanji}
+        >
           {currentQ.questionText}
         </div>
         {currentQ.target && (
@@ -91,7 +94,12 @@ export const KanjiQuizPlayView = ({
               className={`kana-choice-btn ${statusClass}`}
             >
               <span style={styles.optionIndex}>{String.fromCharCode(65 + idx)}</span>
-              <span style={styles.optionText}>{opt}</span>
+              <span
+                lang={questionType === 'hanviet_to_kanji' ? 'ja' : undefined}
+                style={styles.optionText}
+              >
+                {opt}
+              </span>
             </button>
           );
         })}
