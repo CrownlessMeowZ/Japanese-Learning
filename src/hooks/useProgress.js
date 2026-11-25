@@ -3,6 +3,12 @@ import { useShallow } from 'zustand/react/shallow';
 import { useProgressStore, healMistakeVault } from '../store/progressStore';
 import { getTodayDateString } from '../utils/srsAlgo';
 
+// Tham chiếu đóng băng cố định cấp module để selector React 19 (useSyncExternalStore) không bao giờ tạo object mới
+const EMPTY_OBJECT = Object.freeze({});
+const DEFAULT_KANA_PRACTICE = Object.freeze({ totalPracticed: 0, correctAnswers: 0, lastPracticedAt: null });
+const DEFAULT_DAILY_STREAK = Object.freeze({ count: 0, lastActiveDate: null, bestStreak: 0 });
+const DEFAULT_BONSAI_STATE = Object.freeze({ lastWateredDate: null, waterCount: 0 });
+
 /**
  * Chuẩn hóa danh sách các biến thể ID ngữ pháp để tương thích ngược (vd: L01_G01 <-> L01_G1 <-> grammar_L1_1)
  * @param {string|number} id
@@ -34,14 +40,14 @@ const getGrammarIdVariants = (id) => {
  * ⚡ Atomic Selectors - Chọn lọc nguyên tử cho từng thuộc tính
  * Triệt tiêu hoàn toàn re-render thừa thãi cho các component chỉ đọc 1 trường duy nhất
  */
-export const useDailyStreak = () => useProgressStore((state) => state.daily_streak);
-export const useBonsaiState = () => useProgressStore((state) => state.bonsai_state);
-export const useLearnedItems = () => useProgressStore((state) => state.learned_items);
-export const useKanjiLearned = () => useProgressStore((state) => state.kanji_learned || {});
+export const useDailyStreak = () => useProgressStore((state) => state.daily_streak ?? DEFAULT_DAILY_STREAK);
+export const useBonsaiState = () => useProgressStore((state) => state.bonsai_state ?? DEFAULT_BONSAI_STATE);
+export const useLearnedItems = () => useProgressStore((state) => state.learned_items ?? EMPTY_OBJECT);
+export const useKanjiLearned = () => useProgressStore((state) => state.kanji_learned ?? EMPTY_OBJECT);
 export const useCurrentLesson = () => useProgressStore((state) => state.current_lesson);
-export const useActivityHistory = () => useProgressStore((state) => state.activity_history || {});
-export const useKaiwaScores = () => useProgressStore((state) => state.kaiwa_scores || {});
-export const useKanaPractice = () => useProgressStore((state) => state.kana_practice || {});
+export const useActivityHistory = () => useProgressStore((state) => state.activity_history ?? EMPTY_OBJECT);
+export const useKaiwaScores = () => useProgressStore((state) => state.kaiwa_scores ?? EMPTY_OBJECT);
+export const useKanaPractice = () => useProgressStore((state) => state.kana_practice ?? DEFAULT_KANA_PRACTICE);
 
 /**
  * Hook chuyên biệt chỉ lấy Sổ tay điểm yếu (đã tự động phục hồi)
@@ -70,6 +76,7 @@ export const useProgressActions = () => {
       logActivity: state.logActivity,
       recordKaiwaScore: state.recordKaiwaScore,
       recordKanaPractice: state.recordKanaPractice,
+      syncStreakWithToday: state.syncStreakWithToday,
       importAllData: state.importAllData,
       resetAllProgress: state.resetAllProgress,
     }))
@@ -84,14 +91,14 @@ export const useProgress = () => {
   const stateData = useProgressStore(
     useShallow((state) => ({
       currentLesson: state.current_lesson,
-      dailyStreak: state.daily_streak,
-      learnedItems: state.learned_items,
-      bonsaiState: state.bonsai_state,
-      rawMistakeVault: state.mistake_vault,
-      kanjiLearned: state.kanji_learned || {},
-      activityHistory: state.activity_history || {},
-      kaiwaScores: state.kaiwa_scores || {},
-      kanaPractice: state.kana_practice || {},
+      dailyStreak: state.daily_streak ?? DEFAULT_DAILY_STREAK,
+      learnedItems: state.learned_items ?? EMPTY_OBJECT,
+      bonsaiState: state.bonsai_state ?? DEFAULT_BONSAI_STATE,
+      rawMistakeVault: state.mistake_vault ?? EMPTY_OBJECT,
+      kanjiLearned: state.kanji_learned ?? EMPTY_OBJECT,
+      activityHistory: state.activity_history ?? EMPTY_OBJECT,
+      kaiwaScores: state.kaiwa_scores ?? EMPTY_OBJECT,
+      kanaPractice: state.kana_practice ?? DEFAULT_KANA_PRACTICE,
       setCurrentLesson: state.setCurrentLesson,
       toggleLearnedItem: state.toggleLearnedItem,
       reviewItem: state.reviewItem,
@@ -104,6 +111,7 @@ export const useProgress = () => {
       logActivity: state.logActivity,
       recordKaiwaScore: state.recordKaiwaScore,
       recordKanaPractice: state.recordKanaPractice,
+      syncStreakWithToday: state.syncStreakWithToday,
       importAllData: state.importAllData,
       resetAllProgress: state.resetAllProgress,
     }))
@@ -131,6 +139,7 @@ export const useProgress = () => {
     logActivity,
     recordKaiwaScore,
     recordKanaPractice,
+    syncStreakWithToday,
     importAllData,
     resetAllProgress,
   } = stateData;
@@ -248,6 +257,7 @@ export const useProgress = () => {
     logActivity,
     recordKaiwaScore,
     recordKanaPractice,
+    syncStreakWithToday,
     importAllData,
     resetAllProgress,
   };

@@ -297,6 +297,7 @@ Japanese Learning/
 │   │   ├── Vocab/              # Flashcard.jsx (3D flip), VocabScreen.jsx (Tra cứu từ vựng không dấu)
 │   │   ├── Welcome/            # WelcomeScreen.jsx (Hero Onboarding Landing Hub)
 │   │   ├── Dashboard.jsx       # Bảng tiến độ 15 bài học & Lộ trình Dekiru
+│   │   ├── ErrorBoundary.jsx   # Vùng cách ly lỗi Runtime & lỗi tải chunk khi Offline
 │   │   ├── FuriganaSwitch.jsx  # Công tắc bật/tắt Furigana toàn app
 │   │   ├── FuriganaText.jsx    # Component hiển thị thẻ <ruby> tối ưu
 │   │   └── LessonModal.jsx     # Modal chọn bài học và điều hướng tập trung
@@ -335,7 +336,7 @@ Japanese Learning/
 │   ├── main.jsx                # Điểm khởi chạy React DOM
 │   └── registerServiceWorker.js# Quản lý vòng đời PWA & Dev Zero-Cache auto unregister
 ├── index.html                  # File HTML gốc (PWA enabled)
-├── master_roadmap.md           # Lộ trình kỹ thuật tổng thể & 6 kế hoạch tiến hóa tương lai
+├── master_roadmap.md           # Lộ trình kỹ thuật tổng thể & 9 giai đoạn tiến hóa (P0.1 ➔ P3.2)
 ├── package.json                # Danh mục phụ thuộc & kịch bản npm
 ├── start.bat                   # Kịch bản khởi chạy 1-click trên Windows
 └── vite.config.js              # Cấu hình tối ưu Vite Bundler & no-store dev header
@@ -411,8 +412,8 @@ Dự án **Nihongo Master** không ngừng phát triển theo triết lý **Kaiz
 
 | Giai đoạn | Ưu tiên | Tính năng & Hạng mục định hướng | Công nghệ & Giá trị cốt lõi mang lại |
 | :---: | :---: | :--- | :--- |
-| **P0.1** | **Critical** *(Đang hoàn thiện)* | 🛠️ **Hotfix Nghiệp Vụ, Dữ Liệu Gốc & Hiển Thị Chữ Nhật** | Chuẩn hóa dữ liệu gốc (`しょうゆ`, `なんじ`, `chizu`, `strokeCount` 10 Hán tự), siết chấm điểm `to_vi` & Hint cấp 2, chuẩn hóa Canonical ID ngữ pháp `L01_G01` tương thích ngược `L01_G1`, thẻ `<ruby>` nằm trên Kanji, phím `Enter` lần 2, chống lộ đáp án, khóa double-click `KanaScreen`, khử trùng nghĩa `SakuraMatch`, font `Noto Sans JP` + `lang="ja"` + mở zoom mobile. |
-| **P0.2** | **High** | 🛡️ **Ổn Định Store, Mạng, ErrorBoundary & PWA Offline** | Sửa `Mistake Vault` key collision (`progressStore.js`), bỏ `\|\| {}` trong selector `useProgress.js` tránh lặp vô hạn React 19, tự kiểm tra reset Streak qua ngày, sửa lệch giờ UTC Heatmap (`statsUtils.js`), gộp kỷ lục `SakuraMatch` + `settings` vào Backup/Restore kèm Schema Guard; thêm `AbortController` & sửa stale `lang` ở `Translator.jsx`; bọc `ErrorBoundary` + pre-cache PWA Offline. **(*Xong P0.2 ➔ Merge `project-update-temp` về `main`*)**. |
+| **P0.1** | **Critical** *(Đã hoàn thành)* | 🛠️ **Hotfix Nghiệp Vụ, Dữ Liệu Gốc & Hiển Thị Chữ Nhật** | Chuẩn hóa dữ liệu gốc (`しょうゆ`, `なんじ`, `chizu`, `strokeCount` 10 Hán tự), siết chấm điểm `to_vi` & Hint cấp 2, chuẩn hóa Canonical ID ngữ pháp `L01_G01` tương thích ngược `L01_G1`, thẻ `<ruby>` nằm trên Kanji, phím `Enter` lần 2, chống lộ đáp án, khóa double-click `KanaScreen`, khử trùng nghĩa `SakuraMatch`, font `Noto Sans JP` + `lang="ja"` + mở zoom mobile. |
+| **P0.2** | **High** *(Đã hoàn thành)* | 🛡️ **Ổn Định Store, Mạng, ErrorBoundary & PWA Offline** | Sửa `Mistake Vault` key collision (`progressStore.js`), bỏ `\|\| {}` trong selector `useProgress.js` tránh lặp vô hạn React 19, tự kiểm tra reset Streak qua ngày, sửa lệch giờ UTC Heatmap (`statsUtils.js`), gộp kỷ lục `SakuraMatch` + `settings` vào Backup/Restore kèm Schema Guard; thêm `AbortController` & sửa stale `lang` ở `Translator.jsx`; bọc `ErrorBoundary` + pre-cache PWA Offline. **(*Xong P0.2 ➔ Merge `project-update-temp` về `main`*)**. |
 | **P1.1** | **High** *(Tiền đề Backend)* | 🔗 **Chuẩn Hóa Routing, Services Async & Sync Queue** | Gắn `react-router-dom`, tách toàn bộ 22 chỗ import cứng `src/data/*.js` sang tầng `src/services/` (`async/await`), chuẩn hóa Canonical IDs khớp lược đồ SQL và xây dựng hàng đợi **Sync Queue** sẵn sàng đồng bộ đám mây. |
 | **P1.2** | **Medium-High** | 🧠 **Cỗ Máy Trí Nhớ Não Bộ FSRS (`src/utils/fsrsAlgo.js`)** | Nâng cấp thuật toán SM-2 cổ điển lên giải thuật nhận thức **FSRS** (chuẩn Anki đời mới); theo dõi 3 biến số tâm lý học: Độ ổn định ($S$), Độ khó ($D$), Khả năng truy hồi ($R$); giảm 25% khối lượng ôn tập thừa mà vẫn bảo toàn 90% tỷ lệ nhớ. |
 | **P2.1** | **High** | ☕ **Backend Fullstack Java Core & Spring Boot 3** | Chuyển đổi sang kiến trúc Fullstack Doanh nghiệp: **Java Core Engine**, **Spring Boot 3**, bảo mật **Spring Security 6 + Stateless JWT**, CSDL quan hệ **PostgreSQL/MySQL** (JPA/Hibernate), **Redis Caching**, Cronjob `@Scheduled` 00:00 và RESTful API đồng bộ `/api/v1/progress/sync`. |

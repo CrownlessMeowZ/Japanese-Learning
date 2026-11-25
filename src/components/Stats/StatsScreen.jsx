@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useProgress } from '../../hooks/useProgress';
 import { StatsRadarChart } from './StatsRadarChart';
 import { StatsHeatmap } from './StatsHeatmap';
@@ -50,7 +50,16 @@ export const StatsScreen = ({ onBack, onSelectLesson }) => {
     kanaPractice,
   } = useProgress();
 
-  const [matchStats] = useState(loadMatchStats);
+  const [matchStats, setMatchStats] = useState(loadMatchStats);
+
+  // Tự động cập nhật lại chỉ số Sakura Match nếu người dùng Import Backup hoặc Reset từ modal Header
+  useEffect(() => {
+    const syncMatchStats = () => {
+      setMatchStats(loadMatchStats());
+    };
+    window.addEventListener('sakura-highscores-updated', syncMatchStats);
+    return () => window.removeEventListener('sakura-highscores-updated', syncMatchStats);
+  }, []);
 
   // Tính toán năng lực 5 kỹ năng (Radar)
   const radarData = useMemo(() => {

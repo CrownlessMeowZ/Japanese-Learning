@@ -17,8 +17,8 @@ flowchart TD
     end
 
     subgraph Milestone_Next["🚀 LỘ TRÌNH TIẾN HÓA THEO ĐỘ ƯU TIÊN (P0.1 ➔ P3.2)"]
-        P01["P0.1 (Critical - Đang hoàn thiện): Hotfix Nghiệp vụ, Dữ liệu gốc & Hiển thị chữ Nhật<br/>• Chuẩn hóa Từ vựng/Kaiwa/Kanji (strokeCount, なんじ, L7_28), chặn ăn điểm 1-2 ký tự<br/>• Sửa chuẩn Ruby Furigana nằm trên Kanji, Enter lần 2, chống lộ đáp án, font Noto Sans JP"]
-        P02["P0.2 (High): Ổn định Store, Mạng, ErrorBoundary & PWA Offline<br/>• Sửa Mistake Vault collision, bỏ || {} selector React 19, Streak qua ngày, Heatmap UTC<br/>• Gộp SakuraMatch + settings vào Backup/Restore, AbortController, ErrorBoundary, Pre-cache<br/>• Mốc chốt: Hoàn thành P0.2 ➔ Merge project-update-temp về main"]
+        P01["P0.1 (Critical - Đã hoàn thành): Hotfix Nghiệp vụ, Dữ liệu gốc & Hiển thị chữ Nhật<br/>• Chuẩn hóa Từ vựng/Kaiwa/Kanji (strokeCount, なんじ, L7_28), chặn ăn điểm 1-2 ký tự<br/>• Sửa chuẩn Ruby Furigana nằm trên Kanji, Enter lần 2, chống lộ đáp án, font Noto Sans JP"]
+        P02["P0.2 (High - Đã hoàn thành): Ổn định Store, Mạng, ErrorBoundary & PWA Offline<br/>• Sửa Mistake Vault collision, bỏ || {} selector React 19, Streak qua ngày, Heatmap UTC<br/>• Gộp SakuraMatch + settings vào Backup/Restore, AbortController, ErrorBoundary, Pre-cache<br/>• Mốc chốt: Hoàn thành P0.2 ➔ Merge project-update-temp về main"]
         P11["P1.1 (High - Tiền đề Backend): Routing, Services Async & Sync Queue<br/>• Gắn react-router-dom, tách 22 chỗ import cứng src/data/*.js sang src/services/ async/await<br/>• Chuẩn hóa Canonical IDs khớp SQL & hàng đợi Offline Sync Queue"]
         P12["P1.2 (Medium-High): Cỗ máy Trí nhớ Não bộ FSRS (src/utils/fsrsAlgo.js)<br/>• Thay thế SM-2 bằng giải thuật Anki hiện đại (Stability, Difficulty, Retrievability)<br/>• Giảm 25% số lần ôn tập thừa, bảo toàn 100% dữ liệu cũ"]
         P21["P2.1 (High): Backend Fullstack Java Core & Spring Boot 3<br/>• Java Core Engine, Spring Security 6 JWT, PostgreSQL/MySQL, Caching Redis<br/>• API /api/v1/progress/sync & Cronjob 00:00"]
@@ -43,7 +43,7 @@ flowchart TD
 
 ## 📌 CHI TIẾT 9 GIAI ĐOẠN LỘ TRÌNH TIẾN HÓA (P0.1 ➔ P3.2)
 
-### 🔥 P0.1 (Critical - Đang hoàn thiện): Hotfix Nghiệp Vụ, Dữ Liệu Gốc & Hiển Thị Chữ Nhật
+### 🔥 P0.1 (Critical - Đã hoàn thành): Hotfix Nghiệp Vụ, Dữ Liệu Gốc & Hiển Thị Chữ Nhật
 * **Mục tiêu:** Vá triệt để các lỗi sai dữ liệu gốc, sai chuẩn hiển thị tiếng Nhật, bất tiện thao tác và lỗ hổng logic chấm điểm trên bản client hiện tại.
 * **Các hạng mục triển khai:**
   - **Chuẩn hóa dữ liệu gốc:**
@@ -62,7 +62,7 @@ flowchart TD
 
 ---
 
-### 🛡️ P0.2 (High): Ổn Định Store, Mạng, ErrorBoundary & PWA Offline
+### 🛡️ P0.2 (High - Đã hoàn thành): Ổn Định Store, Mạng, ErrorBoundary & PWA Offline
 * **Mục tiêu:** Gia cố độ bền dữ liệu cục bộ, triệt tiêu rủi ro vòng lặp render React 19 và hoàn thiện trải nghiệm ngoại tuyến trước khi chốt nhánh.
 * **Các hạng mục triển khai:**
   - **Ổn định Zustand Store & Tiến trình (`progressStore.js`, `useProgress.js`, `statsUtils.js`):**

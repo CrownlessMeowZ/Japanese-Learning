@@ -3,6 +3,18 @@ import { persist, createJSONStorage } from 'zustand/middleware';
 import { calculateSM2, getTodayDateString, addDaysToDate } from '../utils/srsAlgo.js';
 import { vocabularyData } from '../data/vocabulary.js';
 import { grammarData } from '../data/grammar.js';
+import { useSettingsStore } from './settingsStore.js';
+
+export const SAKURA_HIGHSCORE_STORAGE_KEY = 'nihongo_master_sakura_match_highscores';
+const DATE_KEY_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
+
+const isPlainObject = (val) => Boolean(val) && typeof val === 'object' && !Array.isArray(val);
+
+const notifyHighscoresUpdated = () => {
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new Event('sakura-highscores-updated'));
+  }
+};
 
 let dictionaryCache = null;
 
@@ -38,6 +50,7 @@ const getDictionaryCache = () => {
           for (let i = 0; i < grammars.length; i++) {
             const g = grammars[i];
             const fallbackId = `grammar_L${lessonNum}_${i + 1}`;
+            const legacyPaddedId = `L${String(lessonNum).padStart(2, '0')}_G${i + 1}`;
             const gId = g.id || fallbackId;
             const entry = {
               ...g,
@@ -51,6 +64,7 @@ const getDictionaryCache = () => {
             };
             dictionaryCache.set(gId, entry);
             dictionaryCache.set(fallbackId, entry);
+            dictionaryCache.set(legacyPaddedId, entry);
             if (g.id) dictionaryCache.set(g.id, entry);
             if (g.title && !dictionaryCache.has(g.title)) dictionaryCache.set(g.title, entry);
             if (g.structure && !dictionaryCache.has(g.structure)) dictionaryCache.set(g.structure, entry);
@@ -167,37 +181,108 @@ export const createMistakeVaultEntry = (item, existing = null) => {
 };
 
 /**
- * Tự động chữa lành các bản ghi trong Mistake Vault nếu bị lưu nhầm mã ID (vd: L1_48) thay vì chữ Kanji/Hiragana
+ * Chuẩn hóa & hợp nhất các bản ghi trong Mistake Vault về đúng Canonical ID (tránh trùng key rawId vs entry.id)
+ * Đồng thời tự động chữa lành nếu bị lưu nhầm mã ID (vd: L1_48) thay vì chữ Kanji/Hiragana
  * @param {Object} vault Đối tượng mistake_vault
- * @returns {Object} Mistake vault đã được chữa lành thông tin
+ * @returns {Object} Mistake vault đã được chuẩn hóa và chữa lành thông tin
  */
 export const healMistakeVault = (vault) => {
-  if (!vault || typeof vault !== 'object') return {};
-  const healed = { ...vault };
+  if (!isPlainObject(vault)) return {};
+  const healed = {};
 
-  for (const [id, item] of Object.entries(healed)) {
-    if (!item) continue;
-    const isRawIdText = !item.text || item.text === id || /^L\d+(_[A-Z0-9]+|\d+)$/i.test(item.text) || /^grammar_/i.test(item.text);
+  for (const [rawKey, item] of Object.entries(vault)) {
+    if (!isPlainObject(item)) continue;
+
+    const match =
+      findDictionaryItem(item) ||
+      findDictionaryItem(rawKey) ||
+      (item.id ? findDictionaryItem(item.id) : null) ||
+      (item.text ? findDictionaryItem(item.text) : null);
+
+    const canonicalId = String((match && match.id) || item.id || rawKey);
+    const isRawIdText =
+      !item.text ||
+      item.text === rawKey ||
+      item.text === canonicalId ||
+      /^L\d+(_[A-Z0-9]+|\d+)$/i.test(item.text) ||
+      /^grammar_/i.test(item.text);
     const isMissingMeaning = !item.meaning;
     const isMissingReading = !item.reading && item.type !== 'grammar';
 
-    if (isRawIdText || isMissingMeaning || isMissingReading) {
-      const match = findDictionaryItem(id) || (item.text ? findDictionaryItem(item.text) : null);
-      if (match) {
-        healed[id] = {
-          ...item,
-          id: item.id || id,
-          text: match.kanji || match.hiragana || match.text || item.text,
-          reading: item.reading || match.hiragana || match.reading || '',
-          meaning: item.meaning || match.meaning || match.titleVi || '',
-          lessonId: item.lessonId || match.lessonId || 1,
-          type: item.type || match.type || 'vocab',
-        };
-      }
+    let normalized = {
+      ...item,
+      id: canonicalId,
+      wrongCount: Math.max(1, parseInt(item.wrongCount, 10) || 1),
+      consecutiveCorrect: Math.max(0, parseInt(item.consecutiveCorrect, 10) || 0),
+    };
+
+    if (match && (isRawIdText || isMissingMeaning || isMissingReading)) {
+      normalized = {
+        ...normalized,
+        text: isRawIdText ? (match.kanji || match.hiragana || match.text || item.text || canonicalId) : item.text,
+        reading: item.reading || match.hiragana || match.reading || '',
+        meaning: item.meaning || match.meaning || match.titleVi || '',
+        lessonId: item.lessonId || match.lessonId || 1,
+        type: item.type || match.type || 'vocab',
+      };
+    }
+
+    if (healed[canonicalId]) {
+      const prev = healed[canonicalId];
+      const prevTime = Date.parse(prev.lastMistakeAt || '') || 0;
+      const curTime = Date.parse(normalized.lastMistakeAt || '') || 0;
+      const base = curTime >= prevTime ? normalized : prev;
+      healed[canonicalId] = {
+        ...base,
+        id: canonicalId,
+        text: base.text || prev.text || normalized.text,
+        reading: base.reading || prev.reading || normalized.reading || '',
+        meaning: base.meaning || prev.meaning || normalized.meaning || '',
+        wrongCount: Math.max(prev.wrongCount || 1, normalized.wrongCount || 1),
+        consecutiveCorrect: Math.min(prev.consecutiveCorrect ?? 0, normalized.consecutiveCorrect ?? 0),
+        lastMistakeAt: curTime >= prevTime ? (normalized.lastMistakeAt || prev.lastMistakeAt) : (prev.lastMistakeAt || normalized.lastMistakeAt),
+      };
+    } else {
+      healed[canonicalId] = normalized;
     }
   }
 
   return healed;
+};
+
+// Tính khoảng cách số ngày lịch địa phương giữa 2 mốc YYYY-MM-DD
+const getCalendarDayDiff = (fromDateStr, toDateStr) => {
+  if (!fromDateStr || !toDateStr) return Number.NaN;
+  const from = new Date(`${fromDateStr}T00:00:00`);
+  const to = new Date(`${toDateStr}T00:00:00`);
+  if (Number.isNaN(from.getTime()) || Number.isNaN(to.getTime())) {
+    return Number.NaN;
+  }
+  return Math.round((to - from) / (1000 * 60 * 60 * 24));
+};
+
+// Kiểm tra & đồng bộ chuỗi Streak theo ngày hiện tại: lỡ >= 1 ngày trọn vẹn (diffDays >= 2) -> reset count về 0
+export const computeSyncedStreak = (dailyStreak, today = getTodayDateString()) => {
+  if (!isPlainObject(dailyStreak)) {
+    return { count: 0, lastActiveDate: null, bestStreak: 0 };
+  }
+  const count = Math.max(0, parseInt(dailyStreak.count, 10) || 0);
+  const bestStreak = Math.max(count, parseInt(dailyStreak.bestStreak, 10) || 0);
+  const lastActiveDate =
+    typeof dailyStreak.lastActiveDate === 'string' && DATE_KEY_PATTERN.test(dailyStreak.lastActiveDate)
+      ? dailyStreak.lastActiveDate
+      : null;
+
+  if (!lastActiveDate) {
+    return { count: 0, lastActiveDate: null, bestStreak };
+  }
+
+  const diffDays = getCalendarDayDiff(lastActiveDate, today);
+  if (Number.isNaN(diffDays) || diffDays >= 2) {
+    return { count: 0, lastActiveDate, bestStreak };
+  }
+
+  return { count, lastActiveDate, bestStreak };
 };
 
 // Tính streak theo ngày lịch địa phương (diffDays): 1 ngày -> tăng chuỗi; cùng ngày -> giữ nguyên; >=2 ngày -> reset về 1
@@ -206,18 +291,207 @@ const calculateStreak = (lastDate, currentStreak) => {
   if (!lastDate) return { count: 1, lastDate: today };
 
   if (lastDate === today) {
-    return { count: currentStreak, lastDate: today };
+    return { count: Math.max(1, currentStreak || 0), lastDate: today };
   }
 
-  const last = new Date(`${lastDate}T00:00:00`);
-  const now = new Date(`${today}T00:00:00`);
-  const diffDays = Math.round((now - last) / (1000 * 60 * 60 * 24));
+  const diffDays = getCalendarDayDiff(lastDate, today);
 
   if (diffDays === 1) {
-    return { count: currentStreak + 1, lastDate: today };
+    return { count: Math.max(0, currentStreak || 0) + 1, lastDate: today };
   }
 
   return { count: 1, lastDate: today };
+};
+
+/**
+ * Chuẩn hóa bản ghi kỷ lục Sakura Match (dùng chung cho Backup/Restore và Match Utils)
+ */
+export const sanitizeSakuraHighscores = (raw) => {
+  if (!isPlainObject(raw)) return {};
+  const cleaned = {};
+  for (const [key, val] of Object.entries(raw)) {
+    if (!key || !isPlainObject(val)) continue;
+    const rawBestTime = Number(val.bestTime);
+    const validBestTime =
+      typeof val.bestTime === 'number' &&
+      Number.isFinite(rawBestTime) &&
+      rawBestTime > 1 &&
+      rawBestTime < 999
+        ? Math.round(rawBestTime)
+        : null;
+    cleaned[key] = {
+      highScore: Math.max(0, Math.round(Number(val.highScore) || 0)),
+      bestTime: validBestTime,
+      gamesPlayed: Math.max(0, Math.round(Number(val.gamesPlayed) || 0)),
+      ...(typeof val.lastPlayed === 'string' && DATE_KEY_PATTERN.test(val.lastPlayed.slice(0, 10))
+        ? { lastPlayed: val.lastPlayed.slice(0, 10) }
+        : {}),
+    };
+  }
+  return cleaned;
+};
+
+const RECOGNIZED_BACKUP_KEYS = [
+  'learned_items',
+  'kanji_learned',
+  'mistake_vault',
+  'daily_streak',
+  'bonsai_state',
+  'activity_history',
+  'kaiwa_scores',
+  'kana_practice',
+  'sakura_match_highscores',
+  'settings',
+];
+
+const OBJECT_BACKUP_SECTIONS = [
+  'learned_items',
+  'kanji_learned',
+  'mistake_vault',
+  'daily_streak',
+  'bonsai_state',
+  'activity_history',
+  'kaiwa_scores',
+  'kana_practice',
+  'sakura_match_highscores',
+  'settings',
+];
+
+/**
+ * Schema Guard: Xác thực & làm sạch dữ liệu sao lưu JSON trước khi khôi phục vào Store
+ * @param {unknown} raw Dữ liệu JSON parse từ file backup
+ * @returns {{ valid: boolean, data?: Object, error?: string }}
+ */
+export const validateAndSanitizeBackup = (raw) => {
+  if (!isPlainObject(raw)) {
+    return { valid: false, error: 'File JSON không đúng cấu trúc đối tượng hợp lệ.' };
+  }
+
+  if (raw.appName !== undefined && raw.appName !== 'Nihongo Master') {
+    return { valid: false, error: 'File sao lưu không thuộc ứng dụng Nihongo Master.' };
+  }
+
+  const hasKnownKey = RECOGNIZED_BACKUP_KEYS.some((key) =>
+    Object.prototype.hasOwnProperty.call(raw, key)
+  );
+  if (!hasKnownKey) {
+    return {
+      valid: false,
+      error: 'File JSON không chứa dữ liệu học tập hợp lệ của Nihongo Master.',
+    };
+  }
+
+  for (const section of OBJECT_BACKUP_SECTIONS) {
+    if (raw[section] !== undefined && !isPlainObject(raw[section])) {
+      return {
+        valid: false,
+        error: `Trường dữ liệu "${section}" bị hỏng hoặc sai định dạng đối tượng.`,
+      };
+    }
+  }
+
+  const sanitized = {};
+
+  if (raw.current_lesson !== undefined) {
+    const lessonNum = parseInt(raw.current_lesson, 10);
+    sanitized.current_lesson =
+      Number.isFinite(lessonNum) && lessonNum >= 1 && lessonNum <= 15 ? lessonNum : 1;
+  }
+
+  if (raw.learned_items !== undefined) {
+    const cleanedLearned = {};
+    for (const [id, entry] of Object.entries(raw.learned_items)) {
+      if (!id || !isPlainObject(entry)) continue;
+      const ef = Number(entry.easinessFactor);
+      cleanedLearned[id] = {
+        ...entry,
+        type: typeof entry.type === 'string' && entry.type ? entry.type : 'vocab',
+        repetition: Math.max(0, Math.round(Number(entry.repetition) || 0)),
+        interval: Math.max(0, Math.round(Number(entry.interval) || 0)),
+        easinessFactor: Number.isFinite(ef) && ef >= 1.3 ? ef : 2.5,
+      };
+    }
+    sanitized.learned_items = cleanedLearned;
+  }
+
+  if (raw.kanji_learned !== undefined) {
+    const cleanedKanji = {};
+    for (const [id, val] of Object.entries(raw.kanji_learned)) {
+      if (!id || !val) continue;
+      if (isPlainObject(val)) {
+        cleanedKanji[id] = { ...val };
+      } else if (val === true) {
+        cleanedKanji[id] = { learnedAt: new Date().toISOString() };
+      }
+    }
+    sanitized.kanji_learned = cleanedKanji;
+  }
+
+  if (raw.mistake_vault !== undefined) {
+    sanitized.mistake_vault = healMistakeVault(raw.mistake_vault);
+  }
+
+  if (raw.daily_streak !== undefined) {
+    sanitized.daily_streak = computeSyncedStreak(raw.daily_streak);
+  }
+
+  if (raw.bonsai_state !== undefined) {
+    const lastWateredDate =
+      typeof raw.bonsai_state.lastWateredDate === 'string' &&
+      DATE_KEY_PATTERN.test(raw.bonsai_state.lastWateredDate)
+        ? raw.bonsai_state.lastWateredDate
+        : null;
+    sanitized.bonsai_state = {
+      lastWateredDate,
+      waterCount: Math.max(0, parseInt(raw.bonsai_state.waterCount, 10) || 0),
+    };
+  }
+
+  if (raw.activity_history !== undefined) {
+    const cleanedHistory = {};
+    for (const [dateKey, count] of Object.entries(raw.activity_history)) {
+      const numeric = Number(count);
+      if (DATE_KEY_PATTERN.test(dateKey) && Number.isFinite(numeric) && numeric > 0) {
+        cleanedHistory[dateKey] = Math.round(numeric);
+      }
+    }
+    sanitized.activity_history = cleanedHistory;
+  }
+
+  if (raw.kaiwa_scores !== undefined) {
+    const cleanedKaiwa = {};
+    for (const [id, score] of Object.entries(raw.kaiwa_scores)) {
+      const numeric = Number(score);
+      if (id && Number.isFinite(numeric)) {
+        cleanedKaiwa[id] = Math.max(0, Math.min(100, Math.round(numeric)));
+      }
+    }
+    sanitized.kaiwa_scores = cleanedKaiwa;
+  }
+
+  if (raw.kana_practice !== undefined) {
+    sanitized.kana_practice = {
+      totalPracticed: Math.max(0, parseInt(raw.kana_practice.totalPracticed, 10) || 0),
+      correctAnswers: Math.max(0, parseInt(raw.kana_practice.correctAnswers, 10) || 0),
+      lastPracticedAt:
+        typeof raw.kana_practice.lastPracticedAt === 'string'
+          ? raw.kana_practice.lastPracticedAt
+          : null,
+    };
+  }
+
+  if (raw.sakura_match_highscores !== undefined) {
+    sanitized.sakura_match_highscores = sanitizeSakuraHighscores(raw.sakura_match_highscores);
+  }
+
+  if (raw.settings !== undefined) {
+    sanitized.settings = {
+      showFurigana:
+        raw.settings.showFurigana !== undefined ? Boolean(raw.settings.showFurigana) : true,
+    };
+  }
+
+  return { valid: true, data: sanitized };
 };
 
 export const useProgressStore = create(
@@ -226,9 +500,9 @@ export const useProgressStore = create(
       learned_items: {},
       current_lesson: 1,
       daily_streak: {
-        count: 1,
-        lastActiveDate: getTodayDateString(),
-        bestStreak: 1,
+        count: 0,
+        lastActiveDate: null,
+        bestStreak: 0,
       },
 
       // Vườn Bonsai Sakura (Sakura Habit Garden)
@@ -294,14 +568,27 @@ export const useProgressStore = create(
         get().updateActivityStreak();
       },
 
+      syncStreakWithToday: () => {
+        const current = get().daily_streak;
+        const synced = computeSyncedStreak(current);
+        if (
+          !current ||
+          synced.count !== current.count ||
+          synced.lastActiveDate !== current.lastActiveDate ||
+          synced.bestStreak !== current.bestStreak
+        ) {
+          set({ daily_streak: synced });
+        }
+      },
+
       updateActivityStreak: () => {
         const { daily_streak } = get();
-        const updated = calculateStreak(daily_streak.lastActiveDate, daily_streak.count);
+        const updated = calculateStreak(daily_streak?.lastActiveDate, daily_streak?.count || 0);
         set({
           daily_streak: {
             count: updated.count,
             lastActiveDate: updated.lastDate,
-            bestStreak: Math.max(daily_streak.bestStreak, updated.count),
+            bestStreak: Math.max(daily_streak?.bestStreak || 0, updated.count),
           },
         });
 
@@ -339,23 +626,37 @@ export const useProgressStore = create(
 
       /**
        * Ghi nhận một mục trả lời sai vào Sổ Tay Điểm Yếu (Mistake Vault)
-       * Tự động tra cứu từ điển để trích xuất chữ Kanji/Hiragana & Nghĩa chuẩn (tuyệt đối không hiển thị mã ID như L1_48)
+       * Tự động tra cứu từ điển & chuẩn hóa Canonical ID để tránh trùng lặp key giữa rawId và entry.id
        * @param {Object|string} item Thông tin từ vựng / ngữ pháp hoặc mã ID
        */
       recordMistake: (item) => {
         if (!item) return;
-        const vault = healMistakeVault({ ...(get().mistake_vault || {}) });
-        const rawId = typeof item === 'string' ? item : (item.id || item.kanji || item.hiragana || item.character || item.text);
+        const vault = healMistakeVault(get().mistake_vault);
+        const rawId =
+          typeof item === 'string'
+            ? item
+            : item.id || item.kanji || item.hiragana || item.character || item.text;
         if (!rawId) return;
 
-        const entry = createMistakeVaultEntry(item, vault[rawId]);
+        const matched = findDictionaryItem(item) || findDictionaryItem(rawId);
+        const canonicalTargetId =
+          (matched && matched.id) || (typeof item === 'object' && item.id) || rawId;
+        const existing = vault[canonicalTargetId] || vault[rawId] || null;
+
+        const entry = createMistakeVaultEntry(item, existing);
         if (!entry) return;
 
+        if (rawId !== entry.id) {
+          delete vault[rawId];
+        }
+        if (canonicalTargetId !== entry.id) {
+          delete vault[canonicalTargetId];
+        }
         vault[entry.id] = entry;
         set({ mistake_vault: vault });
       },
 
-       /**
+      /**
        * Ghi nhận khi học viên ôn tập đúng một mục trong Hộp Cứu Hộ
        * Khi trả lời đúng liên tiếp đạt đủ số lần sai (wrongCount), từ đó được coi là Tốt Nghiệp và xóa khỏi Vault
        * @param {string|number} id ID của item
@@ -363,19 +664,26 @@ export const useProgressStore = create(
        */
       recordRescueSuccess: (id) => {
         if (!id) return false;
-        const vault = { ...(get().mistake_vault || {}) };
-        const existing = vault[id];
-        if (!existing) return false;
+        const vault = healMistakeVault(get().mistake_vault);
+        const matched = findDictionaryItem(id);
+        const targetKey = vault[id]
+          ? id
+          : matched?.id && vault[matched.id]
+            ? matched.id
+            : null;
+        if (!targetKey) return false;
 
+        const existing = vault[targetKey];
         const targetCorrect = Math.max(1, existing.wrongCount || 1);
         const nextCorrect = (existing.consecutiveCorrect || 0) + 1;
         let isGraduated = false;
 
         if (nextCorrect >= targetCorrect) {
-          delete vault[id];
+          delete vault[targetKey];
+          if (id !== targetKey) delete vault[id];
           isGraduated = true;
         } else {
-          vault[id] = {
+          vault[targetKey] = {
             ...existing,
             consecutiveCorrect: nextCorrect,
             lastReviewedAt: new Date().toISOString(),
@@ -392,8 +700,12 @@ export const useProgressStore = create(
        */
       clearMistake: (id) => {
         if (!id) return;
-        const vault = { ...(get().mistake_vault || {}) };
+        const vault = healMistakeVault(get().mistake_vault);
+        const matched = findDictionaryItem(id);
         delete vault[id];
+        if (matched?.id && matched.id !== id) {
+          delete vault[matched.id];
+        }
         set({ mistake_vault: vault });
       },
 
@@ -456,66 +768,52 @@ export const useProgressStore = create(
       },
 
       /**
-       * Nhập toàn bộ dữ liệu sao lưu từ file JSON (Data Restore)
+       * Nhập toàn bộ dữ liệu sao lưu từ file JSON kèm Schema Guard (bao gồm Sakura Match & Settings)
        * @param {Object} importedData Dữ liệu backup JSON
        * @returns {boolean} true nếu import thành công
        */
       importAllData: (importedData) => {
-        if (!importedData || typeof importedData !== 'object') {
+        const check = validateAndSanitizeBackup(importedData);
+        if (!check.valid) {
           return false;
         }
 
-        const validLearned = importedData.learned_items && typeof importedData.learned_items === 'object'
-          ? importedData.learned_items
-          : get().learned_items;
-
-        const validKanji = importedData.kanji_learned && typeof importedData.kanji_learned === 'object'
-          ? importedData.kanji_learned
-          : (get().kanji_learned || {});
-
-        const validMistakes = importedData.mistake_vault && typeof importedData.mistake_vault === 'object'
-          ? healMistakeVault(importedData.mistake_vault)
-          : get().mistake_vault;
-
-        const validBonsai = importedData.bonsai_state && typeof importedData.bonsai_state === 'object'
-          ? importedData.bonsai_state
-          : get().bonsai_state;
-
-        const validStreak = importedData.daily_streak && typeof importedData.daily_streak === 'object'
-          ? importedData.daily_streak
-          : get().daily_streak;
-
-        const validLesson = parseInt(importedData.current_lesson, 10) || get().current_lesson || 1;
-
-        const validActivity = importedData.activity_history && typeof importedData.activity_history === 'object'
-          ? importedData.activity_history
-          : (get().activity_history || {});
-
-        const validKaiwa = importedData.kaiwa_scores && typeof importedData.kaiwa_scores === 'object'
-          ? importedData.kaiwa_scores
-          : (get().kaiwa_scores || {});
-
-        const validKana = importedData.kana_practice && typeof importedData.kana_practice === 'object'
-          ? importedData.kana_practice
-          : (get().kana_practice || { totalPracticed: 0, correctAnswers: 0, lastPracticedAt: null });
+        const safe = check.data;
+        const cur = get();
 
         set({
-          learned_items: validLearned,
-          kanji_learned: validKanji,
-          mistake_vault: validMistakes,
-          bonsai_state: validBonsai,
-          daily_streak: validStreak,
-          current_lesson: validLesson,
-          activity_history: validActivity,
-          kaiwa_scores: validKaiwa,
-          kana_practice: validKana,
+          learned_items: safe.learned_items ?? cur.learned_items ?? {},
+          kanji_learned: safe.kanji_learned ?? cur.kanji_learned ?? {},
+          mistake_vault: safe.mistake_vault ?? cur.mistake_vault ?? {},
+          bonsai_state: safe.bonsai_state ?? cur.bonsai_state,
+          daily_streak: safe.daily_streak ?? cur.daily_streak,
+          current_lesson: safe.current_lesson ?? cur.current_lesson ?? 1,
+          activity_history: safe.activity_history ?? cur.activity_history ?? {},
+          kaiwa_scores: safe.kaiwa_scores ?? cur.kaiwa_scores ?? {},
+          kana_practice: safe.kana_practice ?? cur.kana_practice,
         });
+
+        if (safe.sakura_match_highscores !== undefined) {
+          try {
+            localStorage.setItem(
+              SAKURA_HIGHSCORE_STORAGE_KEY,
+              JSON.stringify(safe.sakura_match_highscores)
+            );
+            notifyHighscoresUpdated();
+          } catch {
+            // Bỏ qua nếu trình duyệt chặn storage
+          }
+        }
+
+        if (safe.settings !== undefined) {
+          useSettingsStore.getState().setFurigana(safe.settings.showFurigana);
+        }
 
         return true;
       },
 
       /**
-       * Đặt lại toàn bộ tiến độ học tập (Reset về mặc định)
+       * Đặt lại toàn bộ tiến độ học tập (bao gồm cả kỷ lục Sakura Match & cài đặt Furigana)
        */
       resetAllProgress: () => {
         set({
@@ -523,9 +821,9 @@ export const useProgressStore = create(
           kanji_learned: {},
           current_lesson: 1,
           daily_streak: {
-            count: 1,
-            lastActiveDate: getTodayDateString(),
-            bestStreak: 1,
+            count: 0,
+            lastActiveDate: null,
+            bestStreak: 0,
           },
           bonsai_state: {
             lastWateredDate: null,
@@ -540,6 +838,16 @@ export const useProgressStore = create(
             lastPracticedAt: null,
           },
         });
+
+        try {
+          localStorage.removeItem(SAKURA_HIGHSCORE_STORAGE_KEY);
+          localStorage.removeItem('sakura_match_highscores');
+          notifyHighscoresUpdated();
+        } catch {
+          // Bỏ qua nếu môi trường không có localStorage
+        }
+
+        useSettingsStore.getState().setFurigana(true);
       },
 
       /**
@@ -602,9 +910,8 @@ export const useProgressStore = create(
       version: 1,
       onRehydrateStorage: () => (state) => {
         if (state) {
-          if (state.mistake_vault) {
-            state.mistake_vault = healMistakeVault(state.mistake_vault);
-          }
+          state.mistake_vault = healMistakeVault(state.mistake_vault);
+          state.daily_streak = computeSyncedStreak(state.daily_streak);
           if (!state.kanji_learned) {
             state.kanji_learned = {};
           }

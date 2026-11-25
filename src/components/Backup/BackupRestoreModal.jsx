@@ -1,6 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useProgress } from '../../hooks/useProgress';
+import { useSettingsStore } from '../../store/settingsStore';
+import { validateAndSanitizeBackup } from '../../store/progressStore';
+import { loadHighscoresFromStorage } from '../Match/matchUtils';
+import { getTodayDateString } from '../../utils/srsAlgo';
 
 /**
  * BackupRestoreModal - Trung tâm Sao Lưu & Khôi Phục Dữ Liệu Học Tập (100% Local JSON)
@@ -9,14 +13,22 @@ export const BackupRestoreModal = ({ isOpen, onClose }) => {
   const fileInputRef = useRef(null);
   const [message, setMessage] = useState(null); // { type: 'success' | 'error', text: '' }
   const [confirmReset, setConfirmReset] = useState(false);
+  const showFurigana = useSettingsStore((state) => state.showFurigana);
+  const [matchRecordCount, setMatchRecordCount] = useState(() => Object.keys(loadHighscoresFromStorage()).length);
 
-  // Khóa cuộn trang nền khi mở Modal
+  // Khóa cuộn trang nền khi mở Modal & đồng bộ số kỷ lục Sakura Match từ sự kiện bên ngoài
   useEffect(() => {
     if (!isOpen) return;
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
+
+    const syncMatchCount = () => {
+      setMatchRecordCount(Object.keys(loadHighscoresFromStorage()).length);
+    };
+    window.addEventListener('sakura-highscores-updated', syncMatchCount);
     return () => {
       document.body.style.overflow = originalOverflow;
+      window.removeEventListener('sakura-highscores-updated', syncMatchCount);
     };
   }, [isOpen]);
 
@@ -36,11 +48,12 @@ export const BackupRestoreModal = ({ isOpen, onClose }) => {
 
   if (!isOpen) return null;
 
-  // 1. Tải về bản sao lưu JSON
+  // 1. Tải về bản sao lưu JSON (gồm cả kỷ lục Sakura Match và cài đặt settingsStore)
   const handleExportData = () => {
     try {
+      const matchHighscores = loadHighscoresFromStorage();
       const backupPayload = {
-        version: 1,
+        version: 2,
         appName: 'Nihongo Master',
         exportedAt: new Date().toISOString(),
         current_lesson: currentLesson,
@@ -52,13 +65,17 @@ export const BackupRestoreModal = ({ isOpen, onClose }) => {
         activity_history: activityHistory,
         kaiwa_scores: kaiwaScores,
         kana_practice: kanaPractice,
+        sakura_match_highscores: matchHighscores,
+        settings: {
+          showFurigana,
+        },
       };
 
       const jsonStr = JSON.stringify(backupPayload, null, 2);
       const blob = new Blob([jsonStr], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
 
-      const dateStr = new Date().toISOString().split('T')[0];
+      const dateStr = getTodayDateString();
       const link = document.createElement('a');
       link.href = url;
       link.download = `nihongo_master_backup_${dateStr}.json`;
@@ -69,7 +86,7 @@ export const BackupRestoreModal = ({ isOpen, onClose }) => {
 
       setMessage({
         type: 'success',
-        text: '✅ Đã tải file sao lưu JSON về máy thành công!',
+        text: '✅ Đã tải file sao lưu JSON (bao gồm tiến độ, Sakura Match & cài đặt) về máy!',
       });
     } catch {
       setMessage({
@@ -79,7 +96,7 @@ export const BackupRestoreModal = ({ isOpen, onClose }) => {
     }
   };
 
-  // 2. Nhập dữ liệu từ file JSON
+  // 2. Nhập dữ liệu từ file JSON kèm Schema Guard kiểm duyệt chặt chẽ
   const handleFileChange = (e) => {
     const file = e.target.files && e.target.files[0];
     if (!file) return;
@@ -90,19 +107,29 @@ export const BackupRestoreModal = ({ isOpen, onClose }) => {
         const content = event.target?.result;
         const parsed = JSON.parse(content);
 
-        // Kiểm tra hợp lệ sơ bộ
-        if (!parsed || typeof parsed !== 'object') {
-          throw new Error('Định dạng file không hợp lệ.');
+        // Chốt chặn Schema Guard trước khi nạp vào Store
+        const validation = validateAndSanitizeBackup(parsed);
+        if (!validation.valid) {
+          setMessage({
+            type: 'error',
+            text: `❌ ${validation.error}`,
+          });
+          return;
         }
 
         const success = importAllData(parsed);
         if (success) {
-          const vocabCount = Object.keys(parsed.learned_items || {}).length;
-          const kanjiCount = Object.keys(parsed.kanji_learned || {}).length;
+          const sanitized = validation.data;
+          const vocabCount = Object.keys(sanitized.learned_items || {}).length;
+          const kanjiCount = Object.keys(sanitized.kanji_learned || {}).length;
+          const importedMatchCount = sanitized.sakura_match_highscores
+            ? Object.keys(sanitized.sakura_match_highscores).length
+            : 0;
+          setMatchRecordCount(Object.keys(loadHighscoresFromStorage()).length);
 
           setMessage({
             type: 'success',
-            text: `🎉 Khôi phục thành công! Đã nạp ${vocabCount} từ vựng và ${kanjiCount} chữ Hán.`,
+            text: `🎉 Khôi phục thành công! Đã nạp ${vocabCount} từ vựng, ${kanjiCount} chữ Hán${importedMatchCount > 0 ? `, ${importedMatchCount} kỷ lục Sakura Match` : ''}${sanitized.settings ? ' và cài đặt hiển thị' : ''}.`,
           });
         } else {
           setMessage({
@@ -132,10 +159,11 @@ export const BackupRestoreModal = ({ isOpen, onClose }) => {
     }
 
     resetAllProgress();
+    setMatchRecordCount(0);
     setConfirmReset(false);
     setMessage({
       type: 'success',
-      text: 'Đã xóa toàn bộ tiến độ và đặt lại về trạng thái ban đầu.',
+      text: 'Đã xóa toàn bộ tiến độ, kỷ lục Sakura Match và đặt lại cài đặt về mặc định.',
     });
   };
 
@@ -188,9 +216,12 @@ export const BackupRestoreModal = ({ isOpen, onClose }) => {
               <div style={styles.statLabel}>Mục Hộp cứu hộ</div>
             </div>
             <div style={styles.statItem}>
-              <div style={styles.statNum}>{dailyStreak?.count || 1} 🔥</div>
+              <div style={styles.statNum}>{dailyStreak?.count ?? 0} 🔥</div>
               <div style={styles.statLabel}>Chuỗi ngày học</div>
             </div>
+          </div>
+          <div style={{ fontSize: '0.75rem', color: '#64748b', marginTop: '10px', textAlign: 'center' }}>
+            Kèm theo <strong>{matchRecordCount}</strong> kỷ lục Sakura Match &amp; cài đặt Furigana ({showFurigana ? 'Đang bật' : 'Đang ẩn'})
           </div>
         </div>
 
@@ -201,7 +232,7 @@ export const BackupRestoreModal = ({ isOpen, onClose }) => {
             <div>
               <div style={styles.sectionTitle}>Xuất bản sao lưu (Export JSON)</div>
               <div style={styles.sectionDesc}>
-                Lưu toàn bộ tiến độ ra file <code>.json</code> về máy tính hoặc điện thoại để lưu trữ an toàn.
+                Lưu toàn bộ tiến độ, kỷ lục Sakura Match và cài đặt ra file <code>.json</code> về máy để lưu trữ an toàn.
               </div>
             </div>
           </div>
