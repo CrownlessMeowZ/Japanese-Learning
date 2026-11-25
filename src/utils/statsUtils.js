@@ -1,9 +1,19 @@
 import { vocabularyData } from '../data/vocabulary.js';
 import { grammarData } from '../data/grammar.js';
+import { kanjiData } from '../data/kanjiData.js';
 
-const TOTAL_VOCABULARY = 965;
-const TOTAL_KANJI = 80;
-const TOTAL_GRAMMAR = 68;
+// Single Source of Truth (SSOT): Tự động tính toán tổng số từ mảng dữ liệu thực tế
+export const TOTAL_VOCABULARY = Object.values(vocabularyData || {}).reduce(
+  (sum, list) => sum + (Array.isArray(list) ? list.length : 0),
+  0
+) || 965;
+
+export const TOTAL_KANJI = Array.isArray(kanjiData) ? kanjiData.length : 60;
+
+export const TOTAL_GRAMMAR = Object.values(grammarData || {}).reduce(
+  (sum, list) => sum + (Array.isArray(list) ? list.length : 0),
+  0
+) || 65;
 
 /**
  * Tính toán điểm số năng lực 5 chiều (Radar Competency)
@@ -62,13 +72,18 @@ export function calculateCompetencyRadar(
   }
   kanaScore = Math.min(100, Math.max(0, Math.round(kanaScore)));
 
-  // 4. Kỹ năng Ngữ pháp (Grammar)
-  let grammarLearnedCount = 0;
-  for (const item of Object.values(learnedItems)) {
+  // 4. Kỹ năng Ngữ pháp (Grammar) - Khử trùng giữa mã chuẩn L01_G01 và mã cũ L01_G1
+  const learnedGrammarKeys = new Set();
+  for (const [key, item] of Object.entries(learnedItems || {})) {
     if (item && item.type === 'grammar') {
-      grammarLearnedCount++;
+      const gm = key.match(/^L(\d+)_G(\d+)$/i) || key.match(/^grammar_L(\d+)_(\d+)$/i);
+      const canonical = gm
+        ? `L${String(parseInt(gm[1], 10)).padStart(2, '0')}_G${String(parseInt(gm[2], 10)).padStart(2, '0')}`
+        : key;
+      learnedGrammarKeys.add(canonical);
     }
   }
+  const grammarLearnedCount = learnedGrammarKeys.size;
   const grammarScore = Math.min(100, Math.round((grammarLearnedCount / TOTAL_GRAMMAR) * 100));
 
   // 5. Kỹ năng Nghe & Nói (Listening & Speaking / Kaiwa Shadowing)
@@ -151,6 +166,33 @@ export function calculateCompetencyRadar(
 }
 
 /**
+ * Chuyển chuỗi ISO / Date / YYYY-MM-DD sang khóa ngày theo giờ địa phương (YYYY-MM-DD)
+ * Tránh lệch ngày do múi giờ UTC (vd UTC+7 học lúc 00:00–06:59 bị tính về hôm qua).
+ */
+export function toLocalDateKey(input) {
+  if (!input) return null;
+  if (typeof input === 'string') {
+    const trimmed = input.trim();
+    if (/^\d{4}-\d{2}-\d{2}$/.test(trimmed)) {
+      return trimmed;
+    }
+    const dt = new Date(trimmed);
+    if (Number.isNaN(dt.getTime())) return null;
+    const year = dt.getFullYear();
+    const month = String(dt.getMonth() + 1).padStart(2, '0');
+    const day = String(dt.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+  if (input instanceof Date && !Number.isNaN(input.getTime())) {
+    const year = input.getFullYear();
+    const month = String(input.getMonth() + 1).padStart(2, '0');
+    const day = String(input.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+  return null;
+}
+
+/**
  * Tổng hợp dữ liệu biểu đồ nhiệt 365 ngày (Activity Heatmap)
  * @param {Object} activityHistory Lịch sử hoạt động theo ngày
  * @param {Object} learnedItems Các mục đã học
@@ -166,31 +208,34 @@ export function generate365DaysHeatmap(
   mistakeVault = {},
   bonsaiState = {}
 ) {
-  // Gom toàn bộ mốc hoạt động vào 1 Map ngày -> số lượng
+  // Gom toàn bộ mốc hoạt động vào 1 Map ngày địa phương -> số lượng
   const countByDate = new Map();
+  const recordedActivityDates = new Set();
 
   // 1. Dữ liệu từ activity_history
   if (activityHistory && typeof activityHistory === 'object') {
     for (const [dateStr, count] of Object.entries(activityHistory)) {
-      if (dateStr && typeof count === 'number') {
-        countByDate.set(dateStr, (countByDate.get(dateStr) || 0) + count);
+      const localKey = toLocalDateKey(dateStr);
+      if (localKey && typeof count === 'number' && Number.isFinite(count) && count > 0) {
+        recordedActivityDates.add(localKey);
+        countByDate.set(localKey, (countByDate.get(localKey) || 0) + count);
       }
     }
   }
 
-  // 2. Tự động truy hồi các timestamp có sẵn trong learned_items
+  // 2. Tự động truy hồi các timestamp có sẵn trong learned_items (chuyển UTC ISO -> ngày địa phương)
   if (learnedItems && typeof learnedItems === 'object') {
     for (const item of Object.values(learnedItems)) {
       if (!item) continue;
       if (item.learnedAt) {
-        const d = String(item.learnedAt).split('T')[0];
-        if (d && !activityHistory[d]) {
+        const d = toLocalDateKey(item.learnedAt);
+        if (d && !recordedActivityDates.has(d)) {
           countByDate.set(d, (countByDate.get(d) || 0) + 1);
         }
       }
       if (item.lastReviewedAt) {
-        const d = String(item.lastReviewedAt).split('T')[0];
-        if (d && !activityHistory[d]) {
+        const d = toLocalDateKey(item.lastReviewedAt);
+        if (d && !recordedActivityDates.has(d)) {
           countByDate.set(d, (countByDate.get(d) || 0) + 1);
         }
       }
@@ -201,24 +246,45 @@ export function generate365DaysHeatmap(
   if (kanjiLearned && typeof kanjiLearned === 'object') {
     for (const item of Object.values(kanjiLearned)) {
       if (item?.learnedAt) {
-        const d = String(item.learnedAt).split('T')[0];
-        if (d && !activityHistory[d]) {
+        const d = toLocalDateKey(item.learnedAt);
+        if (d && !recordedActivityDates.has(d)) {
           countByDate.set(d, (countByDate.get(d) || 0) + 1);
         }
       }
     }
   }
 
-  // 4. Truy hồi Bonsai water date
+  // 4. Truy hồi Mistake Vault timestamps (nếu ngày đó chưa được log vào activity_history)
+  if (mistakeVault && typeof mistakeVault === 'object') {
+    for (const item of Object.values(mistakeVault)) {
+      if (!item) continue;
+      if (item.lastMistakeAt) {
+        const d = toLocalDateKey(item.lastMistakeAt);
+        if (d && !recordedActivityDates.has(d)) {
+          countByDate.set(d, (countByDate.get(d) || 0) + 1);
+        }
+      }
+      if (item.lastReviewedAt) {
+        const d = toLocalDateKey(item.lastReviewedAt);
+        if (d && !recordedActivityDates.has(d)) {
+          countByDate.set(d, (countByDate.get(d) || 0) + 1);
+        }
+      }
+    }
+  }
+
+  // 5. Truy hồi Bonsai water date
   if (bonsaiState?.lastWateredDate) {
-    const d = bonsaiState.lastWateredDate;
+    const d = toLocalDateKey(bonsaiState.lastWateredDate);
     if (d && !countByDate.has(d)) {
       countByDate.set(d, 1);
     }
   }
 
-  // Tạo khung 53 tuần kết thúc vào tuần hiện tại
+  // Tạo khung 53 tuần kết thúc vào tuần hiện tại (chuẩn hóa về 00:00:00 giờ địa phương)
   const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const todayKey = toLocalDateKey(today);
   const currentDayOfWeek = today.getDay(); // 0: Chủ Nhật, 6: Thứ Bảy
 
   // Xác định ngày cuối cùng là thứ Bảy của tuần này (để ma trận luôn đầy đủ 7 hàng)
@@ -245,7 +311,7 @@ export function generate365DaysHeatmap(
       const month = String(iterDate.getMonth() + 1).padStart(2, '0');
       const day = String(iterDate.getDate()).padStart(2, '0');
       const dateKey = `${year}-${month}-${day}`;
-      const isFuture = iterDate > today;
+      const isFuture = dateKey > todayKey;
 
       const count = isFuture ? 0 : (countByDate.get(dateKey) || 0);
 
@@ -314,9 +380,19 @@ export function get15LessonsBreakdown(learnedItems = {}) {
     }
 
     let grammarLearned = 0;
-    for (const g of grammarList) {
-      const gId = g.id || `grammar_L${lsId}_${g.title}`;
-      if (learnedItems[gId] || learnedItems[g.title]) {
+    for (let gIdx = 0; gIdx < grammarList.length; gIdx++) {
+      const g = grammarList[gIdx];
+      const gId = g.id || g.grammar_id || `L${String(lsId).padStart(2, '0')}_G${String(gIdx + 1).padStart(2, '0')}`;
+      const legacyGId = `L${String(lsId).padStart(2, '0')}_G${gIdx + 1}`;
+      const legacyRawId = `grammar_L${lsId}_${gIdx + 1}`;
+      const legacyTitleId = `grammar_L${lsId}_${g.title}`;
+      if (
+        learnedItems[gId] ||
+        learnedItems[legacyGId] ||
+        learnedItems[legacyRawId] ||
+        learnedItems[legacyTitleId] ||
+        (g.title && learnedItems[g.title])
+      ) {
         grammarLearned++;
       }
     }

@@ -1,6 +1,11 @@
-import { useProgressStore } from '../../store/progressStore.js';
+import {
+  useProgressStore,
+  SAKURA_HIGHSCORE_STORAGE_KEY,
+  sanitizeSakuraHighscores,
+} from '../../store/progressStore.js';
+import { getTodayDateString } from '../../utils/srsAlgo.js';
 
-export const HIGHSCORE_STORAGE_KEY = 'nihongo_master_sakura_match_highscores';
+export const HIGHSCORE_STORAGE_KEY = SAKURA_HIGHSCORE_STORAGE_KEY;
 
 export const DIFFICULTY_CONFIG = {
   easy: { name: 'Khởi Động (4x3)', pairs: 6, seconds: 45, gridClass: 'match-grid-4x3' },
@@ -28,18 +33,11 @@ export function loadHighscoresFromStorage() {
     const raw = localStorage.getItem(HIGHSCORE_STORAGE_KEY);
     if (!raw) return {};
     const parsed = JSON.parse(raw);
-    let hasCleaned = false;
-    // Tự động làm sạch các giá trị lỗi cũ (như 999s hoặc 1s do đóng băng thời gian trước đó)
-    Object.keys(parsed).forEach((k) => {
-      if (parsed[k]?.bestTime >= 999 || parsed[k]?.bestTime === 1) {
-        parsed[k].bestTime = null;
-        hasCleaned = true;
-      }
-    });
-    if (hasCleaned) {
-      localStorage.setItem(HIGHSCORE_STORAGE_KEY, JSON.stringify(parsed));
+    const cleaned = sanitizeSakuraHighscores(parsed);
+    if (JSON.stringify(cleaned) !== JSON.stringify(parsed)) {
+      localStorage.setItem(HIGHSCORE_STORAGE_KEY, JSON.stringify(cleaned));
     }
-    return parsed;
+    return cleaned;
   } catch {
     return {};
   }
@@ -79,10 +77,13 @@ export function saveHighscoreToStorage(difficulty, key, newScore, timeTaken, isC
         highScore: Math.max(newScore, prev.highScore || 0),
         bestTime: updatedBestTime,
         gamesPlayed: (prev.gamesPlayed || 0) + 1,
-        lastPlayed: new Date().toISOString().slice(0, 10),
+        lastPlayed: getTodayDateString(),
       },
     };
     localStorage.setItem(HIGHSCORE_STORAGE_KEY, JSON.stringify(updated));
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new Event('sakura-highscores-updated'));
+    }
 
     // Ghi nhận hoạt động vào Heatmap & cập nhật Streak
     try {
@@ -102,8 +103,45 @@ export function saveHighscoreToStorage(difficulty, key, newScore, timeTaken, isC
  * Tạo danh sách thẻ bài ngẫu nhiên từ kho từ vựng
  */
 export function generateCardsFromPool(pool, pairsCount) {
-  const shuffledPool = shuffleArray(pool.filter((v) => v.meaning || v.meaning_vi));
-  const selectedVocab = shuffledPool.slice(0, pairsCount);
+  const shuffledPool = shuffleArray(pool.filter((v) => v.meaning || v.meaning_vi || v.vietnamese));
+  const selectedVocab = [];
+  const usedIds = new Set();
+  const usedMeanings = new Set();
+  const usedJpTexts = new Set();
+
+  const normalizeMeaning = (item) =>
+    String(item.meaning || item.meaning_vi || item.vietnamese || '')
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, ' ');
+
+  const normalizeJp = (item) =>
+    String(item.kanji || item.hiragana || '').trim();
+
+  // Khử trùng nghĩa tiếng Việt và mặt chữ tiếng Nhật trên cùng 1 bàn cờ
+  for (const item of shuffledPool) {
+    if (selectedVocab.length >= pairsCount) break;
+    const viNorm = normalizeMeaning(item);
+    const jpNorm = normalizeJp(item);
+    if (!viNorm || !jpNorm) continue;
+    if (usedMeanings.has(viNorm) || usedJpTexts.has(jpNorm)) continue;
+
+    usedMeanings.add(viNorm);
+    usedJpTexts.add(jpNorm);
+    if (item.id) usedIds.add(item.id);
+    selectedVocab.push(item);
+  }
+
+  // Fallback dự phòng nếu pool nhỏ có ít hơn pairsCount nghĩa phân biệt
+  if (selectedVocab.length < pairsCount) {
+    for (const item of shuffledPool) {
+      if (selectedVocab.length >= pairsCount) break;
+      if (item.id && usedIds.has(item.id)) continue;
+      if (!item.id && selectedVocab.includes(item)) continue;
+      if (item.id) usedIds.add(item.id);
+      selectedVocab.push(item);
+    }
+  }
 
   const newCards = [];
   selectedVocab.forEach((item, index) => {

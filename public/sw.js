@@ -1,37 +1,58 @@
 // ==========================================================================
 // Service Worker: Nihongo Master PWA
-// Hỗ trợ hoạt động Offline 100% (Cache-first cho static assets & Offline Fallback)
+// Pre-cache 100% tài nguyên (App Shell + Lazy Chunks + CSS) & Offline Fallback
 // ==========================================================================
 
-const CACHE_NAME = 'nihongo-master-v2';
-const STATIC_ASSETS = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/favicon.svg',
+const IS_PRODUCTION_BUILD = false;
+const CACHE_NAME = 'nihongo-master-dev';
+const PRECACHE_ASSETS = [
+  './',
+  './index.html',
+  './manifest.json',
+  './favicon.svg',
 ];
 
-// Kiểm tra nếu đang chạy ở môi trường phát triển (localhost / 127.0.0.1)
-const isDevHost =
-  self.location.hostname === 'localhost' ||
-  self.location.hostname === '127.0.0.1' ||
-  self.location.port === '5173';
+// Chỉ coi là Dev Server khi chạy bản chưa build hoặc cổng Vite Dev (5173)
+// Bản build production chạy qua `vite preview` (4173) hoặc host thực tế sẽ kích hoạt PWA Pre-cache đầy đủ
+const isViteDevServer = !IS_PRODUCTION_BUILD || self.location.port === '5173';
 
-// 1. Cài đặt Service Worker và lưu trước các file tĩnh cốt lõi
+const getScopeUrl = (assetPath) => new URL(assetPath, self.registration.scope).href;
+
+const matchFromCache = async (request, urlObj, sameOrigin) => {
+  const direct = await caches.match(request, { ignoreVary: true });
+  if (direct) return direct;
+  if (sameOrigin) {
+    return caches.match(`${urlObj.origin}${urlObj.pathname}`, { ignoreVary: true });
+  }
+  return undefined;
+};
+
+// 1. Cài đặt Service Worker và Pre-cache toàn bộ tài nguyên ứng dụng (bao gồm tất cả lazy chunks)
 self.addEventListener('install', (event) => {
-  self.skipWaiting();
-  if (isDevHost) return; // Không lưu cache trên localhost
+  if (isViteDevServer) {
+    self.skipWaiting();
+    return;
+  }
+
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(STATIC_ASSETS);
+    caches.open(CACHE_NAME).then(async (cache) => {
+      const urls = [...new Set(PRECACHE_ASSETS.map(getScopeUrl))];
+      const requests = urls.map((url) => new Request(url, { cache: 'reload' }));
+      try {
+        await cache.addAll(requests);
+      } catch (err) {
+        console.warn('[PWA SW] Batch precache failed, falling back to per-file:', err);
+        // Fallback nạp từng file nếu có 1 resource phụ lỗi mạng tạm thời
+        await Promise.allSettled(requests.map((req) => cache.add(req)));
+      }
+      await self.skipWaiting();
     })
   );
 });
 
-// 2. Kích hoạt và dọn dẹp các cache cũ nếu có
+// 2. Kích hoạt và dọn dẹp các cache phiên bản cũ
 self.addEventListener('activate', (event) => {
-  if (isDevHost) {
-    // Trên localhost: Xóa sạch cache và tự hủy đăng ký
+  if (isViteDevServer) {
     event.waitUntil(
       caches.keys()
         .then((keys) => Promise.all(keys.map((k) => caches.delete(k))))
@@ -42,33 +63,36 @@ self.addEventListener('activate', (event) => {
   }
 
   event.waitUntil(
-    caches.keys().then((keys) => {
-      return Promise.all(
-        keys.map((key) => {
-          if (key !== CACHE_NAME) {
-            return caches.delete(key);
-          }
-          return null;
-        })
-      );
-    }).then(() => self.clients.claim())
+    caches.keys()
+      .then((keys) =>
+        Promise.all(
+          keys.map((key) => (key !== CACHE_NAME ? caches.delete(key) : null))
+        )
+      )
+      .then(() => self.clients.claim())
   );
 });
 
-// 3. Xử lý Fetch Request: Cache-First cho App Shell & Network-First cho API
+// 3. Xử lý Fetch Request: Network-only cho API dịch, Cache-First cho tài nguyên tĩnh & Font
 self.addEventListener('fetch', (event) => {
-  // Trên localhost: Tuyệt đối không can thiệp để Vite HMR tải code tức thì
-  if (isDevHost) {
+  if (isViteDevServer || event.request.method !== 'GET') {
     return;
   }
 
   const requestUrl = new URL(event.request.url);
+  if (requestUrl.protocol !== 'http:' && requestUrl.protocol !== 'https:') {
+    return;
+  }
 
-  // Đối với API bên ngoài (Google Translate API): Network First, không lưu cache API
-  if (requestUrl.hostname.includes('translate.googleapis.com')) {
+  // API dịch thuật bên ngoài (Google Translate & MyMemory): chỉ gọi mạng, trả JSON lỗi khi Offline
+  if (
+    requestUrl.hostname.includes('translate.googleapis.com') ||
+    requestUrl.hostname.includes('api.mymemory.translated.net')
+  ) {
     event.respondWith(
       fetch(event.request).catch(() => {
         return new Response(JSON.stringify({ error: 'offline' }), {
+          status: 503,
           headers: { 'Content-Type': 'application/json' },
         });
       })
@@ -76,30 +100,48 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Đối với các file asset của ứng dụng (HTML, JS, CSS, Font, Image):
-  // Chiến lược Stale-While-Revalidate / Cache First để đảm bảo luôn mở được khi offline
+  const isSameOrigin = requestUrl.origin === self.location.origin;
+  const isGoogleFont =
+    requestUrl.hostname === 'fonts.googleapis.com' ||
+    requestUrl.hostname === 'fonts.gstatic.com';
+
+  if (!isSameOrigin && !isGoogleFont) {
+    return;
+  }
+
+  const isHashedAsset = isSameOrigin && requestUrl.pathname.includes('/assets/');
+
   event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
+    matchFromCache(event.request, requestUrl, isSameOrigin).then((cachedResponse) => {
       if (cachedResponse) {
-        // Cập nhật ngầm trong nền nếu có mạng
-        fetch(event.request)
-          .then((networkResponse) => {
-            if (networkResponse && networkResponse.status === 200) {
-              caches.open(CACHE_NAME).then((cache) => {
-                cache.put(event.request, networkResponse.clone());
-              });
-            }
-          })
-          .catch(() => {
-            // Đang offline, tiếp tục dùng cachedResponse
-          });
+        // Tài nguyên không gắn hash (index.html, manifest.json, Google Fonts CSS) cập nhật ngầm khi online
+        if (!isHashedAsset) {
+          fetch(event.request)
+            .then((networkResponse) => {
+              if (
+                networkResponse &&
+                networkResponse.status === 200 &&
+                (networkResponse.type === 'basic' || networkResponse.type === 'cors')
+              ) {
+                caches.open(CACHE_NAME).then((cache) => {
+                  cache.put(event.request, networkResponse.clone());
+                });
+              }
+            })
+            .catch(() => {
+              // Đang offline, tiếp tục dùng bản cache
+            });
+        }
         return cachedResponse;
       }
 
-      // Nếu chưa có trong cache thì fetch từ network và lưu vào cache
       return fetch(event.request)
         .then((networkResponse) => {
-          if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
+          if (
+            !networkResponse ||
+            networkResponse.status !== 200 ||
+            (networkResponse.type !== 'basic' && networkResponse.type !== 'cors')
+          ) {
             return networkResponse;
           }
           const responseToCache = networkResponse.clone();
@@ -109,10 +151,16 @@ self.addEventListener('fetch', (event) => {
           return networkResponse;
         })
         .catch(() => {
-          // Khi mất mạng và là trang HTML thì trả về index.html trong cache
-          if (event.request.headers.get('accept')?.includes('text/html')) {
-            return caches.match('/index.html') || caches.match('/');
+          if (
+            event.request.mode === 'navigate' ||
+            event.request.headers.get('accept')?.includes('text/html')
+          ) {
+            return caches.match(getScopeUrl('./index.html'), { ignoreVary: true }).then(async (html) => {
+              if (html) return html;
+              return (await caches.match(getScopeUrl('./'), { ignoreVary: true })) || Response.error();
+            });
           }
+          return Response.error();
         });
     })
   );

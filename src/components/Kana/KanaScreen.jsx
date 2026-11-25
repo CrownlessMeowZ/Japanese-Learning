@@ -37,6 +37,22 @@ export const KanaScreen = ({ onBack }) => {
   const [stats, setStats] = useState({ correct: 0, wrong: 0, troubleItems: [] });
   const inputRef = useRef(null);
   const recordedQuizRef = useRef(false);
+  const isTransitioningRef = useRef(false);
+  const transitionTimerRef = useRef(null);
+
+  const clearTransitionTimer = useCallback(() => {
+    if (transitionTimerRef.current) {
+      clearTimeout(transitionTimerRef.current);
+      transitionTimerRef.current = null;
+    }
+    isTransitioningRef.current = false;
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      clearTransitionTimer();
+    };
+  }, [clearTransitionTimer]);
 
   // Ghi nhận thành tích luyện tập Kana vào Progress Store khi hoàn thành Quiz
   useEffect(() => {
@@ -89,6 +105,7 @@ export const KanaScreen = ({ onBack }) => {
 
   // Bắt đầu làm bài Quiz
   const startQuiz = useCallback((customItems = null) => {
+    clearTransitionTimer();
     let pool = customItems;
     if (!pool) {
       if (selectedRows.length === 0) {
@@ -135,7 +152,7 @@ export const KanaScreen = ({ onBack }) => {
     setShowAnswerFeedback(null);
     setStats({ correct: 0, wrong: 0, troubleItems: [] });
     setActiveTab('quiz');
-  }, [quizScript, selectedRows]);
+  }, [quizScript, selectedRows, clearTransitionTimer]);
 
   // Lựa chọn trắc nghiệm cho câu hiện tại (trích xuất trực tiếp từ câu hỏi đã chuẩn bị)
   const currentQuestion = quizQuestions[currentIndex];
@@ -150,6 +167,8 @@ export const KanaScreen = ({ onBack }) => {
 
   // Chuyển sang câu tiếp theo hoặc kết thúc
   const advanceNextQuestion = useCallback(() => {
+    isTransitioningRef.current = false;
+    transitionTimerRef.current = null;
     setShowAnswerFeedback(null);
     setTypedInput('');
     setCurrentIndex((prev) => {
@@ -163,17 +182,24 @@ export const KanaScreen = ({ onBack }) => {
 
   // Xử lý khi người dùng trả lời đúng
   const handleCorrectAnswer = useCallback((item) => {
+    if (isTransitioningRef.current) return;
+    isTransitioningRef.current = true;
     speakKana(item.character);
     setShowAnswerFeedback({ correct: true, text: `Chính xác: ${item.romaji}` });
     setStats((prev) => ({ ...prev, correct: prev.correct + 1 }));
 
-    setTimeout(() => {
+    transitionTimerRef.current = setTimeout(() => {
       advanceNextQuestion();
     }, 450);
   }, [speakKana, advanceNextQuestion]);
 
   // Xử lý khi người dùng trả lời sai hoặc không biết
   const handleWrongAnswer = useCallback((item, isSkip = false) => {
+    if (isTransitioningRef.current) return;
+    if (isSkip) {
+      isTransitioningRef.current = true;
+    }
+
     setIsInputShaking(true);
     setTimeout(() => setIsInputShaking(false), 500);
 
@@ -198,7 +224,7 @@ export const KanaScreen = ({ onBack }) => {
         text: `Đáp án là: ${item.romaji}`,
       });
       speakKana(item.character);
-      setTimeout(() => {
+      transitionTimerRef.current = setTimeout(() => {
         advanceNextQuestion();
       }, 1000);
     }
@@ -206,6 +232,7 @@ export const KanaScreen = ({ onBack }) => {
 
   // Lắng nghe gõ phím tự động (Speed Typing như Tofugu)
   const handleTypingChange = useCallback((e) => {
+    if (isTransitioningRef.current || showAnswerFeedback) return;
     const val = e.target.value.toLowerCase().trim();
     setTypedInput(val);
 
@@ -220,12 +247,13 @@ export const KanaScreen = ({ onBack }) => {
     if (isMatch) {
       handleCorrectAnswer(current);
     }
-  }, [currentIndex, quizQuestions, handleCorrectAnswer]);
+  }, [currentIndex, quizQuestions, handleCorrectAnswer, showAnswerFeedback]);
 
   // Khi bấm Enter trong ô gõ phím nếu chưa khớp
   const handleTypingKeyDown = useCallback((e) => {
     if (e.key === 'Enter') {
       e.preventDefault();
+      if (isTransitioningRef.current || showAnswerFeedback) return;
       const current = quizQuestions[currentIndex];
       if (!current) return;
       const isMatch =
@@ -235,10 +263,11 @@ export const KanaScreen = ({ onBack }) => {
         handleWrongAnswer(current, false);
       }
     }
-  }, [currentIndex, quizQuestions, typedInput, handleWrongAnswer]);
+  }, [currentIndex, quizQuestions, typedInput, handleWrongAnswer, showAnswerFeedback]);
 
   // Chọn đáp án trắc nghiệm
   const handleSelectChoice = useCallback((option) => {
+    if (isTransitioningRef.current || showAnswerFeedback) return;
     const current = quizQuestions[currentIndex];
     if (!current) return;
 
@@ -247,7 +276,7 @@ export const KanaScreen = ({ onBack }) => {
     } else {
       handleWrongAnswer(current, true);
     }
-  }, [currentIndex, quizQuestions, handleCorrectAnswer, handleWrongAnswer]);
+  }, [currentIndex, quizQuestions, handleCorrectAnswer, handleWrongAnswer, showAnswerFeedback]);
 
   // Ôn tập lại chỉ những chữ đã làm sai
   const retryTroubleKana = useCallback(() => {
@@ -285,7 +314,10 @@ export const KanaScreen = ({ onBack }) => {
         <button
           type="button"
           className={`kana-nav-tab-btn ${activeTab === 'chart' ? 'active' : ''}`}
-          onClick={() => setActiveTab('chart')}
+          onClick={() => {
+            clearTransitionTimer();
+            setActiveTab('chart');
+          }}
         >
           📖 Bảng Tra Cứu (Kana Chart)
         </button>
@@ -296,7 +328,10 @@ export const KanaScreen = ({ onBack }) => {
               ? 'active'
               : ''
           }`}
-          onClick={() => setActiveTab('setup')}
+          onClick={() => {
+            clearTransitionTimer();
+            setActiveTab('setup');
+          }}
         >
           🎯 Luyện Tập Phản Xạ (Kana Quiz)
         </button>
@@ -340,7 +375,10 @@ export const KanaScreen = ({ onBack }) => {
             <button
               type="button"
               style={styles.quizAbortBtn}
-              onClick={() => setActiveTab('setup')}
+              onClick={() => {
+                clearTransitionTimer();
+                setActiveTab('setup');
+              }}
             >
               ✕ Dừng bài kiểm tra
             </button>
@@ -375,7 +413,7 @@ export const KanaScreen = ({ onBack }) => {
             </div>
 
             {/* Ký tự hiển thị to bản */}
-            <div style={styles.bigCharacterDisplay}>
+            <div lang="ja" style={styles.bigCharacterDisplay}>
               {currentQuestion.character}
             </div>
 

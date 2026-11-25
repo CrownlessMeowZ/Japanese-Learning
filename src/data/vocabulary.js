@@ -4363,7 +4363,7 @@ export const vocabularyData = {
       "id": "L7_28",
       "kanji": "しょうゆ",
       "hiragana": "しょうゆ",
-      "meaning": "Muối",
+      "meaning": "Nước tương, xì dầu",
       "category": "Từ vựng",
       "section": "7.3",
       "sectionTitle": "7.3 パーティーの準備 (Chuẩn bị bữa tiệc / Nhờ vả & Chỉ thị)"

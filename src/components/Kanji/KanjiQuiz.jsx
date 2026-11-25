@@ -63,15 +63,20 @@ export const KanjiQuiz = ({
    * Khởi tạo ngân hàng câu hỏi trắc nghiệm
    */
   const startQuiz = useCallback((customPool = null) => {
-    const pool = customPool || targetPool;
-    if (!pool || pool.length < 4) return;
+    const isRetry = Array.isArray(customPool);
+    const pool = isRetry ? customPool : targetPool;
+    const distractorSource = pool && pool.length >= 4 ? pool : kanjiList;
+    if (!pool || pool.length === 0 || distractorSource.length < 4) return;
+    if (!isRetry && pool.length < 4 && kanjiList.length < 4) return;
 
     const shuffled = shuffleArray(pool);
-    const count = questionCount === 'all' ? shuffled.length : Math.min(Number(questionCount), shuffled.length);
+    const count = isRetry || questionCount === 'all'
+      ? shuffled.length
+      : Math.min(Number(questionCount), shuffled.length);
     const selectedTargets = shuffled.slice(0, count);
 
     const generated = selectedTargets.map((target) => {
-      const otherCandidates = pool.filter((k) => k.character !== target.character);
+      const otherCandidates = distractorSource.filter((k) => k.character !== target.character);
       const distractors = shuffleArray(otherCandidates).slice(0, 3);
 
       let questionText = '';
@@ -128,7 +133,7 @@ export const KanjiQuiz = ({
     setStreak(0);
     setMissedKanji([]);
     setQuizState('playing');
-  }, [targetPool, questionCount, questionType]);
+  }, [targetPool, kanjiList, questionCount, questionType]);
 
   const currentQ = questions[currentIndex];
 

@@ -5,6 +5,16 @@
    Hiệu ứng ẩn/hiện 0ms re-render trên toàn bộ ứng dụng.
    ========================================================================== */
 
+.ruby-wrapper {
+  ruby-position: over;
+  ruby-align: center;
+}
+
+.ruby-wrapper rt {
+  text-align: center;
+  user-select: none;
+}
+
 [data-furigana="hidden"] .ruby-wrapper rt {
   opacity: 0 !important;
   visibility: hidden !important;

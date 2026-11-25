@@ -3,7 +3,9 @@ import { SplashScreen } from './components/Splash/SplashScreen';
 import { WelcomeScreen } from './components/Welcome/WelcomeScreen';
 import { Dashboard } from './components/Dashboard';
 import { FuriganaSwitch } from './components/FuriganaSwitch';
+import { ErrorBoundary } from './components/ErrorBoundary';
 import { useDailyStreak } from './hooks/useProgress';
+import { useProgressStore } from './store/progressStore';
 import { vocabularyData } from './data/vocabulary';
 import { grammarData } from './data/grammar';
 import './styles/furigana.css';
@@ -50,6 +52,30 @@ export default function App() {
   const [isBackupModalOpen, setIsBackupModalOpen] = useState(false);
   const [isOnline, setIsOnline] = useState(typeof navigator !== 'undefined' ? navigator.onLine : true);
   const dailyStreak = useDailyStreak();
+
+  // Tự động kiểm tra & reset Streak khi mở lại app hoặc chuyển sang ngày mới
+  useEffect(() => {
+    const syncStreak = () => {
+      useProgressStore.getState().syncStreakWithToday();
+    };
+    syncStreak();
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        syncStreak();
+      }
+    };
+
+    window.addEventListener('focus', syncStreak);
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    const intervalId = window.setInterval(syncStreak, 60000);
+
+    return () => {
+      window.removeEventListener('focus', syncStreak);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.clearInterval(intervalId);
+    };
+  }, []);
 
   // Lắng nghe trạng thái kết nối mạng Online / Offline
   useEffect(() => {
@@ -262,116 +288,129 @@ export default function App() {
         </div>
       </header>
 
-      {/* Main Content (State-based Route Dispatcher kèm hiệu ứng chuyển tab sakura-tab-view) */}
+      {/* Main Content (State-based Route Dispatcher kèm hiệu ứng chuyển tab sakura-tab-view & ErrorBoundary) */}
       <main style={{ position: 'relative', zIndex: 1, padding: '16px 0 40px' }}>
-        <Suspense fallback={
-          <div style={{ textAlign: 'center', padding: '80px 20px', color: '#e91e8c', fontWeight: '700' }}>
-            <span style={{ fontSize: '2.5rem', display: 'block', marginBottom: '12px', animation: 'streakPulse 1.5s ease-in-out infinite' }}>🌸</span>
-            Đang tải dữ liệu học tập...
-          </div>
-        }>
-          <div key={currentRoute + (activeLessonId ? `-${activeLessonId}` : '')} className="sakura-tab-view">
-            {currentRoute === 'welcome' && (
-              <WelcomeScreen
-                onStartLearning={handleOpenDashboard}
-                onOpenTranslator={handleOpenTranslator}
-                onOpenKana={handleOpenKana}
-                onOpenKanji={handleOpenKanji}
-                onOpenMatch={handleOpenMatch}
-                onOpenStats={handleOpenStats}
-                onSelectLesson={(lessonId) => {
-                  setActiveLessonId(lessonId);
-                  setCurrentRoute('vocab');
-                }}
-              />
-            )}
+        <ErrorBoundary
+          key={`eb-${currentRoute}-${activeLessonId ?? ''}`}
+          level="route"
+          onResetRoute={handleOpenWelcome}
+        >
+          <Suspense fallback={
+            <div style={{ textAlign: 'center', padding: '80px 20px', color: '#e91e8c', fontWeight: '700' }}>
+              <span style={{ fontSize: '2.5rem', display: 'block', marginBottom: '12px', animation: 'streakPulse 1.5s ease-in-out infinite' }}>🌸</span>
+              Đang tải dữ liệu học tập...
+            </div>
+          }>
+            <div key={currentRoute + (activeLessonId ? `-${activeLessonId}` : '')} className="sakura-tab-view">
+              {currentRoute === 'welcome' && (
+                <WelcomeScreen
+                  onStartLearning={handleOpenDashboard}
+                  onOpenTranslator={handleOpenTranslator}
+                  onOpenKana={handleOpenKana}
+                  onOpenKanji={handleOpenKanji}
+                  onOpenMatch={handleOpenMatch}
+                  onOpenStats={handleOpenStats}
+                  onSelectLesson={(lessonId) => {
+                    setActiveLessonId(lessonId);
+                    setCurrentRoute('vocab');
+                  }}
+                />
+              )}
 
-            {currentRoute === 'dashboard' && (
-              <Dashboard
-                onSelectQuiz={handleOpenQuiz}
-                onSelectVocab={handleOpenVocab}
-                onSelectGrammar={handleOpenGrammar}
-                onSelectKaiwa={handleOpenKaiwa}
-                onSelectMatch={handleOpenMatch}
-                onOpenMatch={handleOpenMatch}
-                onOpenStats={handleOpenStats}
-                onOpenTranslator={handleOpenTranslator}
-                onOpenKana={handleOpenKana}
-                onOpenKanji={handleOpenKanji}
-              />
-            )}
+              {currentRoute === 'dashboard' && (
+                <Dashboard
+                  onSelectQuiz={handleOpenQuiz}
+                  onSelectVocab={handleOpenVocab}
+                  onSelectGrammar={handleOpenGrammar}
+                  onSelectKaiwa={handleOpenKaiwa}
+                  onSelectMatch={handleOpenMatch}
+                  onOpenMatch={handleOpenMatch}
+                  onOpenStats={handleOpenStats}
+                  onOpenTranslator={handleOpenTranslator}
+                  onOpenKana={handleOpenKana}
+                  onOpenKanji={handleOpenKanji}
+                />
+              )}
 
-            {currentRoute === 'stats' && (
-              <StatsScreen
-                onBack={handleBackToDashboard}
-                onSelectLesson={(lessonId) => {
-                  setActiveLessonId(lessonId);
-                  setCurrentRoute('vocab');
-                }}
-              />
-            )}
+              {currentRoute === 'stats' && (
+                <StatsScreen
+                  onBack={handleBackToDashboard}
+                  onSelectLesson={(lessonId) => {
+                    setActiveLessonId(lessonId);
+                    setCurrentRoute('vocab');
+                  }}
+                />
+              )}
 
-            {currentRoute === 'match' && (
-              <SakuraMatchScreen
-                initialLessonId={activeLessonId}
-                onBack={handleBackToDashboard}
-              />
-            )}
+              {currentRoute === 'match' && (
+                <SakuraMatchScreen
+                  initialLessonId={activeLessonId}
+                  onBack={handleBackToDashboard}
+                />
+              )}
 
-            {currentRoute === 'kana' && (
-              <KanaScreen onBack={handleBackToDashboard} />
-            )}
+              {currentRoute === 'kana' && (
+                <KanaScreen onBack={handleBackToDashboard} />
+              )}
 
-            {currentRoute === 'kanji' && (
-              <KanjiScreen onBack={handleBackToDashboard} />
-            )}
+              {currentRoute === 'kanji' && (
+                <KanjiScreen onBack={handleBackToDashboard} />
+              )}
 
-            {currentRoute === 'translator' && (
-              <Translator onBack={handleBackToDashboard} />
-            )}
+              {currentRoute === 'translator' && (
+                <Translator onBack={handleBackToDashboard} />
+              )}
 
-            {currentRoute === 'quiz' && (
-              <QuizScreen
-                lessonId={activeLessonId}
-                rawQuestions={quizRawQuestions}
-                onBack={handleBackToDashboard}
-              />
-            )}
+              {currentRoute === 'quiz' && (
+                <QuizScreen
+                  lessonId={activeLessonId}
+                  rawQuestions={quizRawQuestions}
+                  onBack={handleBackToDashboard}
+                />
+              )}
 
-            {currentRoute === 'grammar' && (
-              <GrammarScreen
-                lessonId={activeLessonId}
-                grammarList={lessonGrammar}
-                onBack={handleBackToDashboard}
-              />
-            )}
+              {currentRoute === 'grammar' && (
+                <GrammarScreen
+                  lessonId={activeLessonId}
+                  grammarList={lessonGrammar}
+                  onBack={handleBackToDashboard}
+                />
+              )}
 
-            {currentRoute === 'kaiwa' && (
-              <KaiwaScreen
-                lessonId={activeLessonId}
-                onBack={handleBackToDashboard}
-              />
-            )}
+              {currentRoute === 'kaiwa' && (
+                <KaiwaScreen
+                  lessonId={activeLessonId}
+                  onBack={handleBackToDashboard}
+                />
+              )}
 
-            {currentRoute === 'vocab' && (
-              <VocabScreen
-                lessonId={activeLessonId}
-                vocabularyList={quizRawQuestions}
-                onBack={handleBackToDashboard}
-              />
-            )}
-          </div>
-        </Suspense>
+              {currentRoute === 'vocab' && (
+                <VocabScreen
+                  lessonId={activeLessonId}
+                  vocabularyList={quizRawQuestions}
+                  onBack={handleBackToDashboard}
+                />
+              )}
+            </div>
+          </Suspense>
+        </ErrorBoundary>
       </main>
 
       {/* 💾 Modal Sao Lưu & Khôi Phục Dữ Liệu */}
       {isBackupModalOpen && (
-        <Suspense fallback={null}>
-          <BackupRestoreModal
-            isOpen={isBackupModalOpen}
-            onClose={() => setIsBackupModalOpen(false)}
-          />
-        </Suspense>
+        <ErrorBoundary
+          key="eb-backup-modal"
+          level="route"
+          onResetRoute={() => setIsBackupModalOpen(false)}
+          resetLabel="✕ Đóng cửa sổ"
+        >
+          <Suspense fallback={null}>
+            <BackupRestoreModal
+              isOpen={isBackupModalOpen}
+              onClose={() => setIsBackupModalOpen(false)}
+            />
+          </Suspense>
+        </ErrorBoundary>
       )}
     </div>
   );

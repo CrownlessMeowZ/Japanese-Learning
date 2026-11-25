@@ -74,7 +74,7 @@ export const KanaMatrixView = ({
                         onClick={() => onSpeakKana(char)}
                         title={`Click để nghe phát âm: ${item.romaji}`}
                       >
-                        <span style={styles.kanaCharacter}>{char}</span>
+                        <span lang="ja" style={styles.kanaCharacter}>{char}</span>
                         <span style={styles.kanaRomaji}>{item.romaji}</span>
                         <span style={styles.speakerIcon}>🔊</span>
                       </div>

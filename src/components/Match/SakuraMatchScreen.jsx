@@ -60,6 +60,15 @@ export const SakuraMatchScreen = ({ initialLessonId = null, onBack }) => {
   const [highscores, setHighscores] = useState(() => loadHighscoresFromStorage());
   const [gameSessionId, setGameSessionId] = useState(0);
 
+  // Tự động đồng bộ kỷ lục Sakura Match khi Import JSON hoặc Factory Reset từ modal Sao Lưu
+  useEffect(() => {
+    const syncHighscores = () => {
+      setHighscores(loadHighscoresFromStorage());
+    };
+    window.addEventListener('sakura-highscores-updated', syncHighscores);
+    return () => window.removeEventListener('sakura-highscores-updated', syncHighscores);
+  }, []);
+
   const startTimeRef = useRef(null);
   const timerRef = useRef(null);
   const isCheckingRef = useRef(false);

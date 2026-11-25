@@ -115,7 +115,11 @@ export const QuizScreen = ({ lessonId = 1, rawQuestions = [], onBack }) => {
     if (status === QUIZ_STATUS.PLAYING && currentQuestion) {
       const target = currentQuestion.correctAnswer;
       const sound = getAudioTarget(target);
-      if (sound && (quizMode === 'listening' || questionFormat === 'dictation' || autoPlayAudio)) {
+      const shouldAutoPlay =
+        questionFormat === 'dictation' ||
+        quizMode === 'listening' ||
+        (autoPlayAudio && quizMode !== 'vi_to_ja');
+      if (sound && shouldAutoPlay) {
         const timer = setTimeout(() => {
           playAudio(sound, audioSpeed);
         }, 180);

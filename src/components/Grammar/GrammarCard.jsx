@@ -14,7 +14,7 @@ const ExampleItem = React.memo(({ example }) => {
   return (
     <div style={styles.exampleItem}>
       <div style={{ flex: 1 }}>
-        <div style={styles.exampleJp}>
+        <div style={styles.exampleJp} lang="ja">
           <FuriganaText
             text={example.furigana}
             kanji={example.japanese}
@@ -46,7 +46,7 @@ const ExampleItem = React.memo(({ example }) => {
  * Hiển thị cấu trúc ngữ pháp, giải thích, câu ví dụ và nút "Đánh dấu đã hiểu"
  */
 export const GrammarCard = React.memo(({ item, lessonId, index }) => {
-  const grammarId = item.grammar_id || `L${String(lessonId).padStart(2, '0')}_G${index + 1}`;
+  const grammarId = item.id || item.grammar_id || `L${String(lessonId).padStart(2, '0')}_G${String(index + 1).padStart(2, '0')}`;
   const { checkIsLearned, markAsLearned } = useProgress();
   const isLearned = checkIsLearned(grammarId);
 
@@ -68,7 +68,7 @@ export const GrammarCard = React.memo(({ item, lessonId, index }) => {
             {item.level && <span style={styles.levelTag}>{item.level}</span>}
             {isLearned && <span style={styles.learnedBadge}>✓ Đã hiểu</span>}
           </div>
-          <h3 style={styles.title}>{item.title}</h3>
+          <h3 style={styles.title} lang="ja">{item.title}</h3>
           {(item.titleVi || item.meaning_vi || item.meaning) && (
             <div style={styles.meaning}>
               💡 {item.titleVi || item.meaning_vi || item.meaning}
@@ -90,7 +90,7 @@ export const GrammarCard = React.memo(({ item, lessonId, index }) => {
       {/* Structure Box */}
       <div style={styles.structureBox}>
         <div style={styles.structureLabel}>CÔNG THỨC:</div>
-        <div style={styles.structureText}>{item.structure}</div>
+        <div style={styles.structureText} lang="ja">{item.structure}</div>
       </div>
 
       {/* Explanation */}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import {
   romajiToHiragana,
   romajiToJapanese,
@@ -38,6 +38,36 @@ export const Translator = ({ onBack }) => {
   const [isSwapping, setIsSwapping] = useState(false);
   const [spellSuggestion, setSpellSuggestion] = useState(null);
   const [history, setHistory] = useState([]);
+  const [isOnline, setIsOnline] = useState(() => (typeof navigator !== 'undefined' ? navigator.onLine : true));
+
+  const abortControllerRef = useRef(null);
+  const debounceTimerRef = useRef(null);
+  const lastImmediateQueryRef = useRef(null);
+  const langRef = useRef({ sourceLang, targetLang });
+
+  useEffect(() => {
+    langRef.current = { sourceLang, targetLang };
+  }, [sourceLang, targetLang]);
+
+  // Theo dõi trạng thái mạng & hủy request dịch / debounce timer còn dở khi unmount
+  useEffect(() => {
+    const handleOnline = () => setIsOnline(true);
+    const handleOffline = () => setIsOnline(false);
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+      if (debounceTimerRef.current) {
+        clearTimeout(debounceTimerRef.current);
+        debounceTimerRef.current = null;
+      }
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+        abortControllerRef.current = null;
+      }
+    };
+  }, []);
 
   // Mẫu câu gợi ý nhanh cho người học
   const samplePhrases = useMemo(
@@ -70,9 +100,12 @@ export const Translator = ({ onBack }) => {
   /**
    * Tra cứu Offline từ cơ sở dữ liệu từ vựng nội bộ (>965 từ Dekiru Nihongo & Nhật dụng)
    */
-  const handleOfflineLookup = useCallback((query) => {
+  const handleOfflineLookup = useCallback((query, overrideSourceLang = null, overrideTargetLang = null) => {
     const trimmed = (query || '').trim();
     if (!trimmed) return;
+
+    const activeSourceLang = overrideSourceLang || langRef.current.sourceLang;
+    const activeTargetLang = overrideTargetLang || langRef.current.targetLang;
 
     const convertedJp = romajiToJapanese(trimmed);
     const hiraJp = romajiToHiragana(trimmed);
@@ -85,9 +118,9 @@ export const Translator = ({ onBack }) => {
 
     if (results.length > 0) {
       const best = results[0];
-      const resultText = sourceLang === 'ja' ? best.meaning : `${best.kanji} (${best.hiragana})`;
+      const resultText = activeSourceLang === 'ja' ? best.meaning : `${best.kanji} (${best.hiragana})`;
 
-      if (sourceLang === 'ja') {
+      if (activeSourceLang === 'ja') {
         setTranslatedText(best.meaning);
         setSourcePhonetic(best.hiragana ? `${trimmed} (${best.hiragana})` : best.hiragana);
         setTargetPhonetic('');
@@ -100,15 +133,15 @@ export const Translator = ({ onBack }) => {
       setErrorMessage(null);
       setSpellSuggestion(null);
 
-      // Lưu vào lịch sử tra cứu
+      // Lưu vào lịch sử tra cứu với đúng cặp ngôn ngữ thực tế tại thời điểm dịch
       setHistory((prev) => {
         const filtered = prev.filter((item) => item.sourceText.toLowerCase() !== trimmed.toLowerCase());
         return [
           {
             sourceText: trimmed,
             translatedText: resultText,
-            sourceLang,
-            targetLang,
+            sourceLang: activeSourceLang,
+            targetLang: activeTargetLang,
             time: Date.now(),
           },
           ...filtered,
@@ -137,15 +170,29 @@ export const Translator = ({ onBack }) => {
         setErrorMessage('⚠️ Không tìm thấy bản dịch phù hợp. Vui lòng kiểm tra lại từ khóa.');
       }
     }
-  }, [sourceLang, targetLang]);
+  }, []);
 
   /**
    * Gọi Dịch Thuật Đa Tầng (Google AI + MyMemory API + Offline Dictionary)
+   * Có AbortController hủy request cũ chống race condition và nhận ngôn ngữ tường minh tránh stale closure
    */
-  const handleTranslate = useCallback(async (overrideText = null) => {
+  const handleTranslate = useCallback(async (overrideText = null, overrideSourceLang = null, overrideTargetLang = null) => {
     const textToProcess = typeof overrideText === 'string' ? overrideText : sourceText;
     const trimmed = textToProcess.trim();
+
+    if (debounceTimerRef.current) {
+      clearTimeout(debounceTimerRef.current);
+      debounceTimerRef.current = null;
+    }
+
+    // Hủy mọi request dịch trước đó đang chạy ngầm để tránh ghi đè kết quả mới bằng kết quả trễ
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+      abortControllerRef.current = null;
+    }
+
     if (!trimmed) {
+      setIsLoading(false);
       setTranslatedText('');
       setSourcePhonetic('');
       setTargetPhonetic('');
@@ -159,6 +206,13 @@ export const Translator = ({ onBack }) => {
       setSourceText(overrideText);
     }
 
+    const reqSourceLang = overrideSourceLang || langRef.current.sourceLang;
+    const reqTargetLang = overrideTargetLang || langRef.current.targetLang;
+
+    const controller = new AbortController();
+    abortControllerRef.current = controller;
+    const { signal } = controller;
+
     setIsLoading(true);
     setErrorMessage(null);
     setIsOfflineResult(false);
@@ -166,13 +220,13 @@ export const Translator = ({ onBack }) => {
 
     // Xử lý thông minh cho Romaji dựa trên Dynamic Romaji Index từ kho từ vựng
     let queryToSend = trimmed;
-    let actualSourceLang = sourceLang;
-    let actualTargetLang = targetLang;
+    let actualSourceLang = reqSourceLang;
+    let actualTargetLang = reqTargetLang;
     const isRomaji = isProbablyRomaji(trimmed);
 
     const exactLocalWord = isRomaji ? getExactWordByRomaji(trimmed) : null;
 
-    if (sourceLang === 'ja' && isRomaji) {
+    if (reqSourceLang === 'ja' && isRomaji) {
       if (exactLocalWord) {
         queryToSend = exactLocalWord.kanji || exactLocalWord.hiragana;
       } else if (COMMON_KATAKANA_MAP[trimmed.toLowerCase()]) {
@@ -181,7 +235,7 @@ export const Translator = ({ onBack }) => {
         queryToSend = trimmed;
       }
       setSourcePhonetic(`${trimmed} (${exactLocalWord?.hiragana || romajiToJapanese(trimmed)})`);
-    } else if (sourceLang === 'vi' && isRomaji) {
+    } else if (reqSourceLang === 'vi' && isRomaji) {
       if (exactLocalWord) {
         queryToSend = exactLocalWord.kanji || exactLocalWord.hiragana;
       } else if (COMMON_KATAKANA_MAP[trimmed.toLowerCase()]) {
@@ -196,8 +250,10 @@ export const Translator = ({ onBack }) => {
 
     // 1. Nếu thiết bị đang Offline: Tra cứu trực tiếp từ điển nội bộ
     if (!navigator.onLine) {
-      handleOfflineLookup(trimmed);
-      setIsLoading(false);
+      handleOfflineLookup(trimmed, actualSourceLang, actualTargetLang);
+      if (abortControllerRef.current === controller) {
+        setIsLoading(false);
+      }
       return;
     }
 
@@ -210,13 +266,16 @@ export const Translator = ({ onBack }) => {
     const googleClients = ['gtx', 'dict-chrome-ex', 'at'];
 
     for (const client of googleClients) {
+      if (signal.aborted || abortControllerRef.current !== controller) return;
       try {
         const endpoint = `https://translate.googleapis.com/translate_a/single?client=${client}&sl=${actualSourceLang}&tl=${actualTargetLang}&dt=t&dt=rm&dt=qc&dt=qca&q=${encodeURIComponent(
           queryToSend
         )}`;
-        const response = await fetch(endpoint);
+        const response = await fetch(endpoint, { signal });
+        if (signal.aborted || abortControllerRef.current !== controller) return;
         if (response.ok) {
           const data = await response.json();
+          if (signal.aborted || abortControllerRef.current !== controller) return;
           if (Array.isArray(data) && Array.isArray(data[0])) {
             for (const item of data[0]) {
               if (!Array.isArray(item)) continue;
@@ -243,10 +302,13 @@ export const Translator = ({ onBack }) => {
             break;
           }
         }
-      } catch {
+      } catch (err) {
+        if (signal.aborted || err?.name === 'AbortError') return;
         // Tiếp tục thử client khác hoặc engine tiếp theo
       }
     }
+
+    if (signal.aborted || abortControllerRef.current !== controller) return;
 
     // 3. Engine 2 Fallback: MyMemory Translate API (miễn phí, dịch câu 2 chiều chuẩn xác khi Google 429)
     if (!fullTranslatedText) {
@@ -254,9 +316,11 @@ export const Translator = ({ onBack }) => {
         const myMemoryEndpoint = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(
           queryToSend
         )}&langpair=${actualSourceLang}|${actualTargetLang}`;
-        const mmRes = await fetch(myMemoryEndpoint);
+        const mmRes = await fetch(myMemoryEndpoint, { signal });
+        if (signal.aborted || abortControllerRef.current !== controller) return;
         if (mmRes.ok) {
           const mmData = await mmRes.json();
+          if (signal.aborted || abortControllerRef.current !== controller) return;
           if (mmData?.responseData?.translatedText) {
             let cleanText = mmData.responseData.translatedText;
             cleanText = cleanText
@@ -269,14 +333,19 @@ export const Translator = ({ onBack }) => {
           }
         }
       } catch (err) {
+        if (signal.aborted || err?.name === 'AbortError') return;
         console.warn('[Translator] MyMemory fallback error:', err);
       }
     }
 
+    if (signal.aborted || abortControllerRef.current !== controller) return;
+
     // 4. Engine 3 Fallback: Từ điển nội bộ Dekiru Nihongo
     if (!fullTranslatedText) {
-      handleOfflineLookup(trimmed);
-      setIsLoading(false);
+      handleOfflineLookup(trimmed, actualSourceLang, actualTargetLang);
+      if (abortControllerRef.current === controller) {
+        setIsLoading(false);
+      }
       return;
     }
 
@@ -353,18 +422,38 @@ export const Translator = ({ onBack }) => {
 
       setSpellSuggestion(detectedSuggestion);
     } catch (err) {
+      if (signal.aborted || err?.name === 'AbortError') return;
       console.warn('[Translator] Output update error:', err);
-      handleOfflineLookup(trimmed);
+      handleOfflineLookup(trimmed, actualSourceLang, actualTargetLang);
     } finally {
-      setIsLoading(false);
+      if (abortControllerRef.current === controller) {
+        setIsLoading(false);
+      }
     }
-  }, [sourceText, sourceLang, targetLang, handleOfflineLookup]);
+  }, [sourceText, handleOfflineLookup]);
 
   // Tự động dịch theo thời gian thực (Real-time Debounced Auto-Translate) khi người dùng gõ phím
   useEffect(() => {
     const trimmed = sourceText.trim();
-    const timer = setTimeout(() => {
+    const immediateSnap = lastImmediateQueryRef.current;
+    lastImmediateQueryRef.current = null;
+    if (
+      immediateSnap &&
+      immediateSnap.text === trimmed &&
+      immediateSnap.from === sourceLang &&
+      immediateSnap.to === targetLang
+    ) {
+      return;
+    }
+
+    debounceTimerRef.current = setTimeout(() => {
+      debounceTimerRef.current = null;
       if (!trimmed) {
+        if (abortControllerRef.current) {
+          abortControllerRef.current.abort();
+          abortControllerRef.current = null;
+        }
+        setIsLoading(false);
         setTranslatedText('');
         setSourcePhonetic('');
         setTargetPhonetic('');
@@ -372,11 +461,16 @@ export const Translator = ({ onBack }) => {
         setErrorMessage(null);
         setIsOfflineResult(false);
       } else {
-        handleTranslate();
+        handleTranslate(trimmed, sourceLang, targetLang);
       }
     }, 400);
 
-    return () => clearTimeout(timer);
+    return () => {
+      if (debounceTimerRef.current) {
+        clearTimeout(debounceTimerRef.current);
+        debounceTimerRef.current = null;
+      }
+    };
   }, [sourceText, sourceLang, targetLang, handleTranslate]);
 
   // Hook nhận diện giọng nói Web Speech STT
@@ -385,8 +479,10 @@ export const Translator = ({ onBack }) => {
       lang: sourceLang === 'ja' ? 'ja-JP' : 'vi-VN',
       onResult: (text) => {
         if (text) {
+          const { sourceLang: curFrom, targetLang: curTo } = langRef.current;
+          lastImmediateQueryRef.current = { text: text.trim(), from: curFrom, to: curTo };
           setSourceText(text);
-          handleTranslate(text);
+          handleTranslate(text, curFrom, curTo);
         }
       },
     });
@@ -407,20 +503,28 @@ export const Translator = ({ onBack }) => {
    * Bấm áp dụng từ gợi ý sửa lỗi chính tả
    */
   const handleApplySuggestion = useCallback((suggestedText) => {
+    const { sourceLang: curFrom, targetLang: curTo } = langRef.current;
+    lastImmediateQueryRef.current = { text: suggestedText.trim(), from: curFrom, to: curTo };
     setSourceText(suggestedText);
     setSpellSuggestion(null);
-    handleTranslate(suggestedText);
+    handleTranslate(suggestedText, curFrom, curTo);
   }, [handleTranslate]);
 
   /**
    * Đảo chiều ngôn ngữ dịch (JA ↔ VI)
    */
   const handleSwapLanguages = useCallback(() => {
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+      abortControllerRef.current = null;
+    }
+    setIsLoading(false);
     setIsSwapping(true);
     setTimeout(() => setIsSwapping(false), 300);
 
     const nextSourceLang = targetLang;
     const nextTargetLang = sourceLang;
+    langRef.current = { sourceLang: nextSourceLang, targetLang: nextTargetLang };
 
     setSourceLang(nextSourceLang);
     setTargetLang(nextTargetLang);
@@ -480,6 +584,12 @@ export const Translator = ({ onBack }) => {
   }, []);
 
   const handleClear = useCallback(() => {
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+      abortControllerRef.current = null;
+    }
+    lastImmediateQueryRef.current = { text: '', from: langRef.current.sourceLang, to: langRef.current.targetLang };
+    setIsLoading(false);
     setSourceText('');
     setTranslatedText('');
     setSourcePhonetic('');
@@ -490,15 +600,22 @@ export const Translator = ({ onBack }) => {
   }, []);
 
   const handleSwitchToJaVi = useCallback(() => {
+    langRef.current = { sourceLang: 'ja', targetLang: 'vi' };
     setSourceLang('ja');
     setTargetLang('vi');
-  }, []);
+    if (sourceText.trim()) {
+      lastImmediateQueryRef.current = { text: sourceText.trim(), from: 'ja', to: 'vi' };
+      handleTranslate(sourceText, 'ja', 'vi');
+    }
+  }, [sourceText, handleTranslate]);
 
   const handleSelectHistory = useCallback((item) => {
+    langRef.current = { sourceLang: item.sourceLang, targetLang: item.targetLang };
+    lastImmediateQueryRef.current = { text: item.sourceText.trim(), from: item.sourceLang, to: item.targetLang };
     setSourceLang(item.sourceLang);
     setTargetLang(item.targetLang);
     setSourceText(item.sourceText);
-    handleTranslate(item.sourceText);
+    handleTranslate(item.sourceText, item.sourceLang, item.targetLang);
   }, [handleTranslate]);
 
   const handleClearHistory = useCallback(() => {
@@ -506,12 +623,14 @@ export const Translator = ({ onBack }) => {
   }, []);
 
   const handleSelectSample = useCallback((phrase) => {
+    langRef.current = { sourceLang: phrase.from, targetLang: phrase.to };
+    lastImmediateQueryRef.current = { text: phrase.text.trim(), from: phrase.from, to: phrase.to };
     setSourceLang(phrase.from);
     setTargetLang(phrase.to);
     setSourceText(phrase.text);
     setSpellSuggestion(null);
     setErrorMessage(null);
-    handleTranslate(phrase.text);
+    handleTranslate(phrase.text, phrase.from, phrase.to);
   }, [handleTranslate]);
 
   return (
@@ -527,7 +646,7 @@ export const Translator = ({ onBack }) => {
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
             <h1 style={styles.pageTitle}>🔍 Từ Điển & Dịch Thuật Thông Minh</h1>
             <span style={styles.badgeOnlineOffline}>
-              {navigator.onLine ? '🌐 Online + Google AI' : '📴 Offline Mode'}
+              {isOnline ? '🌐 Online + Google AI' : '📴 Offline Mode'}
             </span>
           </div>
           <span style={styles.pageSubTitle}>
@@ -686,13 +805,13 @@ const styles = {
   mainCard: {
     backgroundColor: '#ffffff',
     borderRadius: '24px',
-    padding: '24px',
+    padding: 'clamp(14px, 4vw, 24px)',
     boxShadow: '0 12px 36px rgba(233, 30, 140, 0.08), 0 2px 8px rgba(0, 0, 0, 0.02)',
     border: '1.5px solid #fce7f3',
   },
   grid: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
     gap: '20px',
     marginBottom: '20px',
   },

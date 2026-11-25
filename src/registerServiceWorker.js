@@ -34,8 +34,9 @@ export function registerServiceWorker() {
   // 2. Chỉ kích hoạt Service Worker ở môi trường Production (sau khi build deploy)
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
+      const swUrl = `${import.meta.env.BASE_URL}sw.js`;
       navigator.serviceWorker
-        .register('/sw.js')
+        .register(swUrl)
         .then((reg) => {
           console.log('[PWA] ServiceWorker đăng ký thành công với scope:', reg.scope);
         })

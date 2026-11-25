@@ -114,7 +114,7 @@ export const KanjiDetailModal = ({
           <div style={styles.infoCol}>
             {/* Chữ lớn + Âm Hán Việt */}
             <div style={styles.mainCharRow}>
-              <div style={styles.bigCharacter}>{kanjiItem.character}</div>
+              <div lang="ja" style={styles.bigCharacter}>{kanjiItem.character}</div>
               <div>
                 <div style={styles.hanViet}>{kanjiItem.hanViet}</div>
                 <div style={styles.meaning}>{kanjiItem.meaning}</div>
@@ -133,7 +133,7 @@ export const KanjiDetailModal = ({
             <div style={styles.readingsBox}>
               <div style={styles.readingRow}>
                 <span style={styles.readingLabel}>Âm Onyomi (Hán):</span>
-                <span style={styles.readingValue}>
+                <span lang="ja" style={styles.readingValue}>
                   {kanjiItem.onyomi && kanjiItem.onyomi.length > 0
                     ? kanjiItem.onyomi.join('、 ')
                     : '—'}
@@ -141,7 +141,7 @@ export const KanjiDetailModal = ({
               </div>
               <div style={styles.readingRow}>
                 <span style={styles.readingLabel}>Âm Kunyomi (Thuần):</span>
-                <span style={styles.readingValue}>
+                <span lang="ja" style={styles.readingValue}>
                   {kanjiItem.kunyomi && kanjiItem.kunyomi.length > 0
                     ? kanjiItem.kunyomi.join('、 ')
                     : '—'}
@@ -157,8 +157,8 @@ export const KanjiDetailModal = ({
                   kanjiItem.examples.map((ex, idx) => (
                     <div key={idx} style={styles.exampleItem}>
                       <div style={styles.exampleWordRow}>
-                        <span style={styles.exampleWord}>{ex.word}</span>
-                        <span style={styles.exampleReading}>【{ex.reading}】</span>
+                        <span lang="ja" style={styles.exampleWord}>{ex.word}</span>
+                        <span lang="ja" style={styles.exampleReading}>【{ex.reading}】</span>
                         <button
                           type="button"
                           onClick={() => speak(ex.reading || ex.word)}
@@ -318,7 +318,7 @@ const styles = {
   },
   bigCharacter: {
     fontSize: '4.2rem',
-    fontFamily: '"Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", serif',
+    fontFamily: '"Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", serif',
     fontWeight: '800',
     color: '#0f172a',
     lineHeight: 1,

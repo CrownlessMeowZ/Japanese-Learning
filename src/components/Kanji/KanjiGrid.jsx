@@ -40,7 +40,7 @@ export const KanjiGrid = ({
             </div>
 
             {/* Chữ Hán to */}
-            <div style={styles.character}>{item.character}</div>
+            <div lang="ja" style={styles.character}>{item.character}</div>
 
             {/* Âm Hán Việt */}
             <div style={styles.hanViet}>{item.hanViet}</div>
@@ -93,7 +93,7 @@ const styles = {
   },
   character: {
     fontSize: '3.2rem',
-    fontFamily: '"Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", serif',
+    fontFamily: '"Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", serif',
     fontWeight: '800',
     color: '#0f172a',
     lineHeight: 1.1,

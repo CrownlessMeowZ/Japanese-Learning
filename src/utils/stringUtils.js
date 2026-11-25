@@ -67,7 +67,7 @@ const cleanJapaneseTextForComparison = (text) => {
   if (!text || typeof text !== 'string') return '';
   return text
     .replace(/\[(.*?)\]/g, '$1') // Bỏ ngoặc vuông giữ kana
-    .replace(/[\s。、！？!?・…「」『』（）()\-–—_~〜:;]/g, '')
+    .replace(/[\s。、！？!?・…「」『』（）()\-–—_~〜:;,.➔→➡]/g, '')
     .trim()
     .toLowerCase();
 };

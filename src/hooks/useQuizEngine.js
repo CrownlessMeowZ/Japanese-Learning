@@ -87,12 +87,17 @@ export const useQuizEngine = () => {
       const targetMeaning = targetItem.meaning || targetItem.meaning_vi || targetItem.vietnamese;
 
       const candidateDistractors = distractorBank.filter((item) => {
-        if (item.id && targetItem.id) return item.id !== targetItem.id;
-        if (item.kanji && targetItem.kanji) return item.kanji !== targetItem.kanji;
-        if (item.hiragana && targetItem.hiragana) return item.hiragana !== targetItem.hiragana;
-        const itemMeaning = item.meaning || item.meaning_vi || item.vietnamese;
-        if (targetMeaning && itemMeaning && targetMeaning === itemMeaning) return false;
-        return item !== targetItem;
+        if (item === targetItem) return false;
+        if (item.id && targetItem.id && item.id === targetItem.id) return false;
+        if (item.kanji && targetItem.kanji && item.kanji === targetItem.kanji) return false;
+        if (item.hiragana && targetItem.hiragana && item.hiragana === targetItem.hiragana) return false;
+
+        const itemMeaning = (item.meaning || item.meaning_vi || item.vietnamese || '').trim().toLowerCase();
+        const cleanTargetMeaning = (targetMeaning || '').trim().toLowerCase();
+        if (cleanTargetMeaning && itemMeaning && cleanTargetMeaning === itemMeaning) {
+          return false;
+        }
+        return true;
       });
 
       // Trộn tập ứng viên và lấy đúng 3 phần tử đầu tiên -> Đảm bảo O(N)

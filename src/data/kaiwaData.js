@@ -96,7 +96,7 @@ export const kaiwaData = {
     {
       id: 'k3-1',
       japanese_text: 'すみません、今何時ですか。 ➔ 9時半です。',
-      hiragana: 'すみません、いまなにじですか。 ➔ くじはんです。',
+      hiragana: 'すみません、いまなんじですか。 ➔ くじはんです。',
       romaji: 'Sumimasen, ima nanji desu ka. ➔ Kuji han desu.',
       vietnamese_meaning: 'Xin lỗi, bây giờ là mấy giờ rồi ạ? ➔ Bây giờ là 9 giờ rưỡi.',
       context_usage: 'Hỏi và trả lời giờ giấc khi đang ở nơi công cộng.',
@@ -105,7 +105,7 @@ export const kaiwaData = {
     {
       id: 'k3-2',
       japanese_text: '毎朝何時に起きますか。 ➔ いつも6時に起きます。',
-      hiragana: 'まいあさ なにじに おきますか。 ➔ いつも ろくじに おきます。',
+      hiragana: 'まいあさ なんじに おきますか。 ➔ いつも ろくじに おきます。',
       romaji: 'Maiasa nanji ni okimasu ka. ➔ Itsumo rokuji ni okimasu.',
       vietnamese_meaning: 'Mỗi sáng bạn thức dậy lúc mấy giờ? ➔ Tôi luôn thức dậy lúc 6 giờ.',
       context_usage: 'Trò chuyện về thói quen sinh hoạt và thời gian biểu trong ngày.',
@@ -114,7 +114,7 @@ export const kaiwaData = {
     {
       id: 'k3-3',
       japanese_text: '銀行は何時から何時まで開いていますか。',
-      hiragana: 'ぎんこうは なにじから なにじまで あいていますか。',
+      hiragana: 'ぎんこうは なんじから なんじまで あいていますか。',
       romaji: 'Ginkou wa nanji kara nanji made aite imasu ka.',
       vietnamese_meaning: 'Ngân hàng mở cửa từ mấy giờ đến mấy giờ vậy?',
       context_usage: 'Hỏi khung giờ hoạt động của các cơ quan công quyền, tiện ích.',

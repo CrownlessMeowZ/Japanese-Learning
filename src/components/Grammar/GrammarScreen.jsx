@@ -58,7 +58,7 @@ export const GrammarScreen = ({ lessonId, grammarList = [], onBack }) => {
         <div style={styles.list}>
           {grammarList.map((item, idx) => (
             <GrammarCard
-              key={item.grammar_id || idx}
+              key={item.id || item.grammar_id || idx}
               item={item}
               lessonId={lessonId}
               index={idx}
